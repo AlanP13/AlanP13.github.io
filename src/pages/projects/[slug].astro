@@ -75,9 +75,6 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
           {project.data.tech?.length ? (
             <p class="kv"><strong>Tech:</strong> {project.data.tech.join(" · ")}</p>
           ) : null}
-          {project.data.tags?.length ? (
-            <p class="kv"><strong>Tags:</strong> {project.data.tags.join(" · ")}</p>
-          ) : null}
         </div>
       </aside>
     </div>
