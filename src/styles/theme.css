@@ -1,17 +1,14 @@
 :root {
-  /* base */
   --bg: 255 255 255;
   --text: 10 12 16;
   --muted: 92 102 112;
   --card: 255 255 255;
   --border: 224 228 235;
 
-  /* accent default (teal) */
-  --accent: 20 184 166;         /* teal-500-ish */
-  --accent-2: 168 85 247;       /* purple-500-ish */
+  --accent: 20 184 166;   /* teal */
+  --accent-2: 168 85 247; /* purple */
   --starTint: 20 184 166;
 
-  /* radii */
   --r: 18px;
 }
 
@@ -23,7 +20,6 @@
   --border: 36 42 54;
 }
 
-/* Accent switching */
 :root[data-accent="teal"] {
   --accent: 20 184 166;
   --starTint: 20 184 166;
@@ -33,14 +29,6 @@
   --starTint: 168 85 247;
 }
 
-/* Helpful tokens */
-html, body {
-  height: 100%;
-}
-body {
-  background: rgb(var(--bg));
-  color: rgb(var(--text));
-}
-a {
-  color: rgb(var(--accent));
-}
+html, body { height: 100%; }
+body { background: rgb(var(--bg)); color: rgb(var(--text)); }
+a { color: rgb(var(--accent)); }
