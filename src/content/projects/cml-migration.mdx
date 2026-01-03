@@ -30,6 +30,7 @@ This project focused on transitioning CML accounting into PAM while ensuring the
 I served as the **lead engineer and IT owner** for the CML migration, with end-to-end responsibility for design, implementation, and production support.
 
 My responsibilities included:
+
 - Designing the new data ingestion and processing workflows  
 - Building and maintaining the transformation and message generation logic  
 - Coordinating with Accounting, Operations, and Infrastructure teams  
@@ -42,6 +43,7 @@ My responsibilities included:
 The migration replaced vendor-managed processing with an internally owned, automated pipeline.
 
 Key components included:
+
 - **Data ingestion and transformation** using Markit EDM as the enterprise data source  
 - **Python-based message generation** to convert warehouse data into PAM-ready accounting messages  
 - **Job orchestration** using AppWorx to manage daily execution and dependencies  
@@ -56,6 +58,7 @@ The solution was designed to operate on a **daily cadence** with minimal manual 
 Given the financial and regulatory sensitivity of accounting data, reliability was a core design goal.
 
 To support stable operations:
+
 - Validation and reconciliation logic was built directly into the pipeline  
 - Failures were surfaced early and investigated by IT before escalation to business teams  
 - Processing patterns were standardized to reduce operational ambiguity  
@@ -79,6 +82,7 @@ This approach improved both day-to-day reliability and confidence during audit-s
 A key design objective was **future compatibility** — moving toward systems that require fewer operational touch points over time.
 
 If revisiting the project today, I would:
+
 - Refactor transformation logic into **template-driven message generation** to reduce repetition  
 - Further decouple business rules from formatting logic to improve maintainability  
 - Expand automated checks to catch edge cases even earlier in the workflow  
@@ -88,6 +92,7 @@ If revisiting the project today, I would:
 ## Why This Project Matters
 
 This project demonstrates my ability to:
+
 - Own critical financial systems end-to-end  
 - Design data pipelines that balance correctness, reliability, and operational clarity  
 - Lead enterprise migrations without disrupting daily business processes  
