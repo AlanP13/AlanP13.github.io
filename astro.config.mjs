@@ -1,6 +1,10 @@
 import { defineConfig } from "astro/config";
 
+import mdx from "@astrojs/mdx";
+
 export default defineConfig({
-  site: "https://alanp13.github.io",
   // base: "/"  // optional; default is fine for user sites
+  site: "https://alanp13.github.io",
+
+  integrations: [mdx()]
 });
