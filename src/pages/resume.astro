@@ -1,8 +1,11 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 ---
-<SiteLayout title="Resume — Alan Palayil" description="Resume PDF and quick highlights.">
+<SiteLayout title="Resume — Alan Palayil" description="Resume PDF and quick highlights." hideNavOnMobile={true}>
   <h1>Resume</h1>
+  <p class="sub">
+    <a class="link" href="/Alan Palayil Resume 2025 (Detailed).pdf" target="_blank">Open PDF in a new tab →</a>
+  </p>
   <div class="frame accent-rail">
     <iframe src="/Alan Palayil Resume 2025 (Detailed).pdf" title="Resume PDF"></iframe>
   </div>
@@ -60,5 +63,6 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       opacity: 0.5;
     }
     iframe { width: 100%; height: 78vh; border: 0; display: block; }
+    
   </style>
 </SiteLayout>

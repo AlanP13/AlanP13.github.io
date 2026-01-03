@@ -2,30 +2,108 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
-  .sort((a,b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
+const projects = await getCollection("projects");
+
+// Featured first (optional: sort by date if you add dates later)
+const featured = projects.filter((p) => p.data.featured);
+const rest = projects.filter((p) => !p.data.featured);
 ---
 <SiteLayout title="Projects — Alan Palayil" description="Case studies and enterprise engineering work.">
   <h1>Projects</h1>
   <p class="muted">Featured case studies and additional work across pipelines, migrations, and automation.</p>
 
-  <div class="list">
-    {projects.map(p => (
-      <a class="row" href={`/projects/${p.slug}`}>
-        <div>
-          <h2>{p.data.title}</h2>
-          <p class="muted">{p.data.summary}</p>
-          <p class="meta">{p.data.tech.slice(0, 6).join(" · ")}</p>
-        </div>
-        <span class="go">→</span>
-      </a>
-    ))}
-  </div>
+  {featured.length ? (
+    <section class="section">
+      <h2 class="section-title">Featured Case Studies</h2>
+      <div class="grid">
+        {featured.map((p) => (
+          <a class="card" href={`/projects/${p.slug}`}>
+            <div>
+              <h3>{p.data.title}</h3>
+              <p class="muted">{p.data.summary}</p>
+            </div>
+
+            <div class="metaRow">
+              <span class="pill">Read case study →</span>
+              <span class="tech">{p.data.tech.slice(0, 5).join(" · ")}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
+
+  {rest.length ? (
+    <section class="section">
+      <h2 class="section-title">More Projects</h2>
+
+      <div class="list">
+        {rest.map((p) => (
+          <a class="row" href={`/projects/${p.slug}`}>
+            <div>
+              <h3 class="rowTitle">{p.data.title}</h3>
+              <p class="muted">{p.data.summary}</p>
+              <p class="meta">{p.data.tech.slice(0, 6).join(" · ")}</p>
+            </div>
+            <span class="go">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
 
   <style>
     h1 { margin: 0 0 8px; font-size: 34px; }
     .muted { color: rgb(var(--muted)); }
-    .list { margin-top: 18px; display:flex; flex-direction:column; gap: 12px; }
+
+    .section { margin-top: 22px; }
+    .section-title {
+      margin: 18px 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: rgb(var(--muted));
+    }
+
+    /* Featured cards */
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    @media (min-width: 860px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .card {
+      text-decoration: none;
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px 14px 12px;
+      background: rgba(255,255,255,0.02);
+      transition: transform 120ms ease, border-color 120ms ease;
+      color: rgb(var(--text));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 172px;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgb(var(--accent)); }
+    .card h3 { margin: 0 0 8px; font-size: 16px; }
+    .metaRow { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
+    .pill { color: rgb(var(--accent)); font-size: 13px; }
+    .tech {
+      color: rgb(var(--muted));
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 55%;
+      text-align: right;
+    }
+
+    /* More projects list */
+    .list { margin-top: 10px; display:flex; flex-direction:column; gap: 12px; }
     .row {
       display:flex; justify-content:space-between; gap:16px;
       text-decoration:none; color: rgb(var(--text));
@@ -35,7 +113,7 @@ const projects = (await getCollection("projects"))
       background: rgba(255,255,255,0.02);
     }
     .row:hover { border-color: rgb(var(--accent)); }
-    h2 { margin: 0 0 6px; font-size: 18px; }
+    .rowTitle { margin: 0 0 6px; font-size: 18px; }
     .meta { margin: 10px 0 0; font-size: 12px; color: rgb(var(--muted)); }
     .go { color: rgb(var(--accent)); font-size: 18px; }
   </style>

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../src/styles/theme.css";
 @import "../src/styles/stars.css";
+@import "../src/styles/prose.css";
 
 * { box-sizing: border-box; }
 body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }

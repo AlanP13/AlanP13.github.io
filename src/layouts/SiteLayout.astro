@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-const { title, description } = Astro.props;
+const { title, description, hideNavOnMobile = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,18 +23,41 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <div class="starfield"></div>
+
     <header class="wrap">
       <nav class="nav">
         <a class="brand" href="/">Alan Palayil</a>
+
+        <!-- Desktop links -->
         <div class="links">
           <a href="/projects">Projects</a>
           <a href="/about">About</a>
           <a href="/resume">Resume</a>
           <a href="/research">Research</a>
         </div>
+
         <div class="actions">
+          <!-- Mobile menu button -->
+          <button
+            class="chip menu"
+            data-action="toggle-menu"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-drawer"
+          >
+            Menu
+          </button>
+
           <button class="chip" data-action="toggle-theme" type="button">Theme</button>
           <button class="chip" data-action="toggle-accent" type="button">Accent</button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="drawer" id="nav-drawer" hidden>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <a href="/resume">Resume</a>
+          <a href="/research">Research</a>
         </div>
       </nav>
     </header>
@@ -68,25 +91,88 @@ const { title, description } = Astro.props;
         const cur = root.dataset.accent || "teal";
         setAccent(cur === "teal" ? "purple" : "teal");
       });
+
+      // Mobile nav drawer logic
+      const menuBtn = document.querySelector('[data-action="toggle-menu"]');
+      const drawer = document.getElementById("nav-drawer");
+
+      menuBtn?.addEventListener("click", () => {
+        if (!drawer) return;
+        const isOpen = !drawer.hasAttribute("hidden");
+
+        if (isOpen) {
+          drawer.setAttribute("hidden", "");
+          drawer.style.display = "none";
+          menuBtn.setAttribute("aria-expanded", "false");
+        } else {
+          drawer.removeAttribute("hidden");
+          drawer.style.display = "block";
+          menuBtn.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      // Close drawer on link click
+      drawer?.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          drawer.setAttribute("hidden", "");
+          drawer.style.display = "none";
+          menuBtn?.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      // Close drawer when resizing back to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 720 && drawer && !drawer.hasAttribute("hidden")) {
+          drawer.setAttribute("hidden", "");
+          drawer.style.display = "none";
+          menuBtn?.setAttribute("aria-expanded", "false");
+        }
+      });
     </script>
 
     <style>
       .wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
       .main { padding-top: 26px; padding-bottom: 64px; }
+
       .nav {
-        display:flex; align-items:center; justify-content:space-between;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
         gap:16px;
         padding: 14px 16px;
         border: 1px solid rgb(var(--border));
         border-radius: var(--r);
         background: rgba(255,255,255,0.02);
         backdrop-filter: blur(8px);
+        flex-wrap: wrap;
       }
-      .brand { font-weight: 650; text-decoration:none; color: rgb(var(--text)); }
-      .links { display:flex; gap:14px; flex-wrap:wrap; }
-      .links a { text-decoration:none; color: rgb(var(--muted)); }
-      .links a:hover { color: rgb(var(--text)); }
-      .actions { display:flex; gap:10px; }
+
+      .brand {
+        font-weight: 650;
+        text-decoration:none;
+        color: rgb(var(--text));
+      }
+
+      .links {
+        display:flex;
+        gap:14px;
+        flex-wrap:wrap;
+      }
+
+      .links a {
+        text-decoration:none;
+        color: rgb(var(--muted));
+      }
+
+      .links a:hover {
+        color: rgb(var(--text));
+      }
+
+      .actions {
+        display:flex;
+        gap:10px;
+      }
+
       .chip {
         border: 1px solid rgb(var(--border));
         background: rgba(255,255,255,0.02);
@@ -95,8 +181,46 @@ const { title, description } = Astro.props;
         padding: 8px 10px;
         cursor: pointer;
       }
-      .chip:hover { border-color: rgb(var(--accent)); }
-      .foot { padding-bottom: 32px; color: rgb(var(--muted)); font-size: 13px; }
+
+      .chip:hover {
+        border-color: rgb(var(--accent));
+      }
+
+      /* Mobile menu */
+      .menu { display: none; }
+
+      .drawer {
+        display: none;
+        width: 100%;
+        margin-top: 12px;
+        padding: 10px;
+        border: 1px solid rgb(var(--border));
+        border-radius: 14px;
+        background: rgba(255,255,255,0.03);
+      }
+
+      .drawer a {
+        display: block;
+        padding: 10px 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: rgb(var(--text));
+      }
+
+      .drawer a:hover {
+        background: rgba(255,255,255,0.04);
+      }
+
+      @media (max-width: 720px) {
+        .links { display: none; }
+        .menu { display: inline-flex; }
+      }
+
+      .foot {
+        padding-bottom: 32px;
+        color: rgb(var(--muted));
+        font-size: 13px;
+      }
     </style>
   </body>
 </html>
