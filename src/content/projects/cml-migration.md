@@ -16,7 +16,7 @@ role: "Lead engineer / IT owner"
 ---
 
 ## Context & Problem
-(We’ll paste your full case study here next.)
+(You can paste the long version later.)
 
 ## What I built
 ...
