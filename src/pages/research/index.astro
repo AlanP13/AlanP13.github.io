@@ -1,0 +1,55 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getCollection } from "astro:content";
+
+const items = await getCollection("research");
+const order = { published: 0, submitted: 1, "in-progress": 2 };
+items.sort((a,b) => order[a.data.status] - order[b.data.status]);
+---
+<SiteLayout title="Research — Alan Palayil" description="PhD-focused applied research in AI and Data Science.">
+  <h1>Research</h1>
+  <p class="muted">
+    Applied research work related to AI and Data Science in enterprise systems. Includes in-progress items.
+  </p>
+
+  <div class="stack">
+    {items.map(r => (
+      <div class="card">
+        <div class="top">
+          <h2>{r.data.title}</h2>
+          <span class={`badge ${r.data.status}`}>{r.data.status}</span>
+        </div>
+        <p class="muted">{r.data.summary}</p>
+        {r.data.relevance ? <p class="rel"><strong>Relevance:</strong> {r.data.relevance}</p> : null}
+        {r.data.area?.length ? <p class="meta">{r.data.area.join(" · ")}</p> : null}
+        {r.data.links?.length ? (
+          <div class="links">
+            {r.data.links.map(l => <a href={l.url} target="_blank">{l.label} →</a>)}
+          </div>
+        ) : null}
+      </div>
+    ))}
+  </div>
+
+  <style>
+    h1 { margin: 0 0 8px; font-size: 34px; }
+    .muted { color: rgb(var(--muted)); max-width: 80ch; }
+    .stack { margin-top: 18px; display:flex; flex-direction:column; gap: 12px; }
+    .card {
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px;
+      background: rgba(255,255,255,0.02);
+    }
+    .top { display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+    h2 { margin: 0; font-size: 16px; }
+    .badge { font-size: 12px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgb(var(--border)); color: rgb(var(--muted)); }
+    .badge.published { border-color: rgba(var(--accent),0.5); color: rgb(var(--text)); }
+    .badge.submitted { border-color: rgba(255,255,255,0.18); }
+    .badge.in-progress { opacity: 0.9; }
+    .rel { color: rgb(var(--muted)); max-width: 80ch; }
+    .meta { color: rgb(var(--muted)); font-size: 12px; }
+    .links { margin-top: 10px; display:flex; gap: 12px; flex-wrap:wrap; }
+    .links a { text-decoration:none; color: rgb(var(--accent)); }
+  </style>
+</SiteLayout>
