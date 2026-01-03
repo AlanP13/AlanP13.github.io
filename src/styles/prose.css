@@ -1,0 +1,59 @@
+/* =========================
+   Prose / Markdown Styling
+   ========================= */
+
+/* Section headings (##) with accent rail */
+.prose h2 {
+  color: rgb(var(--text));
+  position: relative;
+  padding-left: 14px;
+  margin-top: 26px;
+}
+
+.prose h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 4px;
+  border-radius: 999px;
+  background: rgb(var(--accent));
+  opacity: 0.9;
+}
+
+/* Sub-section headings (###) — lighter touch */
+.prose h3 {
+  color: rgb(var(--text));
+  margin-top: 22px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(var(--accent), 0.25);
+}
+
+/* Paragraph spacing */
+.prose p {
+  margin: 12px 0;
+  line-height: 1.65;
+}
+
+/* Lists */
+.prose ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: rgb(var(--muted));
+}
+
+.prose li {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+/* Option 2: Subtle accent emphasis (for *text*) */
+.prose em {
+  font-style: normal;
+  color: color-mix(
+    in srgb,
+    rgb(var(--accent)) 70%,
+    rgb(var(--text))
+  );
+}
