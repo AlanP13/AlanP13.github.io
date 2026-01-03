@@ -1,0 +1,46 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+<SiteLayout title={`${project.data.title} — Alan Palayil`} description={project.data.summary}>
+  <article class="prose">
+    <p class="back"><a href="/projects">← Back to Projects</a></p>
+    <h1>{project.data.title}</h1>
+    <p class="lead">{project.data.summary}</p>
+
+    {project.data.highlights?.length ? (
+      <>
+        <h2>Highlights</h2>
+        <ul>
+          {project.data.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </>
+    ) : null}
+
+    {project.data.tech?.length ? (
+      <p class="tech"><strong>Tech:</strong> {project.data.tech.join(" · ")}</p>
+    ) : null}
+
+    <hr />
+
+    <Content />
+  </article>
+
+  <style>
+    .back a { color: rgb(var(--muted)); text-decoration:none; }
+    .back a:hover { color: rgb(var(--text)); }
+    h1 { margin: 0 0 8px; font-size: 34px; }
+    .lead { color: rgb(var(--muted)); max-width: 80ch; }
+    .tech { color: rgb(var(--muted)); }
+    hr { border: 0; height: 1px; background: rgb(var(--border)); margin: 18px 0; }
+    .prose { max-width: 80ch; }
+  </style>
+</SiteLayout>

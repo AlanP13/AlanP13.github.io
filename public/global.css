@@ -1,0 +1,8 @@
+@import "../src/styles/theme.css";
+@import "../src/styles/stars.css";
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+
+h1,h2,h3 { letter-spacing: -0.02em; }
+p { line-height: 1.6; }

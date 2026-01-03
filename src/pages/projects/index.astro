@@ -1,0 +1,42 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .sort((a,b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
+---
+<SiteLayout title="Projects — Alan Palayil" description="Case studies and enterprise engineering work.">
+  <h1>Projects</h1>
+  <p class="muted">Featured case studies and additional work across pipelines, migrations, and automation.</p>
+
+  <div class="list">
+    {projects.map(p => (
+      <a class="row" href={`/projects/${p.slug}`}>
+        <div>
+          <h2>{p.data.title}</h2>
+          <p class="muted">{p.data.summary}</p>
+          <p class="meta">{p.data.tech.slice(0, 6).join(" · ")}</p>
+        </div>
+        <span class="go">→</span>
+      </a>
+    ))}
+  </div>
+
+  <style>
+    h1 { margin: 0 0 8px; font-size: 34px; }
+    .muted { color: rgb(var(--muted)); }
+    .list { margin-top: 18px; display:flex; flex-direction:column; gap: 12px; }
+    .row {
+      display:flex; justify-content:space-between; gap:16px;
+      text-decoration:none; color: rgb(var(--text));
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px;
+      background: rgba(255,255,255,0.02);
+    }
+    .row:hover { border-color: rgb(var(--accent)); }
+    h2 { margin: 0 0 6px; font-size: 18px; }
+    .meta { margin: 10px 0 0; font-size: 12px; color: rgb(var(--muted)); }
+    .go { color: rgb(var(--accent)); font-size: 18px; }
+  </style>
+</SiteLayout>
