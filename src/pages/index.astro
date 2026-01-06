@@ -191,7 +191,15 @@ const projects = (await getCollection("projects"))
   <style>
     /* HERO */
     .kicker { color: rgb(var(--muted)); margin: 0 0 10px; }
-    .hero h1 { margin: 0 0 12px; font-size: 44px; line-height: 1.08; }
+    .hero {
+      padding-top: 48px;
+      padding-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 12px 0 20px;
+      font-size: 48px;
+      line-height: 1.05;
+    }
     .lead { font-size: 18px; color: rgb(var(--text)); max-width: 72ch; }
     .sub { color: rgb(var(--muted)); max-width: 72ch; }
 
@@ -212,15 +220,19 @@ const projects = (await getCollection("projects"))
       color: rgb(var(--muted));
       padding: 6px 2px;
     }
+    .socialRow {
+      margin-top: 28px;
+    }
+
     .social:hover { color: rgb(var(--accent)); }
     .icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       border: 1px solid rgb(var(--border));
-      border-radius: 8px;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.02);
     }
     .sep { color: rgb(var(--border)); }
@@ -228,7 +240,9 @@ const projects = (await getCollection("projects"))
     .more:hover { color: rgb(var(--accent)); }
 
     /* SECTIONS */
-    .block { margin-top: 46px; }
+    .block {
+      margin-top: 88px;
+    }
     .muted { color: rgb(var(--muted)); }
 
     /* Featured projects grid */
