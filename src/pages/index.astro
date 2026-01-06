@@ -18,10 +18,42 @@ const projects = (await getCollection("projects"))
     <p class="sub">
       Open to conversations on enterprise cloud migration, financial systems modernization, and large-scale data workflows.
     </p>
-    <div class="cta">
-      <a class="btn" href="/projects">View Projects</a>
-      <a class="btn ghost" href="/resume">Resume</a>
+    <div class="socialRow" aria-label="Social links">
+      <a class="social" href="https://github.com/AlanP13" target="_blank" rel="noreferrer">
+        <span class="icon" aria-hidden="true">
+          <!-- GitHub icon -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path
+              fill="currentColor"
+              d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+            />
+          </svg>
+        </span>
+        GitHub
+      </a>
+
+      <span class="sep" aria-hidden="true">|</span>
+
+      <a class="social" href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">
+        <span class="icon" aria-hidden="true">
+          <!-- LinkedIn icon -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path
+              fill="currentColor"
+              d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
+            />
+          </svg>
+        </span>
+        LinkedIn
+      </a>
+
+      <span class="sep" aria-hidden="true">|</span>
+
+      <a class="social more" href="/about">
+        More about me <span aria-hidden="true">→</span>
+      </a>
     </div>
+
   </section>
 
   <section class="block">
@@ -165,6 +197,50 @@ const projects = (await getCollection("projects"))
     .muted { color: rgb(var(--muted)); }
     .grid { display:grid; gap: 14px; grid-template-columns: repeat(1, minmax(0,1fr)); }
     @media (min-width: 860px) { .grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+/* Hero link row (Jason-style) */
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  color: rgb(var(--muted));
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: rgb(var(--muted));
+  padding: 6px 2px;
+}
+
+.social:hover {
+  color: rgb(var(--text));
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgb(var(--border));
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+}
+
+.sep {
+  color: rgb(var(--border));
+}
+
+.more {
+  color: rgb(var(--muted));
+}
+.more:hover {
+  color: rgb(var(--text));
+}
 
     .card {
       text-decoration:none;
