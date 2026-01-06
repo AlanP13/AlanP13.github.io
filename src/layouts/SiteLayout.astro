@@ -11,8 +11,6 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     <title>{title ?? "Alan Palayil"}</title>
     {description && <meta name="description" content={description} />}
 
-    <link rel="stylesheet" href="/global.css" />
-
     <script is:inline>
       // Persist theme + accent (runs before paint)
       const storedTheme = localStorage.getItem("theme");
@@ -26,7 +24,9 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 
     <header class="wrap">
       <nav class="nav">
-        <a class="brand" href="/">Alan Palayil</a>
+        <a class="brand" href="/" aria-label="Home">
+          <img src="/logo.svg" alt="Alan Palayil" class="logo-img" />
+        </a>
 
         <!-- Desktop links -->
         <div class="links">
@@ -67,7 +67,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     </main>
 
     <footer class="wrap foot">
-      <p>© {new Date().getFullYear()} Alan Palayil • Built with Astro</p>
+      <p>© {new Date().getFullYear()} Alan Palayil • Built with Astro • All graphics are personally drawn</p>
     </footer>
 
     <script is:inline>
@@ -146,13 +146,22 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         backdrop-filter: blur(8px);
         flex-wrap: wrap;
       }
-
       .brand {
-        font-weight: 650;
-        text-decoration:none;
-        color: rgb(var(--text));
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        line-height: 0;
       }
 
+      .logo-img {
+        height: 75px;
+        width: auto;
+        display: block;
+      }
+
+      /* logo is black by default; invert in dark mode to appear white */
+      :root[data-theme="dark"] .logo-img { filter: invert(1); }
+      :root[data-theme="light"] .logo-img { filter: invert(0); }
       .links {
         display:flex;
         gap:14px;
