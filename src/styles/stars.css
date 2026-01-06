@@ -11,14 +11,20 @@
 }
 
 .starfield::before,
+/* Accent tint overlay */
 .starfield::after {
   content: "";
   position: absolute;
-  inset: -20%;
+  inset: -10%;
+  pointer-events: none;
+  background: radial-gradient(900px 520px at 22% 10%,
+    color-mix(in srgb, rgb(var(--accent)) 16%, transparent),
+    transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.5;
   background-repeat: repeat;
   transform: translateZ(0);
 }
-
 .starfield::before {
   background-image:
     radial-gradient(circle at 20px 30px, rgba(255,255,255,0.40) 1px, transparent 2px),
