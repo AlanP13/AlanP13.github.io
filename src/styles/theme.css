@@ -5,8 +5,10 @@
   --card: 255 255 255;
   --border: 224 228 235;
 
-  --accent: 20 184 166;   /* teal */
-  --accent-2: 168 85 247; /* purple */
+  --accent: 20 184 166;
+  /* teal */
+  --accent-2: 168 85 247;
+  /* purple */
   --starTint: 20 184 166;
 
   --r: 18px;
@@ -24,11 +26,22 @@
   --accent: 20 184 166;
   --starTint: 20 184 166;
 }
+
 :root[data-accent="purple"] {
   --accent: 168 85 247;
   --starTint: 168 85 247;
 }
 
-html, body { height: 100%; }
-body { background: rgb(var(--bg)); color: rgb(var(--text)); }
-a { color: rgb(var(--accent)); }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+}
+
+a {
+  color: rgb(var(--accent));
+}

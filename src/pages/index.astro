@@ -12,28 +12,40 @@ const projects = (await getCollection("projects"))
   description="Enterprise data + platform modernization in financial systems."
 >
   <section class="hero">
-    <p class="kicker">Enterprise Data Engineer • Financial Systems • Cloud Platforms</p>
+    <p class="kicker">
+      Enterprise Data Engineer • Financial Systems • Cloud Platforms
+    </p>
     <h1>Hello! I’m Alan Palayil.</h1>
 
     <p class="lead">
-      I’m an <strong>Application Development Analyst</strong> at <strong>Genworth Financial</strong>, modernizing
-      <strong> investment accounting systems</strong> by building reliable <strong>Azure-based data pipelines</strong>,
-      improving operational resilience, and enabling cloud transformation at scale.
+      I’m an <strong>Application Development Analyst</strong> at <strong
+        >Genworth Financial</strong
+      >, modernizing
+      <strong> investment accounting systems</strong> by building reliable <strong
+        >Azure-based data pipelines</strong
+      >, improving operational resilience, and enabling cloud transformation at
+      scale.
     </p>
 
     <p class="sub">
-      Open to conversations on enterprise cloud migration, financial systems modernization, and large-scale data workflows.
+      Open to conversations on enterprise cloud migration, financial systems
+      modernization, and large-scale data workflows.
     </p>
 
     <div class="socialRow" aria-label="Social links">
-      <a class="social" href="https://github.com/AlanP13" target="_blank" rel="noreferrer">
+      <a
+        class="social"
+        href="https://github.com/AlanP13"
+        target="_blank"
+        rel="noreferrer"
+      >
         <span class="icon" aria-hidden="true">
           <!-- GitHub icon -->
           <svg viewBox="0 0 24 24" width="18" height="18">
             <path
               fill="currentColor"
               d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
-            />
+            ></path>
           </svg>
         </span>
         GitHub
@@ -41,30 +53,39 @@ const projects = (await getCollection("projects"))
 
       <span class="sep" aria-hidden="true">|</span>
 
-      <a class="social" href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">
+      <a
+        class="social"
+        href="https://www.linkedin.com/in/alan-palayil/"
+        target="_blank"
+        rel="noreferrer"
+      >
         <span class="icon" aria-hidden="true">
           <!-- LinkedIn icon -->
           <svg viewBox="0 0 24 24" width="18" height="18">
             <path
               fill="currentColor"
               d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
-            />
+            ></path>
           </svg>
         </span>
         LinkedIn
       </a>
 
       <span class="sep" aria-hidden="true">|</span>
-      <a class="social" href="mailto:alan.palayil@gmail.com" target="_blank" rel="noreferrer">
+      <a
+        class="social"
+        href="mailto:alan.palayil@gmail.com"
+        target="_blank"
+        rel="noreferrer"
+      >
         <span class="icon" aria-hidden="true">
           <!-- Email icon -->
           <svg viewBox="0 0 24 24" width="18" height="18">
             <path
               fill="currentColor"
               d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"
-            />
+            ></path>
           </svg>
-
         </span>
         Email
       </a>
@@ -79,19 +100,23 @@ const projects = (await getCollection("projects"))
 
   <section class="block">
     <h2>Featured Projects</h2>
-    <p class="muted">Selected work with production ownership and measurable impact.</p>
+    <p class="muted">
+      Selected work with production ownership and measurable impact.
+    </p>
 
     <div class="grid">
-      {projects.map((p) => (
-        <a class="card" href={`/projects/${p.slug}`}>
-          <h3>{p.data.title}</h3>
-          <p class="muted">{p.data.summary}</p>
-          <div class="meta">
-            <span class="pill">Read case study →</span>
-            <span class="tech">{p.data.tech.slice(0, 4).join(" · ")}</span>
-          </div>
-        </a>
-      ))}
+      {
+        projects.map((p) => (
+          <a class="card" href={`/projects/${p.slug}`}>
+            <h3>{p.data.title}</h3>
+            <p class="muted">{p.data.summary}</p>
+            <div class="meta">
+              <span class="pill">Read case study →</span>
+              <span class="tech">{p.data.tech.slice(0, 4).join(" · ")}</span>
+            </div>
+          </a>
+        ))
+      }
     </div>
 
     <p class="allProjects">
@@ -106,15 +131,23 @@ const projects = (await getCollection("projects"))
         <div class="when">Dec 2025 – Present</div>
         <div class="what">
           <h3>Application Development Analyst (P2) — Genworth Financial</h3>
-          <p class="muted">Platform ownership, cloud modernization, data workflows across fixed income, CML, and derivatives.</p>
+          <p class="muted">
+            Platform ownership, cloud modernization, data workflows across fixed
+            income, CML, and derivatives.
+          </p>
         </div>
       </div>
 
       <div class="item">
         <div class="when">Jul 2023 – Dec 2025</div>
         <div class="what">
-          <h3>Associate Application Development Analyst (P1) — Genworth Financial</h3>
-          <p class="muted">Automations, reporting, interfaces, and production support for investment accounting platforms.</p>
+          <h3>
+            Associate Application Development Analyst (P1) — Genworth Financial
+          </h3>
+          <p class="muted">
+            Automations, reporting, interfaces, and production support for
+            investment accounting platforms.
+          </p>
         </div>
       </div>
 
@@ -124,21 +157,29 @@ const projects = (await getCollection("projects"))
         <div class="when">PhD (in progress)</div>
         <div class="what">
           <h3>PhD in Information Technology — AI & Data Science focus</h3>
-          <p class="muted">Applied research interests in intelligent automation and data-driven systems.</p>
+          <p class="muted">
+            Applied research interests in intelligent automation and data-driven
+            systems.
+          </p>
         </div>
       </div>
 
       <div class="item">
         <div class="when">2023</div>
         <div class="what">
-          <h3>M.S. Cybersecurity Engineering — Illinois Institute of Technology</h3>
+          <h3>
+            M.S. Cybersecurity Engineering — Illinois Institute of Technology
+          </h3>
         </div>
       </div>
 
       <div class="item">
         <div class="when">2023</div>
         <div class="what">
-          <h3>B.S. Computer & Cybersecurity Engineering — Illinois Institute of Technology</h3>
+          <h3>
+            B.S. Computer & Cybersecurity Engineering — Illinois Institute of
+            Technology
+          </h3>
         </div>
       </div>
     </div>
@@ -191,7 +232,7 @@ const projects = (await getCollection("projects"))
   <style>
     /* HERO */
     .hero {
-      padding-top: 28px;     /* after the big main padding, Jason still has a bit more */
+      padding-top: 28px; /* after the big main padding, Jason still has a bit more */
       padding-bottom: 12px;
     }
 
@@ -203,14 +244,14 @@ const projects = (await getCollection("projects"))
 
     .hero h1 {
       margin: 0 0 18px;
-      font-size: 56px;       /* Jason headline is big */
+      font-size: 56px; /* Jason headline is big */
       line-height: 1.02;
       letter-spacing: -0.03em;
     }
 
     .lead {
       font-size: 18px;
-      line-height: 1.75;     /* Jason paragraph breathes */
+      line-height: 1.75; /* Jason paragraph breathes */
       max-width: 74ch;
       margin: 0 0 18px;
     }
@@ -241,7 +282,9 @@ const projects = (await getCollection("projects"))
       color: rgb(var(--muted));
       padding: 6px 2px;
     }
-    .social:hover { color: rgb(var(--accent)); }
+    .social:hover {
+      color: rgb(var(--accent));
+    }
     .icon {
       display: inline-flex;
       align-items: center;
@@ -252,12 +295,20 @@ const projects = (await getCollection("projects"))
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.02);
     }
-    .sep { color: rgb(var(--border)); }
-    .more { color: rgb(var(--muted)); }
-    .more:hover { color: rgb(var(--accent)); }
+    .sep {
+      color: rgb(var(--border));
+    }
+    .more {
+      color: rgb(var(--muted));
+    }
+    .more:hover {
+      color: rgb(var(--accent));
+    }
 
     /* SECTIONS */
-    .block { margin-top: 96px; }
+    .block {
+      margin-top: 96px;
+    }
     .block h2 {
       margin: 0 0 12px;
       font-size: 28px;
@@ -268,11 +319,21 @@ const projects = (await getCollection("projects"))
       margin: 0 0 22px;
     }
 
-    .muted { color: rgb(var(--muted)); }
+    .muted {
+      color: rgb(var(--muted));
+    }
 
     /* Featured projects grid */
-    .grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
-    @media (min-width: 860px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
 
     .card {
       text-decoration: none;
@@ -280,41 +341,110 @@ const projects = (await getCollection("projects"))
       border-radius: var(--r);
       padding: 18px 18px 16px;
       background: rgba(255, 255, 255, 0.02);
-      transition: transform 120ms ease, border-color 120ms ease;
+      transition:
+        transform 120ms ease,
+        border-color 120ms ease;
       color: rgb(var(--text));
     }
-    .card:hover { transform: translateY(-2px); border-color: rgb(var(--accent)); }
-    .card h3 { margin: 0 0 8px; }
-    .meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
-    .pill { color: rgb(var(--accent)); font-size: 13px; }
-    .tech { color: rgb(var(--muted)); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgb(var(--accent));
+    }
+    .card h3 {
+      margin: 0 0 8px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .pill {
+      color: rgb(var(--accent));
+      font-size: 13px;
+    }
+    .tech {
+      color: rgb(var(--muted));
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-    .allProjects { margin-top: 12px; }
-    .allProjects a { color: rgb(var(--accent)); text-decoration: none; }
-    .allProjects a:hover { text-decoration: underline; }
+    .allProjects {
+      margin-top: 12px;
+    }
+    .allProjects a {
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .allProjects a:hover {
+      text-decoration: underline;
+    }
 
     /* Timeline */
-    .timeline { margin-top: 18px; }
-    .item { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 12px 0; }
-    .when { color: rgb(var(--muted)); font-size: 13px; }
-    .what h3 { margin: 0 0 4px; font-size: 16px; }
-    .divider { height: 1px; background: rgb(var(--border)); margin: 10px 0; opacity: 0.9; }
+    .timeline {
+      margin-top: 18px;
+    }
+    .item {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+    }
+    .when {
+      color: rgb(var(--muted));
+      font-size: 13px;
+    }
+    .what h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+    .divider {
+      height: 1px;
+      background: rgb(var(--border));
+      margin: 10px 0;
+      opacity: 0.9;
+    }
 
     /* Skills */
-    .skills { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
-    @media (min-width: 860px) { .skills { grid-template-columns: 1fr 1fr; } }
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (min-width: 860px) {
+      .skills {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
     .s {
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
       background: rgba(255, 255, 255, 0.02);
     }
-    .s h3 { margin: 0 0 10px; font-size: 15px; }
-    ul { margin: 0; padding-left: 18px; color: rgb(var(--muted)); }
-    li { margin: 6px 0; }
+    .s h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: rgb(var(--muted));
+    }
+    li {
+      margin: 6px 0;
+    }
 
     /* Contact buttons (kept) */
-    .cta { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -331,6 +461,8 @@ const projects = (await getCollection("projects"))
       color: rgb(var(--text));
       border: 1px solid rgb(var(--border));
     }
-    .btn.ghost:hover { border-color: rgb(var(--accent)); }
+    .btn.ghost:hover {
+      border-color: rgb(var(--accent));
+    }
   </style>
 </SiteLayout>

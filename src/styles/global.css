@@ -2,7 +2,21 @@
 @import "./stars.css";
 @import "./prose.css";
 
-* { box-sizing: border-box; }
-body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-h1,h2,h3 { letter-spacing: -0.02em; }
-p { line-height: 1.6; }
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+h1,
+h2,
+h3 {
+    letter-spacing: -0.02em;
+}
+
+p {
+    line-height: 1.6;
+}
