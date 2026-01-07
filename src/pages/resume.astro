@@ -1,24 +1,40 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 ---
-<SiteLayout title="Resume — Alan Palayil" description="Resume PDF and quick highlights." hideNavOnMobile={true}>
+
+<SiteLayout
+  title="Resume — Alan Palayil"
+  description="Resume PDF and quick highlights."
+  hideNavOnMobile={true}
+>
   <h1>Resume</h1>
   <p class="sub">
-    <a class="link" href="/Alan_Palayil_Resume.pdf" target="_blank">Open PDF in a new tab →</a>
+    <a class="link" href="/Alan_Palayil_Resume.pdf" target="_blank"
+      >Open PDF in a new tab →</a
+    >
   </p>
   <div class="frame accent-rail">
     <iframe src="/Alan_Palayil_Resume.pdf" title="Resume PDF"></iframe>
   </div>
 
   <style>
-    h1 { margin: 0 0 8px; font-size: 32px; }
-    .sub { margin: 0 0 14px; color: rgb(var(--muted)); }
-    .link { color: rgb(var(--accent)); }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      color: rgb(var(--accent));
+    }
+    .sub {
+      margin: 0 0 14px;
+      color: rgb(var(--muted));
+    }
+    .link {
+      color: rgb(var(--accent));
+    }
     .frame {
       border: 1px solid rgb(var(--border));
       border-radius: 16px;
       overflow: hidden;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       position: relative;
     }
     .frame::before {
@@ -27,9 +43,10 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       inset: 0;
       border-radius: 16px;
       padding: 1px;
-      background: linear-gradient(135deg,
-        rgba(255,255,255,0.10),
-        rgba(255,255,255,0.05),
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.05),
         color-mix(in srgb, rgb(var(--accent)) 40%, transparent)
       );
       -webkit-mask:
@@ -57,12 +74,22 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       inset: 0;
       border-radius: 16px;
       pointer-events: none;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 0 40px rgba(0,0,0,0.25);
-      background: radial-gradient(120px 240px at calc(100% - 8px) 40%, rgba(255,255,255,0.05), transparent 70%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 0 40px rgba(0, 0, 0, 0.25);
+      background: radial-gradient(
+        120px 240px at calc(100% - 8px) 40%,
+        rgba(255, 255, 255, 0.05),
+        transparent 70%
+      );
       mix-blend-mode: screen;
       opacity: 0.5;
     }
-    iframe { width: 100%; height: 78vh; border: 0; display: block; }
-    
+    iframe {
+      width: 100%;
+      height: 78vh;
+      border: 0;
+      display: block;
+    }
   </style>
 </SiteLayout>

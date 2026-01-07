@@ -71,8 +71,12 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
             Menu
           </button>
 
-          <button class="chip" data-action="toggle-theme" type="button">Theme</button>
-          <button class="chip" data-action="toggle-accent" type="button">Accent</button>
+          <button class="chip" data-action="toggle-theme" type="button"
+            >Theme</button
+          >
+          <button class="chip" data-action="toggle-accent" type="button"
+            >Accent</button
+          >
         </div>
 
         <!-- Mobile drawer -->
@@ -90,7 +94,10 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     </main>
 
     <footer class="wrap foot">
-      <p>© {new Date().getFullYear()} Alan Palayil • Built with Astro • All graphics are personally drawn</p>
+      <p>
+        © {new Date().getFullYear()} Alan Palayil • Built with Astro • All graphics
+        are personally drawn
+      </p>
     </footer>
 
     <script is:inline>
@@ -105,15 +112,19 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         localStorage.setItem("accent", next);
       }
 
-      document.querySelector('[data-action="toggle-theme"]')?.addEventListener("click", () => {
-        const cur = root.dataset.theme || "dark";
-        setTheme(cur === "dark" ? "light" : "dark");
-      });
+      document
+        .querySelector('[data-action="toggle-theme"]')
+        ?.addEventListener("click", () => {
+          const cur = root.dataset.theme || "dark";
+          setTheme(cur === "dark" ? "light" : "dark");
+        });
 
-      document.querySelector('[data-action="toggle-accent"]')?.addEventListener("click", () => {
-        const cur = root.dataset.accent || "teal";
-        setAccent(cur === "teal" ? "purple" : "teal");
-      });
+      document
+        .querySelector('[data-action="toggle-accent"]')
+        ?.addEventListener("click", () => {
+          const cur = root.dataset.accent || "teal";
+          setAccent(cur === "teal" ? "purple" : "teal");
+        });
 
       // Mobile nav drawer logic
       const menuBtn = document.querySelector('[data-action="toggle-menu"]');
@@ -135,7 +146,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       });
 
       // Close drawer on link click
-      drawer?.querySelectorAll("a").forEach(a => {
+      drawer?.querySelectorAll("a").forEach((a) => {
         a.addEventListener("click", () => {
           drawer.setAttribute("hidden", "");
           drawer.style.display = "none";
@@ -145,7 +156,11 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 
       // Close drawer when resizing back to desktop
       window.addEventListener("resize", () => {
-        if (window.innerWidth > 720 && drawer && !drawer.hasAttribute("hidden")) {
+        if (
+          window.innerWidth > 720 &&
+          drawer &&
+          !drawer.hasAttribute("hidden")
+        ) {
           drawer.setAttribute("hidden", "");
           drawer.style.display = "none";
           menuBtn?.setAttribute("aria-expanded", "false");
@@ -156,14 +171,14 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     <style>
       /* Jason-style container */
       .wrap {
-        max-width: 1180px;         /* wider than your 980 */
+        max-width: 1180px; /* wider than your 980 */
         margin: 0 auto;
-        padding: 28px 44px;        /* bigger side padding */
+        padding: 28px 44px; /* bigger side padding */
       }
 
       /* Jason has lots of top breathing room before content */
       .main {
-        padding-top: 96px;         /* key: push hero down */
+        padding-top: 96px; /* key: push hero down */
         padding-bottom: 120px;
         position: relative;
       }
@@ -177,24 +192,28 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 
         /* works with rgb(var(--accent)) */
         background:
-          radial-gradient(700px 260px at 18% 6%,
+          radial-gradient(
+            700px 260px at 18% 6%,
             color-mix(in srgb, rgb(var(--accent)) 28%, transparent),
-            transparent 68%),
-          radial-gradient(520px 220px at 50% 0%,
-            rgba(255,255,255,0.06),
-            transparent 70%);
+            transparent 68%
+          ),
+          radial-gradient(
+            520px 220px at 50% 0%,
+            rgba(255, 255, 255, 0.06),
+            transparent 70%
+          );
         opacity: 0.55;
         filter: blur(2px);
       }
       .nav {
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
         padding: 14px 16px;
         border: 1px solid rgb(var(--border));
         border-radius: var(--r);
-        background: rgba(255,255,255,0.02);
+        background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(8px);
         flex-wrap: wrap;
       }
@@ -212,18 +231,26 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       }
 
       /* logo is black by default; invert in dark mode to appear white */
-      :root[data-theme="dark"] .logo-img { filter: invert(1); }
-      :root[data-theme="light"] .logo-img { filter: invert(0); }
-      :root[data-theme="dark"] .main::before { opacity: 0.6; }
-      :root[data-theme="light"] .main::before { opacity: 0.35; }
+      :root[data-theme="dark"] .logo-img {
+        filter: invert(1);
+      }
+      :root[data-theme="light"] .logo-img {
+        filter: invert(0);
+      }
+      :root[data-theme="dark"] .main::before {
+        opacity: 0.6;
+      }
+      :root[data-theme="light"] .main::before {
+        opacity: 0.35;
+      }
       .links {
-        display:flex;
-        gap:14px;
-        flex-wrap:wrap;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
       }
 
       .links a {
-        text-decoration:none;
+        text-decoration: none;
         color: rgb(var(--muted));
       }
 
@@ -232,13 +259,13 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       }
 
       .actions {
-        display:flex;
-        gap:10px;
+        display: flex;
+        gap: 10px;
       }
 
       .chip {
         border: 1px solid rgb(var(--border));
-        background: rgba(255,255,255,0.02);
+        background: rgba(255, 255, 255, 0.02);
         color: rgb(var(--text));
         border-radius: 999px;
         padding: 8px 10px;
@@ -250,7 +277,9 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       }
 
       /* Mobile menu */
-      .menu { display: none; }
+      .menu {
+        display: none;
+      }
 
       .drawer {
         display: none;
@@ -259,7 +288,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         padding: 10px;
         border: 1px solid rgb(var(--border));
         border-radius: 14px;
-        background: rgba(255,255,255,0.03);
+        background: rgba(255, 255, 255, 0.03);
       }
 
       .drawer a {
@@ -271,12 +300,17 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       }
 
       .drawer a:hover {
-        background: rgba(255,255,255,0.04);
+        background: rgba(255, 255, 255, 0.04);
       }
 
       @media (max-width: 720px) {
-        .wrap { padding: 20px 18px; }
-        .main { padding-top: 56px; padding-bottom: 90px; }
+        .wrap {
+          padding: 20px 18px;
+        }
+        .main {
+          padding-top: 56px;
+          padding-bottom: 90px;
+        }
       }
       .foot {
         padding-bottom: 32px;

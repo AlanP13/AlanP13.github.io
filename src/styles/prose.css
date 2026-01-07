@@ -51,9 +51,7 @@
 /* Option 2: Subtle accent emphasis (for *text*) */
 .prose em {
   font-style: normal;
-  color: color-mix(
-    in srgb,
-    rgb(var(--accent)) 70%,
-    rgb(var(--text))
-  );
+  color: color-mix(in srgb,
+      rgb(var(--accent)) 70%,
+      rgb(var(--text)));
 }

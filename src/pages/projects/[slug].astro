@@ -4,7 +4,10 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p, all: projects } }));
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p, all: projects },
+  }));
 }
 
 const { project, all } = Astro.props;
@@ -20,7 +23,11 @@ const ordered = [...all].sort((a, b) => {
 const idx = ordered.findIndex((p) => p.slug === project.slug);
 const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
 ---
-<SiteLayout title={`${project.data.title} — Alan Palayil`} description={project.data.summary}>
+
+<SiteLayout
+  title={`${project.data.title} — Alan Palayil`}
+  description={project.data.summary}
+>
   <article class="page">
     <p class="back"><a href="/projects">← Back to Projects</a></p>
 
@@ -29,52 +36,79 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
       <p class="lead">{project.data.summary}</p>
 
       <div class="metaRow">
-        {project.data.role ? <span class="chip">Role: {project.data.role}</span> : null}
-        {project.data.tags?.length ? <span class="chip">Tags: {project.data.tags.slice(0, 4).join(" · ")}</span> : null}
-        {project.data.featured ? <span class="chip featured">Featured</span> : null}
+        {
+          project.data.role ? (
+            <span class="chip">Role: {project.data.role}</span>
+          ) : null
+        }
+        {
+          project.data.tags?.length ? (
+            <span class="chip">
+              Tags: {project.data.tags.slice(0, 4).join(" · ")}
+            </span>
+          ) : null
+        }
+        {
+          project.data.featured ? (
+            <span class="chip featured">Featured</span>
+          ) : null
+        }
       </div>
     </header>
 
-        <div class="content">
+    <div class="content">
       <div class="main prose">
-        {project.data.highlights?.length ? (
-          <>
-            <h2>Highlights</h2>
-            <ul>
-              {project.data.highlights.map((h) => <li>{h}</li>)}
-            </ul>
-          </>
-        ) : null}
+        {
+          project.data.highlights?.length ? (
+            <>
+              <h2>Highlights</h2>
+              <ul>
+                {project.data.highlights.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+            </>
+          ) : null
+        }
 
-        {project.data.impact?.length ? (
-          <>
-            <h2>Impact</h2>
-            <ul>
-              {project.data.impact.map((i) => <li>{i}</li>)}
-            </ul>
-          </>
-        ) : null}
+        {
+          project.data.impact?.length ? (
+            <>
+              <h2>Impact</h2>
+              <ul>
+                {project.data.impact.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </>
+          ) : null
+        }
 
         <hr />
 
         <Content />
 
-        {next ? (
-          <div class="next">
-            <a href={`/projects/${next.slug}`}>
-              Next: {next.data.title} <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        ) : null}
+        {
+          next ? (
+            <div class="next">
+              <a href={`/projects/${next.slug}`}>
+                Next: {next.data.title} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          ) : null
+        }
       </div>
-
 
       <aside class="aside">
         <div class="card">
           <h3>Key Info</h3>
-          {project.data.tech?.length ? (
-            <p class="kv"><strong>Tech:</strong> {project.data.tech.join(" · ")}</p>
-          ) : null}
+          {
+            project.data.tech?.length ? (
+              <p class="kv">
+                <strong>Tech:</strong> {project.data.tech.join(" · ")}
+              </p>
+            ) : null
+          }
         </div>
       </aside>
     </div>
@@ -82,51 +116,117 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
 
   <style>
     /* layout */
-    .page { max-width: 980px; }
-    .back a { color: rgb(var(--muted)); text-decoration:none; }
-    .back a:hover { color: rgb(var(--text)); }
+    .page {
+      max-width: 980px;
+    }
+    .back a {
+      color: rgb(var(--muted));
+      text-decoration: none;
+    }
+    .back a:hover {
+      color: rgb(var(--text));
+    }
 
-    .head { margin-top: 10px; }
-    h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: -0.02em; }
-    .lead { color: rgb(var(--muted)); max-width: 80ch; margin: 0; }
+    .head {
+      margin-top: 10px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      color: rgb(var(--muted));
+      max-width: 80ch;
+      margin: 0;
+    }
 
-    .metaRow { display:flex; gap: 10px; flex-wrap:wrap; margin-top: 14px; }
+    .metaRow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
     .chip {
       border: 1px solid rgb(var(--border));
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       border-radius: 999px;
       padding: 7px 10px;
       font-size: 12px;
       color: rgb(var(--muted));
     }
-    .chip.featured { border-color: rgba(var(--accent), 0.5); color: rgb(var(--text)); }
+    .chip.featured {
+      border-color: rgba(var(--accent), 0.5);
+      color: rgb(var(--text));
+    }
 
-    .content { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 22px; }
+    .content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
     @media (min-width: 980px) {
-      .content { grid-template-columns: 1fr 280px; gap: 24px; }
-      .aside { position: sticky; top: 18px; align-self: start; }
+      .content {
+        grid-template-columns: 1fr 280px;
+        gap: 24px;
+      }
+      .aside {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+      }
     }
 
     /* typography */
-    h2 { margin: 18px 0 8px; font-size: 18px; }
-    ul { margin: 8px 0 0; padding-left: 18px; color: rgb(var(--muted)); }
-    li { margin: 8px 0; line-height: 1.6; }
+    h2 {
+      margin: 18px 0 8px;
+      font-size: 18px;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: rgb(var(--muted));
+    }
+    li {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
 
-    hr { border: 0; height: 1px; background: rgb(var(--border)); margin: 18px 0; }
+    hr {
+      border: 0;
+      height: 1px;
+      background: rgb(var(--border));
+      margin: 18px 0;
+    }
 
     /* aside card */
     .card {
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
-    .card h3 { margin: 0 0 10px; font-size: 14px; color: rgb(var(--text)); letter-spacing: 0.02em; text-transform: uppercase; }
-    .kv { margin: 8px 0; color: rgb(var(--muted)); font-size: 13px; }
-    .kv strong { color: rgb(var(--text)); }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: rgb(var(--text));
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .kv {
+      margin: 8px 0;
+      color: rgb(var(--muted));
+      font-size: 13px;
+    }
+    .kv strong {
+      color: rgb(var(--text));
+    }
 
     /* next link */
-    .next { margin-top: 26px; }
+    .next {
+      margin-top: 26px;
+    }
     .next a {
       text-decoration: none;
       color: rgb(var(--text));
@@ -135,8 +235,10 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
       padding: 12px 14px;
       display: inline-flex;
       gap: 8px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
-    .next a:hover { border-color: rgb(var(--accent)); }
+    .next a:hover {
+      border-color: rgb(var(--accent));
+    }
   </style>
 </SiteLayout>

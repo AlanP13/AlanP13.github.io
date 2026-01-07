@@ -1,45 +1,384 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import ImageCarousel from "../components/ImageCarousel";
+import { Image } from "astro:assets";
+import national1 from "../assets/about/national-park-1.jpg";
+import national2 from "../assets/about/national-park-2.jpg";
+import national3 from "../assets/about/national-park-3.jpg";
+import national4 from "../assets/about/national-park-4.jpg";
+import national5 from "../assets/about/national-park-5.jpg";
+import national6 from "../assets/about/national-park-6.jpg";
+import national7 from "../assets/about/national-park-7.jpg";
 ---
-<SiteLayout title="About — Alan Palayil" description="Enterprise engineering, data systems, and applied research focus.">
-  <h1>About Me</h1>
 
-  <p>
-    Hey! I’m <a href="https://www.instagram.com/alan.palayil/" target="_blank" rel="noopener noreferrer" class="dotted-link">Alan Palayil</a>, an 
-    <strong>Enterprise Data Engineer</strong> working at the intersection of <strong>Financial Systems</strong>,
-    <strong> Cloud Platforms</strong>, and <strong>Data Reliability</strong>. My work focuses on modernizing investment
-    accounting workflows by building scalable, production-grade pipelines that prioritize <strong>accuracy</strong>,<strong> auditability</strong>, and <strong>long-term maintainability</strong>.
-  </p>
-  <p>
-    I currently work at <a href="https://www.genworth.com" target="_blank" rel="noopener noreferrer" class="dotted-link">Genworth Financial</a>, 
-    where I own and support critical accounting platforms across <strong>Fixed Income</strong>, <strong>Derivatives</strong>, and <strong>Commercial Mortgage Loans</strong>, 
-    collaborating closely with Accounting, Operations, and Infrastructure teams 
-    to deliver systems that are both technically robust and business-critical.
-  </p>
-  <p>
-    Alongside my professional work, I’m pursuing a <a href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology" target="_blank" rel="noopener noreferrer" class="dotted-link">PhD in Information Technology</a>
-    with a focus on <strong>AI</strong> and <strong>Data Science</strong>, centered on applying intelligent, data-driven techniques to enterprise systems and automation.
-  </p>
-  <p>
-    Outside of work, I enjoy <strong>painting</strong>, <strong>digital art</strong>, <strong>3D printing</strong>, <strong>gaming</strong>, and building creative projects</strong> 
-    that blend engineering with design. 
-    I’m always exploring new ideas—whether that’s improving data systems or creating something tangible in the real world. 
-  </p>
+<SiteLayout
+  title="About — Alan Palayil"
+  description="Enterprise engineering, data systems, and applied research focus."
+>
+  <section class="about">
+    <h1>About Me</h1>
+
+    <!-- Jason-style two-column hero: big photo left, cospy right -->
+    <div class="heroGrid">
+      <div class="left prose">
+        <p>
+          Hey! I’m <a
+            href="https://www.instagram.com/alan.palayil/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="dotted-link">Alan Palayil</a
+          >, an
+          <strong>Enterprise Data Engineer</strong> working at the intersection of
+          <strong>Financial Systems</strong>,
+          <strong> Cloud Platforms</strong>, and <strong
+            >Data Reliability</strong
+          >. My work focuses on modernizing investment accounting workflows by
+          building scalable, production-grade pipelines that prioritize <strong
+            >accuracy</strong
+          >,<strong> auditability</strong>, and <strong
+            >long-term maintainability</strong
+          >.
+        </p>
+
+        <p>
+          I currently work at <a
+            href="https://www.genworth.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="dotted-link">Genworth Financial</a
+          >, where I own and support critical accounting platforms across <strong
+            >Fixed Income</strong
+          >, <strong>Derivatives</strong>, and <strong
+            >Commercial Mortgage Loans</strong
+          >, collaborating closely with Accounting, Operations, and
+          Infrastructure teams to deliver systems that are both technically
+          robust and business-critical.
+        </p>
+
+        <p>
+          Alongside my professional work, I’m pursuing a <a
+            href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="dotted-link">PhD in Information Technology</a
+          >
+          with a focus on <strong>AI</strong> and <strong>Data Science</strong>,
+          centered on applying intelligent, data-driven techniques to enterprise
+          systems and automation.
+        </p>
+
+        <p>
+          Outside of work, I enjoy <strong>Painting</strong>, <strong
+            >Digital Art</strong
+          >, <strong>3D Printing</strong>, <strong>Gaming</strong>, and building
+          creative projects that blend engineering with design. I’m always
+          exploring new ideas—whether that’s improving data systems or creating
+          something tangible in the real world.
+        </p>
+
+        <div class="socialRow" aria-label="Social links">
+          <a
+            class="social"
+            href="https://github.com/AlanP13"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+                ></path>
+              </svg>
+            </span>
+            GitHub
+          </a>
+
+          <span class="sep" aria-hidden="true">|</span>
+
+          <a
+            class="social"
+            href="https://www.linkedin.com/in/alan-palayil/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
+                ></path>
+              </svg>
+            </span>
+            LinkedIn
+          </a>
+
+          <span class="sep" aria-hidden="true">|</span>
+
+          <a
+            class="social"
+            href="mailto:alan.palayil@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"
+                ></path>
+              </svg>
+            </span>
+            Email
+          </a>
+        </div>
+      </div>
+
+      <div class="right">
+        <ImageCarousel
+          client:idle
+          images={[
+            "/about/alan-1.jpg",
+            "/about/alan-2.jpg",
+            "/about/alan-3.jpg",
+            "/about/alan-4.jpg",
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Jason-style image section below (3-up responsive grid) -->
+  <section class="gallery">
+    <h2 class="galleryTitle">Some of the iconic places I've visited!</h2>
+
+    <div class="grid">
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national1}
+          alt="National Park 1"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national2}
+          alt="National Park 2"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national3}
+          alt="National Park 3"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national4}
+          alt="National Park 4"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national5}
+          alt="National Park 5"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national6}
+          alt="National Park 6"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+      <a class="imgCard" target="_blank" rel="noreferrer">
+        <Image
+          src={national7}
+          alt="National Park 7"
+          width={768}
+          format="webp"
+          loading="lazy"
+        />
+      </a>
+    </div>
+  </section>
 
   <style>
-    h1 { margin: 0 0 12px; font-size: 34px; 
-    color: rgb(var(--accent)); font-weight: 800; }
-    p { max-width: 80ch; color: rgb(var(--muted)); }
-    p strong { color: rgb(var(--accent)); }
+    /* Jason-like breadcrumb */
+    .path {
+      margin-top: 10px;
+      color: rgb(var(--muted));
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    }
+
+    .about {
+      padding-top: 44px; /* gives that Jason breathing room */
+      padding-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 44px;
+      letter-spacing: -0.03em;
+      color: rgb(var(--accent));
+      font-weight: 800;
+    }
+    .socialRow {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: rgb(var(--muted));
+      font-size: 14px;
+    }
+
+    .social {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: rgb(var(--text));
+      opacity: 0.95;
+    }
+
+    .social:hover {
+      color: rgb(var(--accent));
+    }
+
+    .icon {
+      color: rgb(var(--accent));
+      display: inline-flex;
+    }
+
+    .sep {
+      color: rgb(var(--muted));
+      opacity: 0.7;
+    }
+
+    /* Two-column layout (photo left, text right) */
+    .heroGrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (min-width: 980px) {
+      .heroGrid {
+        grid-template-columns: 6fr 1fr; /* wider text, narrower carousel */
+        gap: 44px; /* keep swipe breathing room */
+        align-items: start;
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: flex-end; /* right align carousel */
+      align-items: flex-start;
+      width: 100%;
+    }
+    /* Your existing text styling */
+    p {
+      color: rgb(var(--muted));
+      text-align: justify;
+    }
+    p strong {
+      color: rgb(var(--accent));
+    }
+
     .dotted-link {
-      max-width: 80ch;
-      font-weight: 700; 
+      font-weight: 700;
       color: rgb(var(--accent));
       text-decoration: underline dotted;
       text-underline-offset: 6px;
     }
     .dotted-link:hover {
       text-decoration: underline solid;
+    }
+
+    /* Jason-like link row */
+    .links {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgb(var(--muted));
+    }
+    .links a {
+      text-decoration: none;
+      color: rgb(var(--text));
+      border-bottom: 1px dotted rgba(var(--accent), 0.35);
+    }
+    .links a:hover {
+      border-bottom-color: rgb(var(--accent));
+    }
+    .sep {
+      margin: 0 8px;
+      color: rgb(var(--muted));
+    }
+
+    /* Gallery */
+    .gallery {
+      margin-top: 26px;
+      padding-top: 12px;
+    }
+    .galleryTitle {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: rgb(var(--muted));
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 760px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .imgCard {
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      display: block;
+      transition:
+        transform 120ms ease,
+        border-color 120ms ease;
+      text-decoration: none;
+    }
+    .imgCard:hover {
+      transform: translateY(-2px);
+      border-color: rgb(var(--accent));
+    }
+    .imgCard img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
     }
   </style>
 </SiteLayout>
