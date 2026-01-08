@@ -2,7 +2,7 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import ImageCarousel from "../components/ImageCarousel";
 
-// Auto-import ALL images in src/assets/about
+// Auto-import ALL images in src/assets/places
 const modules = import.meta.glob(
   "../assets/places/*.{jpg,jpeg,png,webp,avif}",
   {
@@ -25,6 +25,21 @@ const placeImages = Object.entries(modules)
     return { src, name };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+  // Auto-import Carousel images (Alan photos)
+  const carouselModules = import.meta.glob(
+    "../assets/about/*.{jpg,jpeg,png,webp,avif}",
+    { eager: true }
+  );
+
+  const carouselImages = Object.entries(carouselModules)
+    .map(([filePath, mod]) => {
+      const file = filePath.split("/").pop() ?? "";
+      // Sort-friendly if you name them alan-1, alan-2, etc.
+      const src = (mod as { default: { src: string } }).default.src;
+      return { file, src };
+    })
+    .sort((a, b) => a.file.localeCompare(b.file))
+    .map((x) => x.src);
 ---
 
 <SiteLayout
@@ -149,21 +164,13 @@ const placeImages = Object.entries(modules)
       </div>
 
       <div class="right">
-        <ImageCarousel
-          client:idle
-          images={[
-            "/about/alan-1.jpg",
-            "/about/alan-2.jpg",
-            "/about/alan-3.jpg",
-            "/about/alan-4.jpg",
-          ]}
-        />
+        <ImageCarousel client:idle images={carouselImages} />
       </div>
     </div>
   </section>
 
   <section class="gallery">
-    <h2 class="galleryTitle">Some of the iconic places I've visited!</h2>
+    <h2 class="galleryTitle">Some of the places I've visited!</h2>
 
     <div class="grid" id="placesGallery" data-rotating>
       {
