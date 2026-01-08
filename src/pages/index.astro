@@ -267,20 +267,22 @@ const projects = (await getCollection("projects"))
 
     /* Hero link row (Jason-style) */
     .socialRow {
+      margin-top: 14px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-top: 28px;
+      gap: 10px;
       flex-wrap: wrap;
       color: rgb(var(--muted));
+      font-size: 14px;
     }
     .social {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
+      color: rgb(var(--text));
       color: rgb(var(--muted));
-      padding: 6px 2px;
+      opacity: 0.95;
     }
     .social:hover {
       color: rgb(var(--accent));
@@ -294,6 +296,7 @@ const projects = (await getCollection("projects"))
       border: 1px solid rgb(var(--border));
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.02);
+      color: rgb(var(--accent));
     }
     .sep {
       color: rgb(var(--border));
