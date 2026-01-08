@@ -2,9 +2,36 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 
+/** ✅ Eager-load all organization logos from /src/assets/organizations */
+const orgLogoModules = import.meta.glob("../assets/organizations/*.png", {
+  eager: true,
+});
+
+/** Build a map like: { IIT: "/_astro/IIT.hash.png", Genworth: "/_astro/Genworth.hash.png" } */
+const orgLogos = Object.fromEntries(
+  Object.entries(orgLogoModules).map(([path, mod]: [string, any]) => {
+    const key = path.split("/").pop()?.replace(".png", "") ?? ""; // "IIT"
+    const meta = (mod as any).default;
+    const url = meta?.src ?? meta; // ✅ works whether it's metadata or string
+    return [key, url];
+  }),
+);
+
 const projects = (await getCollection("projects"))
   .filter((p) => p.data.featured)
   .slice(0, 3);
+
+const timeline = await getCollection("timeline");
+const workItems = timeline
+  .filter((t) => t.data.kind === "work")
+  .sort((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0));
+
+const eduItems = timeline
+  .filter((t) => t.data.kind === "education")
+  .sort((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0));
+
+/** Helper: returns the image URL (or null if not found) */
+const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 ---
 
 <SiteLayout
@@ -15,23 +42,18 @@ const projects = (await getCollection("projects"))
     <p class="kicker">
       Enterprise Data Engineer • Financial Systems • Cloud Platforms
     </p>
-    <h1>Hello! I’m Alan Palayil.</h1>
-
+    <h1>
+      Hello! I’m <strong>Alan Palayil</strong>.<span class="wave">👋</span>
+    </h1>
     <p class="lead">
-      I’m an <strong>Application Development Analyst</strong> at <strong
-        >Genworth Financial</strong
-      >, modernizing
-      <strong> investment accounting systems</strong> by building reliable <strong
-        >Azure-based data pipelines</strong
-      >, improving operational resilience, and enabling cloud transformation at
-      scale.
+      I’m an <strong>Application Development Analyst</strong> at <strong>Genworth Financial</strong>, working on
+      <strong>Core Investment Accounting Platforms</strong> where correctness and reliability matter.
+      I design and operate <strong>Enterprise Data Pipelines</strong> across <strong>Legacy Systems and Azure Synapse</strong>,
+      focusing on <strong>Scalability</strong>, <strong>Accuracy</strong>, and <strong>Long-Term Maintainability</strong>.
     </p>
-
     <p class="sub">
-      Open to conversations on enterprise cloud migration, financial systems
-      modernization, and large-scale data workflows.
+      Exploring the intersection of Enterprise Data Platforms, Cloud Systems, and Applied AI through both industry work and Doctoral Research.
     </p>
-
     <div class="socialRow" aria-label="Social links">
       <a
         class="social"
@@ -97,12 +119,193 @@ const projects = (await getCollection("projects"))
       </a>
     </div>
   </section>
+  {/* WORK & EDUCATION PANEL */}
+  <section class="block">
+    <div class="weTabs" role="tablist" aria-label="Work and education tabs">
+      <button
+        class="weTab isActive"
+        role="tab"
+        aria-selected="true"
+        aria-controls="we-work"
+        id="tab-work"
+        type="button"
+      >
+        Work
+      </button>
+      <button
+        class="weTab"
+        role="tab"
+        aria-selected="false"
+        aria-controls="we-edu"
+        id="tab-edu"
+        type="button"
+      >
+        Education
+      </button>
+    </div>
+
+    <div class="wePanelWrap">
+      {/* WORK PANEL */}
+      <div
+        class="wePanel isActive"
+        role="tabpanel"
+        id="we-work"
+        aria-labelledby="tab-work"
+      >
+        <div class="weCard">
+          {
+            workItems.map((item, idx) => (
+              <>
+                <article class="weRow">
+                  <div class="weLeft">
+                    <div class="weLogoWrap" aria-hidden="true">
+                      {getOrgLogo(item.data.iconText) ? (
+                        <img
+                          class="weLogoImg"
+                          src={getOrgLogo(item.data.iconText)}
+                          alt={`${item.data.iconText} logo`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="weLogoFallback">{item.data.iconText}</div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="weMain">
+                    <div class="weTop">
+                      <div class="weTitles">
+                        <h3>{item.data.title}</h3>
+                        <p class="weOrg">
+                          {
+                            item.data.orgUrl ? (
+                              <a
+                                href={item.data.orgUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="weOrgLink"
+                              >
+                                <span class="weOrgName">{item.data.org}</span>
+                              </a>
+                            ) : (
+                              <span class="weOrgName">{item.data.org}</span>
+                            )
+                          }
+                          {item.data.location ? ` • ${item.data.location}` : ""}
+                        </p>
+                      </div>
+                      <div class="weDates">{item.data.dates}</div>
+                    </div>
+
+                    {item.data.bullets?.length ? (
+                      <ul class="weBullets">
+                        {item.data.bullets.map((b) => (
+                          <li>{b}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </article>
+
+                {idx !== workItems.length - 1 ? (
+                  <div class="weDivider" />
+                ) : null}
+              </>
+            ))
+          }
+        </div>
+      </div>
+
+      {/* EDUCATION PANEL */}
+      <div
+        class="wePanel"
+        role="tabpanel"
+        id="we-edu"
+        aria-labelledby="tab-edu"
+      >
+        <div class="weCard">
+          {
+            eduItems.map((item, idx) => (
+              <>
+                <article class="weRow">
+                  <div class="weLeft">
+                    <div class="weLogoWrap" aria-hidden="true">
+                      {getOrgLogo(item.data.iconText) ? (
+                        <img
+                          class="weLogoImg"
+                          src={getOrgLogo(item.data.iconText)}
+                          alt={`${item.data.iconText} logo`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="weLogoFallback">{item.data.iconText}</div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="weMain">
+                    <div class="weTop">
+                      <div class="weTitles">
+                        <h3>{item.data.title}</h3>
+                        <p class="weOrg">
+                          {
+                            item.data.orgUrl ? (
+                              <a
+                                href={item.data.orgUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="weOrgLink"
+                              >
+                                <span class="weOrgName">{item.data.org}</span>
+                              </a>
+                            ) : (
+                              <span class="weOrgName">{item.data.org}</span>
+                            )
+                          }
+                          {item.data.location ? ` • ${item.data.location}` : ""}
+                        </p>
+                      </div>
+                      <div class="weDates">{item.data.dates}</div>
+                    </div>
+
+                    {item.data.bullets?.length ? (
+                      <ul class="weBullets">
+                        {item.data.bullets.map((b) => (
+                          <li>{b}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </article>
+
+                {idx !== eduItems.length - 1 ? <div class="weDivider" /> : null}
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      const tabs = Array.from(document.querySelectorAll(".weTab"));
+      const panels = Array.from(document.querySelectorAll(".wePanel"));
+
+      function activate(index) {
+        tabs.forEach((t, i) => {
+          const on = i === index;
+          t.classList.toggle("isActive", on);
+          t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        panels.forEach((p, i) => p.classList.toggle("isActive", i === index));
+      }
+
+      tabs.forEach((t, i) => t.addEventListener("click", () => activate(i)));
+    </script>
+  </section>
 
   <section class="block">
     <h2>Featured Projects</h2>
-    <p class="muted">
-      Selected work with production ownership and measurable impact.
-    </p>
+    <p class="muted"></p>
 
     <div class="grid">
       {
@@ -125,147 +328,137 @@ const projects = (await getCollection("projects"))
   </section>
 
   <section class="block">
-    <h2>Work & Education</h2>
-    <div class="timeline">
-      <div class="item">
-        <div class="when">Dec 2025 – Present</div>
-        <div class="what">
-          <h3>Application Development Analyst (P2) — Genworth Financial</h3>
-          <p class="muted">
-            Platform ownership, cloud modernization, data workflows across fixed
-            income, CML, and derivatives.
-          </p>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="when">Jul 2023 – Dec 2025</div>
-        <div class="what">
-          <h3>
-            Associate Application Development Analyst (P1) — Genworth Financial
-          </h3>
-          <p class="muted">
-            Automations, reporting, interfaces, and production support for
-            investment accounting platforms.
-          </p>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="item">
-        <div class="when">PhD (in progress)</div>
-        <div class="what">
-          <h3>PhD in Information Technology — AI & Data Science focus</h3>
-          <p class="muted">
-            Applied research interests in intelligent automation and data-driven
-            systems.
-          </p>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="when">2023</div>
-        <div class="what">
-          <h3>
-            M.S. Cybersecurity Engineering — Illinois Institute of Technology
-          </h3>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="when">2023</div>
-        <div class="what">
-          <h3>
-            B.S. Computer & Cybersecurity Engineering — Illinois Institute of
-            Technology
-          </h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block">
     <h2>Technical Skills</h2>
     <div class="skills">
       <div class="s">
         <h3>Data Engineering & Pipelines</h3>
         <ul>
-          <li>ETL pipeline design and orchestration</li>
-          <li>Data transformation, validation, and reconciliation</li>
-          <li>Accounting message generation and journal workflows</li>
-          <li>Daily batch processing in regulated environments</li>
+          <li>Enterprise ETL Pipeline Design, Orchestration, and Operations</li>
+          <li>Data Transformation, Validation, Reconciliation, and Controls</li>
+          <li>Accounting Message Generation and Journal Workflows</li>
+          <li>Daily Batch Processing in Regulated Financial Environments</li>
         </ul>
       </div>
 
       <div class="s">
         <h3>Cloud & Data Platforms</h3>
         <ul>
-          <li>Azure Synapse Analytics (dedicated & serverless)</li>
-          <li>Azure monitoring for reliability and operations</li>
-          <li>PostgreSQL and relational data modeling</li>
-          <li>Enterprise scheduling and job orchestration</li>
+          <li>Azure Synapse Analytics (Dedicated & Serverless)</li>
+          <li>Azure-based Monitoring, Reliability, and Operations</li>
+          <li>PostgreSQL and Relational Data Modeling</li>
+          <li>Enterprise Scheduling and Workload Orchestration (AppWorx)</li>
         </ul>
       </div>
 
       <div class="s">
         <h3>Languages & Tooling</h3>
         <ul>
-          <li>Python (processing, automation, validation)</li>
-          <li>SQL (reconciliation, performance tuning)</li>
-          <li>Git (collaboration, version control)</li>
+          <li>C++, Java and Python (Data Processing, Automation, Validation, Message Generation)</li>
+          <li>MySQL and PostgreSQL (Reconciliation, Data Analysis, Performance Tuning)</li>
+          <li>Git and JIRA (Version Control, Collaboration, Release Management, Issue Tracking)</li>
         </ul>
       </div>
 
       <div class="s">
         <h3>Enterprise Systems & Integration</h3>
         <ul>
-          <li>PAM accounting platforms</li>
-          <li>Markit EDM and enterprise ETL workflows</li>
-          <li>AppWorx scheduling and dependency management</li>
-          <li>Vendor migrations and platform ownership</li>
+          <li>PAM Investment Accounting Platforms</li>
+          <li>Markit EDM and Enterprise ETL Workflows</li>
+          <li>Informatica-based Data Integrations</li>
+          <li>Vendor Migrations and Platform Modernization Initiatives</li>
         </ul>
       </div>
     </div>
   </section>
 
+
   <style>
     /* HERO */
     .hero {
-      padding-top: 28px; /* after the big main padding, Jason still has a bit more */
+      padding-top: 28px;
       padding-bottom: 12px;
-    }
 
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
+    }
     .kicker {
       color: rgb(var(--muted));
       margin: 0 0 18px;
-      font-size: 14px;
+      font-size: 16px; /* was 14 */
+      letter-spacing: 0.01em;
     }
 
     .hero h1 {
       margin: 0 0 18px;
-      font-size: 56px; /* Jason headline is big */
+      font-size: clamp(52px, 5vw, 68px); /* responsive, bigger */
       line-height: 1.02;
       letter-spacing: -0.03em;
     }
 
     .lead {
-      font-size: 18px;
-      line-height: 1.75; /* Jason paragraph breathes */
-      max-width: 74ch;
+      font-size: 20px; /* was 18 */
+      line-height: 1.75;
+      max-width: 88ch; /* slightly wider text block */
       margin: 0 0 18px;
     }
 
     .sub {
       color: rgb(var(--muted));
-      max-width: 74ch;
+      font-size: 17px; /* new */
+      max-width: 88ch;
       margin: 0;
       line-height: 1.75;
     }
+    @media (max-width: 620px) {
+      .kicker {
+        font-size: 14px;
+      }
+      .lead {
+        font-size: 18px;
+      }
+      .sub {
+        font-size: 16px;
+      }
+    }
+    .wave {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      cursor: default;
+    }
+
+    /* Trigger animation on hover */
+    .wave:hover {
+      animation: wave-hand 0.9s ease-in-out;
+    }
+
+    /* Keyframes */
+    @keyframes wave-hand {
+      0% {
+        transform: rotate(0deg);
+      }
+      15% {
+        transform: rotate(14deg);
+      }
+      30% {
+        transform: rotate(-8deg);
+      }
+      45% {
+        transform: rotate(14deg);
+      }
+      60% {
+        transform: rotate(-4deg);
+      }
+      75% {
+        transform: rotate(10deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
 
     /* Social row sits lower in Jason’s hero */
-
-    /* Hero link row (Jason-style) */
     .socialRow {
       margin-top: 14px;
       display: flex;
@@ -316,16 +509,24 @@ const projects = (await getCollection("projects"))
       margin: 0 0 12px;
       font-size: 28px;
       letter-spacing: -0.02em;
+      color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--muted)));
     }
 
     .block .muted {
       margin: 0 0 22px;
     }
-
+    p {
+      text-align: justify;
+    }
+    p strong {
+      color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--muted)));
+    }
+    h1 strong {
+      color: rgb(var(--accent));
+    }
     .muted {
       color: rgb(var(--muted));
     }
-
     /* Featured projects grid */
     .grid {
       display: grid;
@@ -385,29 +586,186 @@ const projects = (await getCollection("projects"))
       text-decoration: underline;
     }
 
-    /* Timeline */
-    .timeline {
-      margin-top: 18px;
-    }
-    .item {
-      display: grid;
-      grid-template-columns: 170px 1fr;
+    /* Work & Education — Ted-style tabs + card */
+    .weHeader {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       gap: 16px;
-      padding: 12px 0;
     }
-    .when {
+
+    .weTabs {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid rgb(var(--border));
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .weTab {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: rgb(var(--muted));
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition:
+        background 120ms ease,
+        color 120ms ease,
+        border-color 120ms ease;
+    }
+
+    .weTab.isActive {
+      background: rgba(255, 255, 255, 0.06);
+      color: rgb(var(--text));
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    }
+
+    .weTab:hover {
+      color: rgb(var(--text));
+    }
+
+    .wePanelWrap {
+      margin-top: 14px;
+    }
+
+    .wePanel {
+      display: none;
+    }
+    .wePanel.isActive {
+      display: block;
+    }
+
+    .weCard {
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Subtle accent rail (like Ted’s card feel) */
+    .weCard::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 3px;
+      border-radius: 999px;
+      background: rgb(var(--accent));
+      opacity: 0.65;
+    }
+
+    .weRow {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      padding: 16px 16px 16px 20px; /* extra left padding for rail */
+    }
+
+    .weDivider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.05);
+      margin-left: 20px;
+    }
+
+    /* Logo container */
+    .weLogoWrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgb(var(--border));
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    /* Real image logo */
+    .weLogoImg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px; /* keeps logos from touching edges */
+      filter: saturate(1.05);
+      opacity: 0.95;
+    }
+
+    /* Fallback text if png missing */
+    .weLogoFallback {
+      font-weight: 650;
+      font-size: 14px;
+      color: rgb(var(--text));
+    }
+
+    /* Optional: make education logos tinted by accent when image missing */
+    .weLogoFallback.edu {
+      color: rgb(var(--accent));
+    }
+
+    .weTop {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .weTitles h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .weOrg {
+      margin: 0;
       color: rgb(var(--muted));
       font-size: 13px;
     }
-    .what h3 {
-      margin: 0 0 4px;
-      font-size: 16px;
+    .weOrgName {
+      color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--muted)));
+      font-weight: 500;
     }
-    .divider {
-      height: 1px;
-      background: rgb(var(--border));
-      margin: 10px 0;
-      opacity: 0.9;
+    .weDates {
+      color: rgb(var(--muted));
+      font-size: 13px;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .weBullets {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: rgb(var(--muted));
+    }
+
+    .weBullets li {
+      margin: 6px 0;
+      line-height: 1.6;
+    }
+    .weOrgLink {
+      font-weight: 700;
+      color: rgb(var(--accent));
+      text-decoration: none;
+      text-underline-offset: 6px;
+    }
+
+    .weOrgLink:hover .weOrgName {
+      text-decoration: underline solid;
+    }
+    /* Mobile: stack date under title */
+    @media (max-width: 620px) {
+      .weTop {
+        flex-direction: column;
+      }
+      .weDates {
+        padding-top: 0;
+      }
     }
 
     /* Skills */

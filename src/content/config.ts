@@ -35,4 +35,22 @@ const research = defineCollection({
   }),
 });
 
-export const collections = { projects, research };
+
+/** NEW: Work & Education entries */
+const timeline = defineCollection({
+  type: "content",
+  schema: z.object({
+    kind: z.enum(["work", "education"]),
+    title: z.string(),              // role or degree
+    org: z.string(),                // company or university
+    orgUrl: z.string().url().optional(),
+    location: z.string().optional(),
+    dates: z.string(),              // "Dec 2025 – Present"
+    subtitle: z.string().optional(),// e.g. "Focus: AI & Data Science"
+    bullets: z.array(z.string()).default([]),
+    iconText: z.string().default("•"), // fallback "G" "IIT" "PhD"
+    order: z.number().default(0),       // for manual ordering if needed
+  }),
+});
+
+export const collections = { projects, research, timeline };
