@@ -1,0 +1,51 @@
+---
+title: "Forecasting Retail Fuel Prices Around Holidays Using Walmart Supermarket Data"
+status: published
+area: ["Data Science", "Machine Learning", "Forecasting"]
+summary: "Built a time-series aware regression workflow to predict weekly fuel prices and analyze holiday vs non-holiday behavior using macroeconomic + calendar features."
+relevance: "Demonstrates practical applied ML: feature engineering, baselines vs non-linear models, and explaining drivers via feature importance."
+links:
+  - label: "PDF"
+    url: "/papers/ITS-836-Fuel-Price-Forecasting.pdf"
+  - label: "Dataset Reference"
+    url: "https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting"
+---
+
+## Problem
+
+Retail fuel pricing is influenced by:
+- short-term inertia (recent price history)
+- macro indicators (CPI, unemployment)
+- seasonality and holiday demand shifts
+
+This project forecasts **weekly Fuel_Price** for a store over time and evaluates whether holidays show measurable pricing differences.
+
+## Approach
+
+### Baseline
+A simple lag baseline: “last week’s price ≈ this week’s price”
+
+### Model
+A **Random Forest Regressor** using engineered features such as:
+- lagged Fuel_Price
+- calendar fields (month/week effects)
+- holiday flag (`IsHoliday`)
+- macroeconomic indicators (CPI, unemployment)
+
+## Results & Insights
+
+- Random Forest outperformed the naive lag baseline by capturing non-linear structure.
+- Holiday vs non-holiday weeks showed **modest but systematic differences**.
+- Feature importance emphasized:
+  - lagged price history as the strongest driver
+  - macro + seasonal signals as meaningful secondary contributors
+
+## Why It Matters (Portfolio Angle)
+
+This is a clean example of “real-world ML”:
+- start with a strong baseline
+- build interpretable improvements
+- quantify holiday effects instead of assuming them
+- communicate outcomes in a business-usable way
+
+---

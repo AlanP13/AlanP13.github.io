@@ -1,0 +1,54 @@
+---
+title: "Disaster Recovery Plan for a Hybrid IT Department"
+status: published
+area: ["Cloud & Infrastructure", "Security", "Resilience Engineering"]
+summary: "Designed a structured disaster recovery plan for a hybrid environment with clear RTO/RPO targets, operational roles, and test cadence."
+relevance: "Maps directly to my enterprise pipeline work: recovery design, operational runbooks, validation, and reducing time-to-restore for critical workflows."
+links:
+  - label: "PDF"
+    url: "/papers/ITS-834-Hybrid-DR-Plan.pdf"
+---
+
+
+## Context
+
+In financial IT environments, outages impact:
+- transaction processing
+- accounting close
+- regulatory reporting
+- daily ETL + automation chains
+
+This plan defines how to recover a **hybrid architecture** (cloud + on-prem) safely and predictably.
+
+## What the Plan Includes
+
+### Critical Components & Targets
+Defined RTO/RPO expectations for key systems, including databases, ETL, accounting applications, schedulers, and file automation services.
+
+### Roles & Responsibilities
+Clear ownership across incident command, DR lead, DBA, cloud ops, scheduler owner, and security.
+
+### Activation Criteria
+Triggers include ransomware/database corruption, cloud region outage, scheduler failure blocking EOD, and data integrity compromise.
+
+## Recovery Procedures (Runbook Style)
+
+- database restore + log replay to meet tight RPO targets
+- ETL failover using infrastructure-as-code patterns
+- application rebuild + connection repointing to DR database aliases
+- scheduler promotion + priority chain resumption
+- file restore with malware scanning + checksum validation
+
+## Testing Cadence
+
+Includes quarterly/semiannual/annual drills (DB failover, ETL failover, scheduler simulation, full end-to-end DR exercise), plus backup integrity checks.
+
+## Why It Matters (Portfolio Angle)
+
+This work shows how I think about reliability:
+- define targets (RTO/RPO) early
+- make recovery steps executable and owned
+- test regularly to avoid “paper DR”
+- design for auditability and operational clarity
+
+---

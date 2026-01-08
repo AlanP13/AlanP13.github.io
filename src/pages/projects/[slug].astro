@@ -70,6 +70,22 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
             </>
           ) : null
         }
+        {project.data.links?.length ? (
+          <>
+            <h2>Links</h2>
+            <p>
+              {project.data.links.map((l) => (
+                <a
+                  href={l.url}
+                  target="_blank"
+                  style="margin-right: 12px; color: rgb(var(--accent)); text-decoration: none;"
+                >
+                  {l.label} →
+                </a>
+              ))}
+            </p>
+          </>
+        ) : null}
 
         {
           project.data.impact?.length ? (

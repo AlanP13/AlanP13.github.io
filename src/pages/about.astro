@@ -190,7 +190,7 @@ const placeImages = Object.entries(modules)
     <script define:vars={{ placeImages }}>
       const VISIBLE = 6;
       const INTERVAL = 7500;
-      const FADE_MS = 750;
+      const FADE_MS = 150;
 
       let index = 0;
       const container = document.getElementById("placesGallery");
@@ -241,13 +241,14 @@ const placeImages = Object.entries(modules)
     }
 
     p {
-      color: rgb(var(--muted));
       text-align: justify;
     }
     p strong {
       color: rgb(var(--accent));
     }
-
+    .muted {
+      color: rgb(var(--muted));
+    }
     .dotted-link {
       font-weight: 700;
       color: rgb(var(--accent));
@@ -273,6 +274,7 @@ const placeImages = Object.entries(modules)
       gap: 8px;
       text-decoration: none;
       color: rgb(var(--text));
+      color: rgb(var(--muted));
       opacity: 0.95;
     }
     .social:hover {
@@ -316,7 +318,6 @@ const placeImages = Object.entries(modules)
       font-size: 16px;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: rgb(var(--muted));
     }
 
     .grid {
@@ -365,7 +366,7 @@ const placeImages = Object.entries(modules)
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.02em;
-      color: rgb(var(--text));
+      color: rgb(255, 255, 255);
       background: linear-gradient(
         to top,
         rgba(0, 0, 0, 0.65),
