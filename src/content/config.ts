@@ -13,6 +13,12 @@ const projects = defineCollection({
     tech: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     role: z.string().optional(),
+    links: z.array(
+      z.object({
+        label: z.string(),
+        url: z.string(),
+      })
+    ).default([]),
   }),
 });
 
