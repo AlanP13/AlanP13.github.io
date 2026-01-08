@@ -3,9 +3,12 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 import ImageCarousel from "../components/ImageCarousel";
 
 // Auto-import ALL images in src/assets/about
-const modules = import.meta.glob("../assets/places/*.{jpg,jpeg,png,webp,avif}", {
-  eager: true,
-});
+const modules = import.meta.glob(
+  "../assets/places/*.{jpg,jpeg,png,webp,avif}",
+  {
+    eager: true,
+  },
+);
 
 // Build: { src, name } from file name
 const placeImages = Object.entries(modules)
@@ -39,12 +42,11 @@ const placeImages = Object.entries(modules)
             href="https://www.instagram.com/alan.palayil/"
             target="_blank"
             rel="noopener noreferrer"
-            class="dotted-link"
-            >Alan Palayil</a
-          >, an <strong>Enterprise Data Engineer</strong> working at the
-          intersection of <strong>Financial Systems</strong>,
-          <strong>Cloud Platforms</strong>, and <strong>Data Reliability</strong>.
-          My work focuses on modernizing investment accounting workflows by
+            class="dotted-link">Alan Palayil</a
+          >, an <strong>Enterprise Data Engineer</strong> working at the intersection
+          of <strong>Financial Systems</strong>,
+          <strong>Cloud Platforms</strong>, and <strong>Data Reliability</strong
+          >. My work focuses on modernizing investment accounting workflows by
           building scalable, production-grade pipelines that prioritize
           <strong>accuracy</strong>, <strong>auditability</strong>, and
           <strong>long-term maintainability</strong>.
@@ -56,13 +58,12 @@ const placeImages = Object.entries(modules)
             href="https://www.genworth.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="dotted-link"
-            >Genworth Financial</a
+            class="dotted-link">Genworth Financial</a
           >, where I own and support critical accounting platforms across
           <strong>Fixed Income</strong>, <strong>Derivatives</strong>, and
           <strong>Commercial Mortgage Loans</strong>, collaborating closely with
-          Accounting, Operations, and Infrastructure teams to deliver systems that
-          are both technically robust and business-critical.
+          Accounting, Operations, and Infrastructure teams to deliver systems
+          that are both technically robust and business-critical.
         </p>
 
         <p>
@@ -71,8 +72,7 @@ const placeImages = Object.entries(modules)
             href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology"
             target="_blank"
             rel="noopener noreferrer"
-            class="dotted-link"
-            >PhD in Information Technology</a
+            class="dotted-link">PhD in Information Technology</a
           >
           with a focus on <strong>AI</strong> and <strong>Data Science</strong>,
           centered on applying intelligent, data-driven techniques to enterprise
@@ -88,24 +88,63 @@ const placeImages = Object.entries(modules)
         </p>
 
         <div class="socialRow" aria-label="Social links">
-          <a class="social" href="https://github.com/AlanP13" target="_blank" rel="noreferrer">
-            <span class="icon" aria-hidden="true">…</span>
+          <a
+            class="social"
+            href="https://github.com/AlanP13"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <!-- GitHub icon -->
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+                ></path>
+              </svg>
+            </span>
             GitHub
           </a>
 
           <span class="sep" aria-hidden="true">|</span>
 
-          <a class="social" href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">
-            <span class="icon" aria-hidden="true">…</span>
+          <a
+            class="social"
+            href="https://www.linkedin.com/in/alan-palayil/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <!-- LinkedIn icon -->
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
+                ></path>
+              </svg>
+            </span>
             LinkedIn
           </a>
 
           <span class="sep" aria-hidden="true">|</span>
-
-          <a class="social" href="mailto:alanpalayil+portfolio@gmail.com" target="_blank" rel="noreferrer">
-            <span class="icon" aria-hidden="true">…</span>
+          <a
+            class="social"
+            href="mailto:alanpalayil+portfolio@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="icon" aria-hidden="true">
+              <!-- Email icon -->
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"
+                ></path>
+              </svg>
+            </span>
             Email
           </a>
+          <span class="sep" aria-hidden="true">|</span>
         </div>
       </div>
 
@@ -127,12 +166,14 @@ const placeImages = Object.entries(modules)
     <h2 class="galleryTitle">Some of the iconic places I've visited!</h2>
 
     <div class="grid" id="placesGallery" data-rotating>
-      {placeImages.slice(0, 6).map((img) => (
-        <div class="imgCard">
-          <img src={img.src} alt={img.name} loading="lazy" />
-          <div class="imgLabel">{img.name}</div>
-        </div>
-      ))}
+      {
+        placeImages.slice(0, 6).map((img) => (
+          <div class="imgCard">
+            <img src={img.src} alt={img.name} loading="lazy" />
+            <div class="imgLabel">{img.name}</div>
+          </div>
+        ))
+      }
     </div>
 
     <p class="muted">
@@ -179,7 +220,10 @@ const placeImages = Object.entries(modules)
   </section>
 
   <style>
-    .about { padding-top: 44px; padding-bottom: 24px; }
+    .about {
+      padding-top: 44px;
+      padding-bottom: 24px;
+    }
 
     h1 {
       margin: 0 0 18px;
@@ -189,8 +233,13 @@ const placeImages = Object.entries(modules)
       font-weight: 800;
     }
 
-    p { color: rgb(var(--muted)); text-align: justify; }
-    p strong { color: rgb(var(--accent)); }
+    p {
+      color: rgb(var(--muted));
+      text-align: justify;
+    }
+    p strong {
+      color: rgb(var(--accent));
+    }
 
     .dotted-link {
       font-weight: 700;
@@ -198,7 +247,9 @@ const placeImages = Object.entries(modules)
       text-decoration: underline dotted;
       text-underline-offset: 6px;
     }
-    .dotted-link:hover { text-decoration: underline solid; }
+    .dotted-link:hover {
+      text-decoration: underline solid;
+    }
 
     .socialRow {
       margin-top: 14px;
@@ -217,9 +268,18 @@ const placeImages = Object.entries(modules)
       color: rgb(var(--text));
       opacity: 0.95;
     }
-    .social:hover { color: rgb(var(--accent)); }
-    .icon { color: rgb(var(--accent)); display: inline-flex; }
-    .sep { color: rgb(var(--muted)); opacity: 0.7; margin: 0 8px; }
+    .social:hover {
+      color: rgb(var(--accent));
+    }
+    .icon {
+      color: rgb(var(--accent));
+      display: inline-flex;
+    }
+    .sep {
+      color: rgb(var(--muted));
+      opacity: 0.7;
+      margin: 0 8px;
+    }
 
     .heroGrid {
       display: grid;
@@ -228,7 +288,10 @@ const placeImages = Object.entries(modules)
       align-items: start;
     }
     @media (min-width: 980px) {
-      .heroGrid { grid-template-columns: 6fr 1fr; gap: 44px; }
+      .heroGrid {
+        grid-template-columns: 6fr 1fr;
+        gap: 44px;
+      }
     }
     .right {
       display: flex;
@@ -237,7 +300,10 @@ const placeImages = Object.entries(modules)
       width: 100%;
     }
 
-    .gallery { margin-top: 26px; padding-top: 12px; }
+    .gallery {
+      margin-top: 26px;
+      padding-top: 12px;
+    }
     .galleryTitle {
       margin: 0 0 12px;
       font-size: 16px;
@@ -246,9 +312,15 @@ const placeImages = Object.entries(modules)
       color: rgb(var(--muted));
     }
 
-    .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
     @media (min-width: 760px) {
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
     }
 
     .imgCard {
@@ -257,16 +329,23 @@ const placeImages = Object.entries(modules)
       overflow: hidden;
       background: rgba(255, 255, 255, 0.02);
       position: relative;
-      transition: transform 120ms ease, border-color 120ms ease;
+      transition:
+        transform 120ms ease,
+        border-color 120ms ease;
     }
-    .imgCard:hover { transform: translateY(-2px); border-color: rgb(var(--accent)); }
+    .imgCard:hover {
+      transform: translateY(-2px);
+      border-color: rgb(var(--accent));
+    }
 
     .imgCard img {
       width: 100%;
       height: 220px;
       object-fit: cover;
       display: block;
-      transition: opacity 450ms ease, transform 450ms ease;
+      transition:
+        opacity 450ms ease,
+        transform 450ms ease;
       will-change: opacity, transform;
     }
 
@@ -288,7 +367,9 @@ const placeImages = Object.entries(modules)
       );
       opacity: 0;
       transform: translateY(6px);
-      transition: opacity 160ms ease, transform 160ms ease;
+      transition:
+        opacity 160ms ease,
+        transform 160ms ease;
     }
 
     .imgLabel::before {
@@ -303,7 +384,10 @@ const placeImages = Object.entries(modules)
       opacity: 0.9;
     }
 
-    .imgCard:hover .imgLabel { opacity: 1; transform: translateY(0); }
+    .imgCard:hover .imgLabel {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .imgCard.is-fading img,
     .imgCard.is-fading .imgLabel {
@@ -312,7 +396,10 @@ const placeImages = Object.entries(modules)
     }
 
     @media (hover: none) {
-      .imgLabel { opacity: 1; transform: none; }
+      .imgLabel {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </SiteLayout>
