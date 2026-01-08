@@ -174,7 +174,7 @@ const placeImages = Object.entries(modules)
 
     <div class="grid" id="placesGallery" data-rotating>
       {
-        placeImages.slice(0, 6).map((img) => (
+        placeImages.slice(0, 3).map((img) => (
           <div class="imgCard">
             <img src={img.src} alt={img.name} loading="lazy" />
             <div class="imgLabel">{img.name}</div>
@@ -188,7 +188,7 @@ const placeImages = Object.entries(modules)
     </p>
 
     <script define:vars={{ placeImages }}>
-      const VISIBLE = 6;
+      const VISIBLE = 3;
       const INTERVAL = 7500;
       const FADE_MS = 150;
 
