@@ -1,14 +1,14 @@
 :root {
-  /* Defaults (Sun + Earth) */
-  --bg: 252 252 253;
-  --text: 10 12 16;
-  --muted: 92 102 112;
-  --card: 255 255 255;
-  --border: 224 228 235;
+  /* Defaults (Edge + Pluto) */
+  --bg: 9 10 15;
+  --text: 236 239 244;
+  --muted: 150 158 170;
+  --card: 14 16 22;
+  --border: 36 42 54;
 
   /* Accent is set by data-accent rules below */
-  --accent: 59 130 246; /* earth default */
-  --starTint: 59 130 246;
+  --accent:  168 85 247; /* earth default */
+  --starTint: 168 85 247;
 
   --r: 18px;
 }
