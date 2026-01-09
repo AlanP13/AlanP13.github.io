@@ -53,16 +53,27 @@ items.sort((a, b) => order[a.data.status] - order[b.data.status]);
       margin: 0 0 8px;
       font-size: 34px;
       color: rgb(var(--accent));
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .muted {
       color: rgb(var(--muted));
-      max-width: 80ch;
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .stack {
       margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .card {
       border: 1px solid rgb(var(--border));

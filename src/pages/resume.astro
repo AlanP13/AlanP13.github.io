@@ -22,10 +22,18 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       margin: 0 0 8px;
       font-size: 32px;
       color: rgb(var(--accent));
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .sub {
       margin: 0 0 14px;
       color: rgb(var(--muted));
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .link {
       color: rgb(var(--accent));
@@ -36,6 +44,10 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       overflow: hidden;
       background: rgba(255, 255, 255, 0.02);
       position: relative;
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .frame::before {
       content: "";

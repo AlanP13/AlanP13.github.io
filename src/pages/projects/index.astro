@@ -68,13 +68,25 @@ const rest = projects.filter((p) => !p.data.featured);
       margin: 0 0 8px;
       font-size: 34px;
       color: rgb(var(--accent));
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .muted {
       color: rgb(var(--muted));
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section {
       margin-top: 22px;
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
     }
     .section-title {
       margin: 18px 0 10px;
