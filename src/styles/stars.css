@@ -1,12 +1,13 @@
 .starfield {
-  position: fixed;
+  position: absolute; /* was fixed */
   inset: 0;
-  z-index: -1;
+  z-index: 1;         /* let bgfx control layers */
   pointer-events: none;
   background:
-    radial-gradient(1200px 700px at 15% 10%, rgba(var(--accent), 0.10), transparent 55%),
-    radial-gradient(900px 600px at 80% 15%, rgba(var(--accent), 0.08), transparent 55%),
-    radial-gradient(900px 700px at 40% 90%, rgba(255, 255, 255, 0.06), transparent 55%);
+    radial-gradient(1200px 700px at 15% 10%, rgb(var(--accent) / 0.10), transparent 55%),
+    radial-gradient(900px 600px at 80% 15%, rgb(var(--accent) / 0.08), transparent 55%),
+    radial-gradient(900px 700px at 40% 90%, rgb(255 255 255 / 0.06), transparent 55%);
+
 }
 
 .starfield::before,
@@ -31,7 +32,7 @@
     radial-gradient(circle at 80px 120px, rgba(255, 255, 255, 0.28) 1px, transparent 2px),
     radial-gradient(circle at 140px 60px, rgba(255, 255, 255, 0.22) 1px, transparent 2px),
     radial-gradient(circle at 200px 160px, rgba(255, 255, 255, 0.20) 1px, transparent 2px),
-    radial-gradient(circle at 260px 90px, rgba(var(--starTint), 0.25) 1px, transparent 2px);
+    radial-gradient(circle at 260px 90px, rgba(var(--starTint)/ 0.25) 1px, transparent 2px);
   background-size: 280px 220px;
   opacity: 0.8;
   filter: blur(0.2px);
@@ -41,7 +42,7 @@
 .starfield::after {
   background-image:
     radial-gradient(circle at 40px 40px, rgba(255, 255, 255, 0.22) 1.5px, transparent 3px),
-    radial-gradient(circle at 160px 140px, rgba(var(--starTint), 0.20) 1.5px, transparent 3px),
+    radial-gradient(circle at 160px 140px, rgba(var(--starTint)/ 0.20) 1.5px, transparent 3px),
     radial-gradient(circle at 260px 80px, rgba(255, 255, 255, 0.18) 1.5px, transparent 3px);
   background-size: 320px 260px;
   opacity: 0.55;
@@ -69,7 +70,6 @@
 }
 
 :root[data-theme="light"] .starfield {
-  opacity: 0.08;     /* or 0 to fully remove */
   filter: blur(0.5px);
 }
 
@@ -77,6 +77,3 @@
   opacity: 0.12;     /* your glow */
 }
 
-:root:not([data-theme="dark"]) .starfield {
-  opacity: 0.35;
-}
