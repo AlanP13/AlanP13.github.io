@@ -133,7 +133,18 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
   <style>
     /* layout */
     .page {
-      max-width: 980px;
+      padding: 26px 16px 48px;
+      
+      /* ✅ match section width */
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
+      /* 🔥 semi-transparent glass surface */
+      background: rgb(var(--card) / 0.75);   /* 75% transparency */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      border-radius: 24px;
     }
     .back a {
       color: rgb(var(--muted));
