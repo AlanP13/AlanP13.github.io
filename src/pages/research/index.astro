@@ -88,13 +88,16 @@ items.sort((a, b) => order[a.data.status] - order[b.data.status]);
       color: rgb(var(--muted));
     }
     .badge.published {
-      border-color: rgba(var(--accent), 0.5);
-      color: rgb(var(--text));
+      border-color: color-mix(in srgb, rgb(var(--accent)) 100%, rgb(var(--muted)));
+      color: color-mix(in srgb, rgb(var(--accent)) 100%, rgb(var(--muted)));
     }
     .badge.submitted {
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
+      color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
     }
     .badge.in-progress {
+      border-color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
+      color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
       opacity: 0.9;
     }
     .rel {

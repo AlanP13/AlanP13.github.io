@@ -40,10 +40,10 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 >
   <section class="hero">
     <p class="kicker">
-      Enterprise Data Engineer • Financial Systems • Cloud Platforms
+      <strong>Enterprise Data Engineer</strong> • Financial Systems • <strong>Cloud Platforms</strong>
     </p>
     <h1>
-      Hello! I’m <strong>Alan Palayil</strong>.<span class="wave">👋</span>
+      Hello! I’m <strong>Alan Palayil</strong><span class="wave">👋</span>
     </h1>
     <p class="lead">
       I’m an <strong>Application Development Analyst</strong> at <strong>Genworth Financial</strong>, working on
@@ -55,6 +55,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
       Exploring the intersection of Enterprise Data Platforms, Cloud Systems, and Applied AI through both Industry Work and Doctoral Research.
     </p>
     <div class="socialRow" aria-label="Social links">
+
       <a
         class="social"
         href="https://github.com/AlanP13"
@@ -72,7 +73,6 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
         </span>
         GitHub
       </a>
-
       <span class="sep" aria-hidden="true">|</span>
 
       <a
@@ -92,8 +92,25 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
         </span>
         LinkedIn
       </a>
-
       <span class="sep" aria-hidden="true">|</span>
+
+      <a
+        class="social"
+        href="/resume"
+      >
+        <span class="icon" aria-hidden="true">
+          <!-- Resume / Document icon -->
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              fill="currentColor"
+              d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
+            ></path>
+          </svg>
+        </span>
+        Resume
+      </a>
+      <span class="sep" aria-hidden="true">|</span>
+
       <a
         class="social"
         href="mailto:alanpalayil+portfolio@gmail.com"
@@ -111,10 +128,9 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
         </span>
         Email
       </a>
-
       <span class="sep" aria-hidden="true">|</span>
 
-      <a class="social more" href="/about">
+      <a class="social" href="/about">
         More about me <span aria-hidden="true">→</span>
       </a>
     </div>
@@ -264,6 +280,9 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
                           }
                           {item.data.location ? ` • ${item.data.location}` : ""}
                         </p>
+                        {item.data.subtitle ? (
+                          <p class="weSubtitle">{item.data.subtitle}</p>
+                        ) : null}
                       </div>
                       <div class="weDates">{item.data.dates}</div>
                     </div>
@@ -430,7 +449,8 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 
     /* Trigger animation on hover */
     .wave:hover {
-      animation: wave-hand 0.9s ease-in-out;
+      animation: wave-hand 1.2s infinite ease-in-out;
+      animation-delay: 0.1s;
     }
 
     /* Keyframes */
@@ -474,7 +494,6 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
       gap: 8px;
       text-decoration: none;
       color: rgb(var(--text));
-      color: rgb(var(--muted));
       opacity: 0.95;
     }
     .social:hover {
@@ -736,6 +755,11 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
       font-size: 13px;
       white-space: nowrap;
       padding-top: 2px;
+    }
+    .weSubtitle {
+      margin: 6px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .weBullets {
