@@ -120,7 +120,6 @@ const placeImages = Object.entries(modules)
             </span>
             GitHub
           </a>
-
           <span class="sep" aria-hidden="true">|</span>
 
           <a
@@ -140,8 +139,25 @@ const placeImages = Object.entries(modules)
             </span>
             LinkedIn
           </a>
-
           <span class="sep" aria-hidden="true">|</span>
+
+          <a
+            class="social"
+            href="/resume"
+          >
+            <span class="icon" aria-hidden="true">
+              <!-- Resume / Document icon -->
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  fill="currentColor"
+                  d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
+                ></path>
+              </svg>
+            </span>
+            Resume
+          </a>
+          <span class="sep" aria-hidden="true">|</span>
+
           <a
             class="social"
             href="mailto:alanpalayil+portfolio@gmail.com"
@@ -159,7 +175,6 @@ const placeImages = Object.entries(modules)
             </span>
             Email
           </a>
-          <span class="sep" aria-hidden="true">|</span>
         </div>
       </div>
 
@@ -192,7 +207,11 @@ const placeImages = Object.entries(modules)
       const INTERVAL = 5000; // 5 seconds
       const FADE_MS = 150;
 
+      // ✅ rotate 3 at a time + pause on hover
       let index = 0;
+      let timer = null;
+      let paused = false;
+
       const container = document.getElementById("placesGallery");
       const cards = Array.from(container.querySelectorAll(".imgCard"));
       const count = Math.min(VISIBLE, cards.length);
@@ -211,10 +230,8 @@ const placeImages = Object.entries(modules)
         }, FADE_MS);
       }
 
-      function tick() {
+      function render() {
         if (!placeImages?.length) return;
-
-        index = (index + 1) % placeImages.length;
 
         for (let i = 0; i < count; i++) {
           const img = placeImages[(index + i) % placeImages.length];
@@ -222,9 +239,33 @@ const placeImages = Object.entries(modules)
         }
       }
 
-      requestAnimationFrame(() => setInterval(tick, INTERVAL));
+      function tick() {
+        if (!placeImages?.length) return;
+
+        // ✅ move the window by 3 each time (rotate 3 at once)
+        index = (index + count) % placeImages.length;
+        render();
+      }
+
+      // ✅ pause rotation on hover over the gallery
+      container.addEventListener("mouseenter", () => (paused = true));
+      container.addEventListener("mouseleave", () => (paused = false));
+
+      function start() {
+        if (timer) return;
+        timer = setInterval(() => {
+          if (!paused) tick();
+        }, INTERVAL);
+      }
+
+      // initial paint + start loop
+      requestAnimationFrame(() => {
+        render();
+        start();
+      });
     </script>
   </section>
+
 
   <style>
     .about {
@@ -324,6 +365,9 @@ const placeImages = Object.entries(modules)
       font-size: 16px;
       letter-spacing: 0.02em;
       text-transform: uppercase;
+    }
+    .galleryImg {
+      transition: opacity 0.4s ease;
     }
 
     .grid {
