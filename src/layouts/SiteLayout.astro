@@ -95,8 +95,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 
     <footer class="wrap foot">
       <p>
-        © {new Date().getFullYear()} Alan Palayil • Built with Astro • All graphics
-        are personally drawn
+        © {new Date().getFullYear()} Alan Palayil • Built with Astro 
       </p>
     </footer>
 
@@ -302,8 +301,29 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       .drawer a:hover {
         background: rgba(255, 255, 255, 0.04);
       }
-
       @media (max-width: 720px) {
+        /* hide desktop links */
+        .links {
+          display: none;
+        }
+
+        /* show Menu button on mobile */
+        .menu {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* keep actions from overflowing */
+        .actions {
+          gap: 8px;
+        }
+
+        /* optional: make nav layout tighter */
+        .nav {
+          gap: 12px;
+        }
+
         .wrap {
           padding: 20px 18px;
         }
