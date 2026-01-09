@@ -4,7 +4,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark" data-accent="teal">
+<html lang="en" data-theme="edge" data-accent="pluto" data-bgfx="off">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,13 +35,17 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     <meta property="og:image" content="/favicon-light.png" />
 
     <script is:inline>
-      // Persist theme + accent (runs before paint)
-      const storedTheme = localStorage.getItem("theme");
-      const storedAccent = localStorage.getItem("accent");
+      // Persist theme + accent + background effect (runs before paint)
+      const storedTheme = localStorage.getItem("theme"); // sun | goldilocks | edge
+      const storedAccent = localStorage.getItem("accent"); // planet accents
+      const storedFx = localStorage.getItem("bgFx"); // on | off
+
       if (storedTheme) document.documentElement.dataset.theme = storedTheme;
       if (storedAccent) document.documentElement.dataset.accent = storedAccent;
+      if (storedFx) document.documentElement.dataset.bgfx = storedFx;
     </script>
   </head>
+
   <body>
     <div class="starfield"></div>
 
@@ -71,12 +75,16 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
             Menu
           </button>
 
-          <button class="chip" data-action="toggle-theme" type="button"
-            >Theme</button
+          <!-- ✅ Single Jason-style Theme popover trigger -->
+          <button
+            class="chip"
+            data-action="toggle-theme"
+            type="button"
+            aria-expanded="false"
+            aria-controls="theme-popover"
           >
-          <button class="chip" data-action="toggle-accent" type="button"
-            >Accent</button
-          >
+            Theme
+          </button>
         </div>
 
         <!-- Mobile drawer -->
@@ -86,6 +94,92 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
           <a href="/resume">Resume</a>
           <a href="/research">Research</a>
         </div>
+
+        <!-- ✅ Theme popover (single source of truth) -->
+        <div
+          class="popover"
+          id="theme-popover"
+          hidden
+          role="dialog"
+          aria-label="Theme settings"
+        >
+          <div class="popHead">
+            <div class="popTitle">
+              <span class="spark" aria-hidden="true">
+                <svg
+                  class="iconSvg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  role="img"
+                  aria-label="Theme"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.48 2 2 6.14 2 11.3c0 4.3 3.2 7.7 7.5 7.7h1.2c.8 0 1.45.63 1.45 1.41 0 .4-.17.78-.47 1.05-.23.2-.36.48-.36.78 0 .6.5 1.09 1.12 1.09H13c5.52 0 10-3.96 10-8.83C23 6.5 18.52 2 13 2h-1zM7.7 12.1a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zm3-3.2a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zm4 0a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zm3 3.2a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"
+                  ></path>
+                </svg>
+              </span>
+
+              <span>Theme</span>
+            </div>
+            <button
+              class="popClose"
+              type="button"
+              data-action="close-theme"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- Brightness modes -->
+          <div class="modeRow" role="tablist" aria-label="Brightness">
+            <button class="mode" type="button" data-theme="sun" role="tab">
+              Sun
+            </button>
+            <button
+              class="mode"
+              type="button"
+              data-theme="goldilocks"
+              role="tab"
+            >
+              Goldilocks
+            </button>
+            <button class="mode" type="button" data-theme="edge" role="tab">
+              Edge
+            </button>
+          </div>
+
+          <!-- Planet accents-->
+          <div class="swatches" id="accent-swatches" aria-label="Accent colors">
+            <button class="sw" data-accent="mercury" aria-label="Mercury"
+            ></button>
+            <button class="sw" data-accent="venus" aria-label="Venus"></button>
+            <button class="sw" data-accent="earth" aria-label="Earth"></button>
+            <button class="sw" data-accent="mars" aria-label="Mars"></button>
+            <button class="sw" data-accent="jupiter" aria-label="Jupiter"
+            ></button>
+            <button class="sw" data-accent="saturn" aria-label="Saturn"
+            ></button>
+            <button class="sw" data-accent="uranus" aria-label="Uranus"
+            ></button>
+            <button class="sw" data-accent="neptune" aria-label="Neptune"
+            ></button>
+
+            <!-- one moving ring -->
+            <div class="swRing" id="swRing" aria-hidden="true"></div>
+          </div>
+
+          <!-- Background effect toggle -->
+          <label class="fxRow">
+            <input type="checkbox" data-action="toggle-fx" />
+            <span
+              >Background effect:
+              <span class="fxState fxAccent">on</span></span
+            >
+          </label>
+        </div>
       </nav>
     </header>
 
@@ -94,14 +188,13 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     </main>
 
     <footer class="wrap foot">
-      <p>
-        © {new Date().getFullYear()} Alan Palayil • Built with Astro 
-      </p>
+      <p>© {new Date().getFullYear()} Alan Palayil • Built with Astro</p>
     </footer>
 
     <script is:inline>
       const root = document.documentElement;
 
+      // ---------- persistence helpers ----------
       function setTheme(next) {
         root.dataset.theme = next;
         localStorage.setItem("theme", next);
@@ -110,22 +203,12 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         root.dataset.accent = next;
         localStorage.setItem("accent", next);
       }
+      function setBgFx(on) {
+        root.dataset.bgfx = on ? "on" : "off";
+        localStorage.setItem("bgFx", on ? "on" : "off");
+      }
 
-      document
-        .querySelector('[data-action="toggle-theme"]')
-        ?.addEventListener("click", () => {
-          const cur = root.dataset.theme || "dark";
-          setTheme(cur === "dark" ? "light" : "dark");
-        });
-
-      document
-        .querySelector('[data-action="toggle-accent"]')
-        ?.addEventListener("click", () => {
-          const cur = root.dataset.accent || "teal";
-          setAccent(cur === "teal" ? "purple" : "teal");
-        });
-
-      // Mobile nav drawer logic
+      // ---------- mobile nav drawer ----------
       const menuBtn = document.querySelector('[data-action="toggle-menu"]');
       const drawer = document.getElementById("nav-drawer");
 
@@ -144,16 +227,14 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         }
       });
 
-      // Close drawer on link click
       drawer?.querySelectorAll("a").forEach((a) => {
         a.addEventListener("click", () => {
-          drawer.setAttribute("hidden", "");
-          drawer.style.display = "none";
+          drawer?.setAttribute("hidden", "");
+          if (drawer) drawer.style.display = "none";
           menuBtn?.setAttribute("aria-expanded", "false");
         });
       });
 
-      // Close drawer when resizing back to desktop
       window.addEventListener("resize", () => {
         if (
           window.innerWidth > 720 &&
@@ -165,22 +246,185 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
           menuBtn?.setAttribute("aria-expanded", "false");
         }
       });
+
+      // ---------- popover open/close ----------
+      const popBtn = document.querySelector('[data-action="toggle-theme"]');
+      const pop = document.getElementById("theme-popover");
+      const popClose = document.querySelector('[data-action="close-theme"]');
+
+      function openPop() {
+        if (!pop || !popBtn) return;
+        pop.removeAttribute("hidden");
+        popBtn.setAttribute("aria-expanded", "true");
+        pop.querySelector("button, input")?.focus?.();
+      }
+      function closePop() {
+        if (!pop || !popBtn) return;
+        pop.setAttribute("hidden", "");
+        popBtn.setAttribute("aria-expanded", "false");
+      }
+      function togglePop() {
+        if (!pop) return;
+        const isOpen = !pop.hasAttribute("hidden");
+        isOpen ? closePop() : openPop();
+      }
+
+      popBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        togglePop();
+      });
+      popClose?.addEventListener("click", closePop);
+
+      document.addEventListener("click", (e) => {
+        if (!pop || pop.hasAttribute("hidden")) return;
+        if (pop.contains(e.target)) return;
+        if (popBtn && popBtn.contains(e.target)) return;
+        closePop();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePop();
+      });
+
+      // ---------- theme mode buttons ----------
+      const modeBtns = Array.from(document.querySelectorAll(".modeRow .mode"));
+
+      function syncThemeUI() {
+        const cur = root.dataset.theme || "edge";
+        modeBtns.forEach((b) => {
+          const on = b.getAttribute("data-theme") === cur;
+          b.classList.toggle("isActive", on);
+          b.setAttribute("aria-selected", on ? "true" : "false");
+        });
+      }
+
+      modeBtns.forEach((b) => {
+        b.addEventListener("click", () => {
+          const next = b.getAttribute("data-theme");
+          if (!next) return;
+          setTheme(next);
+          syncThemeUI();
+        });
+      });
+
+      // ---------- accent swatches + moving ring ----------
+      const swGrid = document.getElementById("accent-swatches");
+      const swBtns = Array.from(
+        document.querySelectorAll("#accent-swatches .sw"),
+      );
+
+      function positionSwatchRing() {
+        const ring = document.getElementById("swRing");
+        if (!swGrid || !ring) return;
+
+        const active = swGrid.querySelector(".sw.isActive");
+        if (!active) return;
+
+        const gridRect = swGrid.getBoundingClientRect();
+        const r = active.getBoundingClientRect();
+
+        ring.style.width = `${r.width}px`;
+        ring.style.height = `${r.height}px`;
+
+        const x = r.left - gridRect.left;
+        const y = r.top - gridRect.top;
+        ring.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      function syncAccentUI() {
+        const cur = root.dataset.accent || "pluto";
+        swBtns.forEach((b) => {
+          const on = b.getAttribute("data-accent") === cur;
+          b.classList.toggle("isActive", on);
+        });
+        positionSwatchRing();
+      }
+
+      swBtns.forEach((b) => {
+        b.addEventListener("click", () => {
+          const next = b.getAttribute("data-accent");
+          if (!next) return;
+          setAccent(next);
+          syncAccentUI();
+        });
+      });
+
+      window.addEventListener("resize", positionSwatchRing);
+
+      // ---------- background effect toggle ----------
+      const fxToggle = document.querySelector('[data-action="toggle-fx"]');
+      const fxState = document.querySelector(".fxState");
+
+      function syncFxUI() {
+        const stored = localStorage.getItem("bgFx"); // on/off
+        const on = stored ? stored === "on" : root.dataset.bgfx !== "off"; // default on unless html says off
+
+        if (fxToggle) fxToggle.checked = on;
+        if (fxState) fxState.textContent = on ? "on" : "off";
+        setBgFx(on);
+      }
+
+      fxToggle?.addEventListener("change", () => {
+        const on = !!fxToggle.checked;
+        if (fxState) fxState.textContent = on ? "on" : "off";
+        setBgFx(on);
+      });
+
+      // ---------- initial sync ----------
+      syncThemeUI();
+      syncAccentUI();
+      syncFxUI();
+
+      // Ensure ring positions correctly after fonts/layout settle
+      requestAnimationFrame(() => {
+        const header = document.querySelector("header.wrap");
+        if (header) {
+          document.documentElement.style.setProperty(
+            "--header-h",
+            `${header.offsetHeight}px`,
+          );
+        }
+      });
+
+      const header = document.querySelector("header.wrap");
+      if (header) {
+        document.documentElement.style.setProperty(
+          "--header-h",
+          `${header.offsetHeight}px`,
+        );
+      }
+      window.addEventListener("resize", () => {
+        const header = document.querySelector("header.wrap");
+        if (header) {
+          document.documentElement.style.setProperty(
+            "--header-h",
+            `${header.offsetHeight}px`,
+          );
+        }
+      });
     </script>
 
     <style>
       /* Jason-style container */
       .wrap {
-        max-width: 1180px; /* wider than your 980 */
+        max-width: 1180px;
         margin: 0 auto;
-        padding: 28px 44px; /* bigger side padding */
+        padding: 28px 44px;
       }
 
       /* Jason has lots of top breathing room before content */
-      .main {
-        padding-top: 96px; /* key: push hero down */
+      main.wrap.main {
+        padding-top: calc(var(--header-h, 140px) + 24px);
         padding-bottom: 120px;
         position: relative;
+        z-index: 0;
       }
+
+      /* Make anchor jumps land correctly under the fixed header */
+      section {
+        scroll-margin-top: calc(var(--header-h, 300px) + 16px);
+      }
+
       /* Accent-aware hero glow */
       .main::before {
         content: "";
@@ -188,8 +432,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         inset: -60px -40px auto;
         height: 420px;
         pointer-events: none;
-
-        /* works with rgb(var(--accent)) */
+        z-index: 0;
         background:
           radial-gradient(
             700px 260px at 18% 6%,
@@ -204,7 +447,20 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         opacity: 0.55;
         filter: blur(2px);
       }
+
+      /* When bgFx is off: kill glow + starfield */
+      :root[data-bgfx="off"] .main::before {
+        opacity: 0 !important;
+      }
+      :root[data-bgfx="off"] .starfield {
+        display: none;
+        z-index: 0;
+      }
+
       .nav {
+        position: relative; /* anchor popover */
+        top: auto;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -213,9 +469,23 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         border: 1px solid rgb(var(--border));
         border-radius: var(--r);
         background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(10px);
         flex-wrap: wrap;
       }
+      header.wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        /* keep your centered “wrap” layout */
+        max-width: 1180px;
+        margin: 0 auto;
+        z-index: 5000;
+        /* important: ensure it visually covers content underneath */
+        backdrop-filter: blur(10px);
+        isolation: isolate; /* prevents weird stacking-context overlaps */
+      }
+
       .brand {
         display: flex;
         align-items: center;
@@ -229,19 +499,27 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         display: block;
       }
 
-      /* logo is black by default; invert in dark mode to appear white */
+      /* logo invert rules for brightness */
+      :root[data-theme="edge"] .logo-img,
       :root[data-theme="dark"] .logo-img {
         filter: invert(1);
       }
+      :root[data-theme="sun"] .logo-img,
+      :root[data-theme="goldilocks"] .logo-img,
       :root[data-theme="light"] .logo-img {
         filter: invert(0);
       }
+
+      :root[data-theme="edge"] .main::before,
       :root[data-theme="dark"] .main::before {
         opacity: 0.6;
       }
+      :root[data-theme="sun"] .main::before,
+      :root[data-theme="goldilocks"] .main::before,
       :root[data-theme="light"] .main::before {
         opacity: 0.35;
       }
+
       .links {
         display: flex;
         gap: 14px;
@@ -252,7 +530,6 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         text-decoration: none;
         color: rgb(var(--muted));
       }
-
       .links a:hover {
         color: rgb(var(--text));
       }
@@ -260,6 +537,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       .actions {
         display: flex;
         gap: 10px;
+        align-items: center;
       }
 
       .chip {
@@ -270,7 +548,6 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         padding: 8px 10px;
         cursor: pointer;
       }
-
       .chip:hover {
         border-color: rgb(var(--accent));
       }
@@ -297,10 +574,237 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         text-decoration: none;
         color: rgb(var(--text));
       }
-
       .drawer a:hover {
         background: rgba(255, 255, 255, 0.04);
       }
+
+      /* =========================
+         Theme popover (Jason-ish)
+         ========================= */
+      .popover {
+        position: absolute;
+        right: 16px;
+        top: calc(100% + 12px);
+        width: 360px;
+        border: 1px solid rgb(var(--border));
+        border-radius: 16px;
+        background: color-mix(in srgb, rgb(var(--card)) 92%, transparent);
+        backdrop-filter: blur(10px);
+        padding: 14px;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        z-index: 9999;
+        /* One place to control the “Jason ring” look */
+        --ring: color-mix(in srgb, rgb(var(--accent)) 70%, transparent);
+        --ring-weak: color-mix(in srgb, rgb(var(--accent)) 45%, transparent);
+      }
+      /* Kill default focus outlines but keep keyboard accessibility */
+      .popover button:focus {
+        outline: none;
+      }
+      .popover button:focus-visible,
+      .popover input:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+        border-radius: 10px;
+      }
+
+      @media (max-width: 720px) {
+        .popover {
+          right: 0;
+          left: 0;
+          width: 100%;
+          top: calc(100% + 12px);
+        }
+      }
+
+      .popHead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .popTitle {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: rgb(var(--text));
+        font-weight: 650;
+        font-size: 14px;
+      }
+
+      .spark {
+        width: 18px;
+        height: 18px;
+        display: grid;
+        place-items: center;
+        color: rgb(var(--accent));
+      }
+
+      .popClose {
+        border: 1px solid rgb(var(--border));
+        background: rgba(255, 255, 255, 0.02);
+        color: rgb(var(--muted));
+        border-radius: 10px;
+        padding: 6px 8px;
+        cursor: pointer;
+      }
+      .popClose:hover {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 1px var(--ring) inset;
+      }
+
+      /* Segmented control (Jason's ring-surface0 feel) */
+      .modeRow {
+        display: flex;
+        gap: 4px;
+        padding: 6px;
+        border: 1px solid
+          color-mix(in srgb, rgb(var(--border)) 75%, transparent);
+        border-radius: 12px;
+        background: color-mix(in srgb, rgb(var(--card)) 88%, transparent);
+        border-color: color-mix(in srgb, rgb(var(--border)) 75%, transparent);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        margin-bottom: 12px;
+      }
+
+      .mode {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        color: color-mix(in srgb, rgb(var(--muted)) 92%, rgb(var(--text)));
+        font-size: 12px;
+        font-weight: 600;
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        line-height: 1;
+        transition:
+          background 180ms ease,
+          color 180ms ease,
+          box-shadow 180ms ease;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .mode.isActive {
+        background: color-mix(in srgb, rgb(var(--bg)) 55%, rgb(var(--card)));
+        color: rgb(var(--text));
+        box-shadow:
+          0 0 0 2px var(--ring) inset,
+          0 1px 10px rgba(0, 0, 0, 0.12);
+      }
+
+      .mode:hover {
+        box-shadow: 0 0 0 1px var(--ring-weak) inset;
+      }
+
+      /* Swatches */
+      .swatches {
+        --gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+        margin: 10px 0 12px;
+        position: relative;
+      }
+
+      .sw {
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+          0 6px 18px rgba(0, 0, 0, 0.18);
+        opacity: 0.82;
+        transform: scale(1);
+        transition:
+          transform 150ms ease,
+          opacity 150ms ease,
+          filter 150ms ease;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .sw:hover {
+        opacity: 1;
+        transform: scale(1.08);
+        filter: saturate(1.05);
+      }
+
+      .sw.isActive {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      .swRing {
+        pointer-events: none;
+        position: absolute;
+        border-radius: 12px;
+        box-shadow: 0 0 0 2px var(--ring);
+        transition:
+          transform 260ms ease,
+          width 260ms ease,
+          height 260ms ease;
+        color: rgb(var(--accent));
+      }
+
+      /* Planet swatch colors */
+      .sw[data-accent="mercury"] {
+        background: rgb(var(--color-mercury));
+      }
+      .sw[data-accent="venus"] {
+        background: rgb(var(--color-venus));
+      }
+      .sw[data-accent="earth"] {
+        background: rgb(var(--color-earth));
+      }
+      .sw[data-accent="mars"] {
+        background: rgb(var(--color-mars));
+      }
+      .sw[data-accent="jupiter"] {
+        background: rgb(var(--color-jupiter));
+      }
+      .sw[data-accent="saturn"] {
+        background: rgb(var(--color-saturn));
+      }
+      .sw[data-accent="uranus"] {
+        background: rgb(var(--color-uranus));
+      }
+      .sw[data-accent="neptune"] {
+        background: rgb(var(--color-neptune));
+      }
+
+      /* Optional: make swatches show a faint ring on hover (feels more “Jason”) */
+      .sw:hover {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+          0 0 0 1px var(--ring-weak),
+          0 6px 18px rgba(0, 0, 0, 0.18);
+      }
+      /* checkbox row */
+      .fxRow {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: color-mix(in srgb, rgb(var(--muted)) 90%, rgb(var(--text)));
+        font-size: 13px;
+        user-select: none;
+      }
+      .fxRow input {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        accent-color: rgb(var(--accent));
+      }
+      .fxAccent {
+        color: rgb(var(--accent));
+        font-weight: 650;
+      }
+
       @media (max-width: 720px) {
         /* hide desktop links */
         .links {
@@ -314,12 +818,10 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
           justify-content: center;
         }
 
-        /* keep actions from overflowing */
         .actions {
           gap: 8px;
         }
 
-        /* optional: make nav layout tighter */
         .nav {
           gap: 12px;
         }
@@ -327,11 +829,15 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         .wrap {
           padding: 20px 18px;
         }
-        .main {
-          padding-top: 56px;
-          padding-bottom: 90px;
+
+        @media (max-width: 720px) {
+          main.wrap.main {
+            padding-top: calc(var(--header-h, 140px) + 18px);
+            padding-bottom: 90px;
+          }
         }
       }
+
       .foot {
         padding-bottom: 32px;
         color: rgb(var(--muted));
