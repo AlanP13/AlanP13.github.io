@@ -4,7 +4,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="edge" data-accent="pluto" data-bgfx="off">
+<html lang="en" data-theme="dark" data-accent="pluto" data-bgfx="off">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -291,7 +291,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       const modeBtns = Array.from(document.querySelectorAll(".modeRow .mode"));
 
       function syncThemeUI() {
-        const cur = root.dataset.theme || "edge";
+        const cur = root.dataset.theme || "dark";
         modeBtns.forEach((b) => {
           const on = b.getAttribute("data-theme") === cur;
           b.classList.toggle("isActive", on);
