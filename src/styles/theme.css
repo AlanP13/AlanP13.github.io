@@ -59,8 +59,8 @@
 :root[data-accent="pluto"]   { --accent: var(--color-pluto);   --starTint: var(--color-pluto); }
 
 /* (Optional) back-compat */
-:root[data-accent="teal"]   { --accent: 20 184 166; --starTint: 20 184 166; }
-:root[data-accent="purple"] { --accent: 168 85 247; --starTint: 168 85 247; }
+:root[data-accent="teal"]   { --accent: 20 184 166; --starTint: var(--accent); }
+:root[data-accent="purple"] { --accent: 168 85 247; --starTint: var(--accent); }
 
 html,
 body { height: 100%; }

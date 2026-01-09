@@ -170,3 +170,120 @@ textarea:focus-visible {
   outline-offset: 3px;
   border-radius: 12px;
 }
+
+.bgfx {
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* ✅ not negative */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+header.wrap,
+main.wrap.main,
+footer.wrap.foot {
+  position: relative;
+  z-index: 1;
+}
+
+.bgfx .nebula,
+.bgfx .comets {
+  position: absolute;
+  inset: 0;
+}
+
+.bgfx .starfield {
+  position: absolute; /* instead of fixed */
+  inset: 0;
+  z-index: 1;
+}
+
+/* Layers inside bgfx */
+.nebula { z-index: 0; }
+.starfield { z-index: 1; }
+.comets { z-index: 2; }
+
+.nebula {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1100px 760px at 18% 22%,
+      color-mix(in srgb, rgb(var(--accent)) 18%, transparent),
+      transparent 65%),
+    radial-gradient(1200px 820px at 85% 18%,
+      color-mix(in srgb, rgb(var(--accent)) 10%, transparent),
+      transparent 72%),
+    radial-gradient(900px 700px at 60% 85%,
+      rgba(255, 255, 255, 0.05),
+      transparent 70%),
+    radial-gradient(1400px 900px at 40% 55%,
+      rgba(90, 40, 140, 0.07),
+      transparent 72%);
+  opacity: 0.9;
+  filter: blur(0.2px);
+  animation: nebulaDrift 70s linear infinite;
+}
+
+.nebula::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.012) 0 1px, transparent 1px 5px),
+    repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,0.010) 0 1px, transparent 1px 6px);
+  mix-blend-mode: overlay;
+  opacity: 0.25;
+}
+
+@keyframes nebulaDrift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-50px, 30px, 0) scale(1.02); }
+}
+
+.comets {
+  position: absolute;
+  inset: 0;
+}
+
+.comet {
+  position: absolute;
+  width: 240px;
+  height: 2px;
+  border-radius: 999px;
+  opacity: 0; /* fades in/out in animation */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--accent) / 0.85),
+    rgb(255 255 255 / 0.75),
+    transparent
+  );
+  filter: blur(0.25px);
+  transform: rotate(-18deg) translate3d(0,0,0);
+}
+
+/* Fix comet glow */
+.comet::after {
+  content: "";
+  position: absolute;
+  inset: -8px -50px;
+  background: radial-gradient(circle at 60% 50%,
+    rgb(var(--accent) / 0.16),
+    transparent 60%);
+  filter: blur(7px);
+  opacity: 0.9;
+}
+
+
+.c1 { top: 16%; left: -35%; animation: cometFly 14s linear infinite; }
+.c2 { top: 50%; left: -45%; animation: cometFly 20s linear infinite; animation-delay: 7s; }
+.c3 { top: 78%; left: -40%; animation: cometFly 26s linear infinite; animation-delay: 12s; }
+
+:root[data-theme="dark"] .nebula { opacity: 0.65; }
+:root[data-theme="dark"] .starfield::before { opacity: 0.95; }
+:root[data-theme="dark"] .starfield::after  { opacity: 0.75; }
+
+
+:root[data-theme="light"] .nebula { opacity: 0.10; filter: blur(0.6px); }
+:root[data-theme="light"] .comets { opacity: 0; } /* or 0.15 if you want faint */
+:root[data-theme="light"] .starfield { opacity: 0.08; filter: blur(0.5px); }

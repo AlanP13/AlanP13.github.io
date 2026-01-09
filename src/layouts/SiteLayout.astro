@@ -4,7 +4,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="edge" data-accent="pluto" data-bgfx="off">
+<html lang="en" data-theme="edge" data-accent="pluto" data-bgfx="on">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,7 +47,16 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
   </head>
 
   <body>
-    <div class="starfield"></div>
+    <div class="bgfx" aria-hidden="true">
+      <div class="nebula"></div>
+      <div class="starfield"></div>
+
+      <div class="comets">
+        <span class="comet c1"></span>
+        <span class="comet c2"></span>
+        <span class="comet c3"></span>
+      </div>
+    </div>
 
     <header class="wrap">
       <nav class="nav">
@@ -463,6 +472,9 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         display: none;
         z-index: 0;
       }
+      :root[data-bgfx="off"] .bgfx {
+        display: none;
+      }
 
       .nav {
         position: relative; /* anchor popover */
@@ -515,6 +527,18 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       :root[data-theme="light"] .logo-img {
         filter: invert(0);
       }
+/* Let bgfx show THROUGH the page in dark mode */
+:root[data-theme="dark"] main.wrap.main {
+  background: rgb(var(--card) / 0.22); /* was 0.55 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgb(var(--border) / 0.7);
+}
+
+/* Keep light mode readable */
+:root[data-theme="light"] main.wrap.main {
+  background: rgb(var(--card) / 0.55);
+}
 
       :root[data-theme="dark"] .main::before,
       :root[data-theme="dark"] .main::before {
