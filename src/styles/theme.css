@@ -1,6 +1,6 @@
 :root {
   /* Defaults (Edge + Pluto) */
-  --bg: 9 10 15;
+  --bg: 3 11 20;
   --text: 236 239 244;
   --muted: 150 158 170;
   --card: 14 16 22;
@@ -14,46 +14,18 @@
 }
 
 /* =========================
-   Brightness (3 modes)
+   Brightness (2 modes)
    ========================= */
-
-/* Sun: very light */
-:root[data-theme="sun"] {
-  --bg: 252 252 253;
-  --text: 10 12 16;
-  --muted: 92 102 112;
-  --card: 255 255 255;
-  --border: 224 228 235;
-}
-
-/* Goldilocks: muted grey + premium contrast */
-:root[data-theme="goldilocks"] {
-  --bg: 242 244 248;      /* soft grey */
-  --text: 11 14 20;
-  --muted: 88 98 112;
-  --card: 250 251 253;    /* still “cardy” */
-  --border: 210 216 226;
-}
-
-/* Edge: near-black */
-:root[data-theme="edge"] {
-  --bg: 9 10 15;
-  --text: 236 239 244;
-  --muted: 150 158 170;
-  --card: 14 16 22;
-  --border: 36 42 54;
-}
-
 /* Back-compat (if anything still sets dark/light) */
 :root[data-theme="dark"] { /* map to edge */
-  --bg: 9 10 15;
+  --bg: 3 11 20;
   --text: 236 239 244;
   --muted: 150 158 170;
   --card: 14 16 22;
   --border: 36 42 54;
 }
 :root[data-theme="light"] { /* map to sun */
-  --bg: 252 252 253;
+  --bg: 225 232 240;
   --text: 10 12 16;
   --muted: 92 102 112;
   --card: 255 255 255;

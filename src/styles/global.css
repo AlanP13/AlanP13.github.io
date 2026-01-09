@@ -22,20 +22,16 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+html {
+  height: 100%;
+  background: rgb(var(--bg));
 }
 
-h1,
-h2,
-h3 {
-    letter-spacing: -0.02em;
+/* If you have a wrapper behind main, also ensure it matches */
+.page {
+  background: rgb(var(--bg));
 }
 
-p {
-    line-height: 1.6;
-}
 
 /* Base */
 * {
@@ -45,6 +41,8 @@ p {
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  height: 100%;
+  background: rgb(var(--bg));
 }
 
 h1,
