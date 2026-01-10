@@ -1,7 +1,9 @@
 .starfield {
-  position: absolute; /* was fixed */
+  position: absolute;
+  /* was fixed */
   inset: 0;
-  z-index: 1;         /* let bgfx control layers */
+  z-index: 1;
+  /* let bgfx control layers */
   pointer-events: none;
   background:
     radial-gradient(1200px 700px at 15% 10%, rgb(var(--accent) / 0.10), transparent 55%),
@@ -74,6 +76,6 @@
 }
 
 :root[data-theme="light"] .main::before {
-  opacity: 0.12;     /* your glow */
+  opacity: 0.12;
+  /* your glow */
 }
-

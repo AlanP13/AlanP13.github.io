@@ -7,7 +7,8 @@
   --border: 36 42 54;
 
   /* Accent is set by data-accent rules below */
-  --accent:  168 85 247; /* pluto default */
+  --accent: 168 85 247;
+  /* pluto default */
   --starTint: 168 85 247;
 
   --r: 18px;
@@ -17,14 +18,17 @@
    Brightness (2 modes)
    ========================= */
 /* Back-compat (if anything still sets dark/light) */
-:root[data-theme="dark"] { /* map to edge */
+:root[data-theme="dark"] {
+  /* map to edge */
   --bg: 3 11 20;
   --text: 236 239 244;
   --muted: 150 158 170;
   --card: 14 16 22;
   --border: 36 42 54;
 }
-:root[data-theme="light"] { /* map to sun */
+
+:root[data-theme="light"] {
+  /* map to sun */
   --bg: 225 232 240;
   --text: 10 12 16;
   --muted: 92 102 112;
@@ -48,26 +52,72 @@
   --color-pluto: 168 85 247;
 }
 
-:root[data-accent="mercury"] { --accent: var(--color-mercury); --starTint: var(--color-mercury); }
-:root[data-accent="venus"]   { --accent: var(--color-venus);   --starTint: var(--color-venus); }
-:root[data-accent="earth"]   { --accent: var(--color-earth);   --starTint: var(--color-earth); }
-:root[data-accent="mars"]    { --accent: var(--color-mars);    --starTint: var(--color-mars); }
-:root[data-accent="jupiter"] { --accent: var(--color-jupiter); --starTint: var(--color-jupiter); }
-:root[data-accent="saturn"]  { --accent: var(--color-saturn);  --starTint: var(--color-saturn); }
-:root[data-accent="uranus"]  { --accent: var(--color-uranus);  --starTint: var(--color-uranus); }
-:root[data-accent="neptune"] { --accent: var(--color-neptune); --starTint: var(--color-neptune); }
-:root[data-accent="pluto"]   { --accent: var(--color-pluto);   --starTint: var(--color-pluto); }
+:root[data-accent="mercury"] {
+  --accent: var(--color-mercury);
+  --starTint: var(--color-mercury);
+}
+
+:root[data-accent="venus"] {
+  --accent: var(--color-venus);
+  --starTint: var(--color-venus);
+}
+
+:root[data-accent="earth"] {
+  --accent: var(--color-earth);
+  --starTint: var(--color-earth);
+}
+
+:root[data-accent="mars"] {
+  --accent: var(--color-mars);
+  --starTint: var(--color-mars);
+}
+
+:root[data-accent="jupiter"] {
+  --accent: var(--color-jupiter);
+  --starTint: var(--color-jupiter);
+}
+
+:root[data-accent="saturn"] {
+  --accent: var(--color-saturn);
+  --starTint: var(--color-saturn);
+}
+
+:root[data-accent="uranus"] {
+  --accent: var(--color-uranus);
+  --starTint: var(--color-uranus);
+}
+
+:root[data-accent="neptune"] {
+  --accent: var(--color-neptune);
+  --starTint: var(--color-neptune);
+}
+
+:root[data-accent="pluto"] {
+  --accent: var(--color-pluto);
+  --starTint: var(--color-pluto);
+}
 
 /* (Optional) back-compat */
-:root[data-accent="teal"]   { --accent: 20 184 166; --starTint: var(--accent); }
-:root[data-accent="purple"] { --accent: 168 85 247; --starTint: var(--accent); }
+:root[data-accent="teal"] {
+  --accent: 20 184 166;
+  --starTint: var(--accent);
+}
+
+:root[data-accent="purple"] {
+  --accent: 168 85 247;
+  --starTint: var(--accent);
+}
 
 html,
-body { height: 100%; }
+body {
+  height: 100%;
+}
 
 body {
   background: rgb(var(--bg));
   color: rgb(var(--text));
 }
 
-a { color: rgb(var(--accent)); }
+a {
+  color: rgb(var(--accent));
+}

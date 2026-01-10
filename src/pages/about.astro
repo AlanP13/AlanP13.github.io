@@ -25,21 +25,21 @@ const placeImages = Object.entries(modules)
     return { src, name };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
-  // Auto-import Carousel images (Alan photos)
-  const carouselModules = import.meta.glob(
-    "../assets/about/*.{jpg,jpeg,png,webp,avif}",
-    { eager: true }
-  );
+// Auto-import Carousel images (Alan photos)
+const carouselModules = import.meta.glob(
+  "../assets/about/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
+);
 
-  const carouselImages = Object.entries(carouselModules)
-    .map(([filePath, mod]) => {
-      const file = filePath.split("/").pop() ?? "";
-      // Sort-friendly if you name them alan-1, alan-2, etc.
-      const src = (mod as { default: { src: string } }).default.src;
-      return { file, src };
-    })
-    .sort((a, b) => a.file.localeCompare(b.file))
-    .map((x) => x.src);
+const carouselImages = Object.entries(carouselModules)
+  .map(([filePath, mod]) => {
+    const file = filePath.split("/").pop() ?? "";
+    // Sort-friendly if you name them alan-1, alan-2, etc.
+    const src = (mod as { default: { src: string } }).default.src;
+    return { file, src };
+  })
+  .sort((a, b) => a.file.localeCompare(b.file))
+  .map((x) => x.src);
 ---
 
 <SiteLayout
@@ -103,22 +103,17 @@ const placeImages = Object.entries(modules)
         </p>
 
         <div class="socialRow" aria-label="Social links">
-          <a
-            class="social"
-            href="https://github.com/AlanP13"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a class="social" href="/resume">
             <span class="icon" aria-hidden="true">
-              <!-- GitHub icon -->
+              <!-- Resume / Document icon -->
               <svg viewBox="0 0 24 24" width="18" height="18">
                 <path
                   fill="currentColor"
-                  d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
+                  d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
                 ></path>
               </svg>
             </span>
-            GitHub
+            Resume
           </a>
           <span class="sep" aria-hidden="true">|</span>
 
@@ -140,21 +135,22 @@ const placeImages = Object.entries(modules)
             LinkedIn
           </a>
           <span class="sep" aria-hidden="true">|</span>
-
           <a
             class="social"
-            href="/resume"
+            href="https://github.com/AlanP13"
+            target="_blank"
+            rel="noreferrer"
           >
             <span class="icon" aria-hidden="true">
-              <!-- Resume / Document icon -->
+              <!-- GitHub icon -->
               <svg viewBox="0 0 24 24" width="18" height="18">
                 <path
                   fill="currentColor"
-                  d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
+                  d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
                 ></path>
               </svg>
             </span>
-            Resume
+            GitHub
           </a>
           <span class="sep" aria-hidden="true">|</span>
 
@@ -265,7 +261,6 @@ const placeImages = Object.entries(modules)
       });
     </script>
   </section>
-
 
   <style>
     .about {

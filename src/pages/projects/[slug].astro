@@ -70,22 +70,24 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
             </>
           ) : null
         }
-        {project.data.links?.length ? (
-          <>
-            <h2>Links</h2>
-            <p>
-              {project.data.links.map((l) => (
-                <a
-                  href={l.url}
-                  target="_blank"
-                  style="margin-right: 12px; color: rgb(var(--accent)); text-decoration: none;"
-                >
-                  {l.label} →
-                </a>
-              ))}
-            </p>
-          </>
-        ) : null}
+        {
+          project.data.links?.length ? (
+            <>
+              <h2>Links</h2>
+              <p>
+                {project.data.links.map((l) => (
+                  <a
+                    href={l.url}
+                    target="_blank"
+                    style="margin-right: 12px; color: rgb(var(--accent)); text-decoration: none;"
+                  >
+                    {l.label} →
+                  </a>
+                ))}
+              </p>
+            </>
+          ) : null
+        }
 
         {
           project.data.impact?.length ? (
@@ -134,13 +136,13 @@ const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
     /* layout */
     .page {
       padding: 26px 16px 48px;
-      
+
       /* ✅ match section width */
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
       /* 🔥 semi-transparent glass surface */
-      background: rgb(var(--card) / 0.75);   /* 75% transparency */
+      background: rgb(var(--card) / 0.75); /* 75% transparency */
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
 

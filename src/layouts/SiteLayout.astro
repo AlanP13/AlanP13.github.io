@@ -415,7 +415,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
 
       /* Jason has lots of top breathing room before content */
       .main {
-        max-width: none;      /* remove cap */
+        max-width: none; /* remove cap */
         width: 100%;
       }
 
@@ -429,7 +429,7 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
-/* Add a soft shadow ONLY in light mode so it feels “lifted” */
+      /* Add a soft shadow ONLY in light mode so it feels “lifted” */
       :root[data-theme="light"] .main,
       :root[data-theme="light"] .main {
         box-shadow:
@@ -527,18 +527,18 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       :root[data-theme="light"] .logo-img {
         filter: invert(0);
       }
-/* Let bgfx show THROUGH the page in dark mode */
-:root[data-theme="dark"] main.wrap.main {
-  background: rgb(var(--card) / 0.22); /* was 0.55 */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgb(var(--border) / 0.7);
-}
+      /* Let bgfx show THROUGH the page in dark mode */
+      :root[data-theme="dark"] main.wrap.main {
+        background: rgb(var(--card) / 0.22); /* was 0.55 */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgb(var(--border) / 0.7);
+      }
 
-/* Keep light mode readable */
-:root[data-theme="light"] main.wrap.main {
-  background: rgb(var(--card) / 0.55);
-}
+      /* Keep light mode readable */
+      :root[data-theme="light"] main.wrap.main {
+        background: rgb(var(--card) / 0.55);
+      }
 
       :root[data-theme="dark"] .main::before,
       :root[data-theme="dark"] .main::before {

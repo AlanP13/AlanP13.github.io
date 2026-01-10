@@ -101,15 +101,27 @@ items.sort((a, b) => order[a.data.status] - order[b.data.status]);
       color: rgb(var(--muted));
     }
     .badge.published {
-      border-color: color-mix(in srgb, rgb(var(--accent)) 100%, rgb(var(--muted)));
+      border-color: color-mix(
+        in srgb,
+        rgb(var(--accent)) 100%,
+        rgb(var(--muted))
+      );
       color: color-mix(in srgb, rgb(var(--accent)) 100%, rgb(var(--muted)));
     }
     .badge.submitted {
-      border-color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
+      border-color: color-mix(
+        in srgb,
+        rgb(var(--accent)) 75%,
+        rgb(var(--muted))
+      );
       color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
     }
     .badge.in-progress {
-      border-color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
+      border-color: color-mix(
+        in srgb,
+        rgb(var(--accent)) 50%,
+        rgb(var(--muted))
+      );
       color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
       opacity: 0.9;
     }
