@@ -40,30 +40,28 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 >
   <section class="hero">
     <p class="kicker">
-      <strong>Enterprise Data Engineer</strong> • Financial Systems • <strong
-        >Cloud Platforms</strong
-      >
+      <span class="hl">Enterprise Data Engineer</span> • Financial Systems •
+      <span class="hl">Cloud Platforms</span>
     </p>
+
     <h1>
       Hello! I’m <strong>Alan Palayil</strong><span class="wave">👋</span>
     </h1>
+
     <p class="lead">
-      I’m an <strong>Application Development Analyst</strong> at <strong
-        >Genworth Financial</strong
-      >, working on
-      <strong>Core Investment Accounting Platforms</strong> where correctness and
-      reliability matter. I design and operate <strong
-        >Enterprise Data Pipelines</strong
-      > across <strong>Legacy Systems and Azure Synapse</strong>, focusing on <strong
-        >Scalability</strong
-      >, <strong>Accuracy</strong>, and <strong
-        >Long-Term Maintainability</strong
-      >.
+      I’m an <span class="hl">Application Development Analyst</span> at
+      <span class="hl">Genworth Financial</span>, working on Core Investment
+      Accounting Platforms where correctness and reliability matter. I design
+      and operate enterprise data pipelines across legacy systems and <span
+        class="hl">Azure Synapse</span
+      >, focusing on scalability, accuracy, and long-term maintainability.
     </p>
+
     <p class="sub">
-      Exploring the intersection of Enterprise Data Platforms, Cloud Systems,
-      and Applied AI through both Industry Work and Doctoral Research.
+      Exploring Enterprise Data Platforms, Cloud Systems, and Applied AI through
+      both industry work and doctoral research.
     </p>
+
     <div class="socialRow" aria-label="Social links">
       <a class="social" href="/resume">
         <span class="icon" aria-hidden="true">
@@ -176,7 +174,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
           {
             workItems.map((item, idx) => (
               <>
-                <article class="weRow">
+                <article class="weRow weRowHover">
                   <div class="weLeft">
                     <div class="weLogoWrap" aria-hidden="true">
                       {getOrgLogo(item.data.iconText) ? (
@@ -195,7 +193,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
                   <div class="weMain">
                     <div class="weTop">
                       <div class="weTitles">
-                        <h3>{item.data.title}</h3>
+                        <h3 class="weTitle">{item.data.title}</h3>
                         <p class="weOrg">
                           {item.data.orgUrl ? (
                             <a
@@ -217,9 +215,12 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 
                     {item.data.bullets?.length ? (
                       <ul class="weBullets">
-                        {item.data.bullets.map((b) => (
-                          <li>{b}</li>
+                        {item.data.bullets.map((b, i) => (
+                          <li class={i >= 2 ? "weExtra" : ""}>{b}</li>
                         ))}
+                        {item.data.bullets.length > 2 ? (
+                          <li class="weMore">…</li>
+                        ) : null}
                       </ul>
                     ) : null}
                   </div>
@@ -245,7 +246,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
           {
             eduItems.map((item, idx) => (
               <>
-                <article class="weRow">
+                <article class="weRow weRowHover">
                   <div class="weLeft">
                     <div class="weLogoWrap" aria-hidden="true">
                       {getOrgLogo(item.data.iconText) ? (
@@ -264,7 +265,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
                   <div class="weMain">
                     <div class="weTop">
                       <div class="weTitles">
-                        <h3>{item.data.title}</h3>
+                        <h3 class="weTitle">{item.data.title}</h3>
                         <p class="weOrg">
                           {item.data.orgUrl ? (
                             <a
@@ -289,9 +290,12 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 
                     {item.data.bullets?.length ? (
                       <ul class="weBullets">
-                        {item.data.bullets.map((b) => (
-                          <li>{b}</li>
+                        {item.data.bullets.map((b, i) => (
+                          <li class={i >= 2 ? "weExtra" : ""}>{b}</li>
                         ))}
+                        {item.data.bullets.length > 2 ? (
+                          <li class="weMore">…</li>
+                        ) : null}
                       </ul>
                     ) : null}
                   </div>
@@ -439,6 +443,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
       max-width: 88ch;
       margin: 0;
       line-height: 1.75;
+      opacity: 0.95;
     }
     @media (max-width: 620px) {
       .kicker {
@@ -553,8 +558,14 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
       text-align: justify;
     }
     p strong {
-      color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--muted)));
+      color: rgb(var(--text));
+      font-weight: 700;
     }
+    .hl {
+      color: rgb(var(--accent));
+      font-weight: 650;
+    }
+
     h1 strong {
       color: rgb(var(--accent));
     }
@@ -632,6 +643,56 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
     }
 
     /* Work & Education — Ted-style tabs + card */
+
+    /* Default: hide extra bullets */
+    .weExtra {
+      display: none;
+    }
+
+    /* Default: show ellipsis */
+    .weMore {
+      display: list-item;
+      color: rgb(var(--muted));
+      opacity: 0.8;
+      opacity: 0.75;
+    }
+
+    /* Expand when hovering the TITLE (or the whole row) */
+    .weTitle:hover ~ .weOrg + .weDates {
+      /* no-op; ignore (kept for clarity) */
+    }
+
+    /* ✅ Expand on row hover */
+    .weRowHover:hover .weExtra {
+      display: list-item;
+    }
+    .weRowHover:hover .weMore {
+      display: none;
+    }
+
+    /* ✅ Expand only when hovering the TITLE (more precise) */
+    .weTitle:hover ~ .weBullets .weExtra {
+      display: list-item;
+    }
+    .weTitle:hover ~ .weBullets .weMore {
+      display: none;
+    }
+    .weRowHover:hover .weExtra,
+    .weTitle:hover ~ .weBullets .weExtra {
+      display: list-item;
+      animation: weExpand 120ms ease-out;
+    }
+
+    @keyframes weExpand {
+      from {
+        opacity: 0;
+        transform: translateY(-2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     .weHeader {
       display: flex;
       align-items: baseline;
