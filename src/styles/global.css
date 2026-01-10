@@ -19,7 +19,7 @@
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -174,7 +174,8 @@ textarea:focus-visible {
 .bgfx {
   position: fixed;
   inset: 0;
-  z-index: 0;            /* ✅ not negative */
+  z-index: 0;
+  /* ✅ not negative */
   pointer-events: none;
   overflow: hidden;
 }
@@ -193,15 +194,24 @@ footer.wrap.foot {
 }
 
 .bgfx .starfield {
-  position: absolute; /* instead of fixed */
+  position: absolute;
+  /* instead of fixed */
   inset: 0;
   z-index: 1;
 }
 
 /* Layers inside bgfx */
-.nebula { z-index: 0; }
-.starfield { z-index: 1; }
-.comets { z-index: 2; }
+.nebula {
+  z-index: 0;
+}
+
+.starfield {
+  z-index: 1;
+}
+
+.comets {
+  z-index: 2;
+}
 
 .nebula {
   position: absolute;
@@ -229,15 +239,20 @@ footer.wrap.foot {
   position: absolute;
   inset: 0;
   background-image:
-    repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.012) 0 1px, transparent 1px 5px),
-    repeating-radial-gradient(circle at 70% 60%, rgba(255,255,255,0.010) 0 1px, transparent 1px 6px);
+    repeating-radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 5px),
+    repeating-radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.010) 0 1px, transparent 1px 6px);
   mix-blend-mode: overlay;
   opacity: 0.25;
 }
 
 @keyframes nebulaDrift {
-  from { transform: translate3d(0,0,0) scale(1); }
-  to   { transform: translate3d(-50px, 30px, 0) scale(1.02); }
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-50px, 30px, 0) scale(1.02);
+  }
 }
 
 .comets {
@@ -250,16 +265,15 @@ footer.wrap.foot {
   width: 240px;
   height: 2px;
   border-radius: 999px;
-  opacity: 0; /* fades in/out in animation */
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgb(var(--accent) / 0.85),
-    rgb(255 255 255 / 0.75),
-    transparent
-  );
+  opacity: 0;
+  /* fades in/out in animation */
+  background: linear-gradient(90deg,
+      transparent,
+      rgb(var(--accent) / 0.85),
+      rgb(255 255 255 / 0.75),
+      transparent);
   filter: blur(0.25px);
-  transform: rotate(-18deg) translate3d(0,0,0);
+  transform: rotate(-18deg) translate3d(0, 0, 0);
 }
 
 /* Fix comet glow */
@@ -268,22 +282,57 @@ footer.wrap.foot {
   position: absolute;
   inset: -8px -50px;
   background: radial-gradient(circle at 60% 50%,
-    rgb(var(--accent) / 0.16),
-    transparent 60%);
+      rgb(var(--accent) / 0.16),
+      transparent 60%);
   filter: blur(7px);
   opacity: 0.9;
 }
 
 
-.c1 { top: 16%; left: -35%; animation: cometFly 14s linear infinite; }
-.c2 { top: 50%; left: -45%; animation: cometFly 20s linear infinite; animation-delay: 7s; }
-.c3 { top: 78%; left: -40%; animation: cometFly 26s linear infinite; animation-delay: 12s; }
+.c1 {
+  top: 16%;
+  left: -35%;
+  animation: cometFly 14s linear infinite;
+}
 
-:root[data-theme="dark"] .nebula { opacity: 0.65; }
-:root[data-theme="dark"] .starfield::before { opacity: 0.95; }
-:root[data-theme="dark"] .starfield::after  { opacity: 0.75; }
+.c2 {
+  top: 50%;
+  left: -45%;
+  animation: cometFly 20s linear infinite;
+  animation-delay: 7s;
+}
+
+.c3 {
+  top: 78%;
+  left: -40%;
+  animation: cometFly 26s linear infinite;
+  animation-delay: 12s;
+}
+
+:root[data-theme="dark"] .nebula {
+  opacity: 0.65;
+}
+
+:root[data-theme="dark"] .starfield::before {
+  opacity: 0.95;
+}
+
+:root[data-theme="dark"] .starfield::after {
+  opacity: 0.75;
+}
 
 
-:root[data-theme="light"] .nebula { opacity: 0.10; filter: blur(0.6px); }
-:root[data-theme="light"] .comets { opacity: 0; } /* or 0.15 if you want faint */
-:root[data-theme="light"] .starfield { opacity: 0.08; filter: blur(0.5px); }
+:root[data-theme="light"] .nebula {
+  opacity: 0.10;
+  filter: blur(0.6px);
+}
+
+:root[data-theme="light"] .comets {
+  opacity: 0;
+}
+
+/* or 0.15 if you want faint */
+:root[data-theme="light"] .starfield {
+  opacity: 0.08;
+  filter: blur(0.5px);
+}
