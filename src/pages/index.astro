@@ -40,8 +40,7 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 >
   <section class="hero">
     <p class="kicker">
-      <span class="hl">Enterprise Data Engineer</span> • Financial Systems •
-      <span class="hl">Cloud Platforms</span>
+      Enterprise Data Engineer • Financial Systems • Cloud Platforms
     </p>
 
     <h1>
@@ -217,9 +216,9 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
                     {item.data.bullets?.length ? (
                       <ul class="weBullets">
                         {item.data.bullets.map((b, i) => (
-                          <li class={i >= 2 ? "weExtra" : ""}>{b}</li>
+                          <li class={i >= 1 ? "weExtra" : ""}>{b}</li>
                         ))}
-                        {item.data.bullets.length > 2 ? (
+                        {item.data.bullets.length > 1 ? (
                           <li class="weMore">…</li>
                         ) : null}
                       </ul>
@@ -292,9 +291,9 @@ const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
                     {item.data.bullets?.length ? (
                       <ul class="weBullets">
                         {item.data.bullets.map((b, i) => (
-                          <li class={i >= 2 ? "weExtra" : ""}>{b}</li>
+                          <li class={i >= 1 ? "weExtra" : ""}>{b}</li>
                         ))}
-                        {item.data.bullets.length > 2 ? (
+                        {item.data.bullets.length > 1 ? (
                           <li class="weMore">…</li>
                         ) : null}
                       </ul>
