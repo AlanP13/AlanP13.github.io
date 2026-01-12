@@ -1,0 +1,51 @@
+---
+title: "Py8085 — 8085 Assembler + Interactive Simulator"
+featured: false
+summary: "Built a lightweight 8085-style assembler and instruction-level CPU simulator with an interactive REPL, enabling classic microprocessor lab programs to run with breakpoints, stepping, and full memory inspection."
+highlights:
+  - "Implemented an instruction-level 8085-ish CPU model with registers, flags, PC/SP, and 64KB memory space"
+  - "Built an assembler with label resolution and optional ORG-style program loading for lab-friendly .asm workflows"
+  - "Designed an interactive terminal REPL with stepping, breakpoints, register dumps, and memory tooling"
+impact:
+  - "Provides a repeatable, hackable sandbox for learning low-level execution, debugging, and CPU state transitions"
+  - "Enables running and validating real 8085 lab exercises without physical hardware"
+  - "Strengthened systems reasoning around instruction dispatch, memory addressing, and control flow"
+tech: ["Python", "Assembly", "CPU Simulation", "Assembler Design", "REPL Tooling", "Debugging Utilities"]
+tags: ["systems", "simulator", "assembly", "cpu", "tooling", "education"]
+role: "Designer & Engineer"
+links:
+  - label: "View GitHub Repository"
+    url: "https://github.com/AlanP13/Py8085-Simulator"
+order: 2
+---
+
+## Context
+
+Microprocessor labs often depend on physical kits or constrained tooling, which makes debugging and iteration slow. I wanted a **lab-friendly** way to run classic 8085 programs while making CPU state and memory behavior easy to inspect.
+
+---
+
+## What This Is
+
+A lightweight **8085-ish assembler + instruction-level simulator** that runs bundled `.asm` lab templates and provides an interactive CLI for debugging:
+
+- Assembler support for labels (e.g., `LOOP:` and `JNZ LOOP`)
+- Simulated CPU state: registers (A, B, C, D, E, H, L), `PC`, `SP`, and flags (S, Z, P, CY)
+- Full 64KB memory model with read/write inspection tools
+- REPL workflow for loading templates, seeding memory, running, stepping, and breakpoints
+
+Note: this is **instruction-level**, not cycle-accurate—focused on correct program logic over exact timing.
+
+---
+
+## Outcomes
+
+- A practical sandbox for executing and debugging 8085-style programs  
+- A reusable base that can be extended by adding instructions to the CPU dispatcher  
+- A clear demonstration of low-level systems thinking: instruction decode/dispatch, memory addressing, and control flow  
+
+---
+
+## Why This Matters
+
+This project reinforces how I approach systems work: build tools that make complex behavior **observable and debuggable**. The same mindset applies to production platforms—inspect state, reproduce issues deterministically, and iterate safely.

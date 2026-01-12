@@ -1,0 +1,68 @@
+---
+title: "PAM Derivatives Legacy Message Platform (Azure Synapse)"
+featured: true
+summary: "Designed and built a template-driven, metadata-based message generation platform in Azure Synapse that dynamically constructs complex financial legacy messages directly from Spark tables."
+highlights:
+  - "Built a configuration + Excel-template driven message engine supporting nested and repeating financial structures"
+  - "Generates messages dynamically from Spark SQL tables with full audit and diagnostics output"
+  - "Integrated with Azure Synapse pipelines for scheduled, production-grade execution"
+  - "Handles missing data, partial availability, and schema variability safely"
+impact:
+  - "Replaced brittle, hardcoded message logic with a reusable, metadata-driven generation platform"
+  - "Improved reliability, auditability, and operational transparency of derivatives message feeds"
+  - "Established a scalable pattern for future regulatory and downstream system feeds"
+tech: ["Python", "Spark SQL", "Azure Synapse", "Excel Templates", "Metadata-Driven Systems", "Enterprise Pipelines"]
+tags: ["azure", "data-platforms", "pipelines", "derivatives", "financial-systems", "metadata"]
+role: "Lead Engineer & Platform Owner"
+order: 2
+---
+
+## Context
+
+Derivatives processing required **complex, hierarchical legacy messages** built from many Spark tables, with frequent structure changes and partial data availability. Hardcoding this logic was brittle, slow to change, and risky.
+
+---
+
+## What I Built
+
+A **metadata-driven legacy message generation platform** that:
+
+- Uses Excel as the message structure control plane  
+- Uses config sets to control runs, scopes, and environments  
+- Scans Spark tables dynamically and builds messages at runtime  
+- Supports:
+  - Direct fields
+  - Single-field submessages
+  - Nested structures
+  - Repeating message groups  
+- Produces:
+  - Final business-ready Excel outputs
+  - Full summary, diagnostics, and audit reports  
+
+The system runs **inside Azure Synapse** and is orchestrated by pipelines on a daily schedule.
+
+---
+
+## Reliability & Scale
+
+- Missing tables and optional fields are handled gracefully  
+- Partial messages still generate with full diagnostics  
+- Spark caching and batching are used for performance  
+- The system scales with cluster size and data volume  
+
+---
+
+## Outcomes
+
+- Standardized derivatives legacy message generation across the platform  
+- Greatly reduced change risk when message formats evolve  
+- Improved operational transparency and audit readiness  
+- Established a reusable, template-driven generation pattern for future feeds  
+
+---
+
+## Why This Matters
+
+This project demonstrates **true data-platform engineering**:
+
+> Metadata-driven systems, dynamic schema handling, Spark-native execution, and production-grade orchestration — not just pipelines.

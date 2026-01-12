@@ -1,0 +1,56 @@
+---
+title: "Convo Care — Privacy-First AI Risk Triage Platform"
+featured: false
+summary: "Designed and built a privacy-first AI system that analyzes text and voice conversations to produce sentiment and mental-health risk scores without storing transcripts or raw audio."
+highlights:
+  - "Built a full-stack platform (FastAPI + React) for text and voice-based risk scoring"
+  - "Implemented in-memory speech-to-text and NLP scoring with zero transcript persistence"
+  - "Designed a scores-only data model for privacy-preserving analytics and trend tracking"
+  - "Delivered per-student risk trends, history, and high-risk flagging"
+impact:
+  - "Demonstrated how AI systems can be designed with privacy as a first-class constraint"
+  - "Produced a reusable pattern for compliant AI decision-support pipelines"
+  - "Showcased end-to-end system design: ingestion, scoring, storage, and visualization"
+tech: ["Python", "FastAPI", "React", "MySQL", "NLP", "Speech-to-Text", "Docker"]
+tags: ["ai-systems", "privacy", "nlp", "full-stack", "decision-support"]
+role: "System Architect & Lead Engineer"
+order: 3
+---
+
+## Context
+
+In sensitive domains like mental health, **data privacy is a core system constraint**. Storing transcripts or audio creates unnecessary risk, even when the goal is only trend analysis and triage.
+
+This project explores a **scores-only AI pipeline**:
+
+> Analyze → score → discard raw data → retain only safe metrics.
+
+---
+
+## What This Is
+
+A **web-based AI decision-support platform** that:
+
+- Accepts text or voice input
+- Transcribes audio **in memory**
+- Runs sentiment and risk scoring models
+- Stores **only numerical scores and safe metadata**
+- Presents trends, history, and high-risk flags in a React dashboard
+
+The backend is built with FastAPI and MySQL, and the frontend uses React with WebRTC for voice capture.
+
+---
+
+## Outcomes
+
+- A working demonstration of privacy-first AI system design  
+- A full-stack, containerized platform with real-time scoring flows  
+- A reusable architectural pattern for compliant AI analytics systems  
+
+---
+
+## Why This Matters
+
+This project reflects how I design AI in production environments:
+
+> Treat data handling, privacy, and compliance as **system-level architecture decisions**, not afterthoughts.

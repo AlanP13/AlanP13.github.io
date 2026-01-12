@@ -1,0 +1,56 @@
+---
+title: "Enterprise Event Simulation Platform"
+featured: false
+summary: "A configuration-driven simulation platform for testing distributed systems under realistic conditions such as burst traffic, out-of-order delivery, retries, and partial failures."
+highlights:
+  - "Built a scenario-driven simulator to exercise distributed systems before production releases"
+  - "Supports burst and steady event generation, routing, transformation, and sinks"
+  - "Implements deterministic replay for debugging and regression validation"
+  - "Models real failure modes: timeouts, retries, backpressure, drop rates, and partial outages"
+impact:
+  - "Provides a repeatable testbed for validating system behavior and data correctness"
+  - "Enables reproduction of hard-to-debug production failure scenarios using configuration"
+  - "Demonstrates strong reliability, testing, and systems-engineering mindset"
+tech: ["Java", "Gradle", "Distributed Systems", "Simulation", "Configuration-Driven Systems", "CI"]
+tags: ["distributed-systems", "reliability", "testing", "simulation", "platform"]
+role: "Designer & Lead Engineer"
+links:
+  - label: "View GitHub Repository"
+    url: "https://github.com/AlanP13/Enterprise-Event-Simulation-Platform"
+order: 5
+---
+
+## Context
+
+Distributed systems fail in **predictable but hard-to-reproduce ways**: out-of-order events, retries, backpressure, partial outages, and timing issues.
+
+This project exists to make those failures **deterministic, repeatable, and testable before production**.
+
+---
+
+## What This Is
+
+A **configuration-driven event simulation platform** consisting of:
+
+- A Java-based simulator runtime
+- A scenario library for realistic workloads (financial-style events, device fleets, failure tests)
+- Environment and behavior configuration profiles
+- Deterministic replay for debugging and regression testing
+
+Most scenarios can be created **without code changes**—only configuration.
+
+---
+
+## Outcomes
+
+- A reusable platform for testing system behavior under stress and failure  
+- A controlled way to validate data correctness and system resilience  
+- A practical demonstration of reliability engineering and test infrastructure design  
+
+---
+
+## Why This Matters
+
+This is the same philosophy used in mature data platforms and distributed systems:
+
+> Don’t wait for production to discover failure modes. Simulate them, reproduce them, and fix them early.

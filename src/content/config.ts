@@ -19,6 +19,7 @@ const projects = defineCollection({
         url: z.string(),
       })
     ).default([]),
+    order: z.number().default(0),       // for manual ordering if needed
   }),
 });
 
@@ -32,6 +33,7 @@ const research = defineCollection({
     summary: z.string(),
     relevance: z.string().optional(),
     links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+    order: z.number().default(0),       // for manual ordering if needed
   }),
 });
 

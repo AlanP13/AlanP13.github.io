@@ -13,15 +13,26 @@ export async function getStaticPaths() {
 const { project, all } = Astro.props;
 const { Content } = await project.render();
 
-// Find next project (simple loop). Prioritize featured, then alphabetical fallback.
+const byOrderDescThenTitle = (a: any, b: any) => {
+  const ao = a.data.order ?? 0;
+  const bo = b.data.order ?? 0;
+  if (bo !== ao) return bo - ao;
+  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+};
+
+// ✅ Option A: featured first, then timeline order
 const ordered = [...all].sort((a, b) => {
   const fa = a.data.featured ? 0 : 1;
   const fb = b.data.featured ? 0 : 1;
   if (fa !== fb) return fa - fb;
-  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+  return byOrderDescThenTitle(a, b);
 });
+
+// ✅ Next + Prev
 const idx = ordered.findIndex((p) => p.slug === project.slug);
 const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
+const prev =
+  idx >= 0 ? ordered[(idx - 1 + ordered.length) % ordered.length] : null;
 ---
 
 <SiteLayout
