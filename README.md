@@ -1,46 +1,157 @@
-# Astro Starter Kit: Basics
+# Alan Palayil — Personal Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+🌐 **Live site:** [https://alanp13.github.io](https://alanp13.github.io)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Overview
 
-## 🚀 Project Structure
+This repository contains the source code for my **personal portfolio website**, built to present my professional experience, engineering projects, technical skills, and certifications in a clean, fast, and modern web experience.
 
-Inside of your Astro project, you'll see the following folders and files:
+The site serves as my **primary professional landing page** for:
 
-```text
-/
+-   Recruiters and hiring managers
+    
+-   Engineering collaborators
+    
+-   Technical reviewers
+    
+
+It focuses on:
+
+-   Clear storytelling of technical experience
+    
+-   Clean, readable UI/UX
+    
+-   High performance and accessibility
+    
+-   Maintainable, component-driven architecture
+    
+
+---
+
+## Tech Stack
+
+-   **Astro**
+    
+-   **JavaScript / TypeScript**
+    
+-   **HTML5**
+    
+-   **CSS3**
+    
+-   **Modern static-site architecture**
+    
+-   **Git & GitHub**
+    
+
+---
+
+## Key Features
+
+-   ⚡ Fast, static, SEO-friendly site built with Astro
+    
+-   📱 Fully responsive layout (mobile, tablet, desktop)
+    
+-   🧩 Component-based architecture
+    
+-   🧠 Clear information hierarchy and content structure
+    
+-   🎯 Focused on technical storytelling and project presentation
+    
+-   🚀 Deployed via GitHub Pages
+    
+
+---
+
+## Site Content
+
+The portfolio showcases:
+
+-   Professional experience and roles
+    
+-   Major engineering projects
+    
+-   Technical skill stack
+    
+-   Certifications and credentials
+    
+-   Personal design language and branding
+    
+
+---
+
+## Project Structure
+
+```/
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── layouts/
+│   └── pages/
+├── package.json
+└── astro.config.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## Development
 
-All commands are run from the root of the project, from a terminal:
+### Prerequisites
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+-   Node.js (LTS recommended)
+    
+-   npm
+    
 
-## 👀 Want to learn more?
+### Install dependencies
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`npm install`
+
+### Run locally
+
+`npm run dev`
+
+Then open:
+
+`http://localhost:4321`
+
+### Build for production
+
+`npm run build`
+
+### Preview production build
+
+`npm run preview`
+
+---
+
+## Deployment
+
+The site is deployed using **GitHub Pages**.
+
+Production URL:
+
+> [https://alanp13.github.io](https://alanp13.github.io)
+
+---
+
+## Philosophy
+
+This project is intentionally:
+
+-   Simple
+    
+-   Fast
+    
+-   Content-first
+    
+-   Maintainable
+    
+
+It is designed to evolve over time as my experience, projects, and technical focus grow.
+
+---
+
+## License
+
+Personal portfolio — all rights reserved.
