@@ -1,0 +1,62 @@
+---
+title: "AgriEdge AI — Edge-Deployed Visual Risk Classification Platform"
+featured: false
+summary: "Designed a production-style edge AI inference system that performs low-latency visual risk classification at the edge and routes high-value cases into centralized data pipelines."
+highlights:
+  - "Built a clear separation between training, inference, and orchestration layers"
+  - "Implemented edge-optimized real-time and batch inference pipelines"
+  - "Designed a system that filters and routes data to reduce bandwidth and central compute cost"
+  - "Documented full system architecture, tradeoffs, and deployment model"
+impact:
+  - "Demonstrated a reusable edge-AI pattern applicable to insurance, manufacturing, and inspection systems"
+  - "Showed how tiered processing can improve latency, cost, and scalability"
+  - "Proved ability to design AI systems, not just train models"
+tech: ["Python", "TensorFlow / Keras", "OpenCV", "Edge Inference", "Data Pipelines", "Docker"]
+tags: ["edge-ai", "computer-vision", "systems", "ai-platforms", "data-pipelines"]
+role: "System Architect & Lead Developer"
+links:
+  - label: "View GitHub Repository"
+    url: "https://github.com/AlanP13/AgriEdge-AI-Edge"
+order: 4
+---
+
+## Context
+
+In many real systems, **sending all data to the cloud is expensive and slow**. Most data is low-value; only a small fraction requires deeper processing.
+
+This project demonstrates a **tiered decision pipeline**:
+
+> Classify at the edge → forward only high-risk or high-value cases → process centrally.
+
+---
+
+## What I Built
+
+A **production-style edge AI system** with:
+
+- Separate layers for:
+  - Model training
+  - Edge inference
+  - Batch inference
+  - Orchestration and routing
+- Real-time and batch image classification flows
+- A pluggable decision-routing layer
+- A full ingestion and preprocessing pipeline
+
+The demo domain uses plant disease imagery, but the **architecture is domain-agnostic** and mirrors patterns used in insurance, manufacturing, and document processing systems.
+
+---
+
+## Outcomes
+
+- A reusable reference architecture for edge AI + data pipelines  
+- A working demonstration of low-latency, cost-aware compute routing  
+- A concrete example of AI system design beyond notebooks  
+
+---
+
+## Why This Matters
+
+This project shows how I approach AI as **infrastructure and systems engineering**, not just model training:
+
+> Build decision pipelines, control cost and latency, and design for deployment from day one.

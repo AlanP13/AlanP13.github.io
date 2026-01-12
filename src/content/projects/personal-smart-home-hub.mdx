@@ -1,0 +1,58 @@
+---
+title: "MQTT Smart Home Controller (Arduino + IoT)"
+featured: false
+summary: "Designed and built a modular Arduino-based home automation controller using MQTT for telemetry and control, exploring event-driven device architecture, embedded systems, and IoT system design."
+highlights:
+  - "Built a bidirectional MQTT-based control plane for sensors and actuators (publish telemetry, subscribe to commands)"
+  - "Designed a modular firmware structure to support multiple sensors, rooms, and devices"
+  - "Integrated real hardware: DHT sensors, relay modules, and embedded I/O control"
+  - "Documented full system including wiring, hardware artifacts, and build process"
+impact:
+  - "Demonstrated early system-architecture thinking: message-based control, device decoupling, and extensibility"
+  - "Built foundational experience with event-driven systems that parallels modern data pipelines and distributed systems"
+  - "Proved ability to ship end-to-end systems spanning hardware, firmware, and software integration"
+tech: ["Arduino", "C++", "MQTT", "Embedded Systems", "IoT", "DHT Sensor", "Mosquitto"]
+tags: ["iot", "embedded", "mqtt", "automation", "systems"]
+role: "Designer & Builder"
+links:
+  - label: "View GitHub Repository"
+    url: "https://github.com/AlanP13/Smart-Home-Hub"
+order: 1
+---
+
+## Context
+
+I wanted to explore how **event-driven, message-based architectures** (common in modern data systems) can be applied to physical devices using low-cost hardware.
+
+---
+
+## What I Built
+
+A small but complete **MQTT-driven smart home controller**:
+
+- Arduino firmware that publishes sensor data and subscribes to control commands  
+- Decoupled, message-based control via an MQTT broker  
+- Hardware integration with DHT sensors and relay modules  
+- Full project artifacts: wiring diagrams, BOM, and setup docs  
+
+---
+
+## Architecture
+```
+Sensors → Arduino Firmware → MQTT Broker → Dashboard / Automation
+← Commands / Control Topics
+```
+
+---
+
+## Outcomes
+
+- A working, extensible message-driven control system  
+- A reusable pattern for adding more devices and sensors  
+- A concrete demonstration of event-driven and decoupled system design  
+
+---
+
+## Why This Matters
+
+Although this is a hardware project, it demonstrates the same principles I use in large systems today: **message-based pipelines, decoupling, and control-vs-data plane separation**.

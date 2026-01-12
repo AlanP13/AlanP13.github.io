@@ -4,9 +4,26 @@ import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
 
-// Featured first (optional: sort by date if you add dates later)
-const featured = projects.filter((p) => p.data.featured);
-const rest = projects.filter((p) => !p.data.featured);
+const byOrderDescThenTitle = (
+  a: (typeof projects)[0],
+  b: (typeof projects)[0],
+) => {
+  const ao = a.data.order ?? 0;
+  const bo = b.data.order ?? 0;
+  if (bo !== ao) return bo - ao;
+  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+};
+
+// ✅ optional: still keep featured at the top, but ordered within each group
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort(byOrderDescThenTitle);
+const rest = projects
+  .filter((p) => !p.data.featured)
+  .sort(byOrderDescThenTitle);
+
+// ✅ or if you want a single unified list (ignore featured grouping):
+// const all = [...projects].sort(byOrderDescThenTitle);
 ---
 
 <SiteLayout
@@ -15,14 +32,14 @@ const rest = projects.filter((p) => !p.data.featured);
 >
   <h1>Projects</h1>
   <p class="muted">
-    Featured case studies and additional work across pipelines, migrations, and
-    automation.
+    Featured projects and other projects that I've worked on over the years. Please
+    look over GitHub for more.
   </p>
 
   {
     featured.length ? (
       <section class="section">
-        <h2 class="section-title">Featured Case Studies</h2>
+        <h2 class="section-title">Featured Projects</h2>
         <div class="grid">
           {featured.map((p) => (
             <a class="card" href={`/projects/${p.slug}`}>
@@ -45,8 +62,7 @@ const rest = projects.filter((p) => !p.data.featured);
   {
     rest.length ? (
       <section class="section">
-        <h2 class="section-title">More Projects</h2>
-
+        <h2 class="section-title">Other Projects</h2>
         <div class="list">
           {rest.map((p) => (
             <a class="row" href={`/projects/${p.slug}`}>

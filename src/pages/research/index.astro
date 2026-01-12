@@ -3,9 +3,24 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 
 const items = await getCollection("research");
-const order = { published: 0, submitted: 1, "in-progress": 2 };
-items.sort((a, b) => order[a.data.status] - order[b.data.status]);
+
+const statusRank = { published: 0, submitted: 1, "in-progress": 2 };
+
+const byOrderDescThenTitle = (a: any, b: any) => {
+  const ao = a.data.order ?? 0;
+  const bo = b.data.order ?? 0;
+  if (bo !== ao) return bo - ao;
+  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+};
+
+items.sort((a, b) => {
+  const sa = statusRank[a.data.status] ?? 99;
+  const sb = statusRank[b.data.status] ?? 99;
+  if (sa !== sb) return sa - sb;
+  return byOrderDescThenTitle(a, b);
+});
 ---
+
 
 <SiteLayout
   title="Research — Alan Palayil"

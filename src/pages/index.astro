@@ -17,9 +17,21 @@ const orgLogos = Object.fromEntries(
   }),
 );
 
-const projects = (await getCollection("projects"))
+const byOrderDescThenTitle = (
+  a: (typeof projects)[0],
+  b: (typeof projects)[0],
+) => {
+  const ao = a.data.order ?? 0;
+  const bo = b.data.order ?? 0;
+  if (bo !== ao) return bo - ao;
+  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+};
+
+const featured = await getCollection("projects");
+const projects = featured
   .filter((p) => p.data.featured)
-  .slice(0, 3);
+  .slice(0, 3)
+  .sort(byOrderDescThenTitle);
 
 const timeline = await getCollection("timeline");
 const workItems = timeline
