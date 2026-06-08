@@ -37,6 +37,20 @@ const research = defineCollection({
   }),
 });
 
+const archive = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    status: z.enum(["published", "submitted", "in-progress"]).default("in-progress"),
+    area: z.array(z.string()).default([]),
+    summary: z.string(),
+    relevance: z.string().optional(),
+    links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+    order: z.number().default(0),
+  }),
+});
+
 
 /** NEW: Work & Education entries */
 const timeline = defineCollection({
@@ -55,4 +69,4 @@ const timeline = defineCollection({
   }),
 });
 
-export const collections = { projects, research, timeline };
+export const collections = { projects, research, timeline, archive };

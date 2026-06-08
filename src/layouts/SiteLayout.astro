@@ -31,8 +31,25 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     <!-- Apple / iOS -->
     <link rel="apple-touch-icon" href="/favicon-light.png" />
 
-    <!-- OpenGraph / social preview -->
-    <meta property="og:image" content="/favicon-light.png" />
+    <!-- Author -->
+    <meta name="author" content="Alan Palayil" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={Astro.url.href} />
+
+    <!-- OpenGraph -->
+    <meta property="og:site_name" content="Alan Palayil" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title ?? "Alan Palayil"} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={new URL("/favicon-light.png", Astro.site).href} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title ?? "Alan Palayil"} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={new URL("/favicon-light.png", Astro.site).href} />
 
     <script is:inline>
       // Persist theme + accent + background effect (runs before paint)
@@ -189,7 +206,17 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
     </main>
 
     <footer class="wrap foot">
-      <p>© {new Date().getFullYear()} Alan Palayil • Built with Astro</p>
+      <p class="footLine">Interested in enterprise data platforms, financial systems modernization, AI governance, and research collaborations.</p>
+      <div class="footLinks">
+        <a href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <span class="footSep" aria-hidden="true">·</span>
+        <a href="https://github.com/AlanP13" target="_blank" rel="noreferrer">GitHub</a>
+        <span class="footSep" aria-hidden="true">·</span>
+        <a href="/resume">Resume</a>
+        <span class="footSep" aria-hidden="true">·</span>
+        <a href="mailto:alan.palayil@gmail.com">Email</a>
+      </div>
+      <p class="footCopy">© {new Date().getFullYear()} Alan Palayil · Built with Astro</p>
     </footer>
 
     <script is:inline>
@@ -869,9 +896,43 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       }
 
       .foot {
-        padding-bottom: 32px;
+        padding-top: 32px;
+        padding-bottom: 40px;
         color: rgb(var(--muted));
         font-size: 13px;
+        border-top: 1px solid rgb(var(--border) / 0.5);
+      }
+
+      .footLine {
+        margin: 0 0 14px;
+        max-width: 72ch;
+        line-height: 1.6;
+      }
+
+      .footLinks {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .footLinks a {
+        color: rgb(var(--muted));
+        text-decoration: none;
+      }
+
+      .footLinks a:hover {
+        color: rgb(var(--accent));
+      }
+
+      .footSep {
+        color: rgb(var(--border));
+      }
+
+      .footCopy {
+        margin: 0;
+        opacity: 0.6;
       }
     </style>
   </body>
