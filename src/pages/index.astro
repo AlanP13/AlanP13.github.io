@@ -45,6 +45,11 @@ const eduItems = timeline
 /** Helper: returns the image URL (or null if not found) */
 const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 
+const researchItems = await getCollection("research");
+const completedResearch = researchItems.filter(
+  (r) => (r.data.publication_status ?? r.data.status) === "completed"
+).length;
+
 const personSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
@@ -75,12 +80,12 @@ const personSchema = JSON.stringify({
 
 <SiteLayout
   title="Alan Palayil"
-  description="Enterprise data + platform modernization in financial systems."
+  description="Application Development Analyst at Genworth Financial, building investment accounting data pipelines. PhD researcher in AI Governance and Data Science."
   schemaJson={personSchema}
 >
   <section class="hero">
     <p class="kicker">
-      Enterprise Data Engineer • Financial Systems • Cloud Platforms
+      Enterprise Data Platforms • Financial Systems • AI Governance
     </p>
 
     <h1>
@@ -98,8 +103,9 @@ const personSchema = JSON.stringify({
     </p>
 
     <p class="sub">
-      Exploring Enterprise Data Platforms, Cloud Systems, and Applied AI through
-      both industry work and doctoral research.
+      Researching AI Governance, Enterprise Data Platforms, and Applied Machine
+      Learning through a PhD in Information Technology — applied alongside
+      production work in financial systems.
     </p>
 
     <div class="socialRow" aria-label="Social links">
@@ -497,55 +503,234 @@ const personSchema = JSON.stringify({
   </section>
 
   <section class="block">
+    <h2>Research Focus</h2>
+    <p class="muted">
+      Doctoral research at University of the Cumberlands, applied to enterprise
+      and financial systems contexts.
+    </p>
+    <div class="rfChips">
+      <span class="rfChip">AI Governance</span>
+      <span class="rfChip">Enterprise Risk Management</span>
+      <span class="rfChip">Financial Systems Modernization</span>
+    </div>
+    <p class="rfLink">
+      {completedResearch} completed technical reports — <a href="/research">View research →</a>
+    </p>
+  </section>
+
+  <section class="block">
     <h2>Technical Skills</h2>
-    <div class="skills">
-      <div class="s">
-        <h3>Data Engineering & Pipelines</h3>
-        <ul>
-          <li>Enterprise ETL Pipeline Design, Orchestration, and Operations</li>
-          <li>Data Transformation, Validation, Reconciliation, and Controls</li>
-          <li>Accounting Message Generation and Journal Workflows</li>
-          <li>Daily Batch Processing in Regulated Financial Environments</li>
-        </ul>
+    <div class="skillsGrid">
+      <div class="skillCat">
+        <h3>Enterprise Platforms</h3>
+        <div class="chips">
+          <span class="chip">PAM Investment Accounting</span>
+          <span class="chip">Financial Systems Modernization</span>
+          <span class="chip">Platform Migration</span>
+          <span class="chip">Production Support</span>
+        </div>
       </div>
+      <div class="skillCat">
+        <h3>Data Engineering</h3>
+        <div class="chips">
+          <span class="chip">Azure Synapse</span>
+          <span class="chip">ETL Pipelines</span>
+          <span class="chip">AppWorx</span>
+          <span class="chip">Markit EDM</span>
+          <span class="chip">Data Warehousing</span>
+          <span class="chip">Data Reconciliation</span>
+        </div>
+      </div>
+      <div class="skillCat">
+        <h3>Cloud</h3>
+        <div class="chips">
+          <span class="chip">Microsoft Azure</span>
+          <span class="chip">ADLS</span>
+          <span class="chip">Serverless SQL</span>
+          <span class="chip">Azure Monitoring</span>
+          <span class="chip">Logic Apps</span>
+          <span class="chip">Key Vault</span>
+        </div>
+      </div>
+      <div class="skillCat">
+        <h3>AI &amp; Data Science</h3>
+        <div class="chips">
+          <span class="chip">Machine Learning</span>
+          <span class="chip">Time Series Forecasting</span>
+          <span class="chip">AI Governance</span>
+          <span class="chip">Data Mining</span>
+          <span class="chip">Predictive Analytics</span>
+        </div>
+      </div>
+      <div class="skillCat">
+        <h3>Risk &amp; Governance</h3>
+        <div class="chips">
+          <span class="chip">Enterprise Risk Management</span>
+          <span class="chip">Model Risk Management</span>
+          <span class="chip">NIST</span>
+          <span class="chip">COSO ERM</span>
+          <span class="chip">Regulatory Compliance</span>
+        </div>
+      </div>
+      <div class="skillCat">
+        <h3>Languages</h3>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">C++</span>
+          <span class="chip">Java</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="s">
-        <h3>Cloud & Data Platforms</h3>
-        <ul>
-          <li>Azure Synapse Analytics (Dedicated & Serverless)</li>
-          <li>Azure-based Monitoring, Reliability, and Operations</li>
-          <li>PostgreSQL and Relational Data Modeling</li>
-          <li>Enterprise Scheduling and Workload Orchestration (AppWorx)</li>
-        </ul>
-      </div>
+  <section class="block">
+    <h2>Credentials &amp; Memberships</h2>
 
-      <div class="s">
-        <h3>Languages & Tooling</h3>
-        <ul>
-          <li>
-            C++, Java and Python (Data Processing, Automation, Validation,
-            Message Generation)
-          </li>
-          <li>
-            MySQL and PostgreSQL (Reconciliation, Data Analysis, Performance
-            Tuning)
-          </li>
-          <li>
-            Git and JIRA (Version Control, Collaboration, Release Management,
-            Issue Tracking)
-          </li>
-        </ul>
+    <div class="credCard">
+      <p class="credLabel">Professional Memberships</p>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">IEEE Eta Kappa Nu (HKN)</p>
+          <p class="credDesc">IEEE honor society — membership by invitation, top academic standing required.</p>
+        </div>
+        <div class="credMeta">
+          <span>Alumni Member</span>
+          <span class="credDates">May 2023 – Present</span>
+        </div>
       </div>
+      <div class="credDivider"></div>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">IEEE Eta Kappa Nu (HKN)</p>
+        </div>
+        <div class="credMeta">
+          <span>Internal Secretary</span>
+          <span class="credDates">Jan 2022 – May 2023</span>
+        </div>
+      </div>
+      <div class="credDivider"></div>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">IEEE</p>
+        </div>
+        <div class="credMeta">
+          <span>Member</span>
+          <span class="credDates">May 2024 – Present</span>
+        </div>
+      </div>
+      <div class="credDivider"></div>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">SHPE</p>
+        </div>
+        <div class="credMeta">
+          <span>Member</span>
+          <span class="credDates">Aug 2022 – May 2023</span>
+        </div>
+      </div>
+    </div>
 
-      <div class="s">
-        <h3>Enterprise Systems & Integration</h3>
-        <ul>
-          <li>PAM Investment Accounting Platforms</li>
-          <li>Markit EDM and Enterprise ETL Workflows</li>
-          <li>Informatica-based Data Integrations</li>
-          <li>Vendor Migrations and Platform Modernization Initiatives</li>
-        </ul>
+    <div class="credCard">
+      <p class="credLabel">Academic Honors</p>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">Dean's List</p>
+          <p class="credDesc">Armour College of Engineering · Illinois Institute of Technology</p>
+        </div>
+        <div class="credMeta">
+          <span class="credDates">Fall 2020 · Spring 2021 · Fall 2021 · Spring 2022 · Spring 2023</span>
+        </div>
       </div>
+    </div>
+
+    <div class="credCard">
+      <p class="credLabel">Academic Identity</p>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">ORCID</p>
+          <p class="credDesc">Open Researcher and Contributor ID — linked to graduate research publications.</p>
+        </div>
+        <div class="credMeta">
+          <a
+            class="credLink"
+            href="https://orcid.org/0009-0004-8302-5090"
+            target="_blank"
+            rel="noreferrer"
+          >
+            0009-0004-8302-5090 →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="credCard">
+      <p class="credLabel">In Progress</p>
+      <div class="credEntry">
+        <div>
+          <p class="credOrg">Foundations in Investment</p>
+          <p class="credDesc">CFA Institute</p>
+        </div>
+        <div class="credMeta">
+          <span class="ipBadge">In Progress</span>
+          <span class="credDates">Expected June 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Get in touch</h2>
+    <p class="muted">
+      Interested in enterprise data platforms, financial systems modernization,
+      AI governance, and research collaborations.
+    </p>
+    <div class="ctaRow">
+      <a
+        class="social"
+        href="https://www.linkedin.com/in/alan-palayil/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              fill="currentColor"
+              d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
+            ></path>
+          </svg>
+        </span>
+        LinkedIn
+      </a>
+      <span class="sep" aria-hidden="true">|</span>
+      <a
+        class="social"
+        href="mailto:alanpalayil+portfolio@gmail.com"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              fill="currentColor"
+              d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"
+            ></path>
+          </svg>
+        </span>
+        Email
+      </a>
+      <span class="sep" aria-hidden="true">|</span>
+      <a class="social" href="/resume">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              fill="currentColor"
+              d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
+            ></path>
+          </svg>
+        </span>
+        Resume
+      </a>
     </div>
   </section>
 
@@ -1042,24 +1227,48 @@ const personSchema = JSON.stringify({
       }
     }
 
-    /* Skills */
-    .skills {
+    /* Research Focus */
+    .rfChips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      margin-bottom: 12px;
+    }
+    .rfChip {
+      font-size: 13px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, rgb(var(--accent)) 55%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 80%, rgb(var(--muted)));
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .rfLink {
+      font-size: 13px;
+      color: rgb(var(--muted));
+      margin: 0;
+    }
+    .rfLink a {
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .rfLink a:hover {
+      text-decoration: underline;
+    }
+
+    /* Skills grid */
+    .skillsGrid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
       margin-top: 16px;
     }
-    .skills h3 {
-      font-size: 16px;
-      margin: 0 0 10px;
-    }
     @media (min-width: 860px) {
-      .skills {
+      .skillsGrid {
         grid-template-columns: 1fr 1fr;
       }
     }
-    /* Skills hover highlight */
-    .s {
+    .skillCat {
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
@@ -1068,50 +1277,121 @@ const personSchema = JSON.stringify({
         border-color 120ms ease,
         transform 120ms ease;
     }
-
-    .s:hover {
-      border-color: rgb(var(--accent)); /* ✅ accent border */
-      transform: translateY(-2px); /* optional: same lift as cards */
+    .skillCat:hover {
+      border-color: rgb(var(--accent));
+      transform: translateY(-2px);
     }
-
-    .s h3 {
+    .skillCat h3 {
       margin: 0 0 10px;
-      font-size: 15px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgb(var(--muted));
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
-    ul {
-      margin: 0;
-      padding-left: 18px;
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      background: rgba(255, 255, 255, 0.02);
       color: rgb(var(--muted));
     }
-    li {
-      margin: 6px 0;
+
+    /* Credentials */
+    .credCard {
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      margin-top: 12px;
+    }
+    .credLabel {
+      margin: 0 0 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgb(var(--muted));
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .credEntry {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 6px 0;
+    }
+    .credDivider {
+      height: 1px;
+      background: rgb(var(--border) / 0.5);
+    }
+    .credOrg {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgb(var(--text));
+    }
+    .credDesc {
+      margin: 3px 0 0;
+      font-size: 12px;
+      color: rgb(var(--muted));
+      max-width: 52ch;
+    }
+    .credMeta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .credMeta span {
+      font-size: 13px;
+      color: rgb(var(--text));
+    }
+    .credDates {
+      font-size: 12px;
+      color: rgb(var(--muted));
+    }
+    .credLink {
+      font-size: 13px;
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .credLink:hover {
+      text-decoration: underline;
+    }
+    .ipBadge {
+      font-size: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, rgb(var(--accent)) 45%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 60%, rgb(var(--muted)));
+      white-space: nowrap;
+    }
+    @media (max-width: 620px) {
+      .credEntry {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .credMeta {
+        align-items: flex-start;
+        text-align: left;
+      }
     }
 
-    /* Contact buttons (kept) */
-    .cta {
+    /* Contact CTA */
+    .ctaRow {
+      margin-top: 14px;
       display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: rgb(var(--accent));
-      color: white;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .btn.ghost {
-      background: rgba(255, 255, 255, 0.02);
-      color: rgb(var(--text));
-      border: 1px solid rgb(var(--border));
-    }
-    .btn.ghost:hover {
-      border-color: rgb(var(--accent));
+      gap: 10px;
+      flex-wrap: wrap;
     }
   </style>
 </SiteLayout>
