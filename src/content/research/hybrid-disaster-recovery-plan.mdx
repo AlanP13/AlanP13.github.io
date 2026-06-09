@@ -1,12 +1,57 @@
 ---
 title: "Disaster Recovery Plan for a Hybrid IT Department"
-status: in-progress
+status: completed
 area: ["Cloud & Infrastructure", "Security", "Resilience Engineering"]
 summary: "Designed a structured disaster recovery plan for a hybrid environment with clear RTO/RPO targets, operational roles, and test cadence."
 relevance: "Maps directly to my enterprise pipeline work: recovery design, operational runbooks, validation, and reducing time-to-restore for critical workflows."
 links:
   - label: "PDF"
     url: "/papers/ITS-834-Hybrid-DR-Plan.pdf"
+order: 0
+
+# Publication classification
+publication_type: technical-report
+publication_status: completed
+
+# Publication context
+university: "University of the Cumberlands"
+course: "ITS-834: Emerging Threats and Countermeasures"
+semester: "Fall 2025"
+lifecycle_stage: completed
+citation: "Palayil, A. (2025). Disaster Recovery Plan for a Hybrid IT Department [Technical report]. ITS-834: Emerging Threats and Countermeasures. University of the Cumberlands."
+
+# Academic identity
+orcid: "0009-0004-8302-5090"
+
+# Rich metadata (derived from document content — confirm before Sprint 2 display)
+abstract: >-
+  This paper presents a structured disaster recovery plan for a hybrid IT
+  department combining cloud and on-premises infrastructure, designed for
+  financial services operational continuity. The plan defines Recovery Time
+  Objectives (RTO) and Recovery Point Objectives (RPO) for critical systems
+  including databases, ETL pipelines, accounting applications, workload
+  schedulers, and file automation services. Activation criteria address
+  scenarios including ransomware and database corruption, cloud region outages,
+  scheduler failures blocking end-of-day processing, and data integrity
+  compromise. The plan specifies clear role assignments across incident command,
+  DR lead, DBA, cloud operations, scheduler owner, and security functions.
+  Recovery procedures follow a runbook format covering database restore and log
+  replay, ETL failover via infrastructure-as-code patterns, application rebuild
+  with connection repointing to DR database aliases, and file restore with
+  malware scanning and checksum validation. A structured testing cadence
+  includes quarterly, semiannual, and annual drills to prevent paper DR and
+  ensure operational readiness.
+keywords:
+  - disaster recovery planning
+  - hybrid cloud
+  - RTO
+  - RPO
+  - business continuity
+  - ETL failover
+  - financial IT
+  - runbook
+  - infrastructure as code
+  - operational resilience
 ---
 
 
@@ -48,7 +93,7 @@ Includes quarterly/semiannual/annual drills (DB failover, ETL failover, schedule
 This work shows how I think about reliability:
 - define targets (RTO/RPO) early
 - make recovery steps executable and owned
-- test regularly to avoid “paper DR”
+- test regularly to avoid "paper DR"
 - design for auditability and operational clarity
 
 ---
