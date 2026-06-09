@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-const { title, description, hideNavOnMobile = false } = Astro.props;
+const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
 ---
 
 <!doctype html>
@@ -61,6 +61,8 @@ const { title, description, hideNavOnMobile = false } = Astro.props;
       if (storedAccent) document.documentElement.dataset.accent = storedAccent;
       if (storedFx) document.documentElement.dataset.bgfx = storedFx;
     </script>
+
+    {schemaJson && <script type="application/ld+json" set:html={schemaJson} />}
   </head>
 
   <body>

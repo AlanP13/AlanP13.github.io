@@ -4,7 +4,23 @@ import { getCollection } from "astro:content";
 
 const items = await getCollection("research");
 
-const statusRank = { published: 0, submitted: 1, "in-progress": 2 };
+const statusRank: Record<string, number> = {
+  published: 0,
+  completed: 0,
+  accepted: 1,
+  "under-review": 2,
+  submitted: 2,
+  "in-progress": 3,
+};
+
+const statusLabels: Record<string, string> = {
+  completed: "Completed",
+  published: "Published",
+  "in-progress": "In Progress",
+  submitted: "Submitted",
+  "under-review": "Under Review",
+  accepted: "Accepted",
+};
 
 const byOrderDescThenTitle = (a: any, b: any) => {
   const ao = a.data.order ?? 0;
@@ -14,8 +30,10 @@ const byOrderDescThenTitle = (a: any, b: any) => {
 };
 
 items.sort((a, b) => {
-  const sa = statusRank[a.data.status] ?? 99;
-  const sb = statusRank[b.data.status] ?? 99;
+  const ea = a.data.publication_status ?? a.data.status;
+  const eb = b.data.publication_status ?? b.data.status;
+  const sa = statusRank[ea] ?? 99;
+  const sb = statusRank[eb] ?? 99;
   if (sa !== sb) return sa - sb;
   return byOrderDescThenTitle(a, b);
 });
@@ -34,32 +52,28 @@ items.sort((a, b) => {
 
   <div class="stack">
     {
-      items.map((r) => (
-        <div class="card">
-          <div class="top">
-            <h2>{r.data.title}</h2>
-            <span class={`badge ${r.data.status}`}>{r.data.status}</span>
-          </div>
-          <p class="muted">{r.data.summary}</p>
-          {r.data.relevance ? (
-            <p class="rel">
-              <strong>Relevance:</strong> {r.data.relevance}
-            </p>
-          ) : null}
-          {r.data.area?.length ? (
-            <p class="meta">{r.data.area.join(" · ")}</p>
-          ) : null}
-          {r.data.links?.length ? (
-            <div class="links">
-              {r.data.links.map((l) => (
-                <a href={l.url} target="_blank">
-                  {l.label} →
-                </a>
-              ))}
+      items.map((r) => {
+        const es = r.data.publication_status ?? r.data.status;
+        const esLabel = statusLabels[es] ?? es;
+        return (
+          <a class="card" href={`/research/${r.slug}`}>
+            <div class="top">
+              <h2>{r.data.title}</h2>
+              <span class={`badge ${es}`}>{esLabel}</span>
             </div>
-          ) : null}
-        </div>
-      ))
+            <p class="muted">{r.data.summary}</p>
+            {r.data.relevance ? (
+              <p class="rel">
+                <strong>Relevance:</strong> {r.data.relevance}
+              </p>
+            ) : null}
+            {r.data.area?.length ? (
+              <p class="meta">{r.data.area.join(" · ")}</p>
+            ) : null}
+            <p class="cta">Read more →</p>
+          </a>
+        );
+      })
     }
   </div>
 
@@ -93,10 +107,20 @@ items.sort((a, b) => {
       margin-right: auto;
     }
     .card {
+      display: block;
+      text-decoration: none;
+      color: rgb(var(--text));
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
       background: rgba(255, 255, 255, 0.02);
+      transition:
+        transform 120ms ease,
+        border-color 120ms ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgb(var(--accent));
     }
     .top {
       display: flex;
@@ -131,6 +155,11 @@ items.sort((a, b) => {
       );
       color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
     }
+    .badge.completed,
+    .badge.published {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+    }
     .badge.in-progress {
       border-color: color-mix(
         in srgb,
@@ -148,14 +177,9 @@ items.sort((a, b) => {
       color: rgb(var(--muted));
       font-size: 12px;
     }
-    .links {
+    .cta {
       margin-top: 10px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .links a {
-      text-decoration: none;
+      font-size: 13px;
       color: rgb(var(--accent));
     }
   </style>

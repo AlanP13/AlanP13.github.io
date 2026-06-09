@@ -44,11 +44,39 @@ const eduItems = timeline
 
 /** Helper: returns the image URL (or null if not found) */
 const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
+
+const personSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alan Palayil",
+  jobTitle: "Application Development Analyst",
+  worksFor: {
+    "@type": "Organization",
+    name: "Genworth Financial",
+  },
+  alumniOf: [
+    {
+      "@type": "EducationalOrganization",
+      name: "Illinois Institute of Technology",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "University of the Cumberlands",
+    },
+  ],
+  url: "https://alanp13.github.io",
+  sameAs: [
+    "https://www.linkedin.com/in/alan-palayil/",
+    "https://github.com/AlanP13",
+    "https://orcid.org/0009-0004-8302-5090",
+  ],
+});
 ---
 
 <SiteLayout
   title="Alan Palayil"
   description="Enterprise data + platform modernization in financial systems."
+  schemaJson={personSchema}
 >
   <section class="hero">
     <p class="kicker">

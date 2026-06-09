@@ -1,0 +1,511 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const items = await getCollection("research");
+  return items.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await item.render();
+const d = item.data;
+
+const typeLabels: Record<string, string> = {
+  "technical-report": "Technical Report",
+  "journal-article": "Journal Article",
+  "conference-paper": "Conference Paper",
+  preprint: "Preprint",
+  thesis: "Thesis",
+  "working-paper": "Working Paper",
+};
+
+const statusLabels: Record<string, string> = {
+  completed: "Completed",
+  "in-progress": "In Progress",
+  published: "Published",
+  submitted: "Submitted",
+  "under-review": "Under Review",
+  accepted: "Accepted",
+  preprint: "Preprint",
+};
+
+const effectiveStatus = d.publication_status ?? d.status;
+const statusLabel = statusLabels[effectiveStatus] ?? effectiveStatus;
+const typeLabel = d.publication_type ? typeLabels[d.publication_type] : null;
+
+const pdfLink = d.links?.find((l) => l.label === "PDF");
+const hasDistribution =
+  d.researchgate_url ||
+  d.zenodo_url ||
+  d.google_scholar_url ||
+  d.ssrn_url ||
+  d.github_url;
+
+const schemaObj: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  name: d.title,
+  url: Astro.url.href,
+  inLanguage: "en",
+  author: {
+    "@type": "Person",
+    name: "Alan Palayil",
+    ...(d.orcid ? { identifier: `https://orcid.org/${d.orcid}` } : {}),
+  },
+};
+if (d.abstract) schemaObj.abstract = d.abstract;
+if (d.keywords?.length) schemaObj.keywords = d.keywords.join(", ");
+if (d.university)
+  schemaObj.publisher = {
+    "@type": "EducationalOrganization",
+    name: d.university,
+  };
+if (d.doi) schemaObj.identifier = `https://doi.org/${d.doi}`;
+
+const schemaJson = JSON.stringify(schemaObj);
+---
+
+<SiteLayout
+  title={`${d.title} — Alan Palayil`}
+  description={d.abstract ?? d.summary}
+  schemaJson={schemaJson}
+>
+  <article class="page">
+    <p class="back"><a href="/research">← Research</a></p>
+
+    <header class="rhead">
+      <div class="badges">
+        {typeLabel && <span class="badge type">{typeLabel}</span>}
+        {
+          effectiveStatus && (
+            <span class={`badge status ${effectiveStatus}`}>
+              {statusLabel}
+            </span>
+          )
+        }
+      </div>
+      <h1>{d.title}</h1>
+      {d.abstract && <p class="abstract">{d.abstract}</p>}
+      {
+        d.keywords?.length && (
+          <div class="kws">
+            {d.keywords.map((k) => (
+              <span class="kw">{k}</span>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <div class="body">
+      <div class="main prose">
+        <hr class="divider" />
+        <Content />
+        {
+          d.citation && (
+            <div class="citation-block">
+              <h2>Citation (APA 7)</h2>
+              <pre class="cite-pre">{d.citation}</pre>
+            </div>
+          )
+        }
+      </div>
+
+      <aside class="side">
+        {
+          pdfLink && (
+            <a
+              class="pdf-btn"
+              href={pdfLink.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download PDF →
+            </a>
+          )
+        }
+
+        <div class="scard">
+          <h3>Publication Details</h3>
+          {
+            typeLabel && (
+              <div class="kv">
+                <span class="kkey">Type</span>
+                <span class="kval">{typeLabel}</span>
+              </div>
+            )
+          }
+          <div class="kv">
+            <span class="kkey">Status</span>
+            <span class="kval">{statusLabel}</span>
+          </div>
+          {
+            d.university && (
+              <div class="kv">
+                <span class="kkey">Institution</span>
+                <span class="kval">{d.university}</span>
+              </div>
+            )
+          }
+          {
+            d.course && (
+              <div class="kv">
+                <span class="kkey">Course</span>
+                <span class="kval">{d.course}</span>
+              </div>
+            )
+          }
+          {
+            d.semester && (
+              <div class="kv">
+                <span class="kkey">Semester</span>
+                <span class="kval">{d.semester}</span>
+              </div>
+            )
+          }
+          {
+            d.version && (
+              <div class="kv">
+                <span class="kkey">Version</span>
+                <span class="kval">{d.version}</span>
+              </div>
+            )
+          }
+          {
+            d.doi && (
+              <div class="kv">
+                <span class="kkey">DOI</span>
+                <a
+                  class="kval link"
+                  href={`https://doi.org/${d.doi}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {d.doi}
+                </a>
+              </div>
+            )
+          }
+          {
+            d.orcid && (
+              <div class="kv">
+                <span class="kkey">ORCID</span>
+                <a
+                  class="kval link"
+                  href={`https://orcid.org/${d.orcid}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {d.orcid}
+                </a>
+              </div>
+            )
+          }
+          {
+            d.area?.length && (
+              <div class="kv">
+                <span class="kkey">Areas</span>
+                <span class="kval areas">{d.area.join(" · ")}</span>
+              </div>
+            )
+          }
+        </div>
+
+        {
+          hasDistribution && (
+            <div class="scard">
+              <h3>Find this work on</h3>
+              <div class="distro">
+                {d.researchgate_url && (
+                  <a
+                    class="dlink"
+                    href={d.researchgate_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    ResearchGate →
+                  </a>
+                )}
+                {d.zenodo_url && (
+                  <a
+                    class="dlink"
+                    href={d.zenodo_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Zenodo →
+                  </a>
+                )}
+                {d.google_scholar_url && (
+                  <a
+                    class="dlink"
+                    href={d.google_scholar_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Google Scholar →
+                  </a>
+                )}
+                {d.ssrn_url && (
+                  <a
+                    class="dlink"
+                    href={d.ssrn_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    SSRN →
+                  </a>
+                )}
+                {d.github_url && (
+                  <a
+                    class="dlink"
+                    href={d.github_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub →
+                  </a>
+                )}
+              </div>
+            </div>
+          )
+        }
+      </aside>
+    </div>
+  </article>
+
+  <style>
+    .page {
+      max-width: var(--content, 1100px);
+      margin: 0 auto;
+    }
+    .back {
+      margin: 0 0 18px;
+    }
+    .back a {
+      color: rgb(var(--muted));
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back a:hover {
+      color: rgb(var(--accent));
+    }
+    .rhead {
+      margin-bottom: 32px;
+    }
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      color: rgb(var(--muted));
+    }
+    .badge.type {
+      border-color: color-mix(in srgb, rgb(var(--accent)) 55%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 80%, rgb(var(--muted)));
+    }
+    .badge.completed,
+    .badge.published {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+    }
+    .badge.in-progress {
+      border-color: color-mix(in srgb, rgb(var(--accent)) 45%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 60%, rgb(var(--muted)));
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .abstract {
+      color: rgb(var(--muted));
+      line-height: 1.75;
+      max-width: 88ch;
+      margin: 0 0 18px;
+      font-size: 15px;
+    }
+    .kws {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .kw {
+      font-size: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgb(var(--border));
+      color: rgb(var(--muted));
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid rgb(var(--border));
+      margin: 0 0 28px;
+    }
+    .body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 860px) {
+      .body {
+        grid-template-columns: 1fr 260px;
+        align-items: start;
+      }
+    }
+    .main {
+      min-width: 0;
+    }
+    .prose :global(h2) {
+      font-size: 22px;
+      margin: 28px 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .prose :global(h3) {
+      font-size: 17px;
+      margin: 22px 0 8px;
+    }
+    .prose :global(p) {
+      line-height: 1.75;
+      color: color-mix(in srgb, rgb(var(--text)) 90%, rgb(var(--muted)));
+      margin: 0 0 14px;
+    }
+    .prose :global(ul),
+    .prose :global(ol) {
+      padding-left: 20px;
+      color: rgb(var(--muted));
+      margin: 0 0 14px;
+    }
+    .prose :global(li) {
+      margin: 6px 0;
+      line-height: 1.65;
+    }
+    .prose :global(strong) {
+      color: rgb(var(--text));
+      font-weight: 700;
+    }
+    .prose :global(hr) {
+      border: none;
+      border-top: 1px solid rgb(var(--border));
+      margin: 28px 0;
+    }
+    .citation-block {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgb(var(--border));
+    }
+    .citation-block h2 {
+      font-size: 15px;
+      margin: 0 0 10px;
+      color: rgb(var(--muted));
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .cite-pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 13px;
+      color: rgb(var(--muted));
+      line-height: 1.75;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px;
+      margin: 0;
+      font-family: inherit;
+    }
+    /* sidebar */
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pdf-btn {
+      display: block;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: var(--r);
+      background: rgb(var(--accent));
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 120ms ease;
+    }
+    .pdf-btn:hover {
+      opacity: 0.85;
+    }
+    .scard {
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .scard h3 {
+      margin: 0 0 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgb(var(--muted));
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgb(var(--border) / 0.4);
+      font-size: 13px;
+      align-items: baseline;
+    }
+    .kv:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .kkey {
+      color: rgb(var(--muted));
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .kval {
+      color: rgb(var(--text));
+      text-align: right;
+    }
+    .kval.areas {
+      font-size: 12px;
+      color: rgb(var(--muted));
+    }
+    .kval.link {
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .kval.link:hover {
+      text-decoration: underline;
+    }
+    .distro {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dlink {
+      color: rgb(var(--accent));
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .dlink:hover {
+      text-decoration: underline;
+    }
+  </style>
+</SiteLayout>
