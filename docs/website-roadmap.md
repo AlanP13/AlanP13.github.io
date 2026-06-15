@@ -61,7 +61,7 @@ Ordered by impact, readiness, and dependency risk.
 | 6 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
 | 7 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Blocked on ResearchGate/Zenodo deposits and resulting URLs |
 
-Recommended next implementation: **2B-003 — Recognition & leadership content audit** — unblocks 2B-004 (academic CV) and 2C-006 (speaking/judging timeline); low effort, high credentialing value.
+Recommended next implementation: **Structured-data completion** or **2A-013 / 2B-008** — both blocked on external URLs. Next actionable: **2C-008** (content.config.ts migration, XS) or **2C-010** (remove leaflet, XS) bundled with a config touch.
 
 ---
 
@@ -516,7 +516,7 @@ Section is built to display what exists, with a future-proof structure. No fabri
 
 **Professional credibility:** High — consolidates independently verifiable recognition
 
-| Status | [ ] |
+| Status | [x] Shipped 2026-06-15 — audit complete; IEEE-HKN + Dean's List folded into About page Leadership & Service block; dedicated recognition page deferred until awards/speaking accumulate |
 |---|---|
 
 ---
@@ -541,7 +541,7 @@ Not a duplicate of the resume — different audience, different purpose, differe
 
 **Dependency:** 2A-008 (credentials), 2A-012 (identity), 2B-003 (recognition) should be done first
 
-| Status | [ ] |
+| Status | [x] Shipped 2026-06-15 — `/cv` page live with Education, Research, Academic Honors, Memberships & Leadership, abbreviated Professional Experience, and top Certifications; CV link added to About page social row |
 |---|---|
 
 ---
@@ -726,6 +726,9 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | 2B-009 | 2026-06-15 | Cloudflare Web Analytics beacon added to SiteLayout.astro — no cookies, no consent banner, privacy-compliant |
 | 2B-007 | 2026-06-15 | Project impact statements rewritten with real metrics — 1,500+ CML loans, ~800 CUSIPs across 3 derivative types, operational automation scope and goals |
 | 2B-002 | 2026-06-15 | Work experience bullets quantified — 10+ pipelines, 30+ jobs, 2+ hrs/week saved, Derivatives migrated to Azure Synapse, FI+CML on track for EOY 2026, 5 cross-functional teams; P1 bullets frame foundation-building role |
+
+| 2B-003 | 2026-06-15 | Recognition audit complete — IEEE-HKN Internal Secretary + Dean's List added to About page as Leadership & Service section; standalone recognition page deferred |
+| 2B-004 | 2026-06-15 | Academic CV `/cv` live — Education, Research, Academic Honors, Memberships & Leadership, abbreviated work history, top certs; CV link in About page social row |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 

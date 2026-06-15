@@ -1,7 +1,7 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import ImageCarousel from "../components/ImageCarousel";
-import { FileText, LinkedinLogo, GithubLogo, Envelope } from "@phosphor-icons/react";
+import { FileText, LinkedinLogo, GithubLogo, Envelope, GraduationCap } from "@phosphor-icons/react";
 
 // Auto-import ALL images in src/assets/places
 const modules = import.meta.glob(
@@ -111,6 +111,14 @@ const carouselImages = Object.entries(carouselModules)
           </a>
           <span class="sep" aria-hidden="true">|</span>
 
+          <a class="social" href="/cv">
+            <span class="icon" aria-hidden="true">
+              <GraduationCap size={18} />
+            </span>
+            CV
+          </a>
+          <span class="sep" aria-hidden="true">|</span>
+
           <a class="social" href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">
             <span class="icon" aria-hidden="true">
               <LinkedinLogo size={18} />
@@ -140,6 +148,26 @@ const carouselImages = Object.entries(carouselModules)
         <ImageCarousel client:idle images={carouselImages} />
       </div>
     </div>
+  </section>
+
+  <section class="service">
+    <h2 class="serviceTitle">Leadership & Service</h2>
+    <ul class="serviceList">
+      <li class="serviceItem">
+        <div class="svcInfo">
+          <span class="svcRole">Internal Secretary</span>
+          <span class="svcOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
+        </div>
+        <span class="svcYear">2022</span>
+      </li>
+      <li class="serviceItem">
+        <div class="svcInfo">
+          <span class="svcRole">Dean's List</span>
+          <span class="svcOrg">Illinois Institute of Technology · B.S. & M.S.</span>
+        </div>
+        <span class="svcYear">2021 – 2023</span>
+      </li>
+    </ul>
   </section>
 
   <section class="gallery">
@@ -420,6 +448,55 @@ const carouselImages = Object.entries(carouselModules)
         opacity: 1;
         transform: none;
       }
+    }
+
+    .service {
+      max-width: var(--content, 1100px);
+      margin: 0 auto 32px;
+    }
+    .serviceTitle {
+      margin: 0 0 14px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgb(var(--accent));
+      font-weight: 700;
+    }
+    .serviceList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .serviceItem {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgb(var(--border));
+    }
+    .serviceItem:first-child {
+      border-top: 1px solid rgb(var(--border));
+    }
+    .svcInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .svcRole {
+      font-size: 14px;
+      font-weight: 650;
+      color: rgb(var(--text));
+    }
+    .svcOrg {
+      font-size: 13px;
+      color: rgb(var(--muted));
+    }
+    .svcYear {
+      font-size: 13px;
+      color: rgb(var(--muted));
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   </style>
 </SiteLayout>
