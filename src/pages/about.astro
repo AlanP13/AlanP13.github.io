@@ -2,45 +2,51 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import ImageCarousel from "../components/ImageCarousel";
 import { FileText, LinkedinLogo, GithubLogo, Envelope, GraduationCap } from "@phosphor-icons/react";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 // Auto-import ALL images in src/assets/places
-const modules = import.meta.glob(
+const modules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/places/*.{jpg,jpeg,png,webp,avif}",
-  {
-    eager: true,
-  },
+  { eager: true },
 );
 
-// Build: { src, name } from file name
-const placeImages = Object.entries(modules)
+const placeImagesRaw = Object.entries(modules)
   .map(([filePath, mod]) => {
     const file = filePath.split("/").pop() ?? "";
     const name = decodeURIComponent(file)
       .replace(/\.[^.]+$/, "")
       .replace(/[-_]+/g, " ")
       .trim();
-
-    // Astro asset modules expose default with .src
-    const src = (mod as { default: { src: string } }).default.src;
-
-    return { src, name };
+    return { image: mod.default, name };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+
+// Optimize at build time: resize to gallery display width, convert to WebP
+const placeImages = await Promise.all(
+  placeImagesRaw.map(async ({ image, name }) => {
+    const opt = await getImage({ src: image, width: 1000, format: "webp" });
+    return { src: opt.src, name };
+  })
+);
+
 // Auto-import Carousel images (Alan photos)
-const carouselModules = import.meta.glob(
+const carouselModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/about/*.{jpg,jpeg,png,webp,avif}",
   { eager: true },
 );
 
-const carouselImages = Object.entries(carouselModules)
-  .map(([filePath, mod]) => {
-    const file = filePath.split("/").pop() ?? "";
-    // Sort-friendly if you name them alan-1, alan-2, etc.
-    const src = (mod as { default: { src: string } }).default.src;
-    return { file, src };
+const carouselImagesRaw = Object.entries(carouselModules)
+  .map(([filePath, mod]) => ({ file: filePath.split("/").pop() ?? "", image: mod.default }))
+  .sort((a, b) => a.file.localeCompare(b.file));
+
+// Optimize at build time: 2× the 320px carousel max-width, convert to WebP
+const carouselImages = await Promise.all(
+  carouselImagesRaw.map(async ({ image }) => {
+    const opt = await getImage({ src: image, width: 640, format: "webp" });
+    return opt.src;
   })
-  .sort((a, b) => a.file.localeCompare(b.file))
-  .map((x) => x.src);
+);
 ---
 
 <SiteLayout

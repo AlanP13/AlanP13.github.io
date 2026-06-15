@@ -2,20 +2,23 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 import { FileText, LinkedinLogo, GithubLogo, Envelope } from "@phosphor-icons/react";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 /** Load organization logos from /src/assets/organizations */
-const orgLogoModules = import.meta.glob("../assets/organizations/*.png", {
+const orgLogoModules = import.meta.glob<{ default: ImageMetadata }>("../assets/organizations/*.png", {
   eager: true,
 });
 
-/** Build a map like: { IIT: "/_astro/IIT.hash.png", Genworth: "/_astro/Genworth.hash.png" } */
+/** Build a map like: { IIT: "/_astro/IIT.hash.webp", Genworth: "/_astro/Genworth.hash.webp" } */
 const orgLogos = Object.fromEntries(
-  Object.entries(orgLogoModules).map(([path, mod]: [string, any]) => {
-    const key = path.split("/").pop()?.replace(".png", "") ?? ""; // "IIT"
-    const meta = (mod as any).default;
-    const url = meta?.src ?? meta;
-    return [key, url];
-  }),
+  await Promise.all(
+    Object.entries(orgLogoModules).map(async ([path, mod]) => {
+      const key = path.split("/").pop()?.replace(".png", "") ?? "";
+      const opt = await getImage({ src: mod.default, width: 76, format: "webp" });
+      return [key, opt.src] as [string, string];
+    })
+  )
 );
 
 const byOrderDescThenTitle = (
