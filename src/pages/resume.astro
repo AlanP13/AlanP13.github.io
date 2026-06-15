@@ -5,105 +5,392 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 <SiteLayout
   title="Resume — Alan Palayil"
   description="Resume of Alan Palayil — Application Development Analyst at Genworth Financial, specializing in enterprise data pipelines, financial systems, and AI Governance research."
-  hideNavOnMobile={true}
 >
-  <h1>Resume</h1>
-  <p class="sub">
-    <a class="link" href="/Alan_Palayil_Resume.pdf" target="_blank"
-      >Open PDF in a new tab →</a
-    >
-  </p>
-  <div class="frame accent-rail">
-    <iframe src="/Alan_Palayil_Resume.pdf" title="Resume PDF"></iframe>
+  <div class="resume-wrap">
+
+    <div class="pageHead">
+      <h1>Resume</h1>
+      <a class="dlBtn" href="/Alan_Palayil_Resume.pdf" download="Alan_Palayil_Resume.pdf">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <div class="contactBlock">
+      <div class="contactName">Alan Palayil</div>
+      <div class="contactRole">Application Development Analyst · PhD Researcher</div>
+      <div class="contactLinks">
+        <span>Richmond, VA</span>
+        <span class="cdot" aria-hidden="true">·</span>
+        <a href="mailto:alan.palayil@gmail.com">alan.palayil@gmail.com</a>
+        <span class="cdot" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <span class="cdot" aria-hidden="true">·</span>
+        <a href="https://github.com/AlanP13" target="_blank" rel="noreferrer">GitHub</a>
+        <span class="cdot" aria-hidden="true">·</span>
+        <a href="https://alanp13.github.io">alanp13.github.io</a>
+      </div>
+    </div>
+
+    <section class="rSection">
+      <h2 class="rHead">Experience</h2>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">Application Development Analyst (P2)</span>
+            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates">December 2025 – Present</span>
+            <span class="rLoc">Richmond, VA · Hybrid</span>
+          </div>
+        </div>
+        <p class="rSub">Lead engineering for investment accounting systems, owning CML workflows within PAM and driving the migration of legacy platforms to Azure with automated enterprise data pipelines.</p>
+        <ul class="rBullets">
+          <li>Manages CML engineering within the PAM framework, overseeing technical roadmaps and production stability for mortgage loan accounting.</li>
+          <li>Migrated derivatives processing to Azure, transitioning local infrastructure to cloud services to improve system uptime and scalability.</li>
+          <li>Automates data pipelines and controls to replace manual data entry, reducing processing errors and increasing delivery speed.</li>
+          <li>Partners with Operations and Accounting to align software development with financial reporting requirements and infrastructure updates.</li>
+          <li>Develops system interfaces that integrate accounting platforms with broader enterprise data feeds for consistent reporting.</li>
+        </ul>
+      </div>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">Associate Application Development Analyst (P1)</span>
+            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates">July 2023 – December 2025</span>
+            <span class="rLoc">Richmond, VA · Hybrid</span>
+          </div>
+        </div>
+        <p class="rSub">Developed Python and SQL automation for investment accounting workflows, replacing manual processes with reliable data interfaces and reporting tools.</p>
+        <ul class="rBullets">
+          <li>Automated financial reporting and data extraction using Python and SQL, reducing manual workloads and data entry errors.</li>
+          <li>Maintained the Investments Trading &amp; Accounting platform, implementing updates to ensure system uptime and performance.</li>
+          <li>Resolved application and data failures through root cause analysis, developing permanent fixes to prevent recurring system issues.</li>
+          <li>Developed system interfaces in collaboration with Accounting and Operations to ensure reliable data flow across departments.</li>
+          <li>Supported core accounting workflows, providing technical assistance and troubleshooting for daily production tasks.</li>
+        </ul>
+      </div>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">Full Stack Developer Intern</span>
+            <span class="rOrg"><a href="https://ithena.ai" target="_blank" rel="noreferrer">ITHENA</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates">June 2020 – August 2020</span>
+            <span class="rLoc">Richmond, VA · In-Person</span>
+          </div>
+        </div>
+        <p class="rSub">Engineered custom TCP/IP protocols and IoT control systems to replace restricted third-party platforms, and built real-time data pipelines with web-based monitoring interfaces.</p>
+        <ul class="rBullets">
+          <li>Developed custom TCP communication layers without external automation software, increasing system control and reducing platform dependency.</li>
+          <li>Built an IoT street lamp prototype using C# and MQTT to enable low-latency communication between hardware and the cloud.</li>
+          <li>Created a web-based dashboard using HTML, CSS, and JavaScript for direct real-time monitoring of backend system data.</li>
+          <li>Collaborated with senior engineers to design, test, and document system requirements and user guidelines.</li>
+          <li>Integrated frontend interfaces directly with backend communication services to ensure immediate data synchronization.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="rSection">
+      <h2 class="rHead">Education</h2>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">Executive PhD in Information Technology</span>
+            <span class="rOrg"><a href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology" target="_blank" rel="noreferrer">University of Cumberlands</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates rInProgress">In Progress</span>
+            <span class="rLoc">Williamsburg, KY · Online</span>
+          </div>
+        </div>
+        <ul class="rBullets">
+          <li>Focus areas: data science, big data analytics, AI governance, enterprise IT leadership, and risk management.</li>
+          <li>Advanced coursework in statistical methods, qualitative/quantitative research methodologies, and information governance.</li>
+          <li>Developing dissertation on applied AI, data-driven systems, and enterprise automation.</li>
+        </ul>
+      </div>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">M.S. Cybersecurity Engineering</span>
+            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/cybersecurity-engineering-mas" target="_blank" rel="noreferrer">Illinois Institute of Technology</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates">August 2023</span>
+            <span class="rLoc">Chicago, IL · In-Person</span>
+          </div>
+        </div>
+        <ul class="rBullets">
+          <li>Specialized in application development, cybersecurity systems, and applied artificial intelligence and machine learning.</li>
+          <li>Active in Eta Kappa Nu (IEEE-HKN); served as Internal Secretary (2022). Dean's List recipient.</li>
+        </ul>
+      </div>
+
+      <div class="rEntry">
+        <div class="rEntryHead">
+          <div class="rLeft">
+            <span class="rTitle">B.S. Computer &amp; Cybersecurity Engineering</span>
+            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/computer-and-cybersecurity-engineering-bs" target="_blank" rel="noreferrer">Illinois Institute of Technology</a></span>
+          </div>
+          <div class="rRight">
+            <span class="rDates">August 2023</span>
+            <span class="rLoc">Chicago, IL · In-Person</span>
+          </div>
+        </div>
+        <ul class="rBullets">
+          <li>Coursework in cybersecurity, data structures &amp; algorithms, machine learning, software engineering, and systems programming.</li>
+          <li>Active in Eta Kappa Nu (IEEE-HKN). Dean's List recipient for academic excellence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="rSection">
+      <h2 class="rHead">Technical Skills</h2>
+      <div class="skillsGrid">
+        <div class="skillRow">
+          <span class="skillLabel">Enterprise Platforms</span>
+          <div class="skillTags">
+            <span>PAM Investment Accounting</span>
+            <span>Financial Systems Modernization</span>
+            <span>Platform Migration</span>
+            <span>Production Support</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Data Engineering</span>
+          <div class="skillTags">
+            <span>Azure Synapse</span>
+            <span>ETL Pipelines</span>
+            <span>AppWorx</span>
+            <span>Markit EDM</span>
+            <span>Data Warehousing</span>
+            <span>Data Reconciliation</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Cloud</span>
+          <div class="skillTags">
+            <span>Microsoft Azure</span>
+            <span>ADLS</span>
+            <span>Serverless SQL</span>
+            <span>Azure Monitoring</span>
+            <span>Logic Apps</span>
+            <span>Key Vault</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">AI &amp; Data Science</span>
+          <div class="skillTags">
+            <span>Machine Learning</span>
+            <span>Time Series Forecasting</span>
+            <span>AI Governance</span>
+            <span>Data Mining</span>
+            <span>Predictive Analytics</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Risk &amp; Governance</span>
+          <div class="skillTags">
+            <span>Enterprise Risk Management</span>
+            <span>Model Risk Management</span>
+            <span>NIST</span>
+            <span>COSO ERM</span>
+            <span>Regulatory Compliance</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Languages</span>
+          <div class="skillTags">
+            <span>Python</span>
+            <span>SQL</span>
+            <span>C#</span>
+            <span>Java</span>
+            <span>C++</span>
+            <span>JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <style>
+    .resume-wrap {
+      max-width: var(--content, 1100px);
+      margin: 0 auto;
+      padding-top: 44px;
+      padding-bottom: 60px;
+    }
+
+    .pageHead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
     h1 {
-      margin: 0 0 18px;
+      margin: 0;
       font-size: 44px;
       letter-spacing: -0.03em;
       color: rgb(var(--accent));
       font-weight: 800;
-      /* ✅ match section width */
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
     }
-    .sub {
-      margin: 0 0 14px;
-      color: rgb(var(--muted));
-      /* ✅ match section width */
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .link {
+    .dlBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid rgb(var(--accent));
+      background: color-mix(in srgb, rgb(var(--accent)) 10%, transparent);
       color: rgb(var(--accent));
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 150ms ease, box-shadow 150ms ease;
+      white-space: nowrap;
     }
-    .frame {
+    .dlBtn:hover {
+      background: color-mix(in srgb, rgb(var(--accent)) 18%, transparent);
+      box-shadow: 0 4px 16px color-mix(in srgb, rgb(var(--accent)) 22%, transparent);
+    }
+
+    .contactBlock {
       border: 1px solid rgb(var(--border));
-      border-radius: 16px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.02);
-      position: relative;
-      /* ✅ match section width */
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+      border-radius: 14px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 32px;
     }
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      padding: 1px;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.05),
-        color-mix(in srgb, rgb(var(--accent)) 40%, transparent)
-      );
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
+    .contactName {
+      font-size: 22px;
+      font-weight: 700;
+      color: rgb(var(--text));
+      margin-bottom: 2px;
     }
-    .accent-rail::before {
+    .contactRole {
+      font-size: 14px;
+      color: rgb(var(--accent));
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .contactLinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 0;
+      font-size: 13px;
+      color: rgb(var(--muted));
+      align-items: center;
+    }
+    .contactLinks a {
+      color: rgb(var(--muted));
+      text-decoration: none;
+    }
+    .contactLinks a:hover { color: rgb(var(--accent)); }
+    .cdot { margin: 0 8px; opacity: 0.4; }
+
+    .rSection { margin-bottom: 36px; }
+    .rHead {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgb(var(--accent));
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgb(var(--border));
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rHead::before {
       content: "";
-      position: absolute;
-      top: 10px;
-      bottom: 10px;
-      right: 10px;
-      width: 4px;
+      display: inline-block;
+      width: 3px;
+      height: 13px;
       border-radius: 999px;
       background: rgb(var(--accent));
-      opacity: 0.85;
-      pointer-events: none;
+      opacity: 0.8;
+      flex-shrink: 0;
     }
-    .accent-rail::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      pointer-events: none;
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.04),
-        0 0 40px rgba(0, 0, 0, 0.25);
-      background: radial-gradient(
-        120px 240px at calc(100% - 8px) 40%,
-        rgba(255, 255, 255, 0.05),
-        transparent 70%
-      );
-      mix-blend-mode: screen;
-      opacity: 0.5;
+
+    .rEntry {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid color-mix(in srgb, rgb(var(--border)) 50%, transparent);
     }
-    iframe {
-      width: 100%;
-      height: 78vh;
-      border: 0;
-      display: block;
+    .rEntry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .rEntryHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .rLeft { display: flex; flex-direction: column; gap: 2px; }
+    .rRight { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+
+    .rTitle { font-size: 15.5px; font-weight: 700; color: rgb(var(--text)); }
+    .rOrg a { font-size: 13.5px; font-weight: 500; color: rgb(var(--accent)); text-decoration: none; }
+    .rOrg a:hover { text-decoration: underline; }
+    .rDates { font-size: 13px; color: rgb(var(--muted)); white-space: nowrap; }
+    .rInProgress { color: rgb(var(--accent)); font-weight: 600; }
+    .rLoc { font-size: 12px; color: rgb(var(--muted)); opacity: 0.7; white-space: nowrap; }
+
+    .rSub { font-size: 13px; color: rgb(var(--muted)); margin: 0 0 8px; line-height: 1.55; font-style: italic; }
+    .rBullets { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+    .rBullets li { font-size: 13.5px; color: color-mix(in srgb, rgb(var(--text)) 85%, transparent); line-height: 1.6; }
+
+    .skillsGrid { display: flex; flex-direction: column; gap: 10px; }
+    .skillRow {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .skillLabel {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgb(var(--muted));
+      padding-top: 4px;
+    }
+    .skillTags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skillTags span {
+      font-size: 12.5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      background: color-mix(in srgb, rgb(var(--card)) 80%, transparent);
+      color: rgb(var(--text));
+      opacity: 0.88;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 32px; }
+      .pageHead { flex-direction: column; align-items: flex-start; }
+      .rEntryHead { flex-direction: column; gap: 4px; }
+      .rRight { align-items: flex-start; }
+      .contactBlock { padding: 16px; }
+      .skillRow { grid-template-columns: 1fr; gap: 6px; }
     }
   </style>
 </SiteLayout>
