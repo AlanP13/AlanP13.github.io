@@ -53,15 +53,15 @@ Ordered by impact, readiness, and dependency risk.
 
 | Order | Status | Item | Scope / dependency |
 |---|---|---|---|
-| 1 | [x] | **2B-006 — Homepage contact CTA** | Shipped 2026-06-15 — "Let's connect" section with LinkedIn + Prefer Email? buttons |
-| 2 | [~] | **2B-010 — Certifications expansion** | Schema + sample MDX created 2026-06-15; blocked on user providing full cert list |
-| 3 | [~] | **2B-001 — Resume credentials completion** | Resume has Experience, Education, Skills; certifications section remains once 2B-010 list is supplied |
-| 4 | [~] | **Structured-data completion** | Add remaining article relationships and fields when exact publication dates and external canonical URLs are available |
-| 5 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Code support exists; requires ResearchGate/Zenodo deposits and resulting profile/DOI URLs |
-| 6 | [ ] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
-| 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision before adding the production script |
+| 1 | [x] | **2B-006 — Homepage contact CTA** | Shipped 2026-06-15 |
+| 2 | [x] | **2B-010 — Certifications expansion** | Shipped 2026-06-15; 25 certs, 18 featured, homepage shows top 2 + deep-link to resume |
+| 3 | [x] | **2B-001 — Resume credentials completion** | Certifications section now live on resume page |
+| 4 | [>] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
+| 5 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
+| 6 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Blocked on ResearchGate/Zenodo deposits and resulting URLs |
+| 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision |
 
-Recommended next implementation: **2B-010 Certifications expansion** — sample MDX and schema ready; unblocked once the full cert list is supplied.
+Recommended next implementation: **2B-002 / 2B-007 — Quantified outcomes** — highest remaining recruiter impact; requires public-safe metrics from user for work bullets and project impact statements.
 
 ---
 
@@ -722,7 +722,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | UI re-audit | 2026-06-15 | Installed @phosphor-icons/react; replaced all hand-rolled SVGs on home, about, resume; trimmed hero to 4 elements; fixed featured projects to asymmetric hero+2 grid; fixed about carousel column ratio; split resume contact strip; replaced en-dashes with hyphens throughout |
 | UI uplift | 2026-06-15 | Brightened --muted token (dark 150→180, light 92→72); accent-tinted skill and credential section labels; promoted chip and credential description text to --text; hid about carousel on mobile/tablet |
 | 2B-006 | 2026-06-15 | Homepage contact CTA — "Let's connect" section with LinkedIn (primary) and Prefer Email? (secondary) buttons; domain-framed copy, no availability signal |
-| 2B-010 (partial) | 2026-06-15 | Certifications collection schema added to config.ts; sample foundations-in-investments.mdx created; UI wiring blocked on full cert list from user |
+| 2B-010 | 2026-06-15 | Certifications collection fully wired — 25 MDX files, ordered by professional relevance, 7 hidden (featured: false), homepage shows top 2 with auto-count deep-link to /resume#certifications, resume shows all featured with skill chips and verify links |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
