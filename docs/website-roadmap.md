@@ -56,12 +56,12 @@ Ordered by impact, readiness, and dependency risk.
 | 1 | [x] | **2B-006 — Homepage contact CTA** | Shipped 2026-06-15 |
 | 2 | [x] | **2B-010 — Certifications expansion** | Shipped 2026-06-15; 25 certs, 18 featured, homepage shows top 2 + deep-link to resume |
 | 3 | [x] | **2B-001 — Resume credentials completion** | Certifications section now live on resume page |
-| 4 | [>] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
-| 5 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
-| 6 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Blocked on ResearchGate/Zenodo deposits and resulting URLs |
-| 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision |
+| 4 | [x] | **2B-002 / 2B-007 — Quantified outcomes** | Shipped 2026-06-15 |
+| 5 | [x] | **2B-009 — Privacy-friendly analytics** | Shipped 2026-06-15; Cloudflare Web Analytics beacon (no cookies, no consent banner) |
+| 6 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
+| 7 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Blocked on ResearchGate/Zenodo deposits and resulting URLs |
 
-Recommended next implementation: **2B-002 / 2B-007 — Quantified outcomes** — highest remaining recruiter impact; requires public-safe metrics from user for work bullets and project impact statements.
+Recommended next implementation: **2B-003 — Recognition & leadership content audit** — unblocks 2B-004 (academic CV) and 2C-006 (speaking/judging timeline); low effort, high credentialing value.
 
 ---
 
@@ -723,6 +723,9 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | UI uplift | 2026-06-15 | Brightened --muted token (dark 150→180, light 92→72); accent-tinted skill and credential section labels; promoted chip and credential description text to --text; hid about carousel on mobile/tablet |
 | 2B-006 | 2026-06-15 | Homepage contact CTA — "Let's connect" section with LinkedIn (primary) and Prefer Email? (secondary) buttons; domain-framed copy, no availability signal |
 | 2B-010 | 2026-06-15 | Certifications collection fully wired — 25 MDX files, ordered by professional relevance, 7 hidden (featured: false), homepage shows top 2 with auto-count deep-link to /resume#certifications, resume shows all featured with skill chips and verify links |
+| 2B-009 | 2026-06-15 | Cloudflare Web Analytics beacon added to SiteLayout.astro — no cookies, no consent banner, privacy-compliant |
+| 2B-007 | 2026-06-15 | Project impact statements rewritten with real metrics — 1,500+ CML loans, ~800 CUSIPs across 3 derivative types, operational automation scope and goals |
+| 2B-002 | 2026-06-15 | Work experience bullets quantified — 10+ pipelines, 30+ jobs, 2+ hrs/week saved, Derivatives migrated to Azure Synapse, FI+CML on track for EOY 2026, 5 cross-functional teams; P1 bullets frame foundation-building role |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
