@@ -1,6 +1,6 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
-import ImageCarousel from "../components/ImageCarousel";
+import ImageCarousel from "../components/ImageCarousel.astro";
 import { FileText, LinkedinLogo, GithubLogo, Envelope, GraduationCap } from "@phosphor-icons/react";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -151,7 +151,7 @@ const carouselImages = await Promise.all(
       </div>
 
       <div class="right">
-        <ImageCarousel client:idle images={carouselImages} />
+        <ImageCarousel images={carouselImages} />
       </div>
     </div>
   </section>

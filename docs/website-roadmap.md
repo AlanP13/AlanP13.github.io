@@ -653,9 +653,9 @@ Schema and sample file created 2026-06-15. `certifications` collection defined i
 | 2C-005 | [ ] | S | Google Scholar citation counts / h-index display (conditional) | After papers indexed and Scholar profile active |
 | 2C-006 | [ ] | M | Speaking / judging / leadership timeline | As verified material accumulates from 2B-003 content audit |
 | 2C-007 | [ ] | — | Theme positioning review — space/planet vs. enterprise aesthetic | Design decision; warrants a separate conversation |
-| 2C-008 | [ ] | S | `src/content.config.ts` migration (Astro 5 preferred path over `src/content/config.ts`) | Bundle with next config touch |
+| 2C-008 | [x] | S | `src/content.config.ts` migration (Astro 5 preferred path over `src/content/config.ts`) | Shipped 2026-06-15 |
 | 2C-009 | [ ] | L | Dedicated AI / Data Platform positioning page | When architecture story is ready |
-| 2C-010 | [ ] | S | Remove unused `leaflet` dependency | Bundle with next `package.json` change |
+| 2C-010 | [x] | S | Remove unused `leaflet` + `swiper` dependencies | Shipped 2026-06-15 |
 | 2C-011 | [x] | M | Carousel ratio fixed (4fr/2fr) and hidden on mobile/tablet; carousel visible only at 980px+ | Done 2026-06-15 |
 | 2C-012 | [ ] | M | Semantic Scholar auto-profile integration | After papers indexed |
 
@@ -670,7 +670,7 @@ Schema and sample file created 2026-06-15. `certifications` collection defined i
 | PERF-001 | [x] | M | **Image optimization** — places gallery + carousel + org logos; raw JPEG/PNG up to 4.7 MB each | Shipped 2026-06-15: `getImage()` on all `import.meta.glob` pipelines; 28.4 MB → 2.4 MB WebP (91% reduction) |
 | PERF-002 | [x] | S | **OG / social preview image** — `og:image` pointed to favicon; Twitter card was `summary` | Shipped 2026-06-15: 1200×630 dark card generated via sharp (name, role, tag chips, planet decoration); `summary_large_image`; `og:image:width/height` added |
 | PERF-003 | [x] | XS | **Logo SVG missing explicit width/height** — causing CLS on every page | Shipped 2026-06-15: `width="117" height="55"` added (from 2230×1052 viewBox at 55px height) |
-| PERF-004 | [ ] | L | **Replace React + Swiper carousel with vanilla JS** — 187 KB React client bundle loads on `/about` for one animated carousel | Deferred; lower priority than image fix |
+| PERF-004 | [x] | L | **Replace React + Swiper carousel with vanilla JS** — 187 KB React client bundle loads on `/about` for one animated carousel | Shipped 2026-06-15: `ImageCarousel.astro` (vanilla JS card stack, `data-pos` CSS transitions, pause on hover, click to advance); `client:idle` removed → React client bundle no longer loaded on any page |
 | UX-FIX-001 | [x] | XS | **Mobile nav order ≠ desktop nav order** | Shipped 2026-06-15: drawer reordered to About→Resume→Projects→Research→CV |
 | UX-FIX-002 | [x] | XS | **`/cv` not in main nav** | Shipped 2026-06-15: CV added to desktop nav and mobile drawer (after Research) |
 | CODE-FIX-001 | [x] | XS | **SiteLayout CSS cleanup** | Shipped 2026-06-15: removed nested `@media`, deduplicated `.logo-img` selectors, removed dead `main.wrap.main` padding and `section scroll-margin-top` from global.css |
