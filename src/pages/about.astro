@@ -186,7 +186,7 @@ const carouselImages = Object.entries(carouselModules)
       {
         placeImages.slice(0, 3).map((img) => (
           <div class="imgCard">
-            <img src={img.src} alt={img.name} loading="lazy" />
+            <img src={img.src} alt={img.name} loading="lazy" width="800" height="220" />
             <div class="imgLabel">{img.name}</div>
           </div>
         ))
@@ -309,7 +309,6 @@ const carouselImages = Object.entries(carouselModules)
       align-items: center;
       gap: 8px;
       text-decoration: none;
-      color: rgb(var(--text));
       color: rgb(var(--muted));
       opacity: 0.95;
     }
@@ -366,10 +365,6 @@ const carouselImages = Object.entries(carouselModules)
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }
-    .galleryImg {
-      transition: opacity 0.4s ease;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: 1fr;

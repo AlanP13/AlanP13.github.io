@@ -34,7 +34,7 @@ export default function ImageCarousel({ images, altPrefix = "Alan photo" }: Prop
         {images.map((src, idx) => (
           <SwiperSlide key={`${src}-${idx}`}>
             <div className="card">
-              <img src={src} alt={`${altPrefix} ${idx + 1}`} loading="lazy" />
+              <img src={src} alt={`${altPrefix} ${idx + 1}`} loading="lazy" width="320" height="400" />
             </div>
           </SwiperSlide>
         ))}
