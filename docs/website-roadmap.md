@@ -62,9 +62,10 @@ Ordered by impact, readiness, and dependency risk.
 | 7 | [x] | **Academic CV page (`/cv`)** + Leadership & Service section on About | Shipped 2026-06-15 |
 | 8 | [x] | **PERF-004 / 2C-008 / 2C-010** — vanilla Astro carousel, content.config.ts migration, remove leaflet + swiper | Shipped 2026-06-15 |
 | 9 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
-| 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | In progress: ResearchGate + Zenodo deposits + URL wiring |
+| 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | ON HOLD — display layer complete; blocked on user creating ResearchGate profile + Zenodo deposits to get URLs |
+| 11 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
 
-Recommended next: **2A-013 / 2B-008** (ResearchGate upload, Zenodo DOI deposit, wire `researchgate_url` / `zenodo_url` / `doi` into research MDX + sidebar display layer).
+Recommended next: review remaining roadmap items for any unblocked P1/P2 work.
 
 ---
 
@@ -609,13 +610,15 @@ Action items (user, not code):
 
 ---
 
-#### 2B-009 — Analytics (Plausible)
+#### 2B-009 — Analytics
 **Files:** `src/layouts/SiteLayout.astro`  
 **Effort:** S · **Risk:** Low
 
 Single script tag. Privacy-friendly, no cookie banner required. Shows which pages recruiters and researchers visit and where they drop off. Essential for measuring Phase 2A conversion impact.
 
-| Status | [ ] |
+Shipped with Cloudflare Web Analytics (no cookies, no consent banner required).
+
+| Status | [x] Shipped 2026-06-15 |
 |---|---|
 
 ---
