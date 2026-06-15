@@ -33,11 +33,6 @@ html {
 }
 
 
-/* Base */
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -55,9 +50,9 @@ p {
   line-height: 1.6;
 }
 
-/* =========================================================
-   Global layout rhythm (Jason-like padding + section spacing)
-   ========================================================= */
+/* =================================================
+   Global layout rhythm
+   ================================================= */
 
 /* Ensure consistent, premium breathing room across pages */
 main.wrap.main {
@@ -175,7 +170,7 @@ textarea:focus-visible {
   position: fixed;
   inset: 0;
   z-index: 0;
-  /* ✅ not negative */
+  /* Keep effects in the page stacking context. */
   pointer-events: none;
   overflow: hidden;
 }

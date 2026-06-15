@@ -72,6 +72,8 @@ const isCurrentPath = (href: string) =>
   </head>
 
   <body>
+    <a class="skipLink" href="#main-content">Skip to main content</a>
+
     <div class="bgfx" aria-hidden="true">
       <div class="nebula"></div>
       <div class="starfield"></div>
@@ -130,7 +132,6 @@ const isCurrentPath = (href: string) =>
             Menu
           </button>
 
-          <!-- ✅ Single Jason-style Theme popover trigger -->
           <button
             class="chip"
             data-action="toggle-theme"
@@ -166,12 +167,12 @@ const isCurrentPath = (href: string) =>
           >
         </div>
 
-        <!-- ✅ Theme popover (single source of truth) -->
+        <!-- Theme popover -->
         <div
           class="popover"
           id="theme-popover"
           hidden
-          role="dialog"
+          role="group"
           aria-label="Theme settings"
         >
           <div class="popHead">
@@ -205,31 +206,95 @@ const isCurrentPath = (href: string) =>
           </div>
 
           <!-- Brightness modes -->
-          <div class="modeRow" role="tablist" aria-label="Brightness">
-            <button class="mode" type="button" data-theme="light" role="tab">
+          <div class="modeRow" role="group" aria-label="Brightness">
+            <button
+              class="mode"
+              type="button"
+              data-theme="light"
+              aria-pressed="false"
+            >
               Light
             </button>
-            <button class="mode" type="button" data-theme="dark" role="tab">
+            <button
+              class="mode"
+              type="button"
+              data-theme="dark"
+              aria-pressed="false"
+            >
               Dark
             </button>
           </div>
 
           <!-- Planet accents-->
-          <div class="swatches" id="accent-swatches" aria-label="Accent colors">
-            <button class="sw" data-accent="mercury" aria-label="Mercury"
+          <div
+            class="swatches"
+            id="accent-swatches"
+            role="group"
+            aria-label="Accent colors"
+          >
+            <button
+              class="sw"
+              data-accent="mercury"
+              aria-label="Mercury"
+              aria-pressed="false"
+              type="button"
             ></button>
-            <button class="sw" data-accent="venus" aria-label="Venus"></button>
-            <button class="sw" data-accent="earth" aria-label="Earth"></button>
-            <button class="sw" data-accent="mars" aria-label="Mars"></button>
-            <button class="sw" data-accent="jupiter" aria-label="Jupiter"
+            <button
+              class="sw"
+              data-accent="venus"
+              aria-label="Venus"
+              aria-pressed="false"
+              type="button"
             ></button>
-            <button class="sw" data-accent="saturn" aria-label="Saturn"
+            <button
+              class="sw"
+              data-accent="earth"
+              aria-label="Earth"
+              aria-pressed="false"
+              type="button"
             ></button>
-            <button class="sw" data-accent="uranus" aria-label="Uranus"
+            <button
+              class="sw"
+              data-accent="mars"
+              aria-label="Mars"
+              aria-pressed="false"
+              type="button"
             ></button>
-            <button class="sw" data-accent="neptune" aria-label="Neptune"
+            <button
+              class="sw"
+              data-accent="jupiter"
+              aria-label="Jupiter"
+              aria-pressed="false"
+              type="button"
             ></button>
-            <button class="sw" data-accent="pluto" aria-label="Pluto"></button>
+            <button
+              class="sw"
+              data-accent="saturn"
+              aria-label="Saturn"
+              aria-pressed="false"
+              type="button"
+            ></button>
+            <button
+              class="sw"
+              data-accent="uranus"
+              aria-label="Uranus"
+              aria-pressed="false"
+              type="button"
+            ></button>
+            <button
+              class="sw"
+              data-accent="neptune"
+              aria-label="Neptune"
+              aria-pressed="false"
+              type="button"
+            ></button>
+            <button
+              class="sw"
+              data-accent="pluto"
+              aria-label="Pluto"
+              aria-pressed="false"
+              type="button"
+            ></button>
 
             <!-- one moving ring -->
             <div class="swRing" id="swRing" aria-hidden="true"></div>
@@ -247,7 +312,7 @@ const isCurrentPath = (href: string) =>
       </nav>
     </header>
 
-    <main class="wrap main">
+    <main id="main-content" class="wrap main" tabindex="-1">
       <slot />
     </main>
 
@@ -368,7 +433,7 @@ const isCurrentPath = (href: string) =>
         modeBtns.forEach((b) => {
           const on = b.getAttribute("data-theme") === cur;
           b.classList.toggle("isActive", on);
-          b.setAttribute("aria-selected", on ? "true" : "false");
+          b.setAttribute("aria-pressed", on ? "true" : "false");
         });
       }
 
@@ -410,6 +475,7 @@ const isCurrentPath = (href: string) =>
         swBtns.forEach((b) => {
           const on = b.getAttribute("data-accent") === cur;
           b.classList.toggle("isActive", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
         });
         positionSwatchRing();
       }
@@ -479,14 +545,12 @@ const isCurrentPath = (href: string) =>
     </script>
 
     <style>
-      /* Jason-style container */
       .wrap {
         max-width: 1180px;
         margin: 0 auto;
         padding: 28px 44px;
       }
 
-      /* Jason has lots of top breathing room before content */
       .main {
         max-width: none; /* remove cap */
         width: 99%;
@@ -502,6 +566,29 @@ const isCurrentPath = (href: string) =>
         background: rgb(var(--card) / 0.55);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+      }
+
+      .skipLink {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        z-index: 6000;
+        padding: 8px 20px;
+        border: 1px solid rgb(var(--accent));
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        background: rgb(var(--card));
+        color: rgb(var(--text));
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transform: translate(-50%, -100%);
+        transition: transform 150ms ease;
+      }
+
+      .skipLink:focus {
+        transform: translate(-50%, 0);
       }
       /* Add a soft shadow ONLY in light mode so it feels “lifted” */
       :root[data-theme="light"] .main,
@@ -695,9 +782,7 @@ const isCurrentPath = (href: string) =>
         );
       }
 
-      /* =========================
-         Theme popover (Jason-ish)
-         ========================= */
+      /* Theme popover */
       .popover {
         position: absolute;
         right: 16px;
@@ -710,7 +795,7 @@ const isCurrentPath = (href: string) =>
         padding: 14px;
         box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
         z-index: 9999;
-        /* One place to control the “Jason ring” look */
+        /* Shared focus and selection ring colors */
         --ring: color-mix(in srgb, rgb(var(--accent)) 70%, transparent);
         --ring-weak: color-mix(in srgb, rgb(var(--accent)) 45%, transparent);
       }
@@ -771,7 +856,7 @@ const isCurrentPath = (href: string) =>
         box-shadow: 0 0 0 1px var(--ring) inset;
       }
 
-      /* Segmented control (Jason's ring-surface0 feel) */
+      /* Brightness control */
       .modeRow {
         display: flex;
         gap: 4px;
@@ -898,7 +983,7 @@ const isCurrentPath = (href: string) =>
         background: rgb(var(--color-pluto));
       }
 
-      /* Optional: make swatches show a faint ring on hover (feels more “Jason”) */
+      /* Swatch hover ring */
       .sw:hover {
         box-shadow:
           0 0 0 1px rgba(255, 255, 255, 0.06) inset,

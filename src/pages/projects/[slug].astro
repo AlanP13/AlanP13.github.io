@@ -20,7 +20,7 @@ const byOrderDescThenTitle = (a: any, b: any) => {
   return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 };
 
-// ✅ Option A: featured first, then timeline order
+// Featured projects first, then timeline order.
 const ordered = [...all].sort((a, b) => {
   const fa = a.data.featured ? 0 : 1;
   const fb = b.data.featured ? 0 : 1;
@@ -28,7 +28,7 @@ const ordered = [...all].sort((a, b) => {
   return byOrderDescThenTitle(a, b);
 });
 
-// ✅ Next + Prev
+// Circular previous and next navigation.
 const idx = ordered.findIndex((p) => p.slug === project.slug);
 const next = idx >= 0 ? ordered[(idx + 1) % ordered.length] : null;
 const prev =
@@ -118,12 +118,34 @@ const prev =
         <Content />
 
         {
-          next ? (
-            <div class="next">
-              <a href={`/projects/${next.slug}`}>
-                Next: {next.data.title} <span aria-hidden="true">→</span>
-              </a>
-            </div>
+          prev || next ? (
+            <nav class="projectNav" aria-label="Project navigation">
+              {prev ? (
+                <a
+                  class="projectNavLink previous"
+                  href={`/projects/${prev.slug}`}
+                >
+                  <span aria-hidden="true">←</span>
+                  <span>
+                    <span class="projectNavLabel">Previous project</span>
+                    {prev.data.title}
+                  </span>
+                </a>
+              ) : null}
+
+              {next ? (
+                <a
+                  class="projectNavLink next"
+                  href={`/projects/${next.slug}`}
+                >
+                  <span>
+                    <span class="projectNavLabel">Next project</span>
+                    {next.data.title}
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              ) : null}
+            </nav>
           ) : null
         }
       </div>
@@ -148,11 +170,10 @@ const prev =
     .page {
       padding: 26px 16px 48px;
 
-      /* ✅ match section width */
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
-      /* 🔥 semi-transparent glass surface */
+      /* Semi-transparent content surface */
       background: rgb(var(--card) / 0.75); /* 75% transparency */
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -265,22 +286,50 @@ const prev =
       color: rgb(var(--text));
     }
 
-    /* next link */
-    .next {
+    .projectNav {
       margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
     }
-    .next a {
+
+    .projectNavLink {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 12px 14px;
       text-decoration: none;
       color: rgb(var(--text));
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
-      padding: 12px 14px;
-      display: inline-flex;
-      gap: 8px;
       background: rgba(255, 255, 255, 0.02);
     }
-    .next a:hover {
+
+    .projectNavLink.next {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .projectNavLabel {
+      display: block;
+      margin-bottom: 3px;
+      color: rgb(var(--muted));
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .projectNavLink:hover {
       border-color: rgb(var(--accent));
+    }
+
+    @media (max-width: 640px) {
+      .projectNav {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </SiteLayout>

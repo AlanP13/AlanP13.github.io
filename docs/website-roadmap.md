@@ -2,7 +2,14 @@
 
 Portfolio improvement backlog and Phase 2 implementation plan.  
 Baseline audit: June 2026. Phase 2 planning: June 2026.  
-Update status: `[ ]` → `[x]` when completed.
+Last reconciled against the repository: June 15, 2026.
+
+Status key:
+- `[ ]` — Not started
+- `[>]` — Next implementation
+- `[~]` — Partially complete or waiting on an external action
+- `[x]` — Complete
+- `DEFERRED` — Intentionally paused
 
 This is a public repository. Keep this document limited to public-safe website
 implementation work. Confidential career strategy, legal planning, compensation
@@ -12,6 +19,8 @@ outside this repository.
 ---
 
 ## Audit Scores — Baseline (June 2026)
+
+These scores are the historical baseline, not the current post-sprint state.
 
 | Dimension | Score | Key gap |
 |---|---|---|
@@ -38,6 +47,26 @@ outside this repository.
 
 ---
 
+## Current Next Work
+
+Ordered by impact, readiness, and dependency risk.
+
+| Order | Status | Item | Scope / dependency |
+|---|---|---|---|
+| 1 | [>] | **P2 performance/content cleanup** | Add intrinsic dimensions to dynamic images and remove confirmed dead About-page CSS; PhD start date remains blocked on the exact date |
+| 2 | [ ] | **2B-006 — Homepage contact CTA** | Add a dedicated bottom-of-page conversion section; footer links alone do not replace an in-page CTA |
+| 3 | [~] | **2B-001 — Resume credentials completion** | Add a dedicated credentials section using already-published homepage data |
+| 4 | [~] | **Structured-data completion** | Add remaining article relationships and fields when exact publication dates and external canonical URLs are available |
+| 5 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Code support exists; requires ResearchGate/Zenodo deposits and resulting profile/DOI URLs |
+| 6 | [ ] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
+| 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision before adding the production script |
+
+Recommended next implementation: **P2 performance/content cleanup**, because
+the image-dimension and dead-CSS work is unblocked and improves page stability
+without requiring new content.
+
+---
+
 ## Phase 1 — Baseline Fixes
 
 ### P0 — Fix Immediately
@@ -55,7 +84,7 @@ outside this repository.
 | P1-SEO-002 | [x] | Add Twitter Card meta tags | `src/layouts/SiteLayout.astro` |
 | P1-SEO-003 | [x] | Add `robots.txt` to `public/` | `public/robots.txt` |
 | P1-SEO-004 | [x] | Add canonical URL tag per page | `src/layouts/SiteLayout.astro` |
-| P1-CON-001 | [ ] | ~~Update research papers to `status: published`~~ — **superseded by 2A-002**: papers are technical reports, not publications; use `publication_type` + `publication_status: completed` | `src/content/research/*.mdx` |
+| P1-CON-001 | [x] | ~~Update research papers to `status: published`~~ — **superseded by 2A-002**: papers are correctly classified as technical reports with `publication_status: completed` | `src/content/research/*.mdx` |
 | P1-UX-001 | [x] | Remove `p { text-align: justify; }` from homepage and about | `src/pages/index.astro`, `src/pages/about.astro` |
 | P1-UX-002 | [x] | Add `aria-current="page"` + active styling to current nav link | `src/layouts/SiteLayout.astro` |
 | P1-UX-003 | [x] | Fix work entry expand — remove `mouseleave` auto-collapse | `src/pages/index.astro` |
@@ -88,10 +117,11 @@ publication_status: "published" | "accepted" | "under-review" | "submitted"
                     | "preprint" | "completed" | "in-progress"
 lifecycle_stage:    "idea" | "drafting" | "internal-review" | "submitted"
                     | "under-review" | "accepted" | "published"
-                    | "rejected" | "withdrawn"
+                    | "completed" | "rejected" | "withdrawn"
 venue:              string   (journal / conference / institution)
 university:         string
 course:             string
+semester:           string
 submission_date:    string
 publication_date:   string
 doi:                string
@@ -120,7 +150,7 @@ The legacy `status` field is kept for backward compatibility but display logic u
 **SEO impact:** High — enables ScholarlyArticle JSON-LD, keyword fields  
 **Dependency:** All other 2A research items depend on this
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -132,15 +162,17 @@ The legacy `status` field is kept for backward compatibility but display logic u
 Set correct metadata for all 3 papers:
 - `publication_type: "technical-report"`
 - `publication_status: "completed"`
-- `lifecycle_stage: "published"` (document is finalized)
-- Add `university`, `course`, `keywords`, `abstract`, `version`, `citation`
+- `lifecycle_stage: "completed"` (document is finalized)
+- Add `university`, `course`, `semester`, `keywords`, `abstract`, `citation`
 - Expand MDX body into formal abstract field
 
-**Requires from user before implementing:** university name, course names for ITS-834/835/836, semester/year, preferred citation format.
+All three reports now include verified institution, course, semester, citation,
+abstract, keyword, classification, and ORCID metadata. `version` remains optional
+until an actual revision/versioning workflow is introduced.
 
 **Dependency:** 2A-001 must be merged first
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -183,9 +215,13 @@ Schema.org `ScholarlyArticle` per paper:
 
 Zero additional effort when bundled with 2A-003.
 
+Implemented fields: name, author/ORCID, abstract, keywords, URL, language,
+publisher, and conditional DOI identifier. Exact publication dates, `about`,
+and external `sameAs` URLs remain pending source metadata.
+
 **SEO impact:** High — feeds Google's research knowledge graph
 
-| Status | [x] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -221,11 +257,13 @@ Schema.org `Person`:
 - ORCID added to `sameAs` once registered
 - Links to ScholarlyArticle records via `author` relationship
 
-Seeds Google's Knowledge Graph. Compounds over time.
+Seeds Google's Knowledge Graph. Core identity fields and ORCID are live.
+Explicit links from the Person record to individual ScholarlyArticle records
+remain a future structured-data enhancement.
 
 **SEO impact:** High — named entity establishment
 
-| Status | [x] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -248,7 +286,7 @@ Replace 4 prose-bullet `<ul>` cards with a category-organized tech chip grid. Ea
 **Recruiter impact:** High — passes 5-second tech-stack scan  
 **SEO impact:** Medium — tech names as visible text
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -288,7 +326,7 @@ Renders: IEEE-HKN membership, Azure certifications, Dean's List / academic honor
 
 ---
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -307,7 +345,7 @@ All page `description` props: rewrite to be keyword-targeted (appear verbatim in
 **Recruiter impact:** High — first 10-second clarity  
 **SEO impact:** High — descriptions appear in search result snippets
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -326,7 +364,7 @@ Public release conditions:
 - [ ] Public artifact or non-confidential architecture overview available
 - [ ] Security and confidentiality review complete
 
-| Status | [ ] |
+| Status | DEFERRED |
 |---|---|
 
 ---
@@ -386,7 +424,7 @@ Site placements to wire up once URLs exist:
 
 **Dependency:** None (build work done; this is data entry + minor display wiring)
 
-| Status | [ ] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -411,9 +449,12 @@ Placement locations:
 - About page credentials section
 - Footer (ORCID logo + ID only — minimal)
 
+ORCID is live on the homepage and research detail pages. Other profile links and
+the remaining index/about/footer placements depend on external profiles.
+
 **Research credibility:** High — signals active scholarly presence
 
-| Status | [x] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -431,13 +472,15 @@ Replace broken PDF iframe with:
 2. PDF download button — keep `public/Alan_Palayil_Resume.pdf`
 3. Structured sections: Experience, Education, Skills, Certifications
 
-**Requires:** Resume content (PDF text or structured data to build from).  
+Semantic Experience, Education, and Skills sections plus PDF download are live.
+A dedicated certifications/credentials section remains to complete the original
+scope.
 **Supersedes:** P0-002, P3-UX-002
 
 **Recruiter impact:** High — fixes broken mobile; enables in-browser scanning  
 **SEO impact:** High — all resume content becomes indexable
 
-| Status | [ ] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -506,17 +549,17 @@ Not a duplicate of the resume — different audience, different purpose, differe
 ---
 
 #### 2B-005 — UX Polish Bundle
-**Files:** `src/pages/index.astro`, `src/pages/projects/[slug].astro`, `src/layouts/SiteLayout.astro`, `src/styles/global.css`  
+**Files:** `src/pages/projects/[slug].astro`, `src/layouts/SiteLayout.astro`, `src/styles/global.css`  
 **Effort:** S total · **Risk:** Low
 
-Remaining open items that are small but improve overall quality:
-- P1-UX-003: Remove `mouseleave` auto-collapse on work entry rows
-- P2-UX-003: Render `prev` link on project detail pages (computed, never displayed)
-- P2-TECH-001: Fix double `box-sizing: border-box` in `global.css`
-- P2-TECH-003: Remove `/* Jason-style */` design-reference comments in SiteLayout
-- P2-UX-004: Add skip-to-content link for keyboard accessibility
+Completed cleanup items:
+- P2-UX-003: Render `prev` link on project detail pages (computed, never displayed) ✓
+- P2-TECH-001: Fix double `box-sizing: border-box` in `global.css` ✓
+- P2-TECH-003: Remove `/* Jason-style */` design-reference comments in SiteLayout ✓
+- P2-UX-004: Add skip-to-content link for keyboard accessibility ✓ *(see blocker below)*
+- P2-UX-005: Replace non-modal theme popover `role="dialog"` semantics ✓
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -554,13 +597,13 @@ ORCID registration: free, takes 5 minutes at orcid.org. Should be done before 2A
 Google Scholar profile: auto-generated once papers are indexed. Monitor after 2A-003 is live.
 
 Action items (user, not code):
-1. Register ORCID
+1. ~~Register ORCID~~ — completed (`0009-0004-8302-5090`)
 2. Upload papers to ResearchGate
 3. Submit to SSRN if applicable
 4. Deposit to Zenodo for DOI assignment
-5. Add ORCID to research MDX files
+5. ~~Add ORCID to research MDX files~~ — completed
 
-| Status | [ ] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -613,7 +656,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | P2-UX-002 | → 2B-006 |
 | P2-UX-003 | → 2B-005 |
 | P2-UX-004 | → 2B-005 |
-| P2-UX-005 | Open — fix theme popover `role="dialog"` in `src/layouts/SiteLayout.astro` |
+| P2-UX-005 | → 2B-005 |
 | P2-PERF-001 | → 2C-010 |
 | P2-PERF-002 | Open — add `width`/`height` to dynamic images in about.astro, index.astro |
 | P2-TECH-001 | → 2B-005 |
@@ -631,7 +674,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 
 ---
 
-## Completed
+## Shipped Milestones
 
 | # | Date | Item |
 |---|---|---|
@@ -641,12 +684,19 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | P1-SEO-001/002/004 | 2026-06-15 | Verified OpenGraph, Twitter Card, and canonical metadata already implemented |
 | P1-UX-002/003/004/005 | 2026-06-15 | Added active navigation state and Pluto swatch, fixed work-row expansion, and verified footer contact links |
 | archive collection | 2026-06-08 | Defined `archive` collection in `src/content/config.ts` |
+| 2A-001 | 2026-06-08 | Expanded research schema with classification, lifecycle, academic metadata, identifiers, and distribution fields |
+| 2A-002 | 2026-06-08 | Correctly classified and populated all three technical reports with institution, course, semester, abstract, keywords, citation, and ORCID |
 | 2A-003 | 2026-06-08 | Research detail pages `/research/[slug]` — abstract, keywords, sidebar, citation block, PDF link |
 | 2A-004 | 2026-06-08 | ScholarlyArticle JSON-LD per detail page — author ORCID, abstract, keywords, EducationalOrganization publisher |
 | 2A-005 | 2026-06-08 | `@astrojs/sitemap` installed; `dist/sitemap-index.xml` generated; `robots.txt` Sitemap directive added |
 | 2A-006 | 2026-06-08 | Person JSON-LD on homepage — name, jobTitle, worksFor, alumniOf (IIT/UC), sameAs (LinkedIn/GitHub/ORCID) |
+| 2A-007 | 2026-06-14 | Rebuilt homepage skills as a six-category badge grid |
+| 2A-008 | 2026-06-14 | Added credentials, academic honors, ORCID, and professional memberships |
+| 2A-009 | 2026-06-14 | Updated hero positioning and page descriptions for enterprise data, financial systems, AI governance, and doctoral research |
 | 2A-011 | 2026-06-08 | Research distribution display layer — conditional "Find this work on" sidebar on detail pages |
 | 2A-012 | 2026-06-08 | Academic identity display — ORCID link in detail page sidebar; partial (full profile links pending ResearchGate/Zenodo URLs) |
+| 2B-001 | 2026-06-14 | Replaced the PDF iframe with a semantic, mobile-friendly HTML resume and retained PDF download |
+| 2B-005 | 2026-06-15 | Added centered focus-only skip navigation, corrected theme-control semantics, added previous/next project navigation, and removed duplicate CSS and design-reference comments |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
@@ -659,5 +709,5 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | `https://alanp13.github.io/sitemap-0.xml` | 200 ✓ |
 | `https://alanp13.github.io/robots.txt` | 200 ✓ |
 
-Sitemap contains 16 URLs: `/`, `/about/`, `/resume/`, `/projects/` + 7 project slugs, `/research/` + 3 research slugs.  
-Rollback tag: `website-v1.3-sprint2` @ `07806b3`.
+Sitemap contains 16 URLs: `/`, `/about/`, `/resume/`, `/projects/` + 8 project slugs, `/research/` + 3 research slugs.
+Rollback tag after the June 15 history rewrite: `website-v1.3-sprint2` @ `796deef`.
