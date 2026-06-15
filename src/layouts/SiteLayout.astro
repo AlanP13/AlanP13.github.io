@@ -49,13 +49,15 @@ const isCurrentPath = (href: string) =>
     <meta property="og:title" content={title ?? "Alan Palayil"} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content={new URL("/favicon-light.png", Astro.site).href} />
+    <meta property="og:image" content={new URL("/og-image.png", Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title ?? "Alan Palayil"} />
     {description && <meta name="twitter:description" content={description} />}
-    <meta name="twitter:image" content={new URL("/favicon-light.png", Astro.site).href} />
+    <meta name="twitter:image" content={new URL("/og-image.png", Astro.site).href} />
 
     <meta name="theme-color" content="#030b14" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#e1e8f0" media="(prefers-color-scheme: light)" />
