@@ -639,6 +639,35 @@ const personSchema = JSON.stringify({
     </div>
   </section>
 
+  <section class="contact">
+    <div class="contactInner">
+      <div class="contactText">
+        <h2 class="contactHead">Let's connect</h2>
+        <p class="contactSub">
+          I work at the intersection of enterprise data, financial systems, and AI governance research.
+          If you're building or thinking about similar problems — I'd enjoy the conversation.
+        </p>
+      </div>
+      <div class="contactActions">
+        <div class="ctaBtns">
+          <a
+            class="ctaBtn ctaPrimary"
+            href="https://www.linkedin.com/in/alan-palayil/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span aria-hidden="true"><LinkedinLogo size={16} /></span>
+            LinkedIn
+          </a>
+          <a class="ctaBtn ctaSecondary" href="mailto:alan.palayil+portfolio@gmail.com">
+            <span aria-hidden="true"><Envelope size={16} /></span>
+            Prefer Email?
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <style>
     /* HERO */
     .hero {
@@ -1308,6 +1337,89 @@ const personSchema = JSON.stringify({
       .credMeta {
         align-items: flex-start;
         text-align: left;
+      }
+    }
+
+    /* Contact CTA */
+    .contact {
+      margin-top: 40px;
+      padding: 40px 0 20px;
+      border-top: 1px solid rgb(var(--border));
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contactInner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .contactText {
+      flex: 1;
+      min-width: 260px;
+    }
+    .contactHead {
+      margin: 0 0 10px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: rgb(var(--text));
+    }
+    .contactSub {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgb(var(--muted));
+      max-width: 52ch;
+    }
+    .contactActions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .ctaBtns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ctaBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 150ms ease, box-shadow 150ms ease;
+      white-space: nowrap;
+    }
+    .ctaPrimary {
+      background: rgb(var(--accent));
+      color: rgb(var(--bg));
+      border: 1px solid rgb(var(--accent));
+    }
+    .ctaPrimary:hover {
+      box-shadow: 0 4px 16px color-mix(in srgb, rgb(var(--accent)) 35%, transparent);
+      background: color-mix(in srgb, rgb(var(--accent)) 88%, white);
+    }
+    .ctaSecondary {
+      background: color-mix(in srgb, rgb(var(--accent)) 10%, transparent);
+      color: rgb(var(--accent));
+      border: 1px solid rgb(var(--accent));
+    }
+    .ctaSecondary:hover {
+      background: color-mix(in srgb, rgb(var(--accent)) 18%, transparent);
+    }
+    @media (max-width: 760px) {
+      .contactInner {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 

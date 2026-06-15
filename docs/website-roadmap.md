@@ -53,15 +53,15 @@ Ordered by impact, readiness, and dependency risk.
 
 | Order | Status | Item | Scope / dependency |
 |---|---|---|---|
-| 1 | [>] | **2B-010 — Certifications expansion** | Blocked on user providing full cert list (name, issuer, date, credential ID/URL) |
-| 2 | [ ] | **2B-006 — Homepage contact CTA** | Add a dedicated bottom-of-page conversion section; footer links alone do not replace an in-page CTA |
+| 1 | [x] | **2B-006 — Homepage contact CTA** | Shipped 2026-06-15 — "Let's connect" section with LinkedIn + Prefer Email? buttons |
+| 2 | [~] | **2B-010 — Certifications expansion** | Schema + sample MDX created 2026-06-15; blocked on user providing full cert list |
 | 3 | [~] | **2B-001 — Resume credentials completion** | Resume has Experience, Education, Skills; certifications section remains once 2B-010 list is supplied |
 | 4 | [~] | **Structured-data completion** | Add remaining article relationships and fields when exact publication dates and external canonical URLs are available |
 | 5 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Code support exists; requires ResearchGate/Zenodo deposits and resulting profile/DOI URLs |
 | 6 | [ ] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
 | 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision before adding the production script |
 
-Recommended next implementation: **2B-010 Certifications expansion** — unblocked once the cert list is supplied, high recruiter signal, and completes the remaining scope of 2B-001.
+Recommended next implementation: **2B-010 Certifications expansion** — sample MDX and schema ready; unblocked once the full cert list is supplied.
 
 ---
 
@@ -566,9 +566,9 @@ Completed cleanup items:
 **Files:** `src/pages/index.astro`  
 **Effort:** S · **Risk:** None
 
-A "Get in touch" section at the bottom of the homepage. LinkedIn, email, and a one-line positioning statement. The hero socialRow is good but most visitors who read to the bottom need a second CTA to convert.
+"Let's connect" section at the bottom of the homepage. LinkedIn (primary) and "Prefer Email?" (secondary, mailto:alan.palayil+portfolio@gmail.com) buttons. Copy frames domain interest — enterprise data, financial systems, AI governance — not availability.
 
-| Status | [ ] |
+| Status | [x] |
 |---|---|
 
 ---
@@ -618,25 +618,24 @@ Single script tag. Privacy-friendly, no cookie banner required. Shows which page
 ---
 
 #### 2B-010 — Certifications Expansion
-**Files:** `src/pages/index.astro`, `src/pages/resume.astro`  
+**Files:** `src/content/config.ts`, `src/content/certifications/*.mdx`, `src/pages/index.astro`, `src/pages/resume.astro`  
 **Effort:** S · **Risk:** None
 
-The homepage Credentials & Memberships section currently shows only one certification ("Foundations in Investment" — CFA Institute, In Progress). The resume has no certifications section at all. Both need to reflect the full picture.
+Schema and sample file created 2026-06-15. `certifications` collection defined in `src/content/config.ts` with fields: `title`, `issuer`, `issuerUrl`, `credentialId`, `credentialUrl`, `dateObtained`, `dateExpiry`, `status` (earned/in-progress/planned/expired), `category` (finance/cloud/security/data/ai/other), `order`, `featured`, `summary`. Sample file: `src/content/certifications/foundations-in-investments.mdx`.
 
-**Requires from user before implementing:**
-- Full list of certifications: name, issuing organization, date obtained, expiry date (if any), credential ID or verification URL
-- Indicate which are completed vs. in progress
-- Indicate which are public-safe to display
+**Requires from user before wiring to UI:**
+- Full list of certifications — duplicate the sample MDX for each; user to supply name, issuer, date, credential ID/URL
+- Indicate which are public-safe to display (will prune after list is complete)
 
-**What gets built:**
-1. Expand the "Current Study" credCard on the homepage to show all certifications, grouped by status (completed / in progress)
+**What gets built next (UI wiring):**
+1. Expand the "Current Study" credCard on the homepage to render from the collection, grouped by status
 2. Add a "Certifications" section to the resume page between Skills and any future credentials block
 3. Each cert entry: name, issuer, date, status badge, credential link (if available)
 
 **Recruiter impact:** High — certifications are a fast-scan signal for technical and financial roles  
-**Dependency:** None (code-ready; blocked only on content from user)
+**Dependency:** Blocked on user supplying full cert list via MDX files
 
-| Status | [ ] |
+| Status | [~] |
 |---|---|
 
 ---
@@ -722,6 +721,8 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | P2-PERF-002 | 2026-06-15 | Added intrinsic width/height to gallery, logo, and carousel images; removed dead .galleryImg CSS and duplicate .social color |
 | UI re-audit | 2026-06-15 | Installed @phosphor-icons/react; replaced all hand-rolled SVGs on home, about, resume; trimmed hero to 4 elements; fixed featured projects to asymmetric hero+2 grid; fixed about carousel column ratio; split resume contact strip; replaced en-dashes with hyphens throughout |
 | UI uplift | 2026-06-15 | Brightened --muted token (dark 150→180, light 92→72); accent-tinted skill and credential section labels; promoted chip and credential description text to --text; hid about carousel on mobile/tablet |
+| 2B-006 | 2026-06-15 | Homepage contact CTA — "Let's connect" section with LinkedIn (primary) and Prefer Email? (secondary) buttons; domain-framed copy, no availability signal |
+| 2B-010 (partial) | 2026-06-15 | Certifications collection schema added to config.ts; sample foundations-in-investments.mdx created; UI wiring blocked on full cert list from user |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
