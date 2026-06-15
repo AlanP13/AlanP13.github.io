@@ -14,16 +14,12 @@ const byOrderDescThenTitle = (
   return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 };
 
-// ✅ optional: still keep featured at the top, but ordered within each group
 const featured = projects
   .filter((p) => p.data.featured)
   .sort(byOrderDescThenTitle);
 const rest = projects
   .filter((p) => !p.data.featured)
   .sort(byOrderDescThenTitle);
-
-// ✅ or if you want a single unified list (ignore featured grouping):
-// const all = [...projects].sort(byOrderDescThenTitle);
 ---
 
 <SiteLayout
@@ -86,14 +82,14 @@ const rest = projects
       letter-spacing: -0.03em;
       color: rgb(var(--accent));
       font-weight: 800;
-      /* ✅ match section width */
+      
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
     }
     .muted {
       color: rgb(var(--muted));
-      /* ✅ match section width */
+      
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
@@ -101,7 +97,7 @@ const rest = projects
 
     .section {
       margin-top: 22px;
-      /* ✅ match section width */
+      
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
@@ -118,11 +114,21 @@ const rest = projects
     .grid {
       display: grid;
       gap: 14px;
-      grid-template-columns: repeat(1, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
     @media (min-width: 860px) {
       .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid .card:first-child {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        gap: 32px;
+        min-height: 120px;
+      }
+      .grid .card:first-child > div:first-child {
+        flex: 1;
       }
     }
 
@@ -130,7 +136,7 @@ const rest = projects
       text-decoration: none;
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
-      padding: 14px 14px 12px;
+      padding: 18px 20px 16px;
       background: rgba(255, 255, 255, 0.02);
       transition:
         transform 120ms ease,

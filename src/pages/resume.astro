@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { DownloadSimple } from "@phosphor-icons/react";
 ---
 
 <SiteLayout
@@ -11,9 +12,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     <div class="pageHead">
       <h1>Resume</h1>
       <a class="dlBtn" href="/Alan_Palayil_Resume.pdf" download="Alan_Palayil_Resume.pdf">
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-          <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-        </svg>
+        <span aria-hidden="true"><DownloadSimple size={16} /></span>
         Download PDF
       </a>
     </div>
@@ -25,7 +24,8 @@ import SiteLayout from "../layouts/SiteLayout.astro";
         <span>Richmond, VA</span>
         <span class="cdot" aria-hidden="true">·</span>
         <a href="mailto:alan.palayil@gmail.com">alan.palayil@gmail.com</a>
-        <span class="cdot" aria-hidden="true">·</span>
+      </div>
+      <div class="contactLinks">
         <a href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">LinkedIn</a>
         <span class="cdot" aria-hidden="true">·</span>
         <a href="https://github.com/AlanP13" target="_blank" rel="noreferrer">GitHub</a>
@@ -44,7 +44,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
             <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
-            <span class="rDates">December 2025 – Present</span>
+            <span class="rDates">December 2025 - Present</span>
             <span class="rLoc">Richmond, VA · Hybrid</span>
           </div>
         </div>
@@ -65,7 +65,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
             <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
-            <span class="rDates">July 2023 – December 2025</span>
+            <span class="rDates">July 2023 - December 2025</span>
             <span class="rLoc">Richmond, VA · Hybrid</span>
           </div>
         </div>
@@ -86,7 +86,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
             <span class="rOrg"><a href="https://ithena.ai" target="_blank" rel="noreferrer">ITHENA</a></span>
           </div>
           <div class="rRight">
-            <span class="rDates">June 2020 – August 2020</span>
+            <span class="rDates">June 2020 - August 2020</span>
             <span class="rLoc">Richmond, VA · In-Person</span>
           </div>
         </div>

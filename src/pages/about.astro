@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import ImageCarousel from "../components/ImageCarousel";
+import { FileText, LinkedinLogo, GithubLogo, Envelope } from "@phosphor-icons/react";
 
 // Auto-import ALL images in src/assets/places
 const modules = import.meta.glob(
@@ -104,69 +105,31 @@ const carouselImages = Object.entries(carouselModules)
         <div class="socialRow" aria-label="Social links">
           <a class="social" href="/resume">
             <span class="icon" aria-hidden="true">
-              <!-- Resume / Document icon -->
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path
-                  fill="currentColor"
-                  d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16zm0-8h5v1.5H8V8z"
-                ></path>
-              </svg>
+              <FileText size={18} />
             </span>
             Resume
           </a>
           <span class="sep" aria-hidden="true">|</span>
 
-          <a
-            class="social"
-            href="https://www.linkedin.com/in/alan-palayil/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a class="social" href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">
             <span class="icon" aria-hidden="true">
-              <!-- LinkedIn icon -->
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path
-                  fill="currentColor"
-                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.41v6.34ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"
-                ></path>
-              </svg>
+              <LinkedinLogo size={18} />
             </span>
             LinkedIn
           </a>
           <span class="sep" aria-hidden="true">|</span>
-          <a
-            class="social"
-            href="https://github.com/AlanP13"
-            target="_blank"
-            rel="noreferrer"
-          >
+
+          <a class="social" href="https://github.com/AlanP13" target="_blank" rel="noreferrer">
             <span class="icon" aria-hidden="true">
-              <!-- GitHub icon -->
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path
-                  fill="currentColor"
-                  d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.31 6.84 9.66.5.1.68-.22.68-.48 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.38-3.37-1.38-.46-1.2-1.11-1.52-1.11-1.52-.91-.65.07-.64.07-.64 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.82-4.57 5.08.36.32.68.96.68 1.93 0 1.39-.01 2.52-.01 2.86 0 .27.18.59.69.48A10.06 10.06 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"
-                ></path>
-              </svg>
+              <GithubLogo size={18} />
             </span>
             GitHub
           </a>
           <span class="sep" aria-hidden="true">|</span>
 
-          <a
-            class="social"
-            href="mailto:alanpalayil+portfolio@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a class="social" href="mailto:alanpalayil+portfolio@gmail.com" target="_blank" rel="noreferrer">
             <span class="icon" aria-hidden="true">
-              <!-- Email icon -->
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path
-                  fill="currentColor"
-                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4.2-8 5.33L4 8.2V6l8 5.33L20 6v2.2Z"
-                ></path>
-              </svg>
+              <Envelope size={18} />
             </span>
             Email
           </a>
@@ -340,7 +303,7 @@ const carouselImages = Object.entries(carouselModules)
     }
     @media (min-width: 980px) {
       .heroGrid {
-        grid-template-columns: 6fr 1fr;
+        grid-template-columns: 4fr 2fr;
         gap: 44px;
       }
     }
