@@ -308,16 +308,20 @@ const carouselImages = Object.entries(carouselModules)
       }
     }
     .right {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      width: 100%;
+      display: none;
+    }
+    @media (min-width: 980px) {
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        width: 100%;
+      }
     }
 
     .gallery {
       margin-top: 26px;
       padding-top: 12px;
-      /* ✅ match section width */
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
