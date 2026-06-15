@@ -54,18 +54,6 @@ p {
    Global layout rhythm
    ================================================= */
 
-/* Ensure consistent, premium breathing room across pages */
-main.wrap.main {
-  padding-top: 72px;
-  padding-bottom: 96px;
-}
-
-/* Give sections consistent vertical rhythm by default */
-section {
-  scroll-margin-top: 96px;
-  /* nicer anchor jumps under nav */
-}
-
 /* If you use .block sections (you do on index), make them breathe */
 .block {
   margin-top: 88px;

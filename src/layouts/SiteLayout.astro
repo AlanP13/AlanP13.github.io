@@ -57,6 +57,9 @@ const isCurrentPath = (href: string) =>
     {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content={new URL("/favicon-light.png", Astro.site).href} />
 
+    <meta name="theme-color" content="#030b14" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#e1e8f0" media="(prefers-color-scheme: light)" />
+
     <script is:inline>
       // Persist theme + accent + background effect (runs before paint)
       const storedTheme = localStorage.getItem("theme"); // light | dark
@@ -95,7 +98,7 @@ const isCurrentPath = (href: string) =>
           aria-label="Home"
           aria-current={isCurrentPath("/") ? "page" : undefined}
         >
-          <img src="/logo.svg" alt="Alan Palayil" class="logo-img" />
+          <img src="/logo.svg" alt="Alan Palayil" class="logo-img" width="117" height="55" />
         </a>
 
         <!-- Desktop links -->
@@ -119,6 +122,11 @@ const isCurrentPath = (href: string) =>
             href="/research"
             aria-current={isCurrentPath("/research") ? "page" : undefined}
             >Research</a
+          >
+          <a
+            href="/cv"
+            aria-current={isCurrentPath("/cv") ? "page" : undefined}
+            >CV</a
           >
         </div>
 
@@ -148,11 +156,6 @@ const isCurrentPath = (href: string) =>
         <!-- Mobile drawer -->
         <div class="drawer" id="nav-drawer" hidden>
           <a
-            href="/projects"
-            aria-current={isCurrentPath("/projects") ? "page" : undefined}
-            >Projects</a
-          >
-          <a
             href="/about"
             aria-current={isCurrentPath("/about") ? "page" : undefined}
             >About</a
@@ -163,9 +166,19 @@ const isCurrentPath = (href: string) =>
             >Resume</a
           >
           <a
+            href="/projects"
+            aria-current={isCurrentPath("/projects") ? "page" : undefined}
+            >Projects</a
+          >
+          <a
             href="/research"
             aria-current={isCurrentPath("/research") ? "page" : undefined}
             >Research</a
+          >
+          <a
+            href="/cv"
+            aria-current={isCurrentPath("/cv") ? "page" : undefined}
+            >CV</a
           >
         </div>
 
@@ -682,11 +695,9 @@ const isCurrentPath = (href: string) =>
       }
 
       /* logo invert rules for brightness */
-      :root[data-theme="dark"] .logo-img,
       :root[data-theme="dark"] .logo-img {
         filter: invert(1);
       }
-      :root[data-theme="light"] .logo-img,
       :root[data-theme="light"] .logo-img {
         filter: invert(0);
       }
@@ -1038,11 +1049,9 @@ const isCurrentPath = (href: string) =>
           padding: 20px 18px;
         }
 
-        @media (max-width: 720px) {
-          main.wrap.main {
-            padding-top: calc(var(--header-h, 140px) + 18px);
-            padding-bottom: 90px;
-          }
+        main.wrap.main {
+          padding-top: calc(var(--header-h, 140px) + 18px);
+          padding-bottom: 90px;
         }
       }
 

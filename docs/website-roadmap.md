@@ -669,12 +669,12 @@ Schema and sample file created 2026-06-15. `certifications` collection defined i
 |---|---|---|---|---|
 | PERF-001 | [x] | M | **Image optimization** — places gallery + carousel + org logos; raw JPEG/PNG up to 4.7 MB each | Shipped 2026-06-15: `getImage()` on all `import.meta.glob` pipelines; 28.4 MB → 2.4 MB WebP (91% reduction) |
 | PERF-002 | [ ] | S | **OG / social preview image** — `og:image` points to favicon, not a 1200×630 card; Twitter card type is `summary` not `summary_large_image` | Blocked until a proper OG image asset is created |
-| PERF-003 | [ ] | XS | **Logo SVG missing explicit width/height** — `<img src="/logo.svg">` in nav has no `width`/`height` attributes, causing CLS on every page | 1-line fix in SiteLayout |
+| PERF-003 | [x] | XS | **Logo SVG missing explicit width/height** — causing CLS on every page | Shipped 2026-06-15: `width="117" height="55"` added (from 2230×1052 viewBox at 55px height) |
 | PERF-004 | [ ] | L | **Replace React + Swiper carousel with vanilla JS** — 187 KB React client bundle loads on `/about` for one animated carousel | Deferred; lower priority than image fix |
-| UX-FIX-001 | [ ] | XS | **Mobile nav order ≠ desktop nav order** — desktop: About→Resume→Projects→Research; mobile drawer: Projects→About→Resume→Research | Fix drawer order in SiteLayout |
-| UX-FIX-002 | [ ] | XS | **`/cv` not in main nav** — only reachable via About social row and resume links | Add to desktop nav + mobile drawer, or at minimum footer |
-| CODE-FIX-001 | [ ] | XS | **SiteLayout CSS cleanup** — nested `@media` inside `@media`, duplicate `.logo-img` selectors, `global.css` `main.wrap.main` padding overridden by SiteLayout inline (dead rules) | Bundle with next SiteLayout touch |
-| UX-FIX-003 | [ ] | XS | **Missing `<meta name="theme-color">`** — mobile browser chrome stays plain grey regardless of dark theme | Add to SiteLayout `<head>` |
+| UX-FIX-001 | [x] | XS | **Mobile nav order ≠ desktop nav order** | Shipped 2026-06-15: drawer reordered to About→Resume→Projects→Research→CV |
+| UX-FIX-002 | [x] | XS | **`/cv` not in main nav** | Shipped 2026-06-15: CV added to desktop nav and mobile drawer (after Research) |
+| CODE-FIX-001 | [x] | XS | **SiteLayout CSS cleanup** | Shipped 2026-06-15: removed nested `@media`, deduplicated `.logo-img` selectors, removed dead `main.wrap.main` padding and `section scroll-margin-top` from global.css |
+| UX-FIX-003 | [x] | XS | **Missing `<meta name="theme-color">`** | Shipped 2026-06-15: dark `#030b14` + light `#e1e8f0` via `media` attribute |
 
 ---
 
@@ -744,6 +744,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | 2B-007 | 2026-06-15 | Project impact statements rewritten with real metrics — 1,500+ CML loans, ~800 CUSIPs across 3 derivative types, operational automation scope and goals |
 | 2B-002 | 2026-06-15 | Work experience bullets quantified — 10+ pipelines, 30+ jobs, 2+ hrs/week saved, Derivatives migrated to Azure Synapse, FI+CML on track for EOY 2026, 5 cross-functional teams; P1 bullets frame foundation-building role |
 | PERF-001 | 2026-06-15 | Image optimization — `getImage()` + WebP conversion on all `import.meta.glob` pipelines (places gallery, carousel, org logos); 28.4 MB → 2.4 MB (91% reduction); zero raw JPEG/PNG in dist |
+| SiteLayout pass | 2026-06-15 | PERF-003 (logo CLS), UX-FIX-001 (drawer order), UX-FIX-002 (/cv in nav), UX-FIX-003 (theme-color meta), CODE-FIX-001 (nested @media, duplicate selectors, dead global.css rules) — all shipped in one pass |
 
 | 2B-003 | 2026-06-15 | Recognition audit complete — IEEE-HKN Internal Secretary + Dean's List added to About page as Leadership & Service section; standalone recognition page deferred |
 | 2B-004 | 2026-06-15 | Academic CV `/cv` live — Education, Research, Academic Honors, Memberships & Leadership, abbreviated work history, top certs; CV link in About page social row |
