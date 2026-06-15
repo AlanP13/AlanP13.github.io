@@ -53,17 +53,15 @@ Ordered by impact, readiness, and dependency risk.
 
 | Order | Status | Item | Scope / dependency |
 |---|---|---|---|
-| 1 | [>] | **P2 performance/content cleanup** | Add intrinsic dimensions to dynamic images and remove confirmed dead About-page CSS; PhD start date remains blocked on the exact date |
+| 1 | [>] | **2B-010 — Certifications expansion** | Blocked on user providing full cert list (name, issuer, date, credential ID/URL) |
 | 2 | [ ] | **2B-006 — Homepage contact CTA** | Add a dedicated bottom-of-page conversion section; footer links alone do not replace an in-page CTA |
-| 3 | [~] | **2B-001 — Resume credentials completion** | Add a dedicated credentials section using already-published homepage data |
+| 3 | [~] | **2B-001 — Resume credentials completion** | Resume has Experience, Education, Skills; certifications section remains once 2B-010 list is supplied |
 | 4 | [~] | **Structured-data completion** | Add remaining article relationships and fields when exact publication dates and external canonical URLs are available |
 | 5 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Code support exists; requires ResearchGate/Zenodo deposits and resulting profile/DOI URLs |
 | 6 | [ ] | **2B-002 / 2B-007 — Quantified outcomes** | Requires public-safe metrics for work bullets and project impact statements |
 | 7 | [ ] | **2B-009 — Privacy-friendly analytics** | Requires analytics provider/account decision before adding the production script |
 
-Recommended next implementation: **P2 performance/content cleanup**, because
-the image-dimension and dead-CSS work is unblocked and improves page stability
-without requiring new content.
+Recommended next implementation: **2B-010 Certifications expansion** — unblocked once the cert list is supplied, high recruiter signal, and completes the remaining scope of 2B-001.
 
 ---
 
@@ -619,6 +617,30 @@ Single script tag. Privacy-friendly, no cookie banner required. Shows which page
 
 ---
 
+#### 2B-010 — Certifications Expansion
+**Files:** `src/pages/index.astro`, `src/pages/resume.astro`  
+**Effort:** S · **Risk:** None
+
+The homepage Credentials & Memberships section currently shows only one certification ("Foundations in Investment" — CFA Institute, In Progress). The resume has no certifications section at all. Both need to reflect the full picture.
+
+**Requires from user before implementing:**
+- Full list of certifications: name, issuing organization, date obtained, expiry date (if any), credential ID or verification URL
+- Indicate which are completed vs. in progress
+- Indicate which are public-safe to display
+
+**What gets built:**
+1. Expand the "Current Study" credCard on the homepage to show all certifications, grouped by status (completed / in progress)
+2. Add a "Certifications" section to the resume page between Skills and any future credentials block
+3. Each cert entry: name, issuer, date, status badge, credential link (if available)
+
+**Recruiter impact:** High — certifications are a fast-scan signal for technical and financial roles  
+**Dependency:** None (code-ready; blocked only on content from user)
+
+| Status | [ ] |
+|---|---|
+
+---
+
 ### Phase 2C — Future Enhancements
 
 *High strategic value, longer horizon, or dependent on content that does not exist yet.*
@@ -635,7 +657,7 @@ Single script tag. Privacy-friendly, no cookie banner required. Shows which page
 | 2C-008 | [ ] | S | `src/content.config.ts` migration (Astro 5 preferred path over `src/content/config.ts`) | Bundle with next config touch |
 | 2C-009 | [ ] | L | Dedicated AI / Data Platform positioning page | When architecture story is ready |
 | 2C-010 | [ ] | S | Remove unused `leaflet` dependency | Bundle with next `package.json` change |
-| 2C-011 | [ ] | M | Professional headshot prominence on About — fix 6fr/1fr carousel ratio | When updated photo available or design decision made |
+| 2C-011 | [x] | M | Carousel ratio fixed (4fr/2fr) and hidden on mobile/tablet; carousel visible only at 980px+ | Done 2026-06-15 |
 | 2C-012 | [ ] | M | Semantic Scholar auto-profile integration | After papers indexed |
 
 ---
@@ -658,9 +680,9 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | P2-UX-004 | → 2B-005 |
 | P2-UX-005 | → 2B-005 |
 | P2-PERF-001 | → 2C-010 |
-| P2-PERF-002 | Open — add `width`/`height` to dynamic images in about.astro, index.astro |
+| P2-PERF-002 | Done 2026-06-15 — intrinsic dimensions added to gallery, logo, and carousel images |
 | P2-TECH-001 | → 2B-005 |
-| P2-TECH-002 | Open — remove dead CSS in `src/pages/about.astro` |
+| P2-TECH-002 | Done 2026-06-15 — dead `.galleryImg` rule and duplicate `.social` color removed |
 | P2-TECH-003 | → 2B-005 |
 | P2-CRED-001 | → 2A-008 |
 | P3-SEO-001 | → 2A-004 + 2A-005 + 2A-006 + 2C-004 |
@@ -697,6 +719,9 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | 2A-012 | 2026-06-08 | Academic identity display — ORCID link in detail page sidebar; partial (full profile links pending ResearchGate/Zenodo URLs) |
 | 2B-001 | 2026-06-14 | Replaced the PDF iframe with a semantic, mobile-friendly HTML resume and retained PDF download |
 | 2B-005 | 2026-06-15 | Added centered focus-only skip navigation, corrected theme-control semantics, added previous/next project navigation, and removed duplicate CSS and design-reference comments |
+| P2-PERF-002 | 2026-06-15 | Added intrinsic width/height to gallery, logo, and carousel images; removed dead .galleryImg CSS and duplicate .social color |
+| UI re-audit | 2026-06-15 | Installed @phosphor-icons/react; replaced all hand-rolled SVGs on home, about, resume; trimmed hero to 4 elements; fixed featured projects to asymmetric hero+2 grid; fixed about carousel column ratio; split resume contact strip; replaced en-dashes with hyphens throughout |
+| UI uplift | 2026-06-15 | Brightened --muted token (dark 150→180, light 92→72); accent-tinted skill and credential section labels; promoted chip and credential description text to --text; hid about carousel on mobile/tablet |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
