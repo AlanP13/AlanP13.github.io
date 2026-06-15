@@ -1,16 +1,17 @@
 ---
 title: "PAM Derivatives Legacy Message Platform (Azure Synapse)"
 featured: true
-summary: "Designed and built a template-driven, metadata-based message generation platform in Azure Synapse that dynamically constructs complex financial legacy messages directly from Spark tables."
+summary: "Metadata-driven message generation platform in Azure Synapse covering ~800 CUSIPs across options, futures, and swaps — extensible to additional asset classes without platform changes, and validated as a cross-cloud portability POC."
 highlights:
   - "Built a configuration + Excel-template driven message engine supporting nested and repeating financial structures"
-  - "Generates messages dynamically from Spark SQL tables with full audit and diagnostics output"
+  - "Generates SMF and transaction messages dynamically from Spark SQL tables with full audit and diagnostics output"
   - "Integrated with Azure Synapse pipelines for scheduled, production-grade execution"
   - "Handles missing data, partial availability, and schema variability safely"
 impact:
-  - "Replaced brittle, hardcoded message logic with a reusable, metadata-driven generation platform"
-  - "Improved reliability, auditability, and operational transparency of derivatives message feeds"
-  - "Established a scalable pattern for future regulatory and downstream system feeds"
+  - "Generates SMF and transaction messages for ~800 CUSIPs spanning options, futures, and swaps from a single unified platform"
+  - "Designed for asset-class extensibility — FI, Cash, and legacy assets onboard without major platform changes"
+  - "Validated as a proof-of-concept for cross-cloud deployment, demonstrating portability across different cloud providers"
+  - "Replaced brittle, hardcoded derivatives logic with a reusable metadata-driven architecture"
 tech: ["Python", "Spark SQL", "Azure Synapse", "Excel Templates", "Metadata-Driven Systems", "Enterprise Pipelines"]
 tags: ["azure", "data-platforms", "pipelines", "derivatives", "financial-systems", "metadata"]
 role: "Lead Engineer & Platform Owner"
