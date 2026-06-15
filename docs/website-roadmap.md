@@ -51,16 +51,16 @@ outside this repository.
 
 | # | Status | Item | Files |
 |---|---|---|---|
-| P1-SEO-001 | [ ] | Add `og:title`, `og:description`, `og:type`, `og:url` to head | `src/layouts/SiteLayout.astro` |
-| P1-SEO-002 | [ ] | Add Twitter Card meta tags | `src/layouts/SiteLayout.astro` |
+| P1-SEO-001 | [x] | Add `og:title`, `og:description`, `og:type`, `og:url` to head | `src/layouts/SiteLayout.astro` |
+| P1-SEO-002 | [x] | Add Twitter Card meta tags | `src/layouts/SiteLayout.astro` |
 | P1-SEO-003 | [x] | Add `robots.txt` to `public/` | `public/robots.txt` |
-| P1-SEO-004 | [ ] | Add canonical URL tag per page | `src/layouts/SiteLayout.astro` |
+| P1-SEO-004 | [x] | Add canonical URL tag per page | `src/layouts/SiteLayout.astro` |
 | P1-CON-001 | [ ] | ~~Update research papers to `status: published`~~ — **superseded by 2A-002**: papers are technical reports, not publications; use `publication_type` + `publication_status: completed` | `src/content/research/*.mdx` |
 | P1-UX-001 | [x] | Remove `p { text-align: justify; }` from homepage and about | `src/pages/index.astro`, `src/pages/about.astro` |
-| P1-UX-002 | [ ] | Add `aria-current="page"` + active styling to current nav link | `src/layouts/SiteLayout.astro` |
-| P1-UX-003 | [ ] | Fix work entry expand — remove `mouseleave` auto-collapse | `src/pages/index.astro` |
-| P1-UX-004 | [ ] | Add `pluto` swatch to theme picker | `src/layouts/SiteLayout.astro` |
-| P1-UX-005 | [ ] | Add social links + "get in touch" CTA to footer | `src/layouts/SiteLayout.astro` |
+| P1-UX-002 | [x] | Add `aria-current="page"` + active styling to current nav link | `src/layouts/SiteLayout.astro` |
+| P1-UX-003 | [x] | Fix work entry expand — remove `mouseleave` auto-collapse | `src/pages/index.astro` |
+| P1-UX-004 | [x] | Add `pluto` swatch to theme picker | `src/layouts/SiteLayout.astro` |
+| P1-UX-005 | [x] | Add social links + "get in touch" CTA to footer | `src/layouts/SiteLayout.astro` |
 
 ---
 
@@ -638,6 +638,8 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | P0-001 | 2026-06-08 | Moved `example.mdx` placeholder from research to archive |
 | P1-SEO-003 | 2026-06-08 | Added `public/robots.txt` |
 | P1-UX-001 | 2026-06-08 | Removed `text-align: justify` from homepage and about page |
+| P1-SEO-001/002/004 | 2026-06-15 | Verified OpenGraph, Twitter Card, and canonical metadata already implemented |
+| P1-UX-002/003/004/005 | 2026-06-15 | Added active navigation state and Pluto swatch, fixed work-row expansion, and verified footer contact links |
 | archive collection | 2026-06-08 | Defined `archive` collection in `src/content/config.ts` |
 | 2A-003 | 2026-06-08 | Research detail pages `/research/[slug]` — abstract, keywords, sidebar, citation block, PDF link |
 | 2A-004 | 2026-06-08 | ScholarlyArticle JSON-LD per detail page — author ORCID, abstract, keywords, EducationalOrganization publisher |

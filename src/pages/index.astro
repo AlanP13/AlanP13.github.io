@@ -460,9 +460,6 @@ const personSchema = JSON.stringify({
           toggleRow(row);
         });
 
-        // Collapse when pointer leaves the row (smooth)
-        row.addEventListener("mouseleave", () => closeRow(row));
-
         // Collapse if you click elsewhere
         document.addEventListener("click", (e) => {
           if (!row.contains(e.target)) closeRow(row);

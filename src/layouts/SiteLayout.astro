@@ -1,6 +1,12 @@
 ---
 import "../styles/global.css";
 const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isCurrentPath = (href: string) =>
+  href === "/"
+    ? currentPath === "/"
+    : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
 <!doctype html>
@@ -79,16 +85,37 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
 
     <header class="wrap">
       <nav class="nav">
-        <a class="brand" href="/" aria-label="Home">
+        <a
+          class="brand"
+          href="/"
+          aria-label="Home"
+          aria-current={isCurrentPath("/") ? "page" : undefined}
+        >
           <img src="/logo.svg" alt="Alan Palayil" class="logo-img" />
         </a>
 
         <!-- Desktop links -->
         <div class="links">
-          <a href="/about">About</a>
-          <a href="/resume">Resume</a>
-          <a href="/projects">Projects</a>
-          <a href="/research">Research</a>
+          <a
+            href="/about"
+            aria-current={isCurrentPath("/about") ? "page" : undefined}
+            >About</a
+          >
+          <a
+            href="/resume"
+            aria-current={isCurrentPath("/resume") ? "page" : undefined}
+            >Resume</a
+          >
+          <a
+            href="/projects"
+            aria-current={isCurrentPath("/projects") ? "page" : undefined}
+            >Projects</a
+          >
+          <a
+            href="/research"
+            aria-current={isCurrentPath("/research") ? "page" : undefined}
+            >Research</a
+          >
         </div>
 
         <div class="actions">
@@ -117,10 +144,26 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
 
         <!-- Mobile drawer -->
         <div class="drawer" id="nav-drawer" hidden>
-          <a href="/projects">Projects</a>
-          <a href="/about">About</a>
-          <a href="/resume">Resume</a>
-          <a href="/research">Research</a>
+          <a
+            href="/projects"
+            aria-current={isCurrentPath("/projects") ? "page" : undefined}
+            >Projects</a
+          >
+          <a
+            href="/about"
+            aria-current={isCurrentPath("/about") ? "page" : undefined}
+            >About</a
+          >
+          <a
+            href="/resume"
+            aria-current={isCurrentPath("/resume") ? "page" : undefined}
+            >Resume</a
+          >
+          <a
+            href="/research"
+            aria-current={isCurrentPath("/research") ? "page" : undefined}
+            >Research</a
+          >
         </div>
 
         <!-- ✅ Theme popover (single source of truth) -->
@@ -186,6 +229,7 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
             ></button>
             <button class="sw" data-accent="neptune" aria-label="Neptune"
             ></button>
+            <button class="sw" data-accent="pluto" aria-label="Pluto"></button>
 
             <!-- one moving ring -->
             <div class="swRing" id="swRing" aria-hidden="true"></div>
@@ -592,6 +636,12 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
       .links a:hover {
         color: rgb(var(--text));
       }
+      .links a[aria-current="page"] {
+        color: rgb(var(--accent));
+        font-weight: 650;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+      }
 
       .actions {
         display: flex;
@@ -635,6 +685,14 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
       }
       .drawer a:hover {
         background: rgba(255, 255, 255, 0.04);
+      }
+      .drawer a[aria-current="page"] {
+        color: rgb(var(--accent));
+        background: color-mix(
+          in srgb,
+          rgb(var(--accent)) 10%,
+          transparent
+        );
       }
 
       /* =========================
@@ -762,9 +820,10 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
       .swatches {
         --gap: 10px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: var(--gap);
-        margin: 10px 0 12px;
+        width: calc(75% - (var(--gap) / 4));
+        margin: 10px auto 12px;
         position: relative;
       }
 
@@ -834,6 +893,9 @@ const { title, description, hideNavOnMobile = false, schemaJson } = Astro.props;
       }
       .sw[data-accent="neptune"] {
         background: rgb(var(--color-neptune));
+      }
+      .sw[data-accent="pluto"] {
+        background: rgb(var(--color-pluto));
       }
 
       /* Optional: make swatches show a faint ring on hover (feels more “Jason”) */
