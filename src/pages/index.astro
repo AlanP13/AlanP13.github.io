@@ -46,6 +46,17 @@ const eduItems = timeline
 /** Helper: returns the image URL (or null if not found) */
 const getOrgLogo = (iconText: string) => orgLogos[iconText] ?? null;
 
+const certItems = await getCollection("certifications");
+const allCertsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) => {
+  const priority: Record<string, number> = { "in-progress": 0, "planned": 1, "earned": 2, "expired": 3 };
+  const sa = priority[a.data.status] ?? 99;
+  const sb = priority[b.data.status] ?? 99;
+  if (sa !== sb) return sa - sb;
+  return (b.data.order ?? 0) - (a.data.order ?? 0);
+});
+const certsSorted = allCertsSorted.slice(0, 2);
+const certsTotal = allCertsSorted.length;
+
 const researchItems = await getCollection("research");
 const completedResearch = researchItems.filter(
   (r) => (r.data.publication_status ?? r.data.status) === "completed"
@@ -623,19 +634,44 @@ const personSchema = JSON.stringify({
         </div>
       </div>
 
-      <div class="credCard">
-        <p class="credLabel">Current Study</p>
-        <div class="credEntry">
-          <div>
-            <p class="credOrg">Foundations in Investment</p>
-            <p class="credDesc">CFA Institute</p>
-          </div>
-          <div class="credMeta">
-            <span class="ipBadge">In Progress</span>
-            <span class="credDates">Expected June 2026</span>
-          </div>
+      {certsSorted.length > 0 && (
+        <div class="credCard">
+          <p class="credLabel">Certifications</p>
+          {certsSorted.map((cert) => (
+            <div class="certEntry">
+              <div class="certMain">
+                <p class="certTitle">{cert.data.title}</p>
+                <p class="certIssuer">{cert.data.issuer}</p>
+                <div class="certTags">
+                  <span class="certCat">{cert.data.category}</span>
+                  {cert.data.skills.slice(0, 3).map((s) => (
+                    <span class="certSkill">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="certMeta">
+                {cert.data.status === "in-progress" && (
+                  <span class="ipBadge">In Progress</span>
+                )}
+                {cert.data.status === "earned" && cert.data.credentialUrl && (
+                  <a class="credLink" href={cert.data.credentialUrl} target="_blank" rel="noreferrer">Verify →</a>
+                )}
+                {cert.data.status === "earned" && !cert.data.credentialUrl && (
+                  <span class="earnedBadge">Earned</span>
+                )}
+                {cert.data.dateObtained && (
+                  <span class="credDates">{cert.data.dateObtained}</span>
+                )}
+              </div>
+            </div>
+          ))}
+          {certsTotal > 2 && (
+            <a class="certSeeAll" href="/resume#certifications">
+              +{certsTotal - 5} more on resume →
+            </a>
+          )}
         </div>
-      </div>
+      )}
     </div>
   </section>
 
@@ -1338,6 +1374,83 @@ const personSchema = JSON.stringify({
         align-items: flex-start;
         text-align: left;
       }
+    }
+
+    /* Dynamic cert entries */
+    .certEntry {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 8px 0;
+    }
+    .certEntry + .certEntry {
+      border-top: 1px solid rgb(var(--border) / 0.5);
+    }
+    .certMain { flex: 1; min-width: 0; }
+    .certTitle {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgb(var(--text));
+    }
+    .certIssuer {
+      margin: 2px 0 6px;
+      font-size: 12px;
+      color: rgb(var(--text) / 0.65);
+    }
+    .certTags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .certCat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, rgb(var(--accent)) 12%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--text)));
+      border: 1px solid color-mix(in srgb, rgb(var(--accent)) 25%, transparent);
+    }
+    .certSkill {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      color: rgb(var(--muted));
+      background: rgba(255,255,255,0.02);
+    }
+    .certMeta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .earnedBadge {
+      font-size: 12px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, rgb(34 197 94) 40%, transparent);
+      color: color-mix(in srgb, rgb(34 197 94) 65%, rgb(var(--text)));
+      white-space: nowrap;
+    }
+    .certSeeAll {
+      display: block;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgb(var(--border) / 0.5);
+      font-size: 12px;
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .certSeeAll:hover { text-decoration: underline; }
+    @media (max-width: 480px) {
+      .certEntry { flex-direction: column; gap: 6px; }
+      .certMeta { align-items: flex-start; }
     }
 
     /* Contact CTA */

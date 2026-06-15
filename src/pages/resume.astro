@@ -1,6 +1,16 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { getCollection } from "astro:content";
 import { DownloadSimple } from "@phosphor-icons/react";
+
+const certItems = await getCollection("certifications");
+const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) => {
+  const priority: Record<string, number> = { "in-progress": 0, "planned": 1, "earned": 2, "expired": 3 };
+  const sa = priority[a.data.status] ?? 99;
+  const sb = priority[b.data.status] ?? 99;
+  if (sa !== sb) return sa - sb;
+  return (b.data.order ?? 0) - (a.data.order ?? 0);
+});
 ---
 
 <SiteLayout
@@ -225,6 +235,40 @@ import { DownloadSimple } from "@phosphor-icons/react";
       </div>
     </section>
 
+    {certsSorted.length > 0 && (
+      <section class="rSection" id="certifications">
+        <h2 class="rHead">Certifications</h2>
+        {certsSorted.map((cert) => (
+          <div class="rEntry">
+            <div class="rEntryHead">
+              <div class="rLeft">
+                <span class="rTitle">{cert.data.title}</span>
+                <span class="rOrg">
+                  {cert.data.issuerUrl
+                    ? <a href={cert.data.issuerUrl} target="_blank" rel="noreferrer">{cert.data.issuer}</a>
+                    : cert.data.issuer}
+                </span>
+              </div>
+              <div class="rRight">
+                {cert.data.status === "in-progress"
+                  ? <span class="rDates rInProgress">In Progress</span>
+                  : <span class="rDates">{cert.data.dateObtained ?? "Completed"}</span>}
+                {cert.data.credentialUrl && (
+                  <a class="rCredLink" href={cert.data.credentialUrl} target="_blank" rel="noreferrer">Verify →</a>
+                )}
+              </div>
+            </div>
+            {cert.data.summary && <p class="rSub">{cert.data.summary}</p>}
+            {cert.data.skills.length > 0 && (
+              <div class="rCertSkills">
+                {cert.data.skills.map((s) => <span>{s}</span>)}
+              </div>
+            )}
+          </div>
+        ))}
+      </section>
+    )}
+
   </div>
 
   <style>
@@ -382,6 +426,21 @@ import { DownloadSimple } from "@phosphor-icons/react";
       background: color-mix(in srgb, rgb(var(--card)) 80%, transparent);
       color: rgb(var(--text));
       opacity: 0.88;
+    }
+    .rCredLink {
+      font-size: 12px;
+      color: rgb(var(--accent));
+      text-decoration: none;
+    }
+    .rCredLink:hover { text-decoration: underline; }
+    .rCertSkills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .rCertSkills span {
+      font-size: 12px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      color: rgb(var(--muted));
+      background: rgba(255,255,255,0.02);
     }
 
     @media (max-width: 640px) {
