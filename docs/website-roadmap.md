@@ -58,10 +58,13 @@ Ordered by impact, readiness, and dependency risk.
 | 3 | [x] | **2B-001 — Resume credentials completion** | Certifications section now live on resume page |
 | 4 | [x] | **2B-002 / 2B-007 — Quantified outcomes** | Shipped 2026-06-15 |
 | 5 | [x] | **2B-009 — Privacy-friendly analytics** | Shipped 2026-06-15; Cloudflare Web Analytics beacon (no cookies, no consent banner) |
-| 6 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
-| 7 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Blocked on ResearchGate/Zenodo deposits and resulting URLs |
+| 6 | [x] | **PERF batch** — image optimization (91% reduction), OG image, logo CLS, nav cleanup, SiteLayout cleanup, theme-color meta | Shipped 2026-06-15 |
+| 7 | [x] | **Academic CV page (`/cv`)** + Leadership & Service section on About | Shipped 2026-06-15 |
+| 8 | [x] | **PERF-004 / 2C-008 / 2C-010** — vanilla Astro carousel, content.config.ts migration, remove leaflet + swiper | Shipped 2026-06-15 |
+| 9 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
+| 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | In progress: ResearchGate + Zenodo deposits + URL wiring |
 
-Recommended next implementation: **PERF-001** (image optimization, in progress) → **PERF-002** (OG image) → **UX-FIX-001/002/003 + PERF-003 + CODE-FIX-001** (bundle as one SiteLayout pass).
+Recommended next: **2A-013 / 2B-008** (ResearchGate upload, Zenodo DOI deposit, wire `researchgate_url` / `zenodo_url` / `doi` into research MDX + sidebar display layer).
 
 ---
 
