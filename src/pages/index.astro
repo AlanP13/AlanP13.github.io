@@ -475,7 +475,7 @@ const personSchema = JSON.stringify({
       <span class="rfChip">Financial Systems Modernization</span>
     </div>
     <p class="rfLink">
-      {completedResearch} completed technical reports — <a href="/research">View research →</a>
+      {completedResearch} completed technical reports. <a href="/research">View research →</a>
     </p>
     <p class="rfOrcid">
       ORCID: <a href="https://orcid.org/0009-0004-8302-5090" target="_blank" rel="noreferrer">0009-0004-8302-5090 →</a>
@@ -675,8 +675,8 @@ const personSchema = JSON.stringify({
       <div class="contactText">
         <h2 class="contactHead">Let's connect</h2>
         <p class="contactSub">
-          I work at the intersection of enterprise data, financial systems, and AI governance research.
-          If you're building or thinking about similar problems — I'd enjoy the conversation.
+          I build data infrastructure for financial systems and research AI governance at the doctoral level.
+          If you're working on similar problems, I'd enjoy the conversation.
         </p>
       </div>
       <div class="contactActions">
@@ -841,6 +841,8 @@ const personSchema = JSON.stringify({
       font-size: 28px;
       letter-spacing: -0.02em;
       color: color-mix(in srgb, rgb(var(--accent)) 95%, rgb(var(--muted)));
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgb(var(--border) / 0.5);
     }
     
     .block .muted:empty {
@@ -1210,7 +1212,9 @@ const personSchema = JSON.stringify({
     .rfLink {
       font-size: 13px;
       color: rgb(var(--muted));
-      margin: 0;
+      margin: 10px 0 0;
+      padding-top: 10px;
+      border-top: 1px solid rgb(var(--border) / 0.4);
     }
     .rfLink a {
       color: rgb(var(--accent));
