@@ -482,7 +482,7 @@ scope.
 **Recruiter impact:** High — fixes broken mobile; enables in-browser scanning  
 **SEO impact:** High — all resume content becomes indexable
 
-| Status | [~] |
+| Status | [x] Shipped — semantic HTML resume live; certifications section wired from collection |
 |---|---|
 
 ---
@@ -641,7 +641,7 @@ Schema and sample file created 2026-06-15. `certifications` collection defined i
 **Recruiter impact:** High — certifications are a fast-scan signal for technical and financial roles  
 **Dependency:** Blocked on user supplying full cert list via MDX files
 
-| Status | [~] |
+| Status | [x] Shipped — 25 certs, 18 featured; homepage shows top 2 in-progress first with auto-count deep-link; resume shows all featured with skill chips and verify links |
 |---|---|
 
 ---
