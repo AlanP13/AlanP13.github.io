@@ -62,7 +62,7 @@ Ordered by impact, readiness, and dependency risk.
 | 7 | [x] | **Academic CV page (`/cv`)** + Leadership & Service section on About | Shipped 2026-06-15 |
 | 8 | [x] | **PERF-004 / 2C-008 / 2C-010** — vanilla Astro carousel, content.config.ts migration, remove leaflet + swiper | Shipped 2026-06-15 |
 | 9 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
-| 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | ON HOLD — display layer complete; blocked on user creating ResearchGate profile + Zenodo deposits to get URLs |
+| 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Zenodo deposit complete for Vol. 1 (DOI: 10.5281/zenodo.20733453); MDX added 2026-06-20. Remaining blocker: ResearchGate profile + Zenodo deposits for the 3 coursework reports. |
 | 11 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
 
 Recommended next: review remaining roadmap items for any unblocked P1/P2 work.
@@ -602,7 +602,7 @@ Action items (user, not code):
 1. ~~Register ORCID~~ — completed (`0009-0004-8302-5090`)
 2. Upload papers to ResearchGate
 3. Submit to SSRN if applicable
-4. Deposit to Zenodo for DOI assignment
+4. ~~Deposit to Zenodo for DOI assignment~~ — completed for *Securing Connected Systems* Vol. 1 (DOI: 10.5281/zenodo.20733453, 2026-06-17); coursework reports not yet deposited
 5. ~~Add ORCID to research MDX files~~ — completed
 
 | Status | [~] |
@@ -755,6 +755,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 
 | 2B-003 | 2026-06-15 | Recognition audit complete — IEEE-HKN Internal Secretary + Dean's List added to About page as Leadership & Service section; standalone recognition page deferred |
 | 2B-004 | 2026-06-15 | Academic CV `/cv` live — Education, Research, Academic Honors, Memberships & Leadership, abbreviated work history, top certs; CV link in About page social row |
+| 2A-013 (partial) | 2026-06-20 | *Securing Connected Systems* (Engineering-to-Research Monograph Series Vol. 1) added to research collection — DOI 10.5281/zenodo.20733453; `zenodo_url`, `doi`, `github_url`, `publication_date` all populated; `publication_status: published`; renders on `/research` and `/research/securing-connected-systems-wsn-iot-cps` |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
