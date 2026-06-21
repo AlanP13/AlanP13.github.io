@@ -22,11 +22,13 @@ const statusLabels: Record<string, string> = {
   accepted: "Accepted",
 };
 
-const byOrderDescThenTitle = (a: any, b: any) => {
-  const ao = a.data.order ?? 0;
-  const bo = b.data.order ?? 0;
-  if (bo !== ao) return bo - ao;
-  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
+const typeLabels: Record<string, string> = {
+  "journal-article": "Journal Article",
+  "conference-paper": "Conference Paper",
+  preprint: "Preprint",
+  "technical-report": "Technical Report",
+  thesis: "Thesis",
+  "working-paper": "Working Paper",
 };
 
 items.sort((a, b) => {
@@ -35,28 +37,83 @@ items.sort((a, b) => {
   const sa = statusRank[ea] ?? 99;
   const sb = statusRank[eb] ?? 99;
   if (sa !== sb) return sa - sb;
-  return byOrderDescThenTitle(a, b);
+  const ao = a.data.order ?? 0;
+  const bo = b.data.order ?? 0;
+  if (bo !== ao) return bo - ao;
+  return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 });
----
 
+const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
+const allTypes = [...new Set(
+  items
+    .map((r) => r.data.publication_type)
+    .filter(Boolean) as string[]
+)].sort();
+---
 
 <SiteLayout
   title="Research — Alan Palayil"
   description="Applied research in AI Governance, enterprise data systems, and financial systems modernization. Technical reports from a PhD in Information Technology at University of the Cumberlands."
 >
-  <h1>Research</h1>
-  <p class="muted">
-    Applied research work related to AI and Data Science in enterprise systems.
-    Includes in-progress items.
-  </p>
+  <div class="page-header">
+    <h1>Research</h1>
+    <p class="muted">
+      Applied research work related to AI and Data Science in enterprise systems.
+    </p>
+  </div>
 
-  <div class="stack">
+  <div class="controls">
+    <div class="control-row">
+      <span class="control-label">Sort</span>
+      <select id="sort-select" class="sort-select">
+        <option value="default">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="title">Title A → Z</option>
+      </select>
+    </div>
+
+    {allTypes.length > 1 && (
+      <div class="control-row">
+        <span class="control-label">Type</span>
+        <div class="chips" id="type-chips" data-group="type">
+          <button class="chip active" data-value="all">All</button>
+          {allTypes.map((t) => (
+            <button class="chip" data-value={t}>{typeLabels[t] ?? t}</button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {allAreas.length > 0 && (
+      <div class="control-row">
+        <span class="control-label">Topic</span>
+        <div class="chips" id="area-chips" data-group="area">
+          <button class="chip active" data-value="all">All</button>
+          {allAreas.map((area) => (
+            <button class="chip" data-value={area}>{area}</button>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+
+  <div class="stack" id="research-stack">
     {
       items.map((r) => {
         const es = r.data.publication_status ?? r.data.status;
         const esLabel = statusLabels[es] ?? es;
+        const areasStr = (r.data.area ?? []).join(",");
+        const pubDate = r.data.publication_date ?? r.data.date ?? "";
+        const pubType = r.data.publication_type ?? "";
         return (
-          <a class="card" href={`/research/${r.slug}`}>
+          <a
+            class="card"
+            href={`/research/${r.slug}`}
+            data-areas={areasStr}
+            data-date={pubDate}
+            data-title={r.data.title ?? ""}
+            data-type={pubType}
+          >
             <div class="top">
               <h2>{r.data.title}</h2>
               <span class={`badge ${es}`}>{esLabel}</span>
@@ -75,33 +132,103 @@ items.sort((a, b) => {
         );
       })
     }
+    <p class="empty" id="empty-state" style="display:none">
+      No papers match the selected filters.
+    </p>
   </div>
 
   <style>
+    .page-header {
+      max-width: var(--content, 1100px);
+      margin-left: auto;
+      margin-right: auto;
+    }
     h1 {
-      margin: 0 0 18px;
+      margin: 0 0 8px;
       font-size: 44px;
       letter-spacing: -0.03em;
       color: rgb(var(--accent));
       font-weight: 800;
-      
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
     }
     .muted {
       color: rgb(var(--muted));
-      
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
     }
+
+    /* Controls */
+    .controls {
+      max-width: var(--content, 1100px);
+      margin: 20px auto 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 12px;
+      color: rgb(var(--muted));
+      min-width: 36px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .sort-select {
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      background: rgba(255, 255, 255, 0.04);
+      color: rgb(var(--text));
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    .sort-select:focus {
+      outline: none;
+      border-color: rgb(var(--accent));
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      background: transparent;
+      color: rgb(var(--muted));
+      cursor: pointer;
+      transition: border-color 100ms ease, color 100ms ease, background 100ms ease;
+      line-height: 1;
+    }
+    .chip:hover {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+    }
+    .chip.active {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+      background: color-mix(in srgb, rgb(var(--accent)) 10%, transparent);
+    }
+
+    /* Cards */
     .stack {
       margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      
       max-width: var(--content, 1100px);
       margin-left: auto;
       margin-right: auto;
@@ -138,34 +265,19 @@ items.sort((a, b) => {
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
       color: rgb(var(--muted));
+      white-space: nowrap;
     }
-    .badge.published {
-      border-color: color-mix(
-        in srgb,
-        rgb(var(--accent)) 100%,
-        rgb(var(--muted))
-      );
-      color: color-mix(in srgb, rgb(var(--accent)) 100%, rgb(var(--muted)));
-    }
-    .badge.submitted {
-      border-color: color-mix(
-        in srgb,
-        rgb(var(--accent)) 75%,
-        rgb(var(--muted))
-      );
-      color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
-    }
-    .badge.completed,
-    .badge.published {
+    .badge.published,
+    .badge.completed {
       border-color: rgb(var(--accent));
       color: rgb(var(--accent));
     }
+    .badge.submitted {
+      border-color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
+      color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
+    }
     .badge.in-progress {
-      border-color: color-mix(
-        in srgb,
-        rgb(var(--accent)) 50%,
-        rgb(var(--muted))
-      );
+      border-color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
       color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
       opacity: 0.9;
     }
@@ -182,5 +294,67 @@ items.sort((a, b) => {
       font-size: 13px;
       color: rgb(var(--accent));
     }
+    .empty {
+      color: rgb(var(--muted));
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      .control-label { min-width: unset; }
+    }
   </style>
+
+  <script>
+    const stack = document.getElementById("research-stack") as HTMLElement;
+    const emptyState = document.getElementById("empty-state") as HTMLElement;
+    const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
+    const cards = [...document.querySelectorAll<HTMLElement>(".card[data-areas]")];
+
+    let activeType = "all";
+    let activeArea = "all";
+
+    function applyFilters() {
+      const sort = sortSelect.value;
+
+      const visible = cards.filter((c) => {
+        const areas = c.dataset.areas ? c.dataset.areas.split(",") : [];
+        const type = c.dataset.type ?? "";
+        const typeOk = activeType === "all" || type === activeType;
+        const areaOk = activeArea === "all" || areas.includes(activeArea);
+        return typeOk && areaOk;
+      });
+      const hidden = cards.filter((c) => !visible.includes(c));
+
+      visible.sort((a, b) => {
+        if (sort === "title") return (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "");
+        const da = a.dataset.date ?? "";
+        const db = b.dataset.date ?? "";
+        return sort === "oldest" ? da.localeCompare(db) : db.localeCompare(da);
+      });
+
+      hidden.forEach((c) => { c.style.display = "none"; });
+      visible.forEach((c) => { c.style.display = ""; stack.appendChild(c); });
+
+      if (emptyState) emptyState.style.display = visible.length === 0 ? "" : "none";
+    }
+
+    function wireChips(groupId: string, setter: (v: string) => void) {
+      const group = document.getElementById(groupId);
+      if (!group) return;
+      group.querySelectorAll<HTMLButtonElement>(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          group.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+          setter(chip.dataset.value ?? "all");
+          applyFilters();
+        });
+      });
+    }
+
+    wireChips("type-chips", (v) => { activeType = v; });
+    wireChips("area-chips", (v) => { activeArea = v; });
+    sortSelect.addEventListener("change", applyFilters);
+  </script>
 </SiteLayout>
