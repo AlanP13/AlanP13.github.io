@@ -1,0 +1,98 @@
+---
+title: "Scalable Analytics for Enterprise Decisions: From MapReduce to Holiday-Aware Demand Forecasting"
+status: published
+area: ["Data Engineering", "Data Science", "Machine Learning", "Enterprise Analytics"]
+summary: "Five-stage data-to-decision workflow bridging MapReduce/Spark infrastructure with feature-first predictive modeling — tree-ensemble models for tabular enterprise data, two case studies."
+relevance: "Directly maps to my enterprise data engineering work: pipeline scale, feature engineering discipline, and tree-ensemble modeling for business decision support align with the financial systems and AI governance focus of my doctoral research."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20733992"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Scalable-Analytics-for-Enterprise-Decisions-Vol7"
+order: 1
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 7"
+publication_date: "2026-06-17"
+version: "1.0"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20733992"
+zenodo_url: "https://zenodo.org/records/20733992"
+github_url: "https://github.com/AlanP13/Scalable-Analytics-for-Enterprise-Decisions-Vol7"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Scalable Analytics for Enterprise Decisions: From MapReduce to Holiday-Aware Demand Forecasting (Version 1.0) [Technical report]. Engineering-to-Research Monograph Series, Vol. 7. Zenodo. https://doi.org/10.5281/zenodo.20733992"
+
+# Abstract
+abstract: >-
+  This monograph addresses how enterprises can bridge data infrastructure and
+  predictive modeling to drive better decisions at scale. The central argument
+  is that scale should be spent on feature quality and validation, not model
+  complexity — advocating tree-ensemble methods for tabular enterprise data over
+  architectures that sacrifice interpretability without proportional accuracy gains.
+  A five-stage data-to-decision workflow is formalized, integrating MapReduce and
+  Spark infrastructure with feature-first modeling discipline. Two implementation
+  case studies ground the framework: a holiday-aware retail demand-forecasting
+  system incorporating calendar and macroeconomic features, and an Extremely
+  Randomized Trees vehicle-price prediction model emphasizing feature importance
+  for decision-making. An evaluation framework for comparing modeling approaches
+  in enterprise contexts is also developed, with attention to integration with
+  financial reconciliation and exception monitoring systems.
+
+keywords:
+  - MapReduce
+  - Apache Spark
+  - demand forecasting
+  - enterprise analytics
+  - tree ensembles
+  - gradient boosting
+  - extremely randomized trees
+  - tabular data
+  - big data
+  - feature engineering
+  - holiday effects
+  - predictive modeling
+---
+
+
+## Context
+
+Enterprise data teams routinely operate at a scale where raw compute is plentiful but decision-quality signal is scarce. This monograph argues that the bottleneck is rarely infrastructure — it is feature engineering discipline and model evaluation rigor.
+
+The work spans two layers:
+- **Infrastructure** — MapReduce and Spark as the foundation for scalable data pipelines
+- **Modeling** — tree-ensemble methods as the practical default for tabular enterprise data
+
+## What the Paper Covers
+
+### Five-Stage Data-to-Decision Workflow
+A formalized pipeline from raw data ingestion through feature construction, model evaluation, deployment, and exception monitoring — designed to integrate with existing financial reconciliation systems.
+
+### Feature-First Design Methodology
+The central claim: enterprise data teams should invest in feature quality and validation before reaching for model complexity. Tree ensembles (gradient boosting, Extremely Randomized Trees) outperform more complex architectures on tabular business data when features are well-engineered.
+
+### Case Study 1 — Holiday-Aware Demand Forecasting
+A retail demand-forecasting system that incorporates calendar and macroeconomic features to capture holiday effects. Demonstrates how domain-specific feature construction drives accuracy improvements that no model architecture change could replicate.
+
+### Case Study 2 — Vehicle Price Prediction (ExtraTreesRegressor)
+An Extremely Randomized Trees model for vehicle price prediction, with emphasis on feature importance analysis for interpretable decision support — the kind of explainability that financial and enterprise contexts require.
+
+### Evaluation Framework
+A structured approach for comparing modeling strategies in enterprise contexts, accounting for interpretability, maintenance cost, and integration with downstream business systems.
+
+## Why It Matters (Portfolio Angle)
+
+This work reflects the same engineering discipline I apply in production:
+- scale infrastructure to match the problem, not the hype
+- treat feature engineering as the primary lever for model quality
+- build for interpretability when outputs feed business decisions
+- integrate modeling with reconciliation and exception monitoring, not alongside it
+
+The enterprise analytics framing connects directly to my financial systems work at Genworth and to the AI governance questions at the center of my doctoral research — where model risk management and decision transparency matter as much as raw predictive performance.
