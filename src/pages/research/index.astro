@@ -4,6 +4,13 @@ import { getCollection } from "astro:content";
 
 const items = await getCollection("research");
 
+function formatDate(dateStr: string): string {
+  if (!dateStr) return "";
+  const [year, month, day] = dateStr.split("-").map(Number);
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return `${months[month - 1]} ${day}, ${year}`;
+}
+
 const statusRank: Record<string, number> = {
   published: 0,
   completed: 0,
@@ -116,7 +123,14 @@ const allTypes = [...new Set(
           >
             <div class="top">
               <h2>{r.data.title}</h2>
-              <span class={`badge ${es}`}>{esLabel}</span>
+              <div class="top-right">
+                {pubDate && (
+                  <time class="pub-date" datetime={pubDate}>
+                    {formatDate(pubDate)}
+                  </time>
+                )}
+                <span class={`badge ${es}`}>{esLabel}</span>
+              </div>
             </div>
             <p class="muted">{r.data.summary}</p>
             {r.data.relevance ? (
@@ -259,6 +273,17 @@ const allTypes = [...new Set(
       margin: 0;
       font-size: 16px;
     }
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .pub-date {
+      font-size: 12px;
+      color: rgb(var(--muted));
+      white-space: nowrap;
+    }
     .badge {
       font-size: 12px;
       padding: 6px 10px;
@@ -303,6 +328,7 @@ const allTypes = [...new Set(
     @media (max-width: 600px) {
       h1 { font-size: 32px; }
       .control-label { min-width: unset; }
+      .pub-date { display: none; }
     }
   </style>
 
@@ -331,7 +357,9 @@ const allTypes = [...new Set(
         if (sort === "title") return (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "");
         const da = a.dataset.date ?? "";
         const db = b.dataset.date ?? "";
-        return sort === "oldest" ? da.localeCompare(db) : db.localeCompare(da);
+        if (da !== db) return sort === "oldest" ? da.localeCompare(db) : db.localeCompare(da);
+        // tie-break by title so order is stable
+        return (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "");
       });
 
       hidden.forEach((c) => { c.style.display = "none"; });
