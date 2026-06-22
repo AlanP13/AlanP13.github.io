@@ -13,6 +13,12 @@ const workEntries = allTimeline
 
 const papers = await getCollection("research");
 const papersSorted = [...papers].sort((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0));
+const publishedPapers = papersSorted.filter(
+  (p) => (p.data.publication_status ?? p.data.status) === "published"
+);
+const technicalReports = papersSorted.filter(
+  (p) => (p.data.publication_status ?? p.data.status) !== "published"
+);
 
 const allCerts = await getCollection("certifications");
 const certsFeatured = allCerts
@@ -67,23 +73,28 @@ const certsFeatured = allCerts
       ))}
     </section>
 
-    <!-- Research -->
+    <!-- Publications -->
     <section class="cvSection">
-      <h2 class="cvSectionTitle">Research & Technical Reports</h2>
-      {papersSorted.map((paper) => (
+      <h2 class="cvSectionTitle">Publications</h2>
+      {publishedPapers.map((paper) => (
         <div class="cvPaper">
           <div class="cvPaperHeader">
-            {paper.data.publication_type && (
-              <span class="cvBadge">{paper.data.publication_type.replace(/-/g, " ")}</span>
+            <span class="cvBadge">Published</span>
+            {paper.data.venue && (
+              <span class="cvPaperTerm">{paper.data.venue}</span>
             )}
-            {paper.data.semester && (
-              <span class="cvPaperTerm">{paper.data.semester}</span>
-            )}
-            {paper.data.university && (
-              <span class="cvPaperTerm">{paper.data.university}</span>
+            {paper.data.publication_date && (
+              <span class="cvPaperTerm">{paper.data.publication_date.slice(0, 4)}</span>
             )}
           </div>
           <p class="cvPaperTitle">{paper.data.title}</p>
+          {paper.data.doi && (
+            <p class="cvDoi">
+              <a href={`https://doi.org/${paper.data.doi}`} target="_blank" rel="noopener noreferrer" class="cvLink">
+                DOI: {paper.data.doi}
+              </a>
+            </p>
+          )}
           {paper.data.citation && (
             <p class="cvCitation">{paper.data.citation}</p>
           )}
@@ -99,6 +110,40 @@ const certsFeatured = allCerts
         </div>
       ))}
     </section>
+
+    {technicalReports.length > 0 && (
+      <section class="cvSection">
+        <h2 class="cvSectionTitle">Technical Reports</h2>
+        {technicalReports.map((paper) => (
+          <div class="cvPaper">
+            <div class="cvPaperHeader">
+              {paper.data.publication_type && (
+                <span class="cvBadge">{paper.data.publication_type.replace(/-/g, " ")}</span>
+              )}
+              {paper.data.semester && (
+                <span class="cvPaperTerm">{paper.data.semester}</span>
+              )}
+              {paper.data.university && (
+                <span class="cvPaperTerm">{paper.data.university}</span>
+              )}
+            </div>
+            <p class="cvPaperTitle">{paper.data.title}</p>
+            {paper.data.citation && (
+              <p class="cvCitation">{paper.data.citation}</p>
+            )}
+            {paper.data.links.length > 0 && (
+              <div class="cvPaperLinks">
+                {paper.data.links.map((link) => (
+                  <a href={link.url} class="cvPaperLink" target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </section>
+    )}
 
     <!-- Academic Honors -->
     <section class="cvSection">
@@ -120,14 +165,21 @@ const certsFeatured = allCerts
           <span class="cvEntryRole">Internal Secretary</span>
           <span class="cvEntryOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
         </div>
-        <span class="cvEntryDate">2022</span>
+        <span class="cvEntryDate">Jan 2022 – May 2023</span>
       </div>
       <div class="cvEntry">
         <div class="cvEntryMain">
           <span class="cvEntryRole">Member</span>
           <span class="cvEntryOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
         </div>
-        <span class="cvEntryDate">2021-2023</span>
+        <span class="cvEntryDate">2021–2023</span>
+      </div>
+      <div class="cvEntry">
+        <div class="cvEntryMain">
+          <span class="cvEntryRole">Member</span>
+          <span class="cvEntryOrg">IEEE</span>
+        </div>
+        <span class="cvEntryDate">May 2024 – Present</span>
       </div>
     </section>
 
@@ -310,6 +362,11 @@ const certsFeatured = allCerts
       color: rgb(var(--text));
       margin: 0 0 4px;
       line-height: 1.4;
+    }
+    .cvDoi {
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0 0 4px;
     }
     .cvCitation {
       font-size: 12px;

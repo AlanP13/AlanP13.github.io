@@ -29,14 +29,6 @@ const statusLabels: Record<string, string> = {
   accepted: "Accepted",
 };
 
-const typeLabels: Record<string, string> = {
-  "journal-article": "Journal Article",
-  "conference-paper": "Conference Paper",
-  preprint: "Preprint",
-  "technical-report": "Technical Report",
-  thesis: "Thesis",
-  "working-paper": "Working Paper",
-};
 
 items.sort((a, b) => {
   const ea = a.data.publication_status ?? a.data.status;
@@ -51,11 +43,6 @@ items.sort((a, b) => {
 });
 
 const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
-const allTypes = [...new Set(
-  items
-    .map((r) => r.data.publication_type)
-    .filter(Boolean) as string[]
-)].sort();
 ---
 
 <SiteLayout
@@ -78,18 +65,6 @@ const allTypes = [...new Set(
         <option value="title">Title A → Z</option>
       </select>
     </div>
-
-    {allTypes.length > 1 && (
-      <div class="control-row">
-        <span class="control-label">Type</span>
-        <div class="chips" id="type-chips" data-group="type">
-          <button class="chip active" data-value="all">All</button>
-          {allTypes.map((t) => (
-            <button class="chip" data-value={t}>{typeLabels[t] ?? t}</button>
-          ))}
-        </div>
-      </div>
-    )}
 
     {allAreas.length > 0 && (
       <div class="control-row">
@@ -130,6 +105,7 @@ const allTypes = [...new Set(
                   </time>
                 )}
                 <span class={`badge ${es}`}>{esLabel}</span>
+                {r.data.doi && <span class="badge doi-badge">Zenodo DOI</span>}
               </div>
             </div>
             <p class="muted">{r.data.summary}</p>
@@ -300,6 +276,11 @@ const allTypes = [...new Set(
     .badge.submitted {
       border-color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
       color: color-mix(in srgb, rgb(var(--accent)) 75%, rgb(var(--muted)));
+    }
+    .badge.doi-badge {
+      border-color: color-mix(in srgb, rgb(var(--accent)) 38%, transparent);
+      color: color-mix(in srgb, rgb(var(--accent)) 68%, rgb(var(--muted)));
+      background: color-mix(in srgb, rgb(var(--accent)) 8%, transparent);
     }
     .badge.in-progress {
       border-color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));

@@ -31,8 +31,7 @@ const byOrderDescThenTitle = (
   return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 };
 
-const featured = await getCollection("projects");
-const projects = featured
+const projects = (await getCollection("projects"))
   .filter((p) => p.data.featured)
   .slice(0, 3)
   .sort(byOrderDescThenTitle);
@@ -61,9 +60,24 @@ const certsSorted = allCertsSorted.slice(0, 2);
 const certsTotal = allCertsSorted.length;
 
 const researchItems = await getCollection("research");
+const publishedPapers = [...researchItems]
+  .filter((r) => (r.data.publication_status ?? r.data.status) === "published")
+  .sort((a, b) => {
+    const da = a.data.publication_date ?? "";
+    const db = b.data.publication_date ?? "";
+    if (da !== db) return db.localeCompare(da);
+    return (b.data.order ?? 0) - (a.data.order ?? 0);
+  });
+const publishedCount = publishedPapers.length;
 const completedResearch = researchItems.filter(
   (r) => (r.data.publication_status ?? r.data.status) === "completed"
 ).length;
+const paperContributions: Record<string, string> = {
+  "securing-connected-systems-wsn-iot-cps": "Layered defense taxonomy across WSNs, IoT/CPS, and virtualized networks",
+  "scalable-analytics-enterprise-decisions": "Hybrid forecasting framework: five-stage data-to-decision pipeline",
+  "embedded-to-edge-ai-reference-architecture": "Edge-AI reference architecture across four hardware deployment tiers",
+  "data-mining-financial-systems": '"One anomaly, three meanings" framework for financial anomaly detection',
+};
 
 const personSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -464,6 +478,47 @@ const personSchema = JSON.stringify({
   </section>
 
   <section class="block">
+    <h2>Published Work</h2>
+    <p class="muted">Engineering-to-Research Monograph Series — open-access publications indexed on Zenodo and OpenAIRE.</p>
+    <div class="pubList">
+      {publishedPapers.map((paper) => {
+        const contrib = paperContributions[paper.slug];
+        const year = paper.data.publication_date?.slice(0, 4) ?? "2026";
+        return (
+          <div class="pubEntry">
+            <div class="pubMain">
+              <div class="pubMeta">
+                <span class="pubBadge">Published</span>
+                <span class="pubVenueText">{paper.data.venue}</span>
+                <span class="pubYearSep" aria-hidden="true">·</span>
+                <span class="pubYearText">{year}</span>
+              </div>
+              <p class="pubTitle">
+                <a class="pubTitleLink" href={`/research/${paper.slug}`}>{paper.data.title}</a>
+              </p>
+              {contrib && <p class="pubContrib">{contrib}</p>}
+            </div>
+            {paper.data.doi && (
+              <div class="pubRight">
+                <a
+                  class="pubDoiLink"
+                  href={`https://doi.org/${paper.data.doi}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  DOI →
+                </a>
+                <span class="pubDoiText">{paper.data.doi}</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+    <p class="allProjects"><a href="/research">View all research →</a></p>
+  </section>
+
+  <section class="block">
     <h2>Research Focus</h2>
     <p class="muted">
       Doctoral research at University of the Cumberlands, applied to enterprise
@@ -475,7 +530,7 @@ const personSchema = JSON.stringify({
       <span class="rfChip">Financial Systems Modernization</span>
     </div>
     <p class="rfLink">
-      {completedResearch} completed technical reports. <a href="/research">View research →</a>
+      {publishedCount} published{completedResearch > 0 ? ` · ${completedResearch} completed` : ""}. <a href="/research">View all research →</a>
     </p>
     <p class="rfOrcid">
       ORCID: <a href="https://orcid.org/0009-0004-8302-5090" target="_blank" rel="noreferrer">0009-0004-8302-5090 →</a>
@@ -702,7 +757,7 @@ const personSchema = JSON.stringify({
   <style>
     /* HERO */
     .hero {
-      padding-top: 20px;
+      padding-top: 44px;
       padding-bottom: 8px;
 
       
@@ -727,7 +782,7 @@ const personSchema = JSON.stringify({
     .lead {
       font-size: 20px;
       line-height: 1.75;
-      max-width: 88ch;
+      max-width: 72ch;
       margin: 0 0 12px;
     }
 
@@ -1234,6 +1289,100 @@ const personSchema = JSON.stringify({
     }
     .rfOrcid a:hover {
       text-decoration: underline;
+    }
+
+    /* Published Work */
+    .pubList {
+      margin-top: 12px;
+      border: 1px solid rgb(var(--border));
+      border-radius: var(--r);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .pubEntry {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 16px;
+    }
+    .pubEntry + .pubEntry {
+      border-top: 1px solid rgb(var(--border) / 0.6);
+    }
+    .pubMain { flex: 1; min-width: 0; }
+    .pubMeta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .pubBadge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, rgb(var(--accent)) 14%, transparent);
+      color: rgb(var(--accent));
+      border: 1px solid color-mix(in srgb, rgb(var(--accent)) 28%, transparent);
+      flex-shrink: 0;
+    }
+    .pubVenueText {
+      font-size: 12px;
+      color: rgb(var(--muted));
+    }
+    .pubYearSep {
+      font-size: 12px;
+      color: rgb(var(--border));
+    }
+    .pubYearText {
+      font-size: 12px;
+      color: rgb(var(--muted));
+    }
+    .pubTitle {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+    .pubTitleLink {
+      color: rgb(var(--text));
+      text-decoration: none;
+    }
+    .pubTitleLink:hover { color: rgb(var(--accent)); }
+    .pubContrib {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: rgb(var(--muted));
+      line-height: 1.5;
+    }
+    .pubRight {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .pubDoiLink {
+      font-size: 12px;
+      color: rgb(var(--accent));
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .pubDoiLink:hover { text-decoration: underline; }
+    .pubDoiText {
+      font-size: 11px;
+      color: rgb(var(--muted));
+      font-family: monospace;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 640px) {
+      .pubEntry { flex-direction: column; gap: 8px; }
+      .pubRight { align-items: flex-start; }
+      .pubDoiText { display: none; }
     }
 
     /* Skills grid */
