@@ -64,8 +64,12 @@ Ordered by impact, readiness, and dependency risk.
 | 9 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
 | 10 | [~] | **2A-013 / 2B-008 — Research profile distribution** | Zenodo deposit complete for Vol. 1 (DOI: 10.5281/zenodo.20733453), MDX added 2026-06-20. Vol. 7 (*Scalable Analytics for Enterprise Decisions*, DOI: 10.5281/zenodo.20733992) MDX added 2026-06-21. Remaining blocker: ResearchGate profile + Zenodo deposits for the 3 coursework reports. |
 | 11 | [~] | **Structured-data completion** | Blocked on publication dates and external canonical URLs |
+| 12 | [>] | **AUD-001 — Homepage Publications section** | P0 for O1/EB1: surface all 4 Zenodo DOIs (Vol 1/4/7/8) as a dedicated "Published Work" section on the homepage. Currently invisible from the landing page. See Audit Findings 2026-06-22. |
+| 13 | [>] | **AUD-002 — CV Publications split** | Separate `cv.astro` "Research & Technical Reports" into two sections: "Publications" (DOI papers, `publication_status: published`) above "Technical Reports" (`publication_status: completed`). Critical for O1/EB1 presentation. |
+| 14 | [ ] | **AUD-003 — Hero + About copy polish** | Remove emoji from hero `<h1>`; fix IEEE-HKN date on about page; retitle gallery section; add IEEE member role to Leadership & Service. |
+| 15 | [ ] | **AUD-004 — Research index type filter cleanup** | All coursework is now in archive; only `technical-report` type remains in research collection. Type filter row is redundant — remove or convert to publication-status filter. |
 
-Recommended next: review remaining roadmap items for any unblocked P1/P2 work.
+Recommended next: AUD-001 (homepage Publications) and AUD-002 (CV split) are the highest-value unblocked items for O1/EB1 presentation. AUD-003 is a quick copy pass.
 
 ---
 
@@ -681,6 +685,51 @@ Schema and sample file created 2026-06-15. `certifications` collection defined i
 | UX-FIX-002 | [x] | XS | **`/cv` not in main nav** | Shipped 2026-06-15: CV added to desktop nav and mobile drawer (after Research) |
 | CODE-FIX-001 | [x] | XS | **SiteLayout CSS cleanup** | Shipped 2026-06-15: removed nested `@media`, deduplicated `.logo-img` selectors, removed dead `main.wrap.main` padding and `section scroll-margin-top` from global.css |
 | UX-FIX-003 | [x] | XS | **Missing `<meta name="theme-color">`** | Shipped 2026-06-15: dark `#030b14` + light `#e1e8f0` via `media` attribute |
+
+---
+
+### Audit Findings — 2026-06-22 (Full Stack + O1/EB1 Audit)
+
+*Full audit run: graphify update (159 nodes, 22 communities), taste-skill pre-flight, O1/EB1 credential mapping, code and security review.*
+
+#### O1/EB1 Credential Gaps (highest priority)
+
+| # | Status | Effort | Item | Evidence mapped |
+|---|---|---|---|---|
+| AUD-001 | [>] | S | **Homepage "Published Work" section** — Add a dedicated section listing all 4 Zenodo DOIs (Vol 1/4/7/8) with DOI links, venues, and publication dates. Currently zero DOIs are visible from the homepage landing page. An adjudicator sees no publications on first load. | USCIS criterion: scholarly articles |
+| AUD-002 | [>] | S | **CV Publications split** — Split `cv.astro` "Research & Technical Reports" into: (1) "Publications" for `publication_status: published` papers with DOIs rendered prominently; (2) "Technical Reports" for `publication_status: completed`. Filter by field, not by manually ordering MDX. | USCIS criterion: scholarly articles; authorship |
+| AUD-014 | [ ] | M | **Original Contributions callout** — Surface the named original contributions from the monographs somewhere above the fold: "one anomaly, three meanings" (Vol 8), layered defense taxonomy (Vol 1), edge-AI reference architecture (Vol 4), hybrid forecasting framework (Vol 7). Currently buried in detail page body text only. | USCIS criterion: original contributions of major significance |
+| AUD-015 | [ ] | S | **CV: add IEEE member role** — The IEEE member role (May 2024 – present) is on the homepage credCard but missing from the CV Memberships section. CV is the document O1/EB1 attorneys pull first. | USCIS criterion: professional association membership |
+
+#### Design + Copy (taste-skill pre-flight failures)
+
+| # | Status | Effort | Item | File |
+|---|---|---|---|---|
+| AUD-003 | [ ] | XS | **Remove `👋` emoji from hero `<h1>`** — Wrong register for recruiter and O1/EB1 audiences. Replace with a period or remove entirely. | `src/pages/index.astro:108` |
+| AUD-004 | [ ] | XS | **Fix IEEE-HKN Internal Secretary date on About page** — Shows `"2022"` but the credential inventory specifies Jan 2022 – May 2023. | `src/pages/about.astro:167` |
+| AUD-005 | [ ] | XS | **Retitle About page gallery section** — `"Some of the places I've visited!"` reads as personal blog. Replace with a neutral title like `"Places"` or remove the title entirely and let the images speak. | `src/pages/about.astro:163` |
+| AUD-006 | [ ] | XS | **Add IEEE member role to Leadership & Service on About** — Currently only Internal Secretary + Dean's List. IEEE member (May 2024 – present) is missing from the about page service block. | `src/pages/about.astro` |
+| AUD-007 | [ ] | XS | **Reduce lead paragraph `max-width` from 88ch to 72ch** — 88ch is too wide for comfortable reading at large viewports; standard readable max is 65–72ch. | `src/pages/index.astro:733` |
+| AUD-008 | [ ] | XS | **Increase hero `padding-top` from 20px to at least 40px** — 20px runs the hero content nearly into the nav bar on tall viewports. | `src/pages/index.astro:705` |
+
+#### Research Index + Filtering
+
+| # | Status | Effort | Item | File |
+|---|---|---|---|---|
+| AUD-009 | [ ] | XS | **Remove or convert Type filter on research index** — All coursework reports are now in the archive collection. Only `technical-report` type remains in research. The type filter is gated behind `allTypes.length > 1` so it is already hidden — confirm this is intentional and document it, or remove the dead filter code. | `src/pages/research/index.astro:82` |
+| AUD-010 | [ ] | XS | **Show DOI badge on research index cards for published papers** — Published Zenodo papers have a DOI but the research index card shows no visual differentiation from completed-but-not-published items. Add a small DOI chip or "Published" badge to cards where `doi` is populated. | `src/pages/research/index.astro` |
+
+#### Code Quality
+
+| # | Status | Effort | Item | File |
+|---|---|---|---|---|
+| AUD-011 | [ ] | XS | **Fix `completedResearch` label** — Counts `publication_status === "completed" OR "published"` but the homepage label says "completed technical reports." Published DOI papers are not technical reports. Change label to "published and completed papers" or split the count. | `src/pages/index.astro:64–66,478` |
+| AUD-012 | [ ] | XS | **Remove unused `featured` intermediate const** — `const featured = await getCollection("projects")` at line 34 is immediately shadowed by `const projects = featured.filter(...)` at line 35. Rename the collection call directly into `projects`. | `src/pages/index.astro:34` |
+| AUD-013 | [ ] | XS | **Research Focus section: surface published count separately** — The homepage now has 4 published DOI papers and several completed-only reports. The single count line should distinguish "4 published (Zenodo DOI)" from "X completed" to be credibility-accurate. | `src/pages/index.astro:478` |
+
+#### Security
+
+No critical findings. All external links use `rel="noreferrer"`. No user input surfaces. `define:vars` in `about.astro` injects build-time static data only — safe. GitHub Pages platform limitation: no CSP headers possible without a CDN layer.
 
 ---
 
