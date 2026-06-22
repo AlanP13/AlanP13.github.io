@@ -52,7 +52,7 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
   <div class="page-header">
     <h1>Research</h1>
     <p class="muted">
-      Applied research work related to AI and Data Science in enterprise systems.
+      4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE. Applied doctoral research at University of the Cumberlands.
     </p>
   </div>
 
@@ -94,7 +94,6 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
             data-areas={areasStr}
             data-date={pubDate}
             data-title={r.data.title ?? ""}
-            data-type={pubType}
           >
             <div class="top">
               <h2>{r.data.title}</h2>
@@ -319,7 +318,6 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
     const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
     const cards = [...document.querySelectorAll<HTMLElement>(".card[data-areas]")];
 
-    let activeType = "all";
     let activeArea = "all";
 
     function applyFilters() {
@@ -327,10 +325,8 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
 
       const visible = cards.filter((c) => {
         const areas = c.dataset.areas ? c.dataset.areas.split(",") : [];
-        const type = c.dataset.type ?? "";
-        const typeOk = activeType === "all" || type === activeType;
         const areaOk = activeArea === "all" || areas.includes(activeArea);
-        return typeOk && areaOk;
+        return areaOk;
       });
       const hidden = cards.filter((c) => !visible.includes(c));
 
@@ -362,7 +358,6 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
       });
     }
 
-    wireChips("type-chips", (v) => { activeType = v; });
     wireChips("area-chips", (v) => { activeArea = v; });
     sortSelect.addEventListener("change", applyFilters);
   </script>

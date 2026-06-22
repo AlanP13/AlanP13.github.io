@@ -59,6 +59,7 @@ const schemaObj: Record<string, unknown> = {
 };
 if (d.abstract) schemaObj.abstract = d.abstract;
 if (d.keywords?.length) schemaObj.keywords = d.keywords.join(", ");
+if (d.publication_date) schemaObj.datePublished = d.publication_date;
 if (d.university)
   schemaObj.publisher = {
     "@type": "EducationalOrganization",
