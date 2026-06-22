@@ -1,0 +1,105 @@
+---
+title: "Data Mining for Financial Systems: Anomaly Detection, Risk Signals, and Interpretability"
+status: published
+area: ["Data Science", "Financial Systems", "Machine Learning"]
+summary: "Data mining techniques applied to financial systems — anomaly detection across transaction, market, and operational data, with a unifying interpretability model that explains why the same anomaly means different things in each context."
+relevance: "Directly maps to my production work at Genworth: anomaly patterns in derivative pricing and fund accounting data, reconciliation failures as signals, and the regulatory requirement that analytical conclusions be explainable to risk and audit functions."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20802595"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Data-Mining-for-Financial-Systems-Vol8"
+order: 3
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 8"
+publication_date: "2026-06-21"
+version: "1.0"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20802595"
+zenodo_url: "https://zenodo.org/records/20802595"
+github_url: "https://github.com/AlanP13/Data-Mining-for-Financial-Systems-Vol8"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Data Mining for Financial Systems: Anomaly Detection, Risk Signals, and Interpretability (Version 1.0) [Technical report]. Engineering-to-Research Monograph Series, Vol. 8. Zenodo. https://doi.org/10.5281/zenodo.20802595"
+
+# Abstract
+abstract: >-
+  Financial data mining operates under a constraint absent in most ML literature:
+  the same anomaly can simultaneously represent a fraud signal, a data quality
+  failure, and a legitimate market event. This work formalizes this ambiguity as
+  the "one anomaly, three meanings" problem and proposes a context-resolution
+  framework that classifies detected anomalies by source layer (transaction,
+  market, operational) before routing to the appropriate response function.
+  Unsupervised detection methods (Isolation Forest, DBSCAN, autoencoder-based
+  reconstruction) and supervised risk classification approaches are evaluated
+  against financial-domain requirements: label scarcity, class imbalance,
+  concept drift under regime change, and regulatory auditability. An
+  interpretability layer maps model outputs to the risk vocabulary used by
+  financial risk, compliance, and audit functions. A synthetic-data reference
+  implementation accompanies the paper for reproducibility.
+
+keywords:
+  - data mining
+  - anomaly detection
+  - financial systems
+  - fraud detection
+  - data quality
+  - Isolation Forest
+  - autoencoders
+  - interpretable ML
+  - model risk management
+  - regulatory compliance
+  - concept drift
+  - synthetic data
+---
+
+
+## Context
+
+Financial systems produce anomalies continuously. A price spike, a reconciliation break, a missing settlement instruction — each looks the same to a detection model but demands a completely different response. Fraud teams, data operations teams, and risk teams each own a piece of the problem and speak different languages about what they see.
+
+This work addresses that coordination failure directly: a detection-and-routing framework that separates the statistical question (is this anomalous?) from the semantic question (anomalous *as what*?).
+
+## What the Paper Covers
+
+### The "One Anomaly, Three Meanings" Problem
+The core contribution: a formalization of the ambiguity in financial anomaly signals. A single detected anomaly may simultaneously be:
+1. **A fraud or integrity signal** — intentional manipulation, unauthorized transaction
+2. **A data quality failure** — upstream feed error, transformation bug, stale reference data
+3. **A legitimate market event** — volatility spike, corporate action, index rebalancing
+
+Conflating these leads to both false suppression (real fraud dismissed as data noise) and false escalation (data pipeline errors triggering risk alerts). The framework routes by source layer before interpretation.
+
+### Detection Methods Under Financial Constraints
+Evaluation of anomaly detection approaches against the specific constraints of financial data:
+- **Label scarcity** — confirmed fraud and confirmed data errors are rare; most labeled data is negative
+- **Class imbalance** — anomalies are rare by definition; standard accuracy metrics are misleading
+- **Concept drift** — market regimes shift; models trained on one volatility environment degrade in another
+- **Auditability** — regulatory and model risk requirements demand that outputs be explainable to non-technical reviewers
+
+Methods covered: Isolation Forest, DBSCAN, autoencoder-based reconstruction error, and ensemble risk classifiers.
+
+### Interpretability Layer
+A mapping from model outputs (anomaly scores, reconstruction errors, cluster outliers) to the risk vocabulary used by financial risk, compliance, and audit functions — enabling model outputs to be actioned without requiring technical ML expertise downstream.
+
+### Synthetic-Data Reference Implementation
+A companion implementation using fully synthetic financial data — transaction records, pricing feeds, and reconciliation outputs — designed for reproducibility without any employer or client data.
+
+## Why It Matters (Portfolio Angle)
+
+The framing in this paper comes directly from production experience:
+- reconciliation failures that are sometimes data pipeline bugs and sometimes genuine pricing discrepancies
+- the organizational problem of routing anomalies to the right team when detection is centralized but response is siloed
+- the regulatory pressure to explain why a model flagged something in terms an auditor can evaluate
+
+The interpretability model developed here connects to my broader doctoral research interest in AI governance — specifically, how to make automated signals legible to human oversight functions in regulated environments.
+
+---

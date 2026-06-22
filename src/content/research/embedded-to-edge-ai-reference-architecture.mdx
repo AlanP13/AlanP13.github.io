@@ -1,0 +1,99 @@
+---
+title: "Embedded-to-Edge-AI Reference Architecture: From Constrained Devices to Inference at the Edge"
+status: published
+area: ["Embedded Systems", "Edge AI", "Systems Architecture"]
+summary: "Reference architecture for deploying AI inference across the embedded-to-edge continuum — covering hardware tiers, model compression and quantization, real-time OS constraints, and a security boundary model for edge deployments."
+relevance: "Bridges my embedded systems coursework (ECE 442 SensoryPi, AgriEdge) with AI governance research: how to reason about trust, safety, and resource constraints when AI operates at the physical edge of a system."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20784402"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Embedded-to-Edge-AI-Reference-Architecture-Vol4"
+order: 2
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 4"
+publication_date: "2026-06-21"
+version: "1.0"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20784402"
+zenodo_url: "https://zenodo.org/records/20784402"
+github_url: "https://github.com/AlanP13/Embedded-to-Edge-AI-Reference-Architecture-Vol4"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Embedded-to-Edge-AI Reference Architecture: From Constrained Devices to Inference at the Edge (Version 1.0) [Technical report]. Engineering-to-Research Monograph Series, Vol. 4. Zenodo. https://doi.org/10.5281/zenodo.20784402"
+
+# Abstract
+abstract: >-
+  Deploying AI inference on embedded and edge hardware requires reasoning across
+  hardware capability tiers, model compression constraints, real-time operating
+  system guarantees, and a security boundary model that differs fundamentally
+  from cloud-hosted AI. This work presents a reference architecture spanning
+  four deployment tiers — microcontroller-class, single-board-computer-class,
+  edge-gateway, and far-edge-server — with a systematic treatment of model
+  quantization, pruning, and knowledge distillation strategies appropriate to
+  each tier. RTOS scheduling constraints and their interaction with inference
+  latency budgets are analyzed. A security framework addresses physical access
+  threats, secure boot, firmware attestation, and inference integrity in
+  environments without persistent connectivity. Case studies draw from
+  agricultural IoT (sensor fusion, intermittent connectivity) and embedded
+  signal processing applications, grounded in 2023–2026 literature.
+
+keywords:
+  - edge AI
+  - embedded systems
+  - TinyML
+  - model quantization
+  - knowledge distillation
+  - real-time operating systems
+  - edge inference
+  - secure boot
+  - IoT security
+  - sensor fusion
+  - agricultural IoT
+  - AI deployment
+---
+
+
+## Context
+
+AI inference is moving from cloud data centers to devices with milliwatts of power and kilobytes of RAM. This shift changes every assumption: model size, latency budgets, connectivity reliability, physical security, and update mechanisms all behave differently at the embedded edge.
+
+This work builds a reference architecture that spans the full continuum — from microcontrollers running TinyML to edge-gateway servers running full-precision inference — and addresses the engineering decisions specific to each tier.
+
+## What the Paper Covers
+
+### Hardware Tier Model
+A four-tier classification: MCU-class (ARM Cortex-M, &lt;1 MB RAM), SBC-class (Raspberry Pi / BeagleBone), edge-gateway (NVIDIA Jetson, Intel Neural Compute), and far-edge-server (rack-mounted GPU at the network edge). Each tier has distinct deployment constraints, update mechanisms, and governance implications.
+
+### Model Compression Strategies
+Quantization (INT8/INT4, post-training and quantization-aware training), pruning (structured vs. unstructured), and knowledge distillation — analyzed against accuracy-latency-memory tradeoffs for each hardware tier. Practical selection criteria for constrained deployment environments.
+
+### RTOS Scheduling and Inference Latency
+How real-time OS task scheduling constraints (priority inversion, interrupt latency, deterministic execution windows) interact with neural network inference timing — and design patterns for meeting hard real-time requirements alongside inference workloads.
+
+### Security Boundary Model for Edge AI
+Physical access threats absent in cloud deployments: firmware extraction, adversarial physical input, model inversion, and supply chain compromise. Defense stack: secure boot, cryptographic firmware attestation, inference-time integrity checks, and offline update verification.
+
+### Case Studies
+Two implementation cases:
+- **AgriEdge**: sensor fusion on intermittently-connected agricultural IoT nodes — scheduling, power budget, and edge inference design
+- **SensoryPi (ECE 442)**: embedded signal processing on a Raspberry Pi platform — architecture decisions, resource profiling, and integration with cloud telemetry
+
+## Why It Matters (Portfolio Angle)
+
+This research develops the design vocabulary for a class of problems that AI governance literature rarely addresses:
+- what does "safe deployment" mean when the device cannot call home?
+- how do resource constraints change the threat model for an AI system?
+- where does the trust boundary sit when there is no persistent connectivity?
+
+The architecture presented is directly relevant to AI governance research at the doctoral level — extending explainability and safety concerns from cloud-based ML systems to physically-deployed inference at the edge.
+
+---

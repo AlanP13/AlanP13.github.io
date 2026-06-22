@@ -757,6 +757,7 @@ Items from the original audit backlog are incorporated into Phase 2 above. Cross
 | 2B-004 | 2026-06-15 | Academic CV `/cv` live — Education, Research, Academic Honors, Memberships & Leadership, abbreviated work history, top certs; CV link in About page social row |
 | 2A-013 (partial) | 2026-06-20 | *Securing Connected Systems* (Engineering-to-Research Monograph Series Vol. 1) added to research collection — DOI 10.5281/zenodo.20733453; `zenodo_url`, `doi`, `github_url`, `publication_date` all populated; `publication_status: published`; renders on `/research` and `/research/securing-connected-systems-wsn-iot-cps` |
 | 2A-013 (partial) | 2026-06-21 | *Scalable Analytics for Enterprise Decisions* (Engineering-to-Research Monograph Series Vol. 7) added to research collection — DOI 10.5281/zenodo.20733992; `zenodo_url`, `doi`, `github_url`, `publication_date` all populated; `publication_status: published`; renders on `/research` and `/research/scalable-analytics-enterprise-decisions` |
+| 2A-013 (partial) | 2026-06-22 | *Embedded-to-Edge-AI Reference Architecture* (Vol. 4, DOI 10.5281/zenodo.20784402) and *Data Mining for Financial Systems* (Vol. 8, DOI 10.5281/zenodo.20802595) added to research collection; both `publication_status: published`; render on `/research` and their respective detail slugs |
 
 **Sprint 2 live deploy verified — 2026-06-08**
 
