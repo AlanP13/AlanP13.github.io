@@ -249,7 +249,6 @@ footer.wrap.foot {
   height: 2px;
   border-radius: 999px;
   opacity: 0;
-  /* fades in/out in animation */
   background: linear-gradient(90deg,
       transparent,
       rgb(var(--accent) / 0.85),
@@ -257,6 +256,7 @@ footer.wrap.foot {
       transparent);
   filter: blur(0.25px);
   transform: rotate(-18deg) translate3d(0, 0, 0);
+  will-change: transform, opacity;
 }
 
 /* Fix comet glow */

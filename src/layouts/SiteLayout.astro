@@ -10,7 +10,7 @@ const isCurrentPath = (href: string) =>
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark" data-accent="pluto" data-bgfx="off">
+<html lang="en" data-theme="dark" data-accent="pluto" data-bgfx="on">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -571,9 +571,7 @@ const isCurrentPath = (href: string) =>
       }
 
       .main {
-        max-width: none; /* remove cap */
-        width: 99%;
-        border-radius: 1%;
+        border-radius: 20px;
       }
 
       main.wrap.main {
@@ -599,7 +597,7 @@ const isCurrentPath = (href: string) =>
         border-bottom-right-radius: 8px;
         background: rgb(var(--card));
         color: rgb(var(--text));
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
         text-decoration: none;
         transform: translate(-50%, -100%);
@@ -667,7 +665,7 @@ const isCurrentPath = (href: string) =>
         padding: 14px 16px;
         border: 1px solid rgb(var(--border));
         border-radius: var(--r);
-        background: rgba(255, 255, 255, 0.02);
+        background: var(--card-bg);
         backdrop-filter: blur(10px);
         flex-wrap: wrap;
       }
@@ -755,7 +753,7 @@ const isCurrentPath = (href: string) =>
 
       .chip {
         border: 1px solid rgb(var(--border));
-        background: rgba(255, 255, 255, 0.02);
+        background: var(--card-bg);
         color: rgb(var(--text));
         border-radius: 999px;
         padding: 8px 10px;
@@ -849,7 +847,7 @@ const isCurrentPath = (href: string) =>
         align-items: center;
         color: rgb(var(--text));
         font-weight: 650;
-        font-size: 14px;
+        font-size: 15px;
       }
 
       .spark {
@@ -862,7 +860,7 @@ const isCurrentPath = (href: string) =>
 
       .popClose {
         border: 1px solid rgb(var(--border));
-        background: rgba(255, 255, 255, 0.02);
+        background: var(--card-bg);
         color: rgb(var(--muted));
         border-radius: 10px;
         padding: 6px 8px;
@@ -1014,7 +1012,6 @@ const isCurrentPath = (href: string) =>
         align-items: center;
         gap: 10px;
         color: color-mix(in srgb, rgb(var(--muted)) 90%, rgb(var(--text)));
-        font-size: 13px;
         user-select: none;
       }
       .fxRow input {
@@ -1057,13 +1054,17 @@ const isCurrentPath = (href: string) =>
           padding-top: calc(var(--header-h, 140px) + 18px);
           padding-bottom: 90px;
         }
+
+        .main {
+          border-radius: 10px;
+        }
       }
 
       .foot {
         padding-top: 32px;
         padding-bottom: 40px;
         color: rgb(var(--muted));
-        font-size: 13px;
+        font-size: 12px;
         border-top: 1px solid rgb(var(--border) / 0.5);
       }
 
