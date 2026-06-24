@@ -27,12 +27,6 @@ html {
   background: rgb(var(--bg));
 }
 
-/* If you have a wrapper behind main, also ensure it matches */
-.page {
-  background: rgb(var(--bg));
-}
-
-
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
