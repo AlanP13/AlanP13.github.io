@@ -1,6 +1,6 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { FileText, LinkedinLogo, GithubLogo, Envelope } from "@phosphor-icons/react";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -22,8 +22,8 @@ const orgLogos = Object.fromEntries(
 );
 
 const byOrderDescThenTitle = (
-  a: (typeof projects)[0],
-  b: (typeof projects)[0],
+  a: CollectionEntry<"projects">,
+  b: CollectionEntry<"projects">,
 ) => {
   const ao = a.data.order ?? 0;
   const bo = b.data.order ?? 0;
@@ -104,6 +104,12 @@ const personSchema = JSON.stringify({
     "https://github.com/AlanP13",
     "https://orcid.org/0009-0004-8302-5090",
   ],
+  workExample: publishedPapers.map((p) => ({
+    "@type": "ScholarlyArticle",
+    name: p.data.title,
+    url: `https://alanp13.github.io/research/${p.slug}`,
+    ...(p.data.doi ? { identifier: `https://doi.org/${p.data.doi}` } : {}),
+  })),
 });
 ---
 
@@ -786,23 +792,12 @@ const personSchema = JSON.stringify({
       margin: 0 0 12px;
     }
 
-    .sub {
-      color: rgb(var(--muted));
-      font-size: 17px; /* new */
-      max-width: 88ch;
-      margin: 0;
-      line-height: 1.75;
-      opacity: 0.95;
-    }
     @media (max-width: 620px) {
       .kicker {
         font-size: 14px;
       }
       .lead {
         font-size: 18px;
-      }
-      .sub {
-        font-size: 16px;
       }
     }
     .wave {

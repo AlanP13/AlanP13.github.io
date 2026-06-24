@@ -13,6 +13,10 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await item.render();
 const d = item.data;
+const metaDescription = (() => {
+  const raw = d.abstract ?? d.summary ?? "";
+  return raw.length > 155 ? raw.slice(0, 152) + "…" : raw;
+})();
 
 const typeLabels: Record<string, string> = {
   "technical-report": "Technical Report",
@@ -72,7 +76,7 @@ const schemaJson = JSON.stringify(schemaObj);
 
 <SiteLayout
   title={`${d.title} — Alan Palayil`}
-  description={d.abstract ?? d.summary}
+  description={metaDescription}
   schemaJson={schemaJson}
 >
   <article class="page">
