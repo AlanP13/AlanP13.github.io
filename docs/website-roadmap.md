@@ -1,7 +1,7 @@
 # Website Roadmap — Alan Palayil Portfolio
 
 Master backlog for https://alanp13.github.io  
-Last full audit: **2026-06-23** (backlog sprint — all P1/P2 quick-wins shipped)  
+Last full audit: **2026-06-24** (galaxy + UI consistency sprint — detail pages, star loop, comet fix)  
 Repository baseline: June 2026.
 
 This is a public repository. Keep this document limited to public-safe website
@@ -37,6 +37,25 @@ outside this repository.
 ## Open Backlog
 
 Ordered within each priority level by impact, then readiness.
+
+### UI and design
+
+| ID | Status | Priority | Effort | Item | Notes |
+|---|---|---|---|---|---|
+| UI-001 | [x] | P1 | XS | **Galaxy hidden from first-time visitors** — `data-bgfx="off"` HTML default meant no visitor saw the galaxy until they toggled it. Changed default to `"on"`; localStorage still overrides. | `src/layouts/SiteLayout.astro:13` |
+| UI-002 | [x] | P1 | S | **Comets never animated** — `@keyframes cometFly` was entirely absent; all three comets permanently at `opacity: 0`. Added keyframes to `stars.css`. | `src/styles/stars.css` |
+| UI-003 | [x] | P1 | S | **Star loop break** — `drift1`/`drift2` used `transform: translate3d(-80px, 50px, 0)` / `(70px, -40px, 0)`. Neither is a multiple of tile sizes (283×217, 401×263), causing a visible jump at loop. Switched to `background-position` animation by exactly one tile cycle — wraps natively. | `src/styles/stars.css` |
+| UI-004 | [x] | P1 | XS | **Galaxy blocked by body width** — `.main` was `width: 99%` with no centering, covering the full viewport and hiding the `bgfx` layer at all widths. Removed inline width; `max-width: 1180px; margin: 0 auto` via `.wrap` now centers the panel, revealing galaxy at viewports wider than 1180px. | `src/layouts/SiteLayout.astro` |
+| UI-005 | [x] | P1 | XS | **Project detail black background** — `.page` inside `projects/[slug].astro` applied `background: rgb(var(--card) / 0.75)` — 75% opaque dark layered on top of the already-dark `main.wrap.main` glass panel, producing a near-black surface. Removed the inner background; the SiteLayout panel provides the glass surface. | `src/pages/projects/[slug].astro` |
+| UI-006 | [x] | P1 | XS | **`.chip.featured` CSS syntax bug** — `border-color: rgba(var(--accent), 0.5)` is invalid; `rgba()` cannot consume CSS custom properties that expand to space-separated RGB integers. Border rendered transparent. Fixed to `rgb(var(--accent) / 0.5)`. | `src/pages/projects/[slug].astro` |
+| UI-007 | [x] | P2 | XS | **Side-stripe on `.weCard::before`** — `border-left: 3px` accent stripe on work-experience cards, an impeccable absolute ban. Removed entirely. | `src/pages/index.astro` |
+| UI-008 | [x] | P2 | XS | **Uppercase eyebrow on `.skillCat h3`** — Six instances of `text-transform: uppercase; letter-spacing: 0.08em` on skill category headings (the AI scaffold reflex). Replaced with `font-size: 13px; font-weight: 700; color: rgb(var(--accent)); letter-spacing: -0.01em`. | `src/pages/index.astro` |
+| UI-009 | [x] | P2 | XS | **Flat type hierarchy in SiteLayout** — Multiple adjacent font sizes within the 12–14px band without a ≥1.25× ratio. Resolved to exactly two sizes: 12px (`.skipLink`, `.foot`) and 15px (`.popTitle`) at the 1.25× ratio. | `src/layouts/SiteLayout.astro` |
+| UI-010 | [x] | P2 | XS | **Hardcoded `rgba(255,255,255,0.02)` across detail pages** — `.chip`, `.card`, `.projectNavLink`, `.scard`, `.cite-pre` all used hardcoded alpha instead of `--card-bg` token. Token now consistent; light mode surfaces render correctly. | `src/pages/projects/[slug].astro`, `src/pages/research/[slug].astro` |
+| UI-011 | [x] | P2 | XS | **Uppercase sidebar labels in detail pages** — `.card h3` ("Key Info"), `.scard h3` ("Publication Details", "Find this work on"), `.projectNavLabel` ("Previous/Next project") all used `text-transform: uppercase; letter-spacing: 0.08em`. Replaced with weight + size hierarchy, tracking tightened to 0.02–0.03em. | Both detail pages |
+| UI-012 | [x] | P2 | XS | **`--card-bg` token missing** — Added `--card-bg: rgba(255,255,255,0.02)` (dark) and `rgba(0,0,0,0.02)` (light) to `theme.css`; replaced 12+ hardcoded values site-wide. | `src/styles/theme.css` |
+| UI-013 | [ ] | P3 | S | **Document galaxy design system** — Run `/impeccable document` to capture the space theme, token system, and animation spec into `DESIGN.md`. Ensures the visual system is reproducible in future sessions. | — |
+| UI-014 | [ ] | P3 | S | **Research detail padding alignment** — Added `padding: 12px 0 48px` to `.page` for breathing room, but could benefit from matching the project detail's layout rhythm more precisely (inner max-width, section breaks). | `src/pages/research/[slug].astro` |
 
 ### Code quality
 
@@ -120,6 +139,7 @@ Chronological. Most recent first.
 
 | Date | ID | Item |
 |---|---|---|
+| 2026-06-24 | UI-001–012 | **Galaxy + UI consistency sprint** — Galaxy default ON; comets animated (was missing `@keyframes cometFly`); seamless star drift via `background-position` keyed to exact tile sizes; galaxy revealed at wide viewports; project detail black background removed; `.chip.featured` CSS syntax bug fixed (`rgba()` → `rgb(/ 0.5)`); side-stripe `.weCard::before` removed; skill category uppercase eyebrow replaced with weight/color hierarchy; SiteLayout type hierarchy resolved (12px/15px); `--card-bg` token applied across detail pages; sidebar h3 uppercase labels removed across both detail pages; project nav label uppercase + wide tracking removed |
 | 2026-06-23 | CQ-003/004/005, CP-003/004, SD-002, IA-001/002 | **Backlog sprint** — removed unused `.sub` CSS (+ media override), fixed `byOrderDescThenTitle` to use `CollectionEntry<"projects">`, stripped undefined `.prose` class from About, updated CV meta description to lead with 4 Zenodo papers, truncated research detail meta description to 155 chars, added `workExample` array to Person JSON-LD linking all 4 ScholarlyArticle records by URL + DOI, added ORCID link to site footer, added "Engineering-to-Research Monograph Series · Zenodo · OpenAIRE-indexed" note to CV Publications |
 | 2026-06-22 | AUD-001–015 (partial) | **O1/EB1 + full-stack audit sprint** — Homepage Published Work section (4 Zenodo DOIs + named contributions), hero padding + lead width, CV Publications split, CV + About memberships corrected (IEEE HKN date, IEEE member added), gallery retitled "Travel", research index dead type-filter removed, Zenodo DOI badge on cards, research count label fixed, unused `featured` const removed |
 | 2026-06-22 | AUD-001 | Homepage Published Work section — 4 published papers with DOI links, venue, year, and named-contribution line per paper |
@@ -168,17 +188,19 @@ Chronological. Most recent first.
 
 ## Audit Score History
 
-| Dimension | Baseline (Jun 8) | Post-Sprint 2 (Jun 15) | Post-Audit (Jun 22) |
-|---|---|---|---|
-| O1/EB1 Evidence Visibility | 2 / 10 | 5 / 10 | **8 / 10** |
-| First Impression | 7.5 / 10 | 8 / 10 | **8.5 / 10** |
-| Recruiter Clarity | 5.5 / 10 | 8 / 10 | **8 / 10** |
-| Technical Credibility | 7 / 10 | 8 / 10 | **8.5 / 10** |
-| Visual Design | 7 / 10 | 8 / 10 | **8.5 / 10** |
-| SEO / Structured Data | 3.5 / 10 | 7.5 / 10 | **7.5 / 10** |
-| Accessibility | 6 / 10 | 8 / 10 | **8 / 10** |
-| Performance | 7 / 10 | 9 / 10 | **9 / 10** |
-| Content Depth | 6 / 10 | 8 / 10 | **8.5 / 10** |
-| Mobile Experience | 5.5 / 10 | 8.5 / 10 | **8.5 / 10** |
+| Dimension | Baseline (Jun 8) | Post-Sprint 2 (Jun 15) | Post-Audit (Jun 22) | Galaxy Sprint (Jun 24) |
+|---|---|---|---|---|
+| O1/EB1 Evidence Visibility | 2 / 10 | 5 / 10 | 8 / 10 | **8 / 10** |
+| First Impression | 7.5 / 10 | 8 / 10 | 8.5 / 10 | **9 / 10** |
+| Recruiter Clarity | 5.5 / 10 | 8 / 10 | 8 / 10 | **8 / 10** |
+| Technical Credibility | 7 / 10 | 8 / 10 | 8.5 / 10 | **8.5 / 10** |
+| Visual Design | 7 / 10 | 8 / 10 | 8.5 / 10 | **9 / 10** |
+| SEO / Structured Data | 3.5 / 10 | 7.5 / 10 | 7.5 / 10 | **7.5 / 10** |
+| Accessibility | 6 / 10 | 8 / 10 | 8 / 10 | **8 / 10** |
+| Performance | 7 / 10 | 9 / 10 | 9 / 10 | **9 / 10** |
+| Content Depth | 6 / 10 | 8 / 10 | 8.5 / 10 | **8.5 / 10** |
+| Mobile Experience | 5.5 / 10 | 8.5 / 10 | 8.5 / 10 | **8.5 / 10** |
 
-**Remaining ceiling blockers:** EXT-001 (ResearchGate profile + paper uploads), IA-003 (ResearchGate distribution links — depends on EXT-001), CP-005/006 (quantified work metrics + outcome reframing — pending user-supplied numbers).
+**Jun 24 movers:** First Impression 8.5 → 9 (galaxy visible by default, seamless, comets live); Visual Design 8.5 → 9 (detail page consistency, token system, no more uppercase scaffold tells).
+
+**Remaining ceiling blockers:** EXT-001 (ResearchGate profile + paper uploads), IA-003 (ResearchGate distribution links — depends on EXT-001), CP-005/006 (quantified work metrics + outcome reframing — pending user-supplied numbers), UI-013 (DESIGN.md documentation).

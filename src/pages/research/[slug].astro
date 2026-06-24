@@ -287,6 +287,7 @@ const schemaJson = JSON.stringify(schemaObj);
     .page {
       max-width: var(--content, 1100px);
       margin: 0 auto;
+      padding: 12px 0 48px;
     }
     .back {
       margin: 0 0 18px;
@@ -424,7 +425,7 @@ const schemaJson = JSON.stringify(schemaObj);
       font-size: 13px;
       color: rgb(var(--muted));
       line-height: 1.75;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--card-bg);
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
@@ -456,15 +457,14 @@ const schemaJson = JSON.stringify(schemaObj);
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--card-bg);
     }
     .scard h3 {
       margin: 0 0 10px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       color: rgb(var(--muted));
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.02em;
     }
     .kv {
       display: flex;
