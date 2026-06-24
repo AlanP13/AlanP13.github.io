@@ -1,0 +1,122 @@
+---
+title: "Getting the Foundations Right: A Secure Systems Engineering Primer"
+status: published
+area: ["Security", "Systems Engineering", "Education"]
+summary: "A systems engineering primer for security practitioners — security-by-design principles, the cost-quality-schedule trade-off triangle reframed for security, a competency model for secure systems engineers, and companion coursework from ECE 518 and CS 351."
+relevance: "Formalizes the systems engineering foundation that underlies my approach to security: security properties are not features added after functional requirements are met — they are constraints that shape the design space from the start."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20828879"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Getting-the-Foundations-Right-Vol3"
+order: 7
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 3"
+publication_date: "2026-06-19"
+version: "1.1"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20828879"
+zenodo_url: "https://zenodo.org/records/20828879"
+github_url: "https://github.com/AlanP13/Getting-the-Foundations-Right-Vol3"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Getting the Foundations Right: A Secure Systems Engineering Primer (Version 1.1) [Technical report]. Engineering-to-Research Monograph Series, Vol. 3. Zenodo. https://doi.org/10.5281/zenodo.20828879"
+
+# Abstract
+abstract: >-
+  This primer addresses the systems engineering knowledge gap in security
+  practitioner education. Security controls are routinely selected and deployed
+  without the systems engineering foundations that would enable practitioners to
+  evaluate tradeoffs, anticipate emergent failures, or reason about security
+  properties at the system level rather than the component level. A redesigned
+  trade-off triangle adapts the classic cost-quality-schedule model for security
+  engineering: security, schedule, and cost compete for the same resource pool,
+  and the triangle makes the tradeoffs explicit rather than hidden. A secure
+  systems competency map organizes the practitioner knowledge required to design,
+  evaluate, and maintain security properties across the system lifecycle.
+  Design Principle 1 (Security as Constraint) argues that security properties are
+  design constraints, not post-hoc additions. Design Principle 2 (Emergent
+  Failure Awareness) argues that system-level security failures are not
+  predictable from component-level analysis alone. A qualitative conceptual
+  evaluation assesses the framework against comparable published approaches.
+  Companion code from ECE 518 (Intro to Computer Cybersecurity) and CS 351
+  (Systems Programming) grounds the theoretical framework in coursework evidence.
+
+keywords:
+  - secure systems engineering
+  - security-by-design
+  - requirements engineering
+  - threat modeling
+  - competency model
+  - systems security
+  - trade-off analysis
+  - ECE518
+  - CS351
+  - systems thinking
+  - security constraints
+---
+
+
+## Context
+
+Security practitioners learn to operate tools and apply controls. Systems engineers learn to model requirements, evaluate tradeoffs, and anticipate emergent behavior. These two literacies rarely appear in the same curriculum — and the gap shows up as security controls that are correctly implemented but incorrectly specified, or correctly specified but incorrectly integrated.
+
+This primer argues that security engineering is fundamentally a systems discipline: getting the foundations right means applying systems thinking to security requirements, not just security knowledge to systems.
+
+## What the Paper Covers
+
+### The Secure Systems Trade-Off Triangle
+An adaptation of the classic project management triangle (cost, quality, schedule) for security engineering. Security properties compete with schedule and cost for the same resource pool:
+- Moving left on cost increases pressure on either schedule or security scope
+- Moving right on schedule reduces pressure but may delay security hardening to integration or testing phases
+- Improving security scope adds cost and schedule pressure
+
+The triangle makes the tradeoff explicit. Hidden tradeoffs are where security properties silently erode when a project is under pressure.
+
+### Security-by-Design Principles
+A structured set of principles for incorporating security into design rather than testing it in after the fact:
+- **Least privilege by default** — design for minimum required access, not maximum functional convenience
+- **Defense in depth as a requirement** — specify redundant security controls at multiple layers as a functional requirement, not an audit response
+- **Fail-secure states** — specify the security posture of each possible failure mode explicitly
+- **Attack surface minimization** — measure and constrain the attack surface as a design metric
+
+### Secure Systems Competency Map
+A two-figure competency model organizing the knowledge a secure systems engineer needs:
+- **Foundation tier**: requirements engineering, threat modeling, architecture analysis
+- **Implementation tier**: secure coding, cryptography selection, access control design
+- **Integration tier**: penetration testing interpretation, vulnerability management, incident response integration
+- **Governance tier**: risk acceptance, compliance mapping, audit readiness
+
+The map provides a structured path for practitioners to identify and address their own competency gaps.
+
+### Design Principle 1 — Security as Constraint
+Security properties are design constraints, not features. A constraint shapes the design space from the beginning — a feature can be added later, deferred to a future release, or traded for schedule. Security properties that are specified as features get deferred; security properties that are specified as constraints get designed in.
+
+### Design Principle 2 — Emergent Failure Awareness
+System-level security failures are not predictable from component-level analysis alone. Components that are individually secure can fail insecurely in combination because of emergent interactions at the integration boundary. Secure systems engineering requires analysis at the integration level, not just the component level.
+
+### Conceptual Evaluation
+A qualitative assessment of the framework against three published secure systems engineering approaches, using descriptive categories rather than numeric scoring. Absolute claims about superiority are avoided; the evaluation is presented as a structured comparison to surface differences in emphasis and scope.
+
+### Companion Coursework
+Two publicly available repositories ground the theoretical framework in coursework evidence:
+- **ECE 518 (Intro to Computer Cybersecurity)** — security concepts applied in a systems context
+- **CS 351 (Systems Programming)** — low-level systems work that builds the substrate understanding on which security engineering depends
+
+## Why It Matters (Portfolio Angle)
+
+The systems engineering perspective in this primer is the lens I apply to security problems at every level:
+- at the control architecture level: security properties are constraints on the system design, not optional additions
+- at the AI governance level: trustworthiness properties (fairness, robustness, explainability) are system-level requirements that must be designed in — the same principle, applied to AI systems
+
+The competency model developed here has a direct parallel in AI engineering: the skills required to build and govern trustworthy AI systems span requirements, architecture, implementation, integration, and governance — and practitioners need structured guidance about which gaps to address in what order.
+
+---

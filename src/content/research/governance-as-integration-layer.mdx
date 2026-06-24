@@ -1,0 +1,110 @@
+---
+title: "Governance as the Integration Layer: Enterprise Risk Management, Cybersecurity Policy, and the Control Architecture for Organizational Resilience"
+status: published
+featured: true
+area: ["Security", "Governance", "Risk Management"]
+summary: "A four-layer governance-to-control model integrating ERM and cybersecurity policy under Zero Trust — hybrid RBAC-ABAC authorization, NIST CSF 2.0, traceable path from risk appetite to technical control, and a conceptual evaluation against COSO and ISO 27001."
+relevance: "Connects enterprise risk management to technical control architecture — the governance layer that sits above individual security controls and below organizational strategy. Central to my doctoral research on AI governance, where policy-to-control traceability is a fundamental design requirement."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20828631"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Governance-as-the-Integration-Layer-Vol6"
+order: 6
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 6"
+publication_date: "2026-06-17"
+version: "1.1"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20828631"
+zenodo_url: "https://zenodo.org/records/20828631"
+github_url: "https://github.com/AlanP13/Governance-as-the-Integration-Layer-Vol6"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Governance as the Integration Layer: Enterprise Risk Management, Cybersecurity Policy, and the Control Architecture for Organizational Resilience (Version 1.1) [Technical report]. Engineering-to-Research Monograph Series, Vol. 6. Zenodo. https://doi.org/10.5281/zenodo.20828631"
+
+# Abstract
+abstract: >-
+  Enterprise organizations routinely manage cybersecurity risk and enterprise risk
+  in parallel structures that rarely communicate at the control level. This work
+  argues that governance is not a wrapper around security controls — it is the
+  integration layer that connects organizational risk appetite to technical
+  enforcement mechanisms. A four-layer governance-to-control model is developed,
+  tracing the path from board-level risk appetite through policy, process, and
+  technical control. A hybrid RBAC-ABAC authorization architecture is introduced
+  for Zero Trust environments where static role assignments are insufficient to
+  express access policy under dynamic conditions. Design Principle 1 (Traceable
+  Layering) requires that every technical control be traceable to a policy
+  statement, which in turn traces to a risk appetite statement. Design Principle
+  2 (Enforcement Decoupled from Infrastructure) requires that access decisions be
+  expressed in policy language independent of the enforcement technology.
+  Fourteen full-author references anchor the framework in NIST CSF 2.0, COSO
+  ERM 2017, ISO 27001, FAIR, NIST SP 800-207/207A, and NIST AI RMF.
+
+keywords:
+  - enterprise risk management
+  - cybersecurity governance
+  - Zero Trust
+  - NIST CSF 2.0
+  - RBAC
+  - ABAC
+  - ISO 27001
+  - COSO ERM
+  - organizational resilience
+  - policy-to-control traceability
+  - FAIR
+  - NIST AI RMF
+---
+
+
+## Context
+
+Most organizations manage cybersecurity and enterprise risk in separate structures: a CISO function that operates on controls and vulnerabilities, and a risk management function that operates on business exposure and appetite statements. The two rarely speak at the control level.
+
+This work argues that the failure to integrate them is not an organizational problem — it is an architectural one. Governance is the integration layer that does not yet exist in most organizations: the mechanism that connects risk appetite to technical enforcement decisions in a traceable, auditable chain.
+
+## What the Paper Covers
+
+### Four-Layer Governance-to-Control Model
+A structured model tracing the path from organizational risk appetite to technical enforcement:
+1. **Risk Appetite Layer** — board and executive statements of acceptable risk exposure, expressed in business terms
+2. **Policy Layer** — organizational policies that translate risk appetite into security requirements
+3. **Process Layer** — operational procedures, workflows, and controls that implement policy
+4. **Technical Control Layer** — technical enforcement mechanisms (access control, encryption, monitoring, incident response)
+
+Each layer must be traceable to the layer above. A technical control with no traceable policy rationale is unauditable; a policy with no technical implementation is unenforced. The model makes both failure modes visible.
+
+### Hybrid RBAC-ABAC Authorization Under Zero Trust
+Static role-based access control is insufficient for Zero Trust environments where access decisions depend on dynamic conditions: device posture, network location, behavioral signals, and data sensitivity. The hybrid model:
+- **RBAC base** — coarse-grained entitlement structure, inherited from existing identity infrastructure
+- **ABAC overlay** — attribute-based conditions evaluated at access decision time (device trust score, session risk score, data classification)
+- **Policy decision point** — centralized evaluation engine that combines RBAC entitlements with ABAC conditions per request
+
+A governance-to-control model figure and a hybrid RBAC-ABAC under Zero Trust figure illustrate the architecture.
+
+### Design Principle 1 — Traceable Layering
+Every technical control must trace to a policy statement, which must trace to a risk appetite statement. The traceability chain is the audit record that regulators, internal audit, and governance bodies evaluate. Untraceable controls are an audit finding waiting to happen; untraceable policies are governance theater.
+
+### Design Principle 2 — Enforcement Decoupled from Infrastructure
+Access policy should be expressed in a technology-neutral policy language (XACML, Open Policy Agent, or equivalent) and evaluated by a dedicated policy decision point — not hardcoded into the enforcement technology. Coupling policy to infrastructure makes policy updates require infrastructure changes, which creates both operational risk and governance opacity.
+
+### Conceptual Evaluation Against Standards
+A heuristic evaluation of the framework against NIST CSF 2.0, COSO ERM 2017, ISO 27001/22301, and NIST AI RMF — assessing coverage, gaps, and compatibility. The evaluation uses qualitative descriptors and includes an explicit disclaimer that it is illustrative rather than a formal compliance assessment.
+
+## Why It Matters (Portfolio Angle)
+
+The governance-to-control traceability problem is not specific to cybersecurity. It appears in the same form in AI governance:
+- a model risk policy with no traceable connection to model validation procedures is unenforced
+- an AI system deployed without traceable connection to a risk appetite decision is ungoverned
+
+The framework developed here extends naturally to AI governance contexts — where the four layers become: AI risk appetite, AI policy, model risk management process, and technical AI control (monitoring, testing, explainability tooling). The hybrid RBAC-ABAC model has a direct analogue in AI access governance, where model-level access decisions depend on data sensitivity, use-case authorization, and user clearance simultaneously.
+
+---

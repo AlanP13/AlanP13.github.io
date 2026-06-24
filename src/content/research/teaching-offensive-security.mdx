@@ -1,0 +1,104 @@
+---
+title: "Teaching Offensive Security: A Lifecycle-Sequenced Curriculum for Applied Cybersecurity Education"
+status: published
+area: ["Security", "Education", "Curriculum Design"]
+summary: "A lifecycle-sequenced offensive security curriculum aligned to NICE Framework competencies and Bloom's Taxonomy — covering reconnaissance through post-exploitation with structured learning outcomes, lab progressions, and two pedagogical design principles."
+relevance: "Connects my teaching and curriculum development experience with security engineering: structuring how practitioners learn offensive techniques maps directly to how defenders model adversary behavior — a perspective I carry into AI governance and threat-modeling research."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20821927"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Teaching-Offensive-Security-Vol5"
+order: 4
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 5"
+publication_date: "2026-06-12"
+version: "1.1"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20821927"
+zenodo_url: "https://zenodo.org/records/20821927"
+github_url: "https://github.com/AlanP13/Teaching-Offensive-Security-Vol5"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Teaching Offensive Security: A Lifecycle-Sequenced Curriculum for Applied Cybersecurity Education (Version 1.1) [Technical report]. Engineering-to-Research Monograph Series, Vol. 5. Zenodo. https://doi.org/10.5281/zenodo.20821927"
+
+# Abstract
+abstract: >-
+  This monograph presents a lifecycle-sequenced curriculum for offensive security
+  education, organized around the phases of an adversary operation: reconnaissance,
+  initial access, execution, persistence, lateral movement, collection, and
+  exfiltration. Curriculum objectives are mapped to NICE Framework work roles
+  and Bloom's Taxonomy cognitive levels, producing a structured progression from
+  conceptual understanding to hands-on exploitation competency. Two pedagogical
+  design principles are formalized: Design Principle 1 (Threat-Lifecycle Sequencing)
+  argues that offensive techniques taught in attack-chain order build defensive
+  intuition that topic-organized syllabi cannot; Design Principle 2 (Lab-Before-
+  Lecture) argues that hands-on encounter before formal explanation accelerates
+  transfer to novel environments. A heuristic conceptual evaluation assesses the
+  curriculum against comparable published frameworks. Fourteen IEEE-format
+  references anchor the analysis in practitioner and pedagogical literature.
+
+keywords:
+  - offensive security
+  - cybersecurity education
+  - NICE Framework
+  - Bloom's Taxonomy
+  - ethical hacking
+  - penetration testing
+  - curriculum design
+  - learning outcomes
+  - threat lifecycle
+  - applied security
+  - pedagogy
+---
+
+
+## Context
+
+Most cybersecurity curricula teach offensive techniques by tool or by topic: a week on Nmap, a week on Metasploit, a week on web application vulnerabilities. This organization is convenient for instructors but produces practitioners who can operate tools without understanding how an adversary chains them together.
+
+This work argues for a different organizing principle: sequence instruction around the phases of an actual adversary operation, from initial reconnaissance through data exfiltration. Learning technique X in the context of "this is where an attacker would use it and why" produces more durable defensive intuition than learning it in isolation.
+
+## What the Paper Covers
+
+### Lifecycle-Sequenced Curriculum Structure
+The curriculum is organized around seven adversary operation phases drawn from industry frameworks:
+1. **Reconnaissance** — passive and active information gathering
+2. **Initial Access** — exploitation vectors, social engineering, supply chain
+3. **Execution** — code execution mechanisms, scripting, living-off-the-land
+4. **Persistence** — maintaining access across reboots and user sessions
+5. **Lateral Movement** — credential abuse, pivot techniques, network traversal
+6. **Collection** — data identification, staging, and compression
+7. **Exfiltration** — channel selection, transfer mechanisms, detection avoidance
+
+### NICE Framework and Bloom's Taxonomy Alignment
+Each curriculum module maps to specific NICE Framework work role competencies (SP-RSK, PR-CDA, IN-INV, etc.) and Bloom's cognitive levels (Remember, Understand, Apply, Analyze, Evaluate, Create). The alignment tables enable institutions to use the curriculum for competency-based credentialing and to justify learning outcomes to accreditors.
+
+### Design Principle 1 — Threat-Lifecycle Sequencing
+Offensive techniques taught in attack-chain order, with the adversary's goal made explicit at each phase, build the defensive mental model that topic-organized syllabi cannot replicate. A defender who learned reconnaissance in the context of "what the attacker is trying to learn, and why" is better positioned to model attacker intent than one who learned the same tools in isolation.
+
+### Design Principle 2 — Lab-Before-Lecture
+Hands-on encounter with a technique or vulnerability class before formal explanation accelerates transfer to novel environments. Encountering a problem first creates a cognitive anchor that formal instruction can then organize around — the opposite of the traditional lecture-then-lab sequence.
+
+### Heuristic Conceptual Evaluation
+A structured comparison against three publicly available offensive security curriculum frameworks, assessing sequencing coherence, competency coverage, and lab integration depth. The evaluation uses qualitative descriptors rather than quantitative scoring, with an explicit disclaimer that the comparison is illustrative rather than empirical.
+
+## Why It Matters (Portfolio Angle)
+
+The curriculum design challenge in offensive security is a microcosm of a broader problem I care about: how do you structure learning so that practitioners develop judgment, not just procedural skill?
+
+- lifecycle sequencing produces defenders who can model adversary intent
+- competency alignment makes learning outcomes auditable — analogous to model risk governance
+- Design Principle 2 (lab-before-lecture) mirrors how I approach complex system design: encounter the problem before reaching for the abstraction
+
+The connection to AI governance is direct: understanding how adversaries chain techniques informs threat modeling for AI systems, where the attack surface includes data poisoning, model extraction, and inference-time manipulation alongside traditional network and endpoint vectors.
+
+---

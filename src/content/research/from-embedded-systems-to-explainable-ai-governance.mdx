@@ -1,0 +1,138 @@
+---
+title: "From Embedded Systems to Explainable AI Governance: A Research Synthesis across Ten Engineering Disciplines"
+status: published
+featured: true
+area: ["AI Governance", "Explainable AI", "Systems Research"]
+summary: "Capstone synthesis across ten Engineering-to-Research monographs — tracing the thread from constrained embedded hardware to AI governance, identifying three convergent themes, and mapping a research agenda for explainable, trustworthy AI systems. Formally cites all nine prior volumes by DOI."
+relevance: "This is the flagship synthesis that connects all prior research threads to my doctoral work: the journey from embedded systems through security, analytics, and governance converges on explainable AI governance as the discipline that integrates all of them."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20832713"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/From-Embedded-Systems-to-Explainable-AI-Governance-Vol10"
+order: 9
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 10 (Capstone)"
+publication_date: "2026-06-23"
+version: "1.1"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20832713"
+zenodo_url: "https://zenodo.org/records/20832713"
+github_url: "https://github.com/AlanP13/From-Embedded-Systems-to-Explainable-AI-Governance-Vol10"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). From Embedded Systems to Explainable AI Governance: A Research Synthesis across Ten Engineering Disciplines (Version 1.1) [Technical report]. Engineering-to-Research Monograph Series, Vol. 10. Zenodo. https://doi.org/10.5281/zenodo.20832713"
+
+# Abstract
+abstract: >-
+  This capstone monograph synthesizes the ten-volume Engineering-to-Research
+  Monograph Series into a unified research argument. Three convergent themes
+  emerge across the prior nine volumes: the trust boundary problem (where does
+  a system's accountability perimeter end, and what governance mechanisms are
+  needed at that boundary?), the interpretability imperative (system outputs
+  that cannot be explained to affected parties cannot be governed), and the
+  constraint-first design principle (security, safety, and fairness properties
+  must be designed in as constraints, not added as features). These themes
+  converge on explainable AI governance as the integrating discipline: the
+  practice of designing, deploying, and overseeing AI systems such that their
+  decisions are traceable, their failures are detectable, and their impacts
+  are accountable. A research agenda is mapped across three thrusts: formal
+  methods for AI accountability, governance architecture for edge-deployed AI,
+  and cross-disciplinary competency models for AI governance practitioners.
+  The capstone formally cites all nine prior volumes by DOI and positions the
+  series as a published foundation for doctoral research.
+
+keywords:
+  - AI governance
+  - explainable AI
+  - XAI
+  - LIME
+  - SHAP
+  - model cards
+  - datasheets for datasets
+  - EU AI Act
+  - ISO/IEC 42001
+  - NIST AI RMF
+  - trustworthy AI
+  - research synthesis
+  - accountability
+  - interpretability
+---
+
+
+## Context
+
+Ten monographs, ten disciplines: wireless sensor network security, computer architecture, secure systems engineering, embedded-to-edge AI, offensive security pedagogy, ERM and governance, scalable analytics, financial data mining, research methods, and this capstone. Written across six weeks, published in sequence, each one grounded in a distinct domain.
+
+The question this capstone addresses is not "what did each volume cover?" — it is "what do they collectively argue?"
+
+The answer: a practitioner who has reasoned carefully about security constraints in embedded hardware, about side-channel vulnerabilities in microarchitectural optimizations, about governance-to-control traceability in enterprise risk management, and about anomaly interpretation in financial systems has, without quite intending to, assembled the vocabulary for AI governance. The convergence is not accidental. It reflects where systems engineering, security engineering, and data science are all arriving independently.
+
+## What the Paper Covers
+
+### The Journey Arc
+A three-figure narrative structure:
+1. **Journey arc figure** — the ten-volume progression visualized as a path from constrained hardware through escalating abstraction layers to organizational governance
+2. **Convergent themes figure** — the three themes that emerge across volumes, visualized as threads that run through the entire series
+3. **Research agenda thrusts figure** — three forward-looking research directions that the synthesis motivates
+
+### Convergent Theme 1 — The Trust Boundary Problem
+Every volume in the series, at some level, addresses where accountability ends:
+- Vol 1: where does the security perimeter end in a hybrid WSN-IoT-virtualized network?
+- Vol 2: where does the architectural trust boundary sit when speculative execution crosses security domain lines?
+- Vol 4: where does the governance boundary sit when AI inference operates without persistent connectivity?
+- Vol 6: where does the organizational accountability boundary sit between risk appetite and technical control?
+
+The convergence: AI systems have trust boundaries at every layer — model, data, infrastructure, organizational, and regulatory — and governance must address all of them.
+
+### Convergent Theme 2 — The Interpretability Imperative
+System outputs that cannot be explained to affected parties cannot be governed:
+- Vol 7: tree ensembles chosen over complex architectures because enterprise decision-makers need interpretable outputs
+- Vol 8: the "one anomaly, three meanings" framework exists because an uninterpreted anomaly score cannot be routed to the right response function
+- Vol 6: the governance-to-control model requires that every control be traceable to a policy rationale — a form of interpretability for governance decisions
+
+The convergence: explainability is not a model property — it is a governance requirement. LIME, SHAP, model cards, and datasheets are tools for making model behavior legible to the humans and organizations that must govern it.
+
+### Convergent Theme 3 — Constraint-First Design
+Security, safety, and fairness properties that are specified as features get deferred. Properties specified as constraints get designed in:
+- Vol 3: security as constraint rather than feature
+- Vol 4: RTOS scheduling guarantees as constraints on inference deployment
+- Vol 6: Design Principle 2 (Enforcement Decoupled from Infrastructure) as an architectural constraint
+
+The convergence: AI governance frameworks (NIST AI RMF, ISO/IEC 42001, EU AI Act 2024/1689) are increasingly specifying trustworthiness properties as deployment requirements — constraints that AI systems must satisfy, not optional governance layers added after deployment.
+
+### Research Agenda
+Three forward-looking research thrusts motivated by the synthesis:
+
+**Thrust 1: Formal Methods for AI Accountability**
+Developing formal specifications for AI system accountability properties — analogous to formal methods in hardware verification — that can be checked before deployment rather than audited after failure.
+
+**Thrust 2: Governance Architecture for Edge-Deployed AI**
+Extending the trust boundary analysis and the governance-to-control model to AI systems deployed at the embedded edge — where the Vol 4 architecture meets the Vol 6 governance framework in environments without persistent connectivity or centralized oversight.
+
+**Thrust 3: Cross-Disciplinary Competency Models**
+AI governance practitioners need competencies that span security engineering, systems architecture, data science, and organizational risk management — the competency map developed across Vols 2, 3, 6, and 9 has a natural extension to AI governance practitioner development.
+
+### Series Appendix
+Appendix A provides a complete table of all ten volumes with titles, DOIs, publication dates, and volume numbers — the formal citation record for the series as a published body of work.
+
+## Why It Matters (Portfolio Angle)
+
+This capstone is the document that makes the ten-volume series into a research argument rather than a collection of technical reports. It:
+- establishes the interpretive frame for the entire series
+- maps the convergent themes to open research questions
+- positions the series as a published foundation for doctoral research in AI governance
+
+The formal citations of all nine prior volumes (refs [9]-[17]) and the related identifiers in Zenodo metadata establish the series as a coherent body of work for EB1A/O-1 authorship evidence and for Google Scholar citation tracking.
+
+The research agenda in Thrust 2 (governance architecture for edge-deployed AI) is the direct predecessor to my dissertation research focus.
+
+---

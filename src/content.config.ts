@@ -30,6 +30,7 @@ const research = defineCollection({
     title: z.string(),
     date: z.string().optional(),
     status: z.enum(["published", "submitted", "in-progress", "completed"]).default("in-progress"),
+    featured: z.boolean().default(false),
     area: z.array(z.string()).default([]),
     summary: z.string(),
     relevance: z.string().optional(),

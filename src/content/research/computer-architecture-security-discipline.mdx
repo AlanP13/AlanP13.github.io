@@ -1,0 +1,114 @@
+---
+title: "Computer Architecture as a Security Discipline: Microarchitectural Mechanisms, Side-Channel Vulnerabilities, and the Hardware-Software Security Interface"
+status: published
+area: ["Computer Architecture", "Security", "Systems Research"]
+summary: "Examines computer architecture through a security lens — tournament branch predictors, speculative execution side channels, and a hardware-software competency model for security engineers who need to reason below the instruction set."
+relevance: "Extends my embedded systems and security background into the hardware-software interface: the coupling thesis — that architectural optimization decisions directly create vulnerability classes — informs how I approach secure system design and AI hardware security research."
+links:
+  - label: "Zenodo (PDF + DOI)"
+    url: "https://zenodo.org/records/20821993"
+  - label: "GitHub"
+    url: "https://github.com/AlanP13/Computer-Architecture-as-a-Security-Discipline-Vol2"
+order: 5
+
+# Publication classification
+publication_type: technical-report
+publication_status: published
+
+# Publication context
+venue: "Engineering-to-Research Monograph Series, Vol. 2"
+publication_date: "2026-06-14"
+version: "1.1"
+lifecycle_stage: published
+
+# Identifiers
+doi: "10.5281/zenodo.20821993"
+zenodo_url: "https://zenodo.org/records/20821993"
+github_url: "https://github.com/AlanP13/Computer-Architecture-as-a-Security-Discipline-Vol2"
+orcid: "0009-0004-8302-5090"
+
+# Citation
+citation: "Palayil, A. B. (2026). Computer Architecture as a Security Discipline: Microarchitectural Mechanisms, Side-Channel Vulnerabilities, and the Hardware-Software Security Interface (Version 1.1) [Technical report]. Engineering-to-Research Monograph Series, Vol. 2. Zenodo. https://doi.org/10.5281/zenodo.20821993"
+
+# Abstract
+abstract: >-
+  Modern processor design optimizes aggressively for performance through speculative
+  execution, out-of-order processing, branch prediction, and shared microarchitectural
+  state. This work argues that these optimization mechanisms are not incidental to
+  side-channel vulnerability classes — they are their direct cause. A coupling thesis
+  is formalized: every major microarchitectural optimization introduces a corresponding
+  information leakage channel exploitable by an adversary with timing or power
+  measurement capability. A hardware-software security competency model is developed
+  for practitioners who need to reason about systems below the instruction set
+  abstraction. Four figures illustrate the tournament branch predictor datapath,
+  the optimization-to-side-channel mapping, the competency stack, and the
+  performance-security design spectrum. A Comparative Reasoning Capabilities table
+  assesses practitioner effectiveness across architecture-level and software-level
+  mental models. A real ECE 586 Verilog tournament branch predictor is bundled as
+  MIT-licensed companion code to ground the architectural analysis in runnable
+  hardware description.
+
+keywords:
+  - computer architecture
+  - side-channel attacks
+  - speculative execution
+  - Spectre
+  - Meltdown
+  - branch prediction
+  - microarchitecture
+  - security engineering
+  - Verilog
+  - hardware security
+  - cache timing
+  - performance-security tradeoff
+---
+
+
+## Context
+
+Security engineers who work above the operating system abstraction are routinely surprised by hardware-level vulnerabilities — Spectre, Meltdown, Rowhammer, and their descendants — because their mental models stop at the instruction set. This work argues that is not a gap in threat awareness; it is a gap in architectural literacy.
+
+The coupling thesis at the center of this monograph: the same design decisions that make modern processors fast are the mechanisms that make them leakable. Understanding the optimization is understanding the vulnerability.
+
+## What the Paper Covers
+
+### The Coupling Thesis
+Four major microarchitectural optimizations and their corresponding leakage channels:
+- **Branch prediction** — the tournament predictor's shared BTB/BHT state enables cross-process prediction poisoning (Spectre variant 2)
+- **Speculative execution** — transiently executed instructions touch cache lines, creating timing-observable side effects (Spectre variant 1, Meltdown)
+- **Out-of-order execution** — instruction reordering creates observable timing relationships between logically independent operations
+- **Shared caches** — capacity contention across security domains enables Flush+Reload, Prime+Probe, and related cache-timing attacks
+
+The thesis: these are not bugs in the implementation. They are unavoidable consequences of the optimization design.
+
+### Tournament Branch Predictor Analysis
+A detailed walkthrough of the tournament predictor architecture (local history table, global history table, tournament selector) with a focus on the security-relevant behaviors: how entries are indexed, when they are updated, and under what conditions an attacker in one security domain can influence predictions in another. The ECE 586 Verilog predictor (bundled in the companion repo) makes the datapath concrete.
+
+### Hardware-Software Security Competency Model
+A structured model for what a security practitioner needs to know below the ISA abstraction:
+- Tier 1: Cache hierarchy and timing (prerequisite for cache-timing attacks)
+- Tier 2: Branch prediction mechanisms (prerequisite for Spectre-class analysis)
+- Tier 3: Speculative and out-of-order execution (prerequisite for transient execution analysis)
+- Tier 4: Power and EM side channels (advanced, requires measurement infrastructure)
+
+The model answers the question: what is the minimum architectural literacy a security engineer needs, and in what order should it be acquired?
+
+### Comparative Reasoning Capabilities
+A structured table comparing what practitioners with different architectural depth can and cannot reason about:
+- software-only model: can identify control-flow vulnerabilities, cannot reason about microarchitectural leakage
+- cache-aware model: can identify cache-timing risks, cannot reason about speculative access patterns
+- full microarchitectural model: can reason about transient execution paths and prediction poisoning
+
+### Performance-Security Design Spectrum
+A design space map showing the tradeoff surface between architectural optimizations and security properties — with existing mitigation strategies (IBRS, IBPB, STIBP, KPTI, retpoline) located on the spectrum along with their performance costs.
+
+## Why It Matters (Portfolio Angle)
+
+This research develops the vocabulary for reasoning about an attack surface that most security curricula treat as a black box:
+- the hardware below the OS is not security-neutral; its optimizations create observable state accessible to adversaries
+- AI accelerators (TPUs, NPUs, GPUs) have analogous optimization-driven side channels that AI governance frameworks have not yet addressed
+- the competency model provides a structured path for security engineers to extend their threat models downward
+
+The connection to my doctoral research: as AI inference moves to specialized hardware, the side-channel surface expands to include model extraction via power analysis and cache timing — a class of AI security risks that requires exactly the architectural literacy this monograph develops.
+
+---

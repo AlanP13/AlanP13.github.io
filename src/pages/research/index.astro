@@ -3,6 +3,9 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 
 const items = await getCollection("research");
+const publishedCount = items.filter(
+  (r) => (r.data.publication_status ?? r.data.status) === "published"
+).length;
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return "";
@@ -52,7 +55,7 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
   <div class="page-header">
     <h1>Research</h1>
     <p class="muted">
-      4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE. Applied doctoral research at University of the Cumberlands.
+      {publishedCount} papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE. Applied doctoral research at University of the Cumberlands.
     </p>
   </div>
 
