@@ -1,7 +1,7 @@
 # Website Roadmap — Alan Palayil Portfolio
 
 Master backlog for https://alanp13.github.io  
-Last full audit: **2026-06-22** (post-sprint re-audit)  
+Last full audit: **2026-06-23** (backlog sprint — all P1/P2 quick-wins shipped)  
 Repository baseline: June 2026.
 
 This is a public repository. Keep this document limited to public-safe website
@@ -42,20 +42,20 @@ Ordered within each priority level by impact, then readiness.
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| CQ-001 | [>] | P1 | XS | **Dead JS in research index** — `let activeType`, `typeOk` check, and `wireChips("type-chips", ...)` still present after type-filter removal. `wireChips` silently no-ops but the variable and filter logic are misleading. Remove all three. | `src/pages/research/index.astro` script block |
-| CQ-002 | [>] | P1 | XS | **Remove dead `data-type` attribute from research cards** — Cards still emit `data-type={pubType}` even though the type filter no longer exists. Goes with CQ-001. | `src/pages/research/index.astro:97` |
-| CQ-003 | [ ] | P2 | XS | **Remove unused `.sub` CSS rule in index.astro** — The `.sub` selector is defined in the style block but no element in the JSX uses the `sub` class. Dead CSS. | `src/pages/index.astro` |
-| CQ-004 | [ ] | P2 | XS | **Fix `byOrderDescThenTitle` forward type reference** — The sort function types its arguments as `(typeof projects)[0]` but `projects` is assigned two lines later. Works at runtime; cleaner to type as `CollectionEntry<"projects">` with an import. | `src/pages/index.astro:24` |
-| CQ-005 | [ ] | P2 | XS | **Remove undefined `.prose` class from About** — `<div class="left prose">` in about.astro references `.prose` but no such rule exists in the scoped style block. Harmless but should be removed. | `src/pages/about.astro` |
+| CQ-001 | [x] | P1 | XS | **Dead JS in research index** — `let activeType`, `typeOk` check, and `wireChips("type-chips", ...)` still present after type-filter removal. `wireChips` silently no-ops but the variable and filter logic are misleading. Remove all three. | `src/pages/research/index.astro` script block |
+| CQ-002 | [x] | P1 | XS | **Remove dead `data-type` attribute from research cards** — Cards still emit `data-type={pubType}` even though the type filter no longer exists. Goes with CQ-001. | `src/pages/research/index.astro:97` |
+| CQ-003 | [x] | P2 | XS | **Remove unused `.sub` CSS rule in index.astro** — The `.sub` selector is defined in the style block but no element in the JSX uses the `sub` class. Dead CSS. | `src/pages/index.astro` |
+| CQ-004 | [x] | P2 | XS | **Fix `byOrderDescThenTitle` forward type reference** — The sort function types its arguments as `(typeof projects)[0]` but `projects` is assigned two lines later. Works at runtime; cleaner to type as `CollectionEntry<"projects">` with an import. | `src/pages/index.astro:24` |
+| CQ-005 | [x] | P2 | XS | **Remove undefined `.prose` class from About** — `<div class="left prose">` in about.astro references `.prose` but no such rule exists in the scoped style block. Harmless but should be removed. | `src/pages/about.astro` |
 
 ### Content and copy
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| CP-001 | [>] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Correct order: IEEE Member (May 2024–Present) → HKN Internal Secretary (Jan 2022–May 2023) → HKN Member (2021–2023). | `src/pages/cv.astro:117–132`, `src/pages/about.astro:161–177` |
-| CP-002 | [>] | P1 | XS | **Research index subtitle — surface published papers** — Currently reads "Applied research work related to AI and Data Science in enterprise systems." Now that 4 papers are Zenodo-published and OpenAIRE-indexed, the subtitle should say so (e.g. "4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE."). | `src/pages/research/index.astro:54–56` |
-| CP-003 | [ ] | P2 | XS | **CV page meta description — mention publications** — Currently: "PhD candidate in Information Technology…researcher in AI governance." After the CV split, the description should surface "4 Zenodo-published papers" as the lead credential. | `src/pages/cv.astro:25` |
-| CP-004 | [ ] | P2 | XS | **Research detail page meta description** — `[slug].astro` uses `d.abstract ?? d.summary` as the description. For published papers, the abstract is rich and long. Consider truncating to 155 chars or using a dedicated `short_description` field for meta. | `src/pages/research/[slug].astro:74` |
+| CP-001 | [x] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Correct order: IEEE Member (May 2024–Present) → HKN Internal Secretary (Jan 2022–May 2023) → HKN Member (2021–2023). | `src/pages/cv.astro:117–132`, `src/pages/about.astro:161–177` |
+| CP-002 | [x] | P1 | XS | **Research index subtitle — surface published papers** — Currently reads "Applied research work related to AI and Data Science in enterprise systems." Now that 4 papers are Zenodo-published and OpenAIRE-indexed, the subtitle should say so (e.g. "4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE."). | `src/pages/research/index.astro:54–56` |
+| CP-003 | [x] | P2 | XS | **CV page meta description — mention publications** — Currently: "PhD candidate in Information Technology…researcher in AI governance." After the CV split, the description should surface "4 Zenodo-published papers" as the lead credential. | `src/pages/cv.astro:25` |
+| CP-004 | [x] | P2 | XS | **Research detail page meta description** — `[slug].astro` uses `d.abstract ?? d.summary` as the description. For published papers, the abstract is rich and long. Consider truncating to 155 chars or using a dedicated `short_description` field for meta. | `src/pages/research/[slug].astro:74` |
 | CP-005 | [ ] | P2 | S | **Quantified work bullets (2B-002)** — Work experience bullets at Genworth still lack specific numbers (pipeline scale, records/day, error reduction %). Requires user to supply metrics. High recruiter impact. | `src/content/timeline/work-genworth-p1.mdx`, `work-genworth-p2.mdx` |
 | CP-006 | [ ] | P2 | S | **Business outcome reframing on work projects (2B-007)** — Project summaries in the projects collection describe what was built, not what changed. Shift to impact framing: cost savings, error reduction, migration scope. Requires user approval of public metrics. | `src/content/projects/work-*.mdx` |
 
@@ -63,16 +63,16 @@ Ordered within each priority level by impact, then readiness.
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| SD-001 | [>] | P1 | XS | **Add `datePublished` to ScholarlyArticle JSON-LD** — The `[slug].astro` schema builder never sets `datePublished` even though `publication_date` is populated in all 4 published MDX files. One line: `if (d.publication_date) schemaObj.datePublished = d.publication_date;` | `src/pages/research/[slug].astro:60–68` |
-| SD-002 | [ ] | P2 | S | **Link Person schema to ScholarlyArticle records** — The homepage `personSchema` has `sameAs` (LinkedIn, GitHub, ORCID) but no explicit `publication` or `author` links to the 4 ScholarlyArticle pages. Adding these strengthens the Google Knowledge Graph entity. Requires constructing absolute URLs per paper. | `src/pages/index.astro:82–93` |
+| SD-001 | [x] | P1 | XS | **Add `datePublished` to ScholarlyArticle JSON-LD** — The `[slug].astro` schema builder never sets `datePublished` even though `publication_date` is populated in all 4 published MDX files. One line: `if (d.publication_date) schemaObj.datePublished = d.publication_date;` | `src/pages/research/[slug].astro:60–68` |
+| SD-002 | [x] | P2 | S | **Link Person schema to ScholarlyArticle records** — The homepage `personSchema` has `sameAs` (LinkedIn, GitHub, ORCID) but no explicit `publication` or `author` links to the 4 ScholarlyArticle pages. Adding these strengthens the Google Knowledge Graph entity. Requires constructing absolute URLs per paper. | `src/pages/index.astro:82–93` |
 | SD-003 | [ ] | P3 | M | **Dynamic OG images per research page** — Research detail pages currently share the same static OG image. A per-page card with paper title and DOI would improve social sharing. Trigger: after basic structured data is solid. | `src/pages/research/[slug].astro` |
 
 ### Information architecture and navigation
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| IA-001 | [ ] | P2 | XS | **Footer ORCID link** — Footer currently: LinkedIn · GitHub · Resume · Email. ORCID should be added; it is the primary academic identity signal and is already in the homepage credCard and research detail pages. | `src/layouts/SiteLayout.astro:339–345` |
-| IA-002 | [ ] | P2 | XS | **OpenAIRE/indexed language on CV research section** — The CV "Publications" section shows DOIs but doesn't indicate that the papers are OpenAIRE-indexed. A one-line note "Engineering-to-Research Monograph Series — Zenodo community, OpenAIRE-indexed" would strengthen the O1/EB1 signal for anyone reading the CV page directly. | `src/pages/cv.astro` |
+| IA-001 | [x] | P2 | XS | **Footer ORCID link** — Footer currently: LinkedIn · GitHub · Resume · Email. ORCID should be added; it is the primary academic identity signal and is already in the homepage credCard and research detail pages. | `src/layouts/SiteLayout.astro:339–345` |
+| IA-002 | [x] | P2 | XS | **OpenAIRE/indexed language on CV research section** — The CV "Publications" section shows DOIs but doesn't indicate that the papers are OpenAIRE-indexed. A one-line note "Engineering-to-Research Monograph Series — Zenodo community, OpenAIRE-indexed" would strengthen the O1/EB1 signal for anyone reading the CV page directly. | `src/pages/cv.astro` |
 | IA-003 | [ ] | P3 | M | **Research distribution links — ResearchGate** — Sidebar on detail pages has a "Find this work on" section that renders conditionally. ResearchGate profile + paper pages still need to be created, then `researchgate_url` populated in each MDX. External action first. | `src/content/research/*.mdx`, `src/pages/research/[slug].astro` |
 | IA-004 | [ ] | P3 | L | **Blog / writing section** | Trigger: 2–3 technical posts ready to publish. |
 | IA-005 | [ ] | P3 | L | **Case study depth on work projects** — Architecture diagrams, before/after metrics. | Trigger: architecture details approved for public disclosure. |
@@ -120,6 +120,7 @@ Chronological. Most recent first.
 
 | Date | ID | Item |
 |---|---|---|
+| 2026-06-23 | CQ-003/004/005, CP-003/004, SD-002, IA-001/002 | **Backlog sprint** — removed unused `.sub` CSS (+ media override), fixed `byOrderDescThenTitle` to use `CollectionEntry<"projects">`, stripped undefined `.prose` class from About, updated CV meta description to lead with 4 Zenodo papers, truncated research detail meta description to 155 chars, added `workExample` array to Person JSON-LD linking all 4 ScholarlyArticle records by URL + DOI, added ORCID link to site footer, added "Engineering-to-Research Monograph Series · Zenodo · OpenAIRE-indexed" note to CV Publications |
 | 2026-06-22 | AUD-001–015 (partial) | **O1/EB1 + full-stack audit sprint** — Homepage Published Work section (4 Zenodo DOIs + named contributions), hero padding + lead width, CV Publications split, CV + About memberships corrected (IEEE HKN date, IEEE member added), gallery retitled "Travel", research index dead type-filter removed, Zenodo DOI badge on cards, research count label fixed, unused `featured` const removed |
 | 2026-06-22 | AUD-001 | Homepage Published Work section — 4 published papers with DOI links, venue, year, and named-contribution line per paper |
 | 2026-06-22 | AUD-002 | CV "Publications" section split from "Technical Reports"; DOI shown prominently per paper |
@@ -180,4 +181,4 @@ Chronological. Most recent first.
 | Content Depth | 6 / 10 | 8 / 10 | **8.5 / 10** |
 | Mobile Experience | 5.5 / 10 | 8.5 / 10 | **8.5 / 10** |
 
-**Remaining ceiling blockers:** SD-001 (`datePublished` missing from ScholarlyArticle), CP-001 (memberships order), CQ-001/002 (dead JS), EXT-001 (ResearchGate), CP-005/006 (quantified metrics pending user input).
+**Remaining ceiling blockers:** EXT-001 (ResearchGate profile + paper uploads), IA-003 (ResearchGate distribution links — depends on EXT-001), CP-005/006 (quantified work metrics + outcome reframing — pending user-supplied numbers).
