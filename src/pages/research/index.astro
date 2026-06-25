@@ -32,7 +32,6 @@ const statusLabels: Record<string, string> = {
   accepted: "Accepted",
 };
 
-
 items.sort((a, b) => {
   const ea = a.data.publication_status ?? a.data.status;
   const eb = b.data.publication_status ?? b.data.status;
@@ -45,185 +44,235 @@ items.sort((a, b) => {
   return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 });
 
-const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
+// Top 5 areas by frequency across the collection
+const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data Science", "Education"];
 ---
 
 <SiteLayout
   title="Research — Alan Palayil"
   description="Applied research in AI Governance, enterprise data systems, and financial systems modernization. Technical reports from a PhD in Information Technology at University of the Cumberlands."
 >
-  <div class="page-header">
+  <div class="hd">
     <h1>Research</h1>
-    <p class="muted">
-      {publishedCount} papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE. Applied doctoral research at University of the Cumberlands.
+    <p class="sub">
+      {publishedCount} papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE.
     </p>
   </div>
 
   <div class="controls">
-    <div class="control-row">
-      <span class="control-label">Sort</span>
-      <select id="sort-select" class="sort-select">
-        <option value="default">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="title">Title A → Z</option>
-      </select>
+    <div class="chips" id="filter-chips" role="group" aria-label="Filter by topic">
+      <button class="fchip active" data-filter="all">All</button>
+      {TOP_FILTERS.map(area => (
+        <button class="fchip" data-filter={area}>{area}</button>
+      ))}
     </div>
-
-    {allAreas.length > 0 && (
-      <div class="control-row">
-        <span class="control-label">Topic</span>
-        <div class="chips" id="area-chips" data-group="area">
-          <button class="chip active" data-value="all">All</button>
-          {allAreas.map((area) => (
-            <button class="chip" data-value={area}>{area}</button>
-          ))}
-        </div>
-      </div>
-    )}
+    <div class="sorts" role="group" aria-label="Sort research">
+      <button class="sbtn active" id="sort-status">Status</button>
+      <button class="sbtn" id="sort-cycle">A–Z</button>
+    </div>
   </div>
 
   <div class="stack" id="research-stack">
-    {
-      items.map((r) => {
-        const es = r.data.publication_status ?? r.data.status;
-        const esLabel = statusLabels[es] ?? es;
-        const areasStr = (r.data.area ?? []).join(",");
-        const pubDate = r.data.publication_date ?? r.data.date ?? "";
-        const pubType = r.data.publication_type ?? "";
-        return (
-          <a
-            class="card"
-            href={`/research/${r.slug}`}
-            data-areas={areasStr}
-            data-date={pubDate}
-            data-title={r.data.title ?? ""}
-          >
-            <div class="top">
-              <h2>{r.data.title}</h2>
-              <div class="top-right">
-                {pubDate && (
-                  <time class="pub-date" datetime={pubDate}>
-                    {formatDate(pubDate)}
-                  </time>
-                )}
-                <span class={`badge ${es}`}>{esLabel}</span>
-                {r.data.doi && <span class="badge doi-badge">Zenodo DOI</span>}
-              </div>
+    {items.map((r, idx) => {
+      const es = r.data.publication_status ?? r.data.status;
+      const esLabel = statusLabels[es] ?? es;
+      const areasStr = (r.data.area ?? []).join(",");
+      const pubDate = r.data.publication_date ?? r.data.date ?? "";
+      return (
+        <a
+          class="card"
+          href={`/research/${r.slug}`}
+          data-areas={areasStr}
+          data-date={pubDate}
+          data-title={r.data.title ?? ""}
+          data-order={idx}
+        >
+          <div class="top">
+            <h2>{r.data.title}</h2>
+            <div class="top-right">
+              {pubDate && (
+                <time class="pub-date" datetime={pubDate}>{formatDate(pubDate)}</time>
+              )}
+              <span class={`badge ${es}`}>{esLabel}</span>
+              {r.data.doi && <span class="badge doi-badge">Zenodo DOI</span>}
             </div>
-            <p class="muted">{r.data.summary}</p>
-            {r.data.relevance ? (
-              <p class="rel">
-                <strong>Relevance:</strong> {r.data.relevance}
-              </p>
-            ) : null}
-            {r.data.area?.length ? (
-              <p class="meta">{r.data.area.join(" · ")}</p>
-            ) : null}
-            <p class="cta">Read more →</p>
-          </a>
-        );
-      })
-    }
-    <p class="empty" id="empty-state" style="display:none">
-      No papers match the selected filters.
-    </p>
+          </div>
+          <p class="muted">{r.data.summary}</p>
+          {r.data.area?.length ? (
+            <p class="meta">{r.data.area.slice(0, 4).join(" · ")}</p>
+          ) : null}
+          <p class="cta">Read more →</p>
+        </a>
+      );
+    })}
+    <p class="empty" id="empty-state" hidden>No papers match the selected topic.</p>
   </div>
 
+  <script>
+    (() => {
+      const chipsWrap   = document.getElementById("filter-chips");
+      const statusBtn   = document.getElementById("sort-status")  as HTMLButtonElement | null;
+      const cycleBtn    = document.getElementById("sort-cycle")   as HTMLButtonElement | null;
+      const stack       = document.getElementById("research-stack") as HTMLElement | null;
+      const emptyState  = document.getElementById("empty-state")  as HTMLElement | null;
+
+      const CYCLE = [
+        { key: "az",     label: "A–Z"    },
+        { key: "za",     label: "Z–A"    },
+        { key: "newest", label: "Newest" },
+        { key: "oldest", label: "Oldest" },
+      ];
+      let cycleIdx     = 0;
+      let activeFilter = "all";
+      let activeSort   = "default";
+
+      function allCards(): HTMLElement[] {
+        return Array.from(document.querySelectorAll<HTMLElement>(".card[data-areas]"));
+      }
+
+      function apply() {
+        const cards = allCards();
+
+        // Filter
+        cards.forEach(card => {
+          const areas = (card.dataset.areas ?? "").split(",").filter(Boolean);
+          card.hidden = activeFilter !== "all" && !areas.includes(activeFilter);
+        });
+
+        // Sort visible cards
+        const visible = cards.filter(c => !c.hidden);
+        if (activeSort === "az") {
+          visible.sort((a, b) => (a.dataset.title ?? "").localeCompare(b.dataset.title ?? ""));
+        } else if (activeSort === "za") {
+          visible.sort((a, b) => (b.dataset.title ?? "").localeCompare(a.dataset.title ?? ""));
+        } else if (activeSort === "newest") {
+          visible.sort((a, b) => (b.dataset.date ?? "").localeCompare(a.dataset.date ?? ""));
+        } else if (activeSort === "oldest") {
+          visible.sort((a, b) => (a.dataset.date ?? "").localeCompare(b.dataset.date ?? ""));
+        } else {
+          visible.sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0));
+        }
+        visible.forEach(el => stack?.appendChild(el));
+
+        if (emptyState) emptyState.hidden = visible.length > 0;
+      }
+
+      // Filter chips
+      chipsWrap?.addEventListener("click", e => {
+        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".fchip");
+        if (!btn) return;
+        document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter ?? "all";
+        apply();
+      });
+
+      // Status sort (default)
+      statusBtn?.addEventListener("click", () => {
+        statusBtn.classList.add("active");
+        cycleBtn?.classList.remove("active");
+        cycleIdx = 0;
+        if (cycleBtn) cycleBtn.textContent = CYCLE[0].label;
+        activeSort = "default";
+        apply();
+      });
+
+      // Cycling sort — A–Z → Z–A → Newest → Oldest → A–Z…
+      cycleBtn?.addEventListener("click", () => {
+        if (cycleBtn.classList.contains("active")) {
+          cycleIdx = (cycleIdx + 1) % CYCLE.length;
+        } else {
+          cycleIdx = 0;
+          statusBtn?.classList.remove("active");
+          cycleBtn.classList.add("active");
+        }
+        cycleBtn.textContent = CYCLE[cycleIdx].label;
+        activeSort = CYCLE[cycleIdx].key;
+        apply();
+      });
+    })();
+  </script>
+
   <style>
-    .page-header {
+    .hd {
       max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
     h1 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-size: 44px;
       letter-spacing: -0.03em;
       color: rgb(var(--accent));
       font-weight: 800;
     }
-    .muted {
+    .sub {
       color: rgb(var(--muted));
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 0 4px;
+      font-size: 15px;
     }
 
-    /* Controls */
+    /* ---- controls (matches projects page) ---- */
     .controls {
-      max-width: var(--content, 1100px);
-      margin: 20px auto 4px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .control-row {
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
-    }
-    .control-label {
-      font-size: 12px;
-      color: rgb(var(--muted));
-      min-width: 36px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .sort-select {
-      font-size: 13px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgb(var(--border));
-      background: rgba(255, 255, 255, 0.04);
-      color: rgb(var(--text));
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      padding-right: 28px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-    }
-    .sort-select:focus {
-      outline: none;
-      border-color: rgb(var(--accent));
+      margin: 20px auto 24px;
+      max-width: var(--content, 1100px);
     }
     .chips {
       display: flex;
+      gap: 7px;
       flex-wrap: wrap;
-      gap: 6px;
     }
-    .chip {
-      font-size: 12px;
-      padding: 5px 12px;
+    .fchip {
+      padding: 5px 13px;
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
+      background: var(--card-bg);
+      color: rgb(var(--muted));
+      font-size: 12px;
+      cursor: pointer;
+      transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+      line-height: 1.5;
+    }
+    .fchip:hover,
+    .fchip.active {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+      background: rgb(var(--accent) / 0.08);
+    }
+    .sorts {
+      display: flex;
+      gap: 4px;
+    }
+    .sbtn {
+      padding: 5px 11px;
+      border-radius: var(--r);
+      border: 1px solid transparent;
       background: transparent;
       color: rgb(var(--muted));
+      font-size: 12px;
       cursor: pointer;
-      transition: border-color 100ms ease, color 100ms ease, background 100ms ease;
-      line-height: 1;
+      transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
     }
-    .chip:hover {
-      border-color: rgb(var(--accent));
-      color: rgb(var(--accent));
+    .sbtn.active {
+      color: rgb(var(--text));
+      border-color: rgb(var(--border));
+      background: var(--card-bg);
     }
-    .chip.active {
-      border-color: rgb(var(--accent));
-      color: rgb(var(--accent));
-      background: color-mix(in srgb, rgb(var(--accent)) 10%, transparent);
+    .sbtn:hover:not(.active) {
+      color: rgb(var(--text));
     }
 
-    /* Cards */
+    /* ---- cards ---- */
     .stack {
-      margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
     .card {
       display: block;
@@ -231,11 +280,9 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
       color: rgb(var(--text));
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.02);
-      transition:
-        transform 120ms ease,
-        border-color 120ms ease;
+      padding: 16px 18px;
+      background: var(--card-bg);
+      transition: transform 120ms ease, border-color 120ms ease;
     }
     .card:hover {
       transform: translateY(-2px);
@@ -243,13 +290,14 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
     }
     .top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
     }
     h2 {
       margin: 0;
       font-size: 16px;
+      line-height: 1.35;
     }
     .top-right {
       display: flex;
@@ -264,7 +312,7 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
     }
     .badge {
       font-size: 12px;
-      padding: 6px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
       color: rgb(var(--muted));
@@ -287,15 +335,16 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
     .badge.in-progress {
       border-color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
       color: color-mix(in srgb, rgb(var(--accent)) 50%, rgb(var(--muted)));
-      opacity: 0.9;
     }
-    .rel {
+    .muted {
       color: rgb(var(--muted));
-      max-width: 80ch;
+      margin: 8px 0 0;
+      font-size: 14px;
     }
     .meta {
       color: rgb(var(--muted));
       font-size: 12px;
+      margin: 6px 0 0;
     }
     .cta {
       margin-top: 10px;
@@ -310,58 +359,9 @@ const allAreas = [...new Set(items.flatMap((r) => r.data.area ?? []))].sort();
 
     @media (max-width: 600px) {
       h1 { font-size: 32px; }
-      .control-label { min-width: unset; }
       .pub-date { display: none; }
+      .top { flex-direction: column; gap: 8px; }
+      .top-right { flex-wrap: wrap; }
     }
   </style>
-
-  <script>
-    const stack = document.getElementById("research-stack") as HTMLElement;
-    const emptyState = document.getElementById("empty-state") as HTMLElement;
-    const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
-    const cards = [...document.querySelectorAll<HTMLElement>(".card[data-areas]")];
-
-    let activeArea = "all";
-
-    function applyFilters() {
-      const sort = sortSelect.value;
-
-      const visible = cards.filter((c) => {
-        const areas = c.dataset.areas ? c.dataset.areas.split(",") : [];
-        const areaOk = activeArea === "all" || areas.includes(activeArea);
-        return areaOk;
-      });
-      const hidden = cards.filter((c) => !visible.includes(c));
-
-      visible.sort((a, b) => {
-        if (sort === "title") return (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "");
-        const da = a.dataset.date ?? "";
-        const db = b.dataset.date ?? "";
-        if (da !== db) return sort === "oldest" ? da.localeCompare(db) : db.localeCompare(da);
-        // tie-break by title so order is stable
-        return (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "");
-      });
-
-      hidden.forEach((c) => { c.style.display = "none"; });
-      visible.forEach((c) => { c.style.display = ""; stack.appendChild(c); });
-
-      if (emptyState) emptyState.style.display = visible.length === 0 ? "" : "none";
-    }
-
-    function wireChips(groupId: string, setter: (v: string) => void) {
-      const group = document.getElementById(groupId);
-      if (!group) return;
-      group.querySelectorAll<HTMLButtonElement>(".chip").forEach((chip) => {
-        chip.addEventListener("click", () => {
-          group.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-          chip.classList.add("active");
-          setter(chip.dataset.value ?? "all");
-          applyFilters();
-        });
-      });
-    }
-
-    wireChips("area-chips", (v) => { activeArea = v; });
-    sortSelect.addEventListener("change", applyFilters);
-  </script>
 </SiteLayout>
