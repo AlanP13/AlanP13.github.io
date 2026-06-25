@@ -203,10 +203,9 @@ const carouselImages = await Promise.all(
 
     <script define:vars={{ placeImages }}>
       const VISIBLE = 3;
-      const INTERVAL = 5000; // 5 seconds
+      const INTERVAL = 5000;
       const FADE_MS = 150;
 
-      // ✅ rotate 3 at a time + pause on hover
       let index = 0;
       let timer = null;
       let paused = false;
@@ -215,53 +214,54 @@ const carouselImages = await Promise.all(
       const cards = Array.from(container.querySelectorAll(".imgCard"));
       const count = Math.min(VISIBLE, cards.length);
 
+      // Kick off all image fetches immediately so they're cached before first rotation
+      placeImages.forEach(({ src }) => { const p = new Image(); p.src = src; });
+
       function setCard(card, img) {
         const imageEl = card.querySelector("img");
         const labelEl = card.querySelector(".imgLabel");
 
         card.classList.add("is-fading");
 
-        setTimeout(() => {
+        const preload = new Image();
+        const doSwap = () => {
           imageEl.src = img.src;
           imageEl.alt = img.name;
           labelEl.textContent = img.name;
           card.classList.remove("is-fading");
-        }, FADE_MS);
+        };
+
+        preload.src = img.src;
+        if (preload.complete) {
+          // Already in cache — swap after the fade-out finishes
+          setTimeout(doSwap, FADE_MS);
+        } else {
+          // Wait for the image to load AND the fade-out to finish
+          const deadline = Date.now() + FADE_MS;
+          const onReady = () => setTimeout(doSwap, Math.max(0, deadline - Date.now()));
+          preload.onload = onReady;
+          preload.onerror = onReady;
+        }
       }
 
       function render() {
         if (!placeImages?.length) return;
-
         for (let i = 0; i < count; i++) {
-          const img = placeImages[(index + i) % placeImages.length];
-          setCard(cards[i], img);
+          setCard(cards[i], placeImages[(index + i) % placeImages.length]);
         }
       }
 
       function tick() {
         if (!placeImages?.length) return;
-
-        // ✅ move the window by 3 each time (rotate 3 at once)
         index = (index + count) % placeImages.length;
         render();
       }
 
-      // ✅ pause rotation on hover over the gallery
       container.addEventListener("mouseenter", () => (paused = true));
       container.addEventListener("mouseleave", () => (paused = false));
 
-      function start() {
-        if (timer) return;
-        timer = setInterval(() => {
-          if (!paused) tick();
-        }, INTERVAL);
-      }
-
-      // initial paint + start loop
-      requestAnimationFrame(() => {
-        render();
-        start();
-      });
+      // HTML already shows the correct first frame — just start the rotation
+      timer = setInterval(() => { if (!paused) tick(); }, INTERVAL);
     </script>
   </section>
 
