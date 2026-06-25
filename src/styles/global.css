@@ -38,6 +38,7 @@ h1,
 h2,
 h3 {
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 p {
@@ -193,6 +194,7 @@ footer.wrap.foot {
 .nebula {
   position: absolute;
   inset: 0;
+  will-change: transform;
   background:
     radial-gradient(1100px 760px at 18% 22%,
       color-mix(in srgb, rgb(var(--accent)) 18%, transparent),
@@ -257,11 +259,11 @@ footer.wrap.foot {
 .comet::after {
   content: "";
   position: absolute;
-  inset: -8px -50px;
-  background: radial-gradient(circle at 60% 50%,
-      rgb(var(--accent) / 0.16),
-      transparent 60%);
-  filter: blur(7px);
+  inset: -14px -60px;
+  background: radial-gradient(ellipse at 60% 50%,
+      rgb(var(--accent) / 0.22),
+      rgb(var(--accent) / 0.06) 42%,
+      transparent 70%);
   opacity: 0.9;
 }
 

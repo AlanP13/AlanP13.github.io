@@ -318,7 +318,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       border: 1px solid rgb(var(--border));
       border-radius: 14px;
       padding: 20px 24px;
-      background: rgba(255,255,255,0.02);
+      background: var(--card-bg);
       margin-bottom: 32px;
     }
     .contactName {
@@ -350,10 +350,9 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
 
     .rSection { margin-bottom: 36px; }
     .rHead {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      letter-spacing: -0.01em;
       color: rgb(var(--accent));
       margin: 0 0 16px;
       padding-bottom: 8px;
@@ -366,7 +365,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       content: "";
       display: inline-block;
       width: 3px;
-      height: 13px;
+      height: 14px;
       border-radius: 999px;
       background: rgb(var(--accent));
       opacity: 0.8;
@@ -410,10 +409,8 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       align-items: start;
     }
     .skillLabel {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      font-weight: 600;
       color: rgb(var(--muted));
       padding-top: 4px;
     }
@@ -440,9 +437,13 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
       color: rgb(var(--muted));
-      background: rgba(255,255,255,0.02);
+      background: var(--card-bg);
     }
 
+    @media (max-width: 760px) {
+      h1 { font-size: 36px; }
+      .skillRow { grid-template-columns: 120px 1fr; }
+    }
     @media (max-width: 640px) {
       h1 { font-size: 32px; }
       .pageHead { flex-direction: column; align-items: flex-start; }

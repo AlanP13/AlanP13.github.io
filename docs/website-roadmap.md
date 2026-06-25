@@ -1,7 +1,7 @@
 # Website Roadmap — Alan Palayil Portfolio
 
 Master backlog for https://alanp13.github.io  
-Last full audit: **2026-06-24** (galaxy + UI consistency sprint — detail pages, star loop, comet fix)  
+Last full audit: **2026-06-25** (comprehensive audit — content + UI; filter/sort; anti-pattern sweep; a11y + perf fixes)  
 Repository baseline: June 2026.
 
 This is a public repository. Keep this document limited to public-safe website
@@ -56,6 +56,18 @@ Ordered within each priority level by impact, then readiness.
 | UI-012 | [x] | P2 | XS | **`--card-bg` token missing** — Added `--card-bg: rgba(255,255,255,0.02)` (dark) and `rgba(0,0,0,0.02)` (light) to `theme.css`; replaced 12+ hardcoded values site-wide. | `src/styles/theme.css` |
 | UI-013 | [ ] | P3 | S | **Document galaxy design system** — Run `/impeccable document` to capture the space theme, token system, and animation spec into `DESIGN.md`. Ensures the visual system is reproducible in future sessions. | — |
 | UI-014 | [ ] | P3 | S | **Research detail padding alignment** — Added `padding: 12px 0 48px` to `.page` for breathing room, but could benefit from matching the project detail's layout rhythm more precisely (inner max-width, section breaks). | `src/pages/research/[slug].astro` |
+
+### Anti-patterns — cv / resume / about (not yet addressed)
+
+| ID | Status | Priority | Effort | Item | Notes |
+|---|---|---|---|---|---|
+| AUD2-001 | [x] | P2 | S | **Uppercase + wide tracking on `resume.astro`** — `.rHead` section titles: `12px 0.12em uppercase` → `13px -0.01em` weight-only; `.skillLabel`: `11px 0.08em uppercase` → `12px weight-600` no tracking. | `src/pages/resume.astro` |
+| AUD2-002 | [x] | P2 | S | **Uppercase + wide tracking on `cv.astro`** — `.cvSectionTitle`: `12px 0.1em uppercase` → `13px -0.01em`; `.cvBadge`: `0.04em uppercase` → `weight-700 letter-spacing:0`. | `src/pages/cv.astro` |
+| AUD2-003 | [x] | P2 | XS | **Uppercase on `about.astro`** — `.galleryTitle` ("Travel"): uppercase removed, `font-weight: 700` added; `.serviceTitle` ("Leadership & Service"): `13px 0.08em uppercase` → `16px -0.01em`. | `src/pages/about.astro` |
+| AUD2-004 | [x] | P2 | XS | **Remaining hardcoded `rgba(255,255,255,0.02)` — about / resume / index** — All 6 instances replaced with `var(--card-bg)`. Light mode now renders correctly on these surfaces. | Multiple files |
+| AUD2-005 | [x] | P2 | S | **`resume.astro` missing mid-breakpoint (640–860px)** — Added `@media (max-width: 760px)`: h1 `44px → 36px`, `.skillRow` label column `160px → 120px`. Smoother transition before the 640px collapse. | `src/pages/resume.astro` |
+| AUD2-006 | [x] | P3 | XS | **`index.astro` two remaining uppercase instances** — `.credLabel` ("Academic Identity" etc.): `12px 0.05em uppercase` → `13px -0.01em`; `.certCat` category pill: `10px 0.07em uppercase` → `11px weight-600 letter-spacing:0`. | `src/pages/index.astro` |
+| AUD2-007 | [x] | P3 | S | **`.comet::after filter: blur(7px)` — lighter glow** — Replaced filter with wider radial-gradient ellipse (`inset: -14px -60px`, two-stop fade). Same visual softness, no filter pass — composites cleanly on integrated GPUs. | `src/styles/global.css` |
 
 ### Code quality
 
@@ -139,6 +151,9 @@ Chronological. Most recent first.
 
 | Date | ID | Item |
 |---|---|---|
+| 2026-06-25 | AUD2-001–007 | **Anti-pattern + quality sweep** — Uppercase + wide tracking removed from all remaining pages: `resume.astro` (`.rHead` 0.12em → -0.01em, `.skillLabel` 0.08em → none), `cv.astro` (`.cvSectionTitle` 0.1em, `.cvBadge` uppercase), `about.astro` (`.galleryTitle`, `.serviceTitle`), `index.astro` (`.credLabel`, `.certCat`). All 6 remaining hardcoded `rgba(255,255,255,0.02)` replaced with `var(--card-bg)`. Resume mid-breakpoint added at 760px. Comet `filter: blur(7px)` replaced with blur-free radial-gradient glow. |
+| 2026-06-25 | (audit fixes) | **Comprehensive audit pass** — Research index `relevance` field restored (was removed in rewrite, critical for O1/EB1); `text-wrap: balance` added to all h1/h2/h3 globally (zero instances before); `will-change: transform` added to `.nebula` (70s animated element now GPU-promoted); `max-width: 92ch` → 72ch on skills section (impeccable cap); `.kw` keyword chip background `rgba(255,255,255,0.04)` → `var(--card-bg)` on research detail page. Roadmap updated with AUD2-001–007 backlog. |
+| 2026-06-25 | UI, research | **Filter/sort on Projects + Research** — 5 semantic filter chips on projects (Enterprise, AI/ML, Systems, Data & Pipelines, Automation) with build-time tag bucketing; cycling sort (A–Z → Z–A → Newest → Oldest) on both pages; research index redesigned to match (5 curated topic chips, Status + cycling sort, relevance field on cards, area capped at 4); visual language identical across both pages (`.fchip`, `.sbtn`, `.controls`) |
 | 2026-06-24 | UI-001–012 | **Galaxy + UI consistency sprint** — Galaxy default ON; comets animated (was missing `@keyframes cometFly`); seamless star drift via `background-position` keyed to exact tile sizes; galaxy revealed at wide viewports; project detail black background removed; `.chip.featured` CSS syntax bug fixed (`rgba()` → `rgb(/ 0.5)`); side-stripe `.weCard::before` removed; skill category uppercase eyebrow replaced with weight/color hierarchy; SiteLayout type hierarchy resolved (12px/15px); `--card-bg` token applied across detail pages; sidebar h3 uppercase labels removed across both detail pages; project nav label uppercase + wide tracking removed |
 | 2026-06-23 | CQ-003/004/005, CP-003/004, SD-002, IA-001/002 | **Backlog sprint** — removed unused `.sub` CSS (+ media override), fixed `byOrderDescThenTitle` to use `CollectionEntry<"projects">`, stripped undefined `.prose` class from About, updated CV meta description to lead with 4 Zenodo papers, truncated research detail meta description to 155 chars, added `workExample` array to Person JSON-LD linking all 4 ScholarlyArticle records by URL + DOI, added ORCID link to site footer, added "Engineering-to-Research Monograph Series · Zenodo · OpenAIRE-indexed" note to CV Publications |
 | 2026-06-22 | AUD-001–015 (partial) | **O1/EB1 + full-stack audit sprint** — Homepage Published Work section (4 Zenodo DOIs + named contributions), hero padding + lead width, CV Publications split, CV + About memberships corrected (IEEE HKN date, IEEE member added), gallery retitled "Travel", research index dead type-filter removed, Zenodo DOI badge on cards, research count label fixed, unused `featured` const removed |

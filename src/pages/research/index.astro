@@ -98,6 +98,9 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
             </div>
           </div>
           <p class="muted">{r.data.summary}</p>
+          {r.data.relevance && (
+            <p class="rel"><strong>Relevance:</strong> {r.data.relevance}</p>
+          )}
           {r.data.area?.length ? (
             <p class="meta">{r.data.area.slice(0, 4).join(" · ")}</p>
           ) : null}
@@ -340,6 +343,16 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
       color: rgb(var(--muted));
       margin: 8px 0 0;
       font-size: 14px;
+    }
+    .rel {
+      color: color-mix(in srgb, rgb(var(--muted)) 85%, rgb(var(--text)));
+      margin: 8px 0 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .rel strong {
+      color: rgb(var(--text));
+      font-weight: 600;
     }
     .meta {
       color: rgb(var(--muted));

@@ -1121,7 +1121,7 @@ const personSchema = JSON.stringify({
       color: color-mix(in srgb, rgb(var(--text)) 65%, rgb(var(--muted)));
       font-size: 14px;
       line-height: 1.6;
-      max-width: 92ch;
+      max-width: 72ch;
     }
 
     
@@ -1279,7 +1279,7 @@ const personSchema = JSON.stringify({
       padding: 4px 10px;
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--card-bg);
       color: rgb(var(--text));
     }
 
@@ -1303,11 +1303,10 @@ const personSchema = JSON.stringify({
     }
     .credLabel {
       margin: 0 0 10px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: color-mix(in srgb, rgb(var(--accent)) 70%, rgb(var(--text)));
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.01em;
     }
     .credEntry {
       display: flex;
@@ -1404,10 +1403,9 @@ const personSchema = JSON.stringify({
       gap: 4px;
     }
     .certCat {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0;
       padding: 2px 8px;
       border-radius: 999px;
       background: color-mix(in srgb, rgb(var(--accent)) 12%, transparent);
@@ -1420,7 +1418,7 @@ const personSchema = JSON.stringify({
       border-radius: 999px;
       border: 1px solid rgb(var(--border));
       color: rgb(var(--muted));
-      background: rgba(255,255,255,0.02);
+      background: var(--card-bg);
     }
     .certMeta {
       display: flex;
