@@ -1,154 +1,75 @@
 # Alan Palayil — Personal Portfolio
 
-🌐 **Live site:** [https://alanp13.github.io](https://alanp13.github.io)
+**Live site:** [https://alanp13.github.io](https://alanp13.github.io)
 
-## Overview
-
-This repository contains the source code for my **personal portfolio website**, built to present my professional experience, engineering projects, technical skills, and certifications in a clean, fast, and modern web experience.
-
-The site serves as my **primary professional landing page** for:
-
--   Recruiters and hiring managers
-    
--   Engineering collaborators
-    
--   Technical reviewers
-    
-
-It focuses on:
-
--   Clear storytelling of technical experience
-    
--   Clean, readable UI/UX
-    
--   High performance and accessibility
-    
--   Maintainable, component-driven architecture
-    
+Personal portfolio built with Astro 5 — fast, static, and SEO-friendly. Covers professional experience, engineering projects, research, and credentials.
 
 ---
 
-## Tech Stack
+## Stack
 
--   **Astro**
-    
--   **JavaScript / TypeScript**
-    
--   **HTML5**
-    
--   **CSS3**
-    
--   **Modern static-site architecture**
-    
--   **Git & GitHub**
-    
+| Layer | Detail |
+|---|---|
+| Framework | Astro 5.16.6 |
+| UI | React 19 (single interactive component) |
+| Language | TypeScript (strict) |
+| Styling | Scoped CSS per component |
+| Content | MDX + Astro Content Collections |
+| Deployment | GitHub Pages via GitHub Actions |
 
 ---
 
-## Key Features
+## Routes
 
--   ⚡ Fast, static, SEO-friendly site built with Astro
-    
--   📱 Fully responsive layout (mobile, tablet, desktop)
-    
--   🧩 Component-based architecture
-    
--   🧠 Clear information hierarchy and content structure
-    
--   🎯 Focused on technical storytelling and project presentation
-    
--   🚀 Deployed via GitHub Pages
-    
+| URL | Source |
+|---|---|
+| `/` | `src/pages/index.astro` |
+| `/about` | `src/pages/about.astro` |
+| `/resume` | `src/pages/resume.astro` |
+| `/projects` | `src/pages/projects/index.astro` |
+| `/projects/[slug]` | `src/pages/projects/[slug].astro` |
+| `/research` | `src/pages/research/index.astro` |
 
 ---
 
-## Site Content
+## Content Collections
 
-The portfolio showcases:
+Managed under `src/content/`:
 
--   Professional experience and roles
-    
--   Major engineering projects
-    
--   Technical skill stack
-    
--   Certifications and credentials
-    
--   Personal design language and branding
-    
-
----
-
-## Project Structure
-
-```/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── layouts/
-│   └── pages/
-├── package.json
-└── astro.config.mjs
-```
+- `projects` — engineering project entries (MDX)
+- `research` — research write-ups (MDX)
+- `timeline` — career / experience timeline
+- `certifications` — credential entries
+- `archive` — archived content
 
 ---
 
 ## Development
 
-### Prerequisites
+**Prerequisites:** Node.js LTS, npm
 
--   Node.js (LTS recommended)
-    
--   npm
-    
-
-### Install dependencies
-
-`npm install`
-
-### Run locally
-
-`npm run dev`
-
-Then open:
-
-`http://localhost:4321`
-
-### Build for production
-
-`npm run build`
-
-### Preview production build
-
-`npm run preview`
+```bash
+npm install       # Install dependencies
+npm run dev       # Dev server → http://localhost:4321
+npm run build     # Production build → ./dist/
+npm run preview   # Serve ./dist/ locally
+```
 
 ---
 
-## Deployment
+## Project Structure
 
-The site is deployed using **GitHub Pages**.
-
-Production URL:
-
-> [https://alanp13.github.io](https://alanp13.github.io)
-
----
-
-## Philosophy
-
-This project is intentionally:
-
--   Simple
-    
--   Fast
-    
--   Content-first
-    
--   Maintainable
-    
-
-It is designed to evolve over time as my experience, projects, and technical focus grow.
+```
+├── public/                  # Static assets
+├── src/
+│   ├── components/          # Astro + React components
+│   ├── content/             # MDX content collections
+│   ├── layouts/             # Page layout wrappers
+│   └── pages/               # File-based routes
+├── docs/                    # Project docs & decision log
+├── astro.config.mjs
+└── package.json
+```
 
 ---
 
