@@ -579,10 +579,7 @@ const isCurrentPath = (href: string) =>
         padding-bottom: 120px;
         position: relative;
         z-index: 0;
-        /* add a surface so the rounded container is visible in LIGHT mode */
-        background: rgb(var(--card) / 0.55);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgb(var(--bg) / 0.88);
       }
 
       .skipLink {
@@ -703,17 +700,15 @@ const isCurrentPath = (href: string) =>
       :root[data-theme="light"] .logo-img {
         filter: invert(0);
       }
-      /* Let bgfx show THROUGH the page in dark mode */
+      /* Dark mode — deep panel, galaxy tints through at 12% */
       :root[data-theme="dark"] main.wrap.main {
-        background: rgb(var(--card) / 0.22); /* was 0.55 */
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgb(var(--bg) / 0.88);
         border: 1px solid rgb(var(--border) / 0.7);
       }
 
-      /* Keep light mode readable */
+      /* Light mode — near-opaque white, galaxy visible outside panel edges */
       :root[data-theme="light"] main.wrap.main {
-        background: rgb(var(--card) / 0.55);
+        background: rgb(var(--card) / 0.94);
       }
 
       :root[data-theme="dark"] .main::before,
