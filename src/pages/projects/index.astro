@@ -51,8 +51,8 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
       ))}
     </div>
     <div class="sorts" role="group" aria-label="Sort projects">
-      <button class="sbtn active" data-sort="default">Featured</button>
-      <button class="sbtn" data-sort="az">A–Z</button>
+      <button class="sbtn active" id="sort-featured">Featured</button>
+      <button class="sbtn" id="sort-cycle">A–Z</button>
     </div>
   </div>
 
@@ -108,10 +108,18 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
 
   <script>
     (() => {
-      const chipsWrap = document.getElementById("filter-chips");
-      const sortBtns  = Array.from(document.querySelectorAll<HTMLButtonElement>(".sbtn"));
-      const sections  = Array.from(document.querySelectorAll<HTMLElement>(".section"));
+      const chipsWrap   = document.getElementById("filter-chips");
+      const featuredBtn = document.getElementById("sort-featured") as HTMLButtonElement | null;
+      const cycleBtn    = document.getElementById("sort-cycle")    as HTMLButtonElement | null;
+      const sections    = Array.from(document.querySelectorAll<HTMLElement>(".section"));
 
+      const CYCLE = [
+        { key: "az",     label: "A–Z"    },
+        { key: "za",     label: "Z–A"    },
+        { key: "newest", label: "Newest" },
+        { key: "oldest", label: "Oldest" },
+      ];
+      let cycleIdx     = 0;
       let activeFilter = "all";
       let activeSort   = "default";
 
@@ -120,10 +128,10 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
       }
 
       function apply() {
+        // Filter
         cards().forEach(card => {
           const buckets = (card.dataset.buckets ?? "").split(" ").filter(Boolean);
-          const show = activeFilter === "all" || buckets.includes(activeFilter);
-          card.hidden = !show;
+          card.hidden = activeFilter !== "all" && !buckets.includes(activeFilter);
         });
 
         // Sort within each container
@@ -134,26 +142,28 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
             container.querySelectorAll<HTMLElement>("[data-title]:not([hidden])")
           );
           if (activeSort === "az") {
-            visible.sort((a, b) =>
-              (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "")
-            );
+            visible.sort((a, b) => (a.dataset.title ?? "").localeCompare(b.dataset.title ?? ""));
+          } else if (activeSort === "za") {
+            visible.sort((a, b) => (b.dataset.title ?? "").localeCompare(a.dataset.title ?? ""));
+          } else if (activeSort === "newest") {
+            visible.sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0));
+          } else if (activeSort === "oldest") {
+            visible.sort((a, b) => Number(b.dataset.order ?? 0) - Number(a.dataset.order ?? 0));
           } else {
-            visible.sort((a, b) =>
-              Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0)
-            );
+            visible.sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0));
           }
           visible.forEach(el => container.appendChild(el));
         });
 
-        // Hide sections that have no visible cards
+        // Hide sections with no visible cards
         sections.forEach(sec => {
-          const hasVisible = Array.from(
+          sec.hidden = !Array.from(
             sec.querySelectorAll<HTMLElement>("[data-buckets]")
           ).some(c => !c.hidden);
-          sec.hidden = !hasVisible;
         });
       }
 
+      // Filter chips
       chipsWrap?.addEventListener("click", e => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".fchip");
         if (!btn) return;
@@ -163,13 +173,28 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
         apply();
       });
 
-      sortBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          sortBtns.forEach(s => s.classList.remove("active"));
-          btn.classList.add("active");
-          activeSort = btn.dataset.sort ?? "default";
-          apply();
-        });
+      // Featured sort — reset cycle to first state
+      featuredBtn?.addEventListener("click", () => {
+        featuredBtn.classList.add("active");
+        cycleBtn?.classList.remove("active");
+        cycleIdx = 0;
+        if (cycleBtn) cycleBtn.textContent = CYCLE[0].label;
+        activeSort = "default";
+        apply();
+      });
+
+      // Cycling sort — advance through A–Z → Z–A → Newest → Oldest → A–Z…
+      cycleBtn?.addEventListener("click", () => {
+        if (cycleBtn.classList.contains("active")) {
+          cycleIdx = (cycleIdx + 1) % CYCLE.length;
+        } else {
+          cycleIdx = 0;
+          featuredBtn?.classList.remove("active");
+          cycleBtn.classList.add("active");
+        }
+        cycleBtn.textContent = CYCLE[cycleIdx].label;
+        activeSort = CYCLE[cycleIdx].key;
+        apply();
       });
     })();
   </script>
