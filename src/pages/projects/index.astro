@@ -14,103 +14,253 @@ const byOrderDescThenTitle = (
   return (a.data.title ?? "").localeCompare(b.data.title ?? "");
 };
 
-const featured = projects
-  .filter((p) => p.data.featured)
-  .sort(byOrderDescThenTitle);
-const rest = projects
-  .filter((p) => !p.data.featured)
-  .sort(byOrderDescThenTitle);
+const FILTERS = [
+  { key: "enterprise", label: "Enterprise",      tags: ["finance","enterprise","financial-systems","derivatives","azure","reliability","platform-ops","operations"] },
+  { key: "ai",         label: "AI / ML",          tags: ["edge-ai","ai-systems","ai-platforms","nlp","computer-vision","decision-support"] },
+  { key: "systems",    label: "Systems",          tags: ["systems","distributed-systems","embedded","iot","cpu","assembly","simulator","simulation"] },
+  { key: "data",       label: "Data & Pipelines", tags: ["data-platforms","pipelines","data-pipelines","metadata"] },
+  { key: "automation", label: "Automation",       tags: ["automation","mqtt","platform-ops"] },
+];
+
+function getBuckets(tags: string[] | undefined): string {
+  const t = tags ?? [];
+  return FILTERS
+    .filter(fg => t.some(tag => fg.tags.includes(tag)))
+    .map(fg => fg.key)
+    .join(" ");
+}
+
+const featured = projects.filter((p) => p.data.featured).sort(byOrderDescThenTitle);
+const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTitle);
 ---
 
 <SiteLayout
   title="Projects — Alan Palayil"
   description="Engineering projects in financial data platforms, enterprise systems modernization, and applied AI. Industry work and personal builds by Alan Palayil."
 >
-  <h1>Projects</h1>
-  <p class="muted">
-    Featured projects and other projects that I've worked on over the years. Please
-    look over GitHub for more.
-  </p>
+  <div class="hd">
+    <h1>Projects</h1>
+    <p class="sub">Featured projects and other work over the years. See GitHub for more.</p>
+  </div>
 
-  {
-    featured.length ? (
-      <section class="section">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="grid">
-          {featured.map((p) => (
-            <a class="card" href={`/projects/${p.slug}`}>
-              <div>
-                <h3>{p.data.title}</h3>
-                <p class="muted">{p.data.summary}</p>
-              </div>
+  <div class="controls">
+    <div class="chips" id="filter-chips" role="group" aria-label="Filter by topic">
+      <button class="fchip active" data-filter="all">All</button>
+      {FILTERS.map(f => (
+        <button class="fchip" data-filter={f.key}>{f.label}</button>
+      ))}
+    </div>
+    <div class="sorts" role="group" aria-label="Sort projects">
+      <button class="sbtn active" data-sort="default">Featured</button>
+      <button class="sbtn" data-sort="az">A–Z</button>
+    </div>
+  </div>
 
-              <div class="metaRow">
-                <span class="pill">Project Details →</span>
-                <span class="tech">{p.data.tech.slice(0, 5).join(" · ")}</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    ) : null
-  }
+  {featured.length ? (
+    <section class="section" id="sec-featured">
+      <h2 class="section-title">Featured</h2>
+      <div class="grid" id="grid-featured">
+        {featured.map((p, idx) => (
+          <a
+            class="card"
+            href={`/projects/${p.slug}`}
+            data-buckets={getBuckets(p.data.tags)}
+            data-title={p.data.title}
+            data-order={idx}
+          >
+            <div>
+              <h3>{p.data.title}</h3>
+              <p class="muted">{p.data.summary}</p>
+            </div>
+            <div class="metaRow">
+              <span class="pill">Details →</span>
+              <span class="tech">{p.data.tech.slice(0, 4).join(" · ")}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
 
-  {
-    rest.length ? (
-      <section class="section">
-        <h2 class="section-title">Other Projects</h2>
-        <div class="list">
-          {rest.map((p) => (
-            <a class="row" href={`/projects/${p.slug}`}>
-              <div>
-                <h3 class="rowTitle">{p.data.title}</h3>
-                <p class="muted">{p.data.summary}</p>
-                <p class="meta">{p.data.tech.slice(0, 6).join(" · ")}</p>
-              </div>
-              <span class="go">→</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    ) : null
-  }
+  {rest.length ? (
+    <section class="section" id="sec-rest">
+      <h2 class="section-title">Other Projects</h2>
+      <div class="list" id="list-rest">
+        {rest.map((p, idx) => (
+          <a
+            class="row"
+            href={`/projects/${p.slug}`}
+            data-buckets={getBuckets(p.data.tags)}
+            data-title={p.data.title}
+            data-order={idx}
+          >
+            <div>
+              <h3 class="rowTitle">{p.data.title}</h3>
+              <p class="muted">{p.data.summary}</p>
+              <p class="meta">{p.data.tech.slice(0, 4).join(" · ")}</p>
+            </div>
+            <span class="go" aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
+
+  <script>
+    (() => {
+      const chipsWrap = document.getElementById("filter-chips");
+      const sortBtns  = Array.from(document.querySelectorAll<HTMLButtonElement>(".sbtn"));
+      const sections  = Array.from(document.querySelectorAll<HTMLElement>(".section"));
+
+      let activeFilter = "all";
+      let activeSort   = "default";
+
+      function cards(): HTMLElement[] {
+        return Array.from(document.querySelectorAll<HTMLElement>("[data-buckets]"));
+      }
+
+      function apply() {
+        cards().forEach(card => {
+          const buckets = (card.dataset.buckets ?? "").split(" ").filter(Boolean);
+          const show = activeFilter === "all" || buckets.includes(activeFilter);
+          card.hidden = !show;
+        });
+
+        // Sort within each container
+        const containers = new Set(cards().map(c => c.parentElement).filter(Boolean));
+        containers.forEach(container => {
+          if (!container) return;
+          const visible = Array.from(
+            container.querySelectorAll<HTMLElement>("[data-title]:not([hidden])")
+          );
+          if (activeSort === "az") {
+            visible.sort((a, b) =>
+              (a.dataset.title ?? "").localeCompare(b.dataset.title ?? "")
+            );
+          } else {
+            visible.sort((a, b) =>
+              Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0)
+            );
+          }
+          visible.forEach(el => container.appendChild(el));
+        });
+
+        // Hide sections that have no visible cards
+        sections.forEach(sec => {
+          const hasVisible = Array.from(
+            sec.querySelectorAll<HTMLElement>("[data-buckets]")
+          ).some(c => !c.hidden);
+          sec.hidden = !hasVisible;
+        });
+      }
+
+      chipsWrap?.addEventListener("click", e => {
+        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".fchip");
+        if (!btn) return;
+        document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter ?? "all";
+        apply();
+      });
+
+      sortBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          sortBtns.forEach(s => s.classList.remove("active"));
+          btn.classList.add("active");
+          activeSort = btn.dataset.sort ?? "default";
+          apply();
+        });
+      });
+    })();
+  </script>
 
   <style>
+    .hd {
+      max-width: var(--content, 1100px);
+      margin: 0 auto;
+    }
     h1 {
-      margin: 0 0 18px;
+      margin: 0 0 10px;
       font-size: 44px;
       letter-spacing: -0.03em;
       color: rgb(var(--accent));
       font-weight: 800;
-      
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
     }
-    .muted {
+    .sub {
       color: rgb(var(--muted));
-      
-      max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 0 4px;
+      font-size: 15px;
     }
 
-    .section {
-      margin-top: 22px;
-      
+    /* ---- controls ---- */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px auto 24px;
       max-width: var(--content, 1100px);
-      margin-left: auto;
-      margin-right: auto;
+    }
+    .chips {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+    .fchip {
+      padding: 5px 13px;
+      border-radius: 999px;
+      border: 1px solid rgb(var(--border));
+      background: var(--card-bg);
+      color: rgb(var(--muted));
+      font-size: 12px;
+      cursor: pointer;
+      transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+      line-height: 1.5;
+    }
+    .fchip:hover,
+    .fchip.active {
+      border-color: rgb(var(--accent));
+      color: rgb(var(--accent));
+      background: rgb(var(--accent) / 0.08);
+    }
+    .sorts {
+      display: flex;
+      gap: 4px;
+    }
+    .sbtn {
+      padding: 5px 11px;
+      border-radius: var(--r);
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgb(var(--muted));
+      font-size: 12px;
+      cursor: pointer;
+      transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+    .sbtn.active {
+      color: rgb(var(--text));
+      border-color: rgb(var(--border));
+      background: var(--card-bg);
+    }
+    .sbtn:hover:not(.active) {
+      color: rgb(var(--text));
+    }
+
+    /* ---- sections ---- */
+    .section {
+      margin: 0 auto 8px;
+      max-width: var(--content, 1100px);
     }
     .section-title {
-      margin: 18px 0 10px;
-      font-size: 14px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       color: color-mix(in srgb, rgb(var(--accent)) 65%, rgb(var(--muted)));
     }
 
-    /* Featured cards */
+    /* ---- featured grid ---- */
     .grid {
       display: grid;
       gap: 14px;
@@ -137,15 +287,13 @@ const rest = projects
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 18px 20px 16px;
-      background: rgba(255, 255, 255, 0.02);
-      transition:
-        transform 120ms ease,
-        border-color 120ms ease;
+      background: var(--card-bg);
+      transition: transform 120ms ease, border-color 120ms ease;
       color: rgb(var(--text));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 172px;
+      min-height: 160px;
     }
     .card:hover {
       transform: translateY(-2px);
@@ -158,12 +306,14 @@ const rest = projects
     .metaRow {
       display: flex;
       justify-content: space-between;
+      align-items: baseline;
       gap: 10px;
       margin-top: 12px;
     }
     .pill {
       color: rgb(var(--accent));
       font-size: 13px;
+      flex-shrink: 0;
     }
     .tech {
       color: rgb(var(--muted));
@@ -175,12 +325,12 @@ const rest = projects
       text-align: right;
     }
 
-    /* More projects list */
+    /* ---- other projects list ---- */
     .list {
       margin-top: 10px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .row {
       display: flex;
@@ -191,23 +341,31 @@ const rest = projects
       border: 1px solid rgb(var(--border));
       border-radius: var(--r);
       padding: 14px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--card-bg);
+      transition: border-color 120ms ease;
     }
     .row:hover {
       border-color: rgb(var(--accent));
     }
     .rowTitle {
       margin: 0 0 6px;
-      font-size: 18px;
+      font-size: 16px;
+    }
+    .muted {
+      color: rgb(var(--muted));
+      margin: 0;
+      font-size: 14px;
     }
     .meta {
-      margin: 10px 0 0;
+      margin: 8px 0 0;
       font-size: 12px;
       color: rgb(var(--muted));
     }
     .go {
       color: rgb(var(--accent));
       font-size: 18px;
+      flex-shrink: 0;
+      align-self: center;
     }
   </style>
 </SiteLayout>

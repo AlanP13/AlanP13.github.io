@@ -98,7 +98,7 @@ const schemaJson = JSON.stringify(schemaObj);
       {
         d.keywords?.length && (
           <div class="kws">
-            {d.keywords.map((k) => (
+            {d.keywords.slice(0, 5).map((k) => (
               <span class="kw">{k}</span>
             ))}
           </div>
