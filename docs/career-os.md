@@ -157,20 +157,17 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 |---|---|
 | **Canonical title** | M.S., Cybersecurity Engineering |
 | **Institution** | Illinois Institute of Technology, Chicago, IL |
-| **Start date** | DISPUTED — RESUME-0728 text says "M.S. begun May 2022"; older CareerOS record had August 2022. Not yet verified against official transcript. |
-| **End date** | August 2023 (both degrees conferred August 2023) |
+| **Dates** | May 2022 – August 2023 (co-terminal; both degrees conferred August 2023) |
 | **GPA** | 3.6 |
-| **Source** | RESUME-0728 (start date pending verification) |
-| **Confidence** | MEDIUM — start date unresolved; verify against official IIT transcript or enrollment record before updating portfolio |
-| **last_verified** | 2026-08-12 (resume only; transcript not reviewed) |
+| **Source** | RESUME-0728 + USER-CONFIRMED 2026-08-12 |
+| **Confidence** | HIGH — May 2022 start USER-CONFIRMED; older CareerOS record (Aug 2022) was from an earlier LinkedIn-derived pass and is superseded |
+| **last_verified** | 2026-08-12 (USER-CONFIRMED) |
 | **Clearance** | PUBLIC |
-| **Portfolio** | `edu-ms.mdx` — STALE: shows only "August 2023"; defer start date update until transcript verified |
-| **Resume** | Shows May 2022 (in footnote text) — may be correct |
-| **CV** | Include; use verified start date once confirmed |
+| **Portfolio** | `edu-ms.mdx` — UPDATED 2026-08-12: "May 2022 – August 2023" |
+| **Resume** | ✓ Correct |
+| **CV** | Include separately with GPA |
 
-> **Verification needed (ID-007):** May 2022 vs August 2022 conflict must be resolved via official IIT transcript or enrollment record. Do not update portfolio with May 2022 until then.
->
-> **Display note:** BS started Aug 2019; MS co-terminal overlap; both conferred Aug 2023. Portfolio may display as a combined IIT entry.
+> **Display note:** BS started Aug 2019; MS co-terminal (May 2022 – Aug 2023); both conferred Aug 2023. Portfolio displays as two separate entries.
 
 ---
 
@@ -224,15 +221,16 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | Field | Value |
 |---|---|
 | **Canonical title** | Neo4j Certified Professional |
-| **Issuer** | Neo4j |
+| **Issuer** | Neo4j (GraphAcademy) |
 | **Date Earned** | August 2026 |
 | **Credential ID** | 599d588d-8706-44bf-9707-59c5bb61a5b9 |
 | **Expiry** | Unknown |
-| **Source** | LINKEDIN-PDF (no physical cert PDF in manual yet) |
-| **Confidence** | HIGH (LinkedIn-sourced) |
+| **Source** | LINKEDIN-PDF + USER-CONFIRMED |
+| **Confidence** | USER-SUPPLIED/LINKEDIN-CORROBORATED — credential IDs supplied by user via LinkedIn export; no physical cert PDF in manual. Upgrade to VERIFIED once GraphAcademy certificate URL is confirmed. |
 | **Clearance** | PUBLIC |
 | **LinkedIn** | ✓ Listed (source) |
-| **Portfolio** | MISSING — no MDX file |
+| **Portfolio** | `neo4j-certified-professional.mdx` — CREATED 2026-08-12 |
+| **Skills covered** | Cypher, Neo4j fundamentals, schema/indexes, drivers, data modeling, importing data |
 
 ---
 
@@ -240,31 +238,32 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | Field | Value |
 |---|---|
 | **Canonical title** | Neo4j Graph Data Science Certification |
-| **Issuer** | Neo4j |
+| **Issuer** | Neo4j (GraphAcademy) |
 | **Date Earned** | August 2026 |
 | **Credential ID** | 0285db3f-4f77-4501-92c8-c48ebe19d30d |
 | **Expiry** | Unknown |
-| **Source** | LINKEDIN-PDF (no physical cert PDF in manual yet) |
-| **Confidence** | HIGH (LinkedIn-sourced) |
+| **Source** | LINKEDIN-PDF + USER-CONFIRMED |
+| **Confidence** | USER-SUPPLIED/LINKEDIN-CORROBORATED — same as CERT-003; upgrade to VERIFIED once GraphAcademy certificate URL confirmed |
 | **Clearance** | PUBLIC |
 | **LinkedIn** | ✓ Listed (source) |
-| **Portfolio** | MISSING — no MDX file |
+| **Portfolio** | `neo4j-graph-data-science.mdx` — CREATED 2026-08-12 |
+| **Skills covered** | GDS library, graph data science workflows, graph algorithms |
 
 ---
 
-### CERT-005 — Amazon Web Services (AWS) Certified – 4 Certifications! Training
+### CERT-005 — AWS Exam-Prep Training (Udemy) — RECLASSIFIED
 | Field | Value |
 |---|---|
-| **Canonical title** | Amazon Web Services (AWS) Certified 2021 – 4 Certifications! |
+| **Canonical description** | Udemy/BackSpace Academy exam-preparation course for AWS associate-level domains (NOT an official AWS certification) |
 | **Issuer** | Udemy / BackSpace Academy & Paul Coady |
-| **Date Earned** | June 10, 2021 |
+| **Date Completed** | June 10, 2021 |
 | **Credential ID** | UC-6604265b-6b90-4bfc-9193-f2f5df5f13d3 |
-| **Source** | CERT-PDF (physical certificate) |
-| **Confidence** | HIGHEST |
-| **Clearance** | PUBLIC |
-| **Portfolio** | `aws-certified-5-certifications.mdx` — STALE: title says "5 Certifications" — physical cert says 4 |
+| **Source** | CERT-PDF (physical Udemy completion certificate) |
+| **Confidence** | HIGHEST (physical cert) |
+| **Clearance** | PUBLIC — but must NOT be described as "AWS Certified"; must be described as exam-prep training |
+| **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→training, title/summary rewritten to remove certification framing |
 
-> **Fix needed:** Correct title to "Amazon Web Services (AWS) Certified 2021 – 4 Certifications!" and rename file to `aws-certified-4-certifications.mdx`.
+> **INTEGRITY RULE:** Do not describe Alan as "AWS Certified." He holds no official AWS certifications. This Udemy course prepared him for AWS exams but confers no AWS credential. Represents under Professional Development / Training, not Certifications. If a separate training collection is created in the future, move this item there.
 
 ---
 
@@ -401,8 +400,8 @@ Grouped as they appear in the site skills grid. Skills marked `[NEW]` are not cu
 | ID | Issue | Current state | Required action |
 |---|---|---|---|
 | INCON-001 | ITHENA title: resume says "Software Engineer Intern", CareerOS canonical is "Full Stack Developer Intern" | Portfolio is correct; resume PDF is stale | Correct resume PDF separately; do not change portfolio |
-| INCON-002 | AWS cert: MDX title says "5 Certifications", physical cert says "4 Certifications" | MDX is wrong | Fix MDX title; optionally rename file |
-| INCON-003 | CFA cert: MDX title is "Foundations of Investment"; canonical is "Investment Foundations® Certificate" | MDX is wrong | Fix MDX title |
+| INCON-002 | AWS item: MDX title says "AWS Certified — 5 Certifications!"; item is a Udemy exam-prep course, not an official AWS certification | Integrity issue — not just a count fix | RESOLVED 2026-08-12: reclassified to training; featured→false; title/summary rewritten |
+| INCON-003 | CFA cert: MDX title is "Foundations of Investment"; canonical is "Investment Foundations® Certificate" | MDX is wrong | RESOLVED 2026-08-12: fixed to earned with credential data |
 | INCON-004 | work-genworth-p1.mdx exposes "(P1)" internal level in public title | Cosmetic | Remove level tag from display title |
 | INCON-005 | work-genworth-p2.mdx end date reads "Present" instead of "July 2026" | STALE | Fix dates |
 | INCON-006 | Genworth role missing from portfolio: Data Engineer (GEN-003) | MISSING | Create work-genworth-de.mdx |
