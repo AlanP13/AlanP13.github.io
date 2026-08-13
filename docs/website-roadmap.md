@@ -59,21 +59,141 @@ Sourced from CareerOS canonical registry (`docs/career-os.md`). All facts verifi
 | ID-013 | [x] | P2 | XS | **Remove internal level tags from Genworth timeline titles** — Removed "(P1)" from `work-genworth-p1.mdx` and "(P2)" from `work-genworth-p2.mdx`; also removed from both hardcoded `resume.astro` spans. | Shipped 2026-08-12. |
 | ID-014 | [x] | P2 | XS | **Add HKN dates to edu-ms.mdx bullets** — Updated bullet to "Member, Eta Kappa Nu (IEEE-HKN), April 2022 – May 2023; served as Internal Secretary." Also corrected stale hardcoded "Jan 2022" in `cv.astro` and `about.astro` to "Apr 2022" (canonical: RESUME-0728). resume.astro HKN bullet also updated with dates. | Shipped 2026-08-12/13. |
 
-### Platform synchronization (LinkedIn & GitHub)
+### Phase 1 — LinkedIn synchronization
 
-These items require manual user action — they cannot be automated via code. Tracked here so CareerOS canonical status is visible alongside portfolio work.
+Manual user actions. Priority: Employment → Education → Certifications → Headline/About → Publications.
 
-| ID | Status | Platform | Item |
-|---|---|---|---|
-| LI-001 | [ ] | LinkedIn | Close GEN-002 (Application Development Analyst) at July 2026 |
-| LI-002 | [ ] | LinkedIn | Add or update current role to "Data Engineer" starting July 2026 (GEN-003) |
-| LI-003 | [ ] | LinkedIn | Add Investment Foundations® Certificate (CFA, #189900608, July 2026) |
-| LI-004 | [ ] | LinkedIn | Add Qualys VMDR certification (July 2026, expires July 2028) |
-| LI-005 | [ ] | LinkedIn | Verify Neo4j Certified Professional and Neo4j GDS Cert are listed correctly |
-| LI-006 | [ ] | LinkedIn | Ensure AWS Udemy item is NOT presented as an AWS certification |
-| LI-007 | [ ] | LinkedIn | Verify ITHENA title reads "Software Engineer Intern" (canonical: RESUME-0728; prior CareerOS record "Full Stack Developer Intern" was LinkedIn-derived and has been corrected) |
-| GH-001 | [ ] | GitHub | Update bio/description to reflect "Data Engineer" title |
-| GH-002 | [ ] | GitHub | Add READMEs to IPRO497 repos (IPRO497-Design-and-Entrepreneur, IPRO497-AP-Digital-Development) |
+**Integrity rules (apply to all LinkedIn edits):**
+- Never expose (P1)/(P2) internal level designations
+- ITHENA = "Software Engineer Intern" (not "Full Stack Developer Intern")
+- HKN start = April 2022 (not January 2022)
+- AWS Udemy = exam-prep training only; do not use "AWS Certified" as a personal credential
+- Research = "Technical Monographs & Reports" — never "peer-reviewed papers"
+
+#### A. Employment
+
+| ID | Status | Item |
+|---|---|---|
+| LI-001 | [ ] | **Close Application Development Analyst** — Employer: Genworth Financial. Dates: December 2025 – July 2026. Do not show as current. Do not expose P2 level. |
+| LI-002 | [ ] | **Add/update Data Engineer (current role)** — Employer: Genworth Financial. Dates: July 2026 – Present. Title: Data Engineer. Location: Richmond, VA. Update headline and About so Application Development Analyst is no longer implied as current. |
+| LI-003e | [ ] | **Verify Associate Application Development Analyst** — Dates: July 2023 – December 2025. Do not expose P1 level. |
+| LI-007 | [ ] | **Verify ITHENA title reads "Software Engineer Intern"** — Canonical: RESUME-0728. Prior CareerOS record "Full Stack Developer Intern" was LinkedIn-derived and has been corrected. Dates: June 2020 – August 2020. Location: Richmond, VA. Do not add "In-Person." |
+| LI-008 | [ ] | **Verify IIT Student Assistant** — Title: Student Assistant, Office of Residence Life, Illinois Institute of Technology. Dates: August 2021 – May 2023. Lower visual prominence than engineering roles. |
+
+#### B. Education
+
+| ID | Status | Item |
+|---|---|---|
+| LI-009 | [ ] | **B.S. Computer & Cybersecurity Engineering** — IIT, August 2019 – August 2023 |
+| LI-010 | [ ] | **M.S. Cybersecurity Engineering** — IIT, May 2022 – August 2023 |
+| LI-011 | [ ] | **Ph.D. Information Technology** — University of the Cumberlands, August 2025 – Present. Expected completion may appear separately. |
+| LI-012 | [ ] | **HKN affiliation** — Eta Kappa Nu, Internal Secretary, April 2022 – May 2023. Remove any January 2022 start date. |
+
+#### C. Certifications
+
+| ID | Status | Item |
+|---|---|---|
+| LI-003 | [ ] | **Add Investment Foundations® Certificate** — CFA Institute, July 2026, Credential #189900608. Status: earned. |
+| LI-004 | [ ] | **Add Qualys VMDR** — Vulnerability Management Detection and Response, July 2026, expires July 2028. |
+| LI-005 | [ ] | **Verify Neo4j certs** — Neo4j Certified Professional (ID: 599d588d-8706-44bf-9707-59c5bb61a5b9) and Neo4j Graph Data Science (ID: 0285db3f-4f77-4501-92c8-c48ebe19d30d), both August 2026. |
+| LI-006 | [ ] | **AWS Udemy** — Verify NOT presented as an AWS certification. If retained, place under Courses/Professional Development. Describe as exam-preparation training only. |
+
+#### D. Headline & About
+
+| ID | Status | Item |
+|---|---|---|
+| LI-013 | [ ] | **Update LinkedIn headline** — Lead with Data Engineer. Candidate: "Data Engineer \| Financial Systems & Cloud Platforms \| AI & Data Science Research \| Ph.D. Student". Avoid internal level designations. |
+| LI-014 | [ ] | **Update LinkedIn About** — Remove any Application Development Analyst wording. Themes: data engineering, financial systems, investment technology, Python/SQL, ETL, Azure, cloud modernization, AI/data-science research. Platform-specific voice — do not copy portfolio prose verbatim. |
+
+#### E. Publications
+
+| ID | Status | Item |
+|---|---|---|
+| LI-015 | [ ] | **Verify all 10 Zenodo volumes listed** — Use "Technical Monographs & Reports" and "Engineering-to-Research Monograph Series." Never "10 peer-reviewed papers." Individual peer-reviewed work must remain distinguishable from Zenodo monographs. |
+
+**Public-metric safety:** Do not publish private/internal operating metrics (CML/derivatives volumes, internal system identifiers) unless explicitly PUBLIC-cleared in CareerOS.
+
+---
+
+### Phase 2 — GitHub synchronization
+
+Mix of code-assistable (READMEs, topics) and manual (bio, pins, metadata).
+
+#### A. Profile
+
+| ID | Status | Item |
+|---|---|---|
+| GH-001 | [ ] | **Update bio to reflect Data Engineer** — Complementary to LinkedIn, not identical. Themes: data engineering, financial systems, cloud, AI/graph/data science, systems engineering. Verify profile URL points to alanp13.github.io. |
+
+#### B. Pinned repositories
+
+| ID | Status | Item |
+|---|---|---|
+| GH-003 | [ ] | **Audit and update pinned repos** — Current candidates: AlanP13.github.io, Enterprise-Event-Simulation-Platform, Financial-Engineering-Portfolio, Py8085-Simulator. Evaluate whether a stronger AI/data/graph project should replace a weaker pin. Keep at least one systems/low-level project. Final selection requires user decision during GitHub audit. |
+
+#### C. IPRO497 repositories
+
+| ID | Status | Item |
+|---|---|---|
+| GH-002 | [ ] | **Add README to IPRO497-Design-and-Entrepreneur** — Sections: project purpose, your contribution, team/project context, technologies, architecture/implementation, outcome, academic context. Do not exaggerate individual ownership of team work. |
+| GH-004 | [ ] | **Add README to IPRO497-AP-Digital-Development** — Same structure as above. |
+
+#### D. Repository metadata
+
+| ID | Status | Item |
+|---|---|---|
+| GH-005 | [ ] | **Audit all important public repo descriptions, topics, demo URLs** — Remove stale descriptions. Ensure archived/unfinished projects do not appear current. Make README titles consistent with portfolio naming. Add relevant topics. Check licenses where appropriate. |
+
+#### E. Classification schema
+
+Apply CareerOS project tiers to all public repos:
+- **Portfolio Case Study** — strongest, professionally presented
+- **GitHub Engineering Project** — technically useful, no full case study needed
+- **Historical / College Project** — evidence of earlier development, lower prominence
+
+---
+
+### Phase 3 — Cross-platform reconciliation
+
+After LinkedIn and GitHub are updated. Compare:
+
+- CareerOS ↔ LinkedIn (employment, education, certs, research, projects)
+- CareerOS ↔ GitHub (projects, skills, bio)
+- CareerOS ↔ Portfolio (every entity)
+- LinkedIn ↔ Portfolio (visible contradictions)
+- GitHub projects ↔ Portfolio project inventory
+
+Verify: employment titles/dates · education dates · certifications · research terminology · project names and links · no private metrics on public surfaces.
+
+Facts must match across platforms. Presentation can be platform-specific.
+
+---
+
+### Phase 4 — Full portfolio audit
+
+After Phase 3 complete. Scope: every page and route.
+
+Dimensions: visual hierarchy · responsive/mobile · navigation/IA · accessibility (a11y) · SEO · JSON-LD/structured data · metadata/social previews · recruiter UX · hiring-manager UX · technical credibility · O1/EB1 evidence presentation (without legal-status claims) · project case-study quality · research presentation · certifications · employment differentiation · performance · dead links · duplicate/stale content · public/private metric clearance · cross-platform comparison.
+
+Use all available skills and tools. This is a broader pass than the Aug 2026 identity audit.
+
+---
+
+### Phase 5 — Graphify refresh
+
+After portfolio audit. Re-run against corrected CareerOS state.
+
+Update: employment nodes + supersession relationships · education nodes · certifications + evidence tiers · AWS item as Training/Professional Development (not Certification) · research nodes (all 10 monographs) · GitHub repository/project nodes · project classifications (Portfolio Case Study / GitHub Engineering Project / Historical College Project) · platform sync state per entity.
+
+Preserve: evidence source + confidence metadata · PUBLIC/PRIVATE/ATTORNEY-ONLY clearance · superseded values (do not silently delete historical facts).
+
+Run contradiction detection after refresh. Generate final CareerOS reconciliation report.
+
+---
+
+**Completion definition:** Canonical registry ✓ → LinkedIn ✓ → GitHub ✓ → Portfolio audit ✓ → Graphify ✓ → contradiction scan = 0 unresolved material conflicts
+
+---
 
 ### Architecture debt
 
