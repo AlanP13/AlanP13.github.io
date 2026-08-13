@@ -1,7 +1,8 @@
 # Website Roadmap — Alan Palayil Portfolio
 
 Master backlog for https://alanp13.github.io  
-Last full audit: **2026-06-25** (comprehensive audit — content + UI; filter/sort; anti-pattern sweep; a11y + perf fixes)  
+Last full audit: **2026-08-13** (Phase 4 — structured data, ARIA, accessibility, SEO, reduced-motion, rel consistency)  
+Prior audit: 2026-06-25 (content + UI; filter/sort; anti-pattern sweep; a11y + perf fixes)  
 Repository baseline: June 2026.
 
 This is a public repository. Keep this document limited to public-safe website
@@ -153,35 +154,47 @@ Apply CareerOS project tiers to all public repos:
 
 ---
 
-### Phase 3 — Cross-platform reconciliation
+### Phase 3 — Cross-platform reconciliation ✓ Complete 2026-08-13
 
-After LinkedIn and GitHub are updated. Compare:
+17 material issues resolved across employment/identity, education, certifications, research, and projects. Full clearance check run; restricted metrics removed from all public surfaces. Zero unresolved material contradictions at gate.
 
-- CareerOS ↔ LinkedIn (employment, education, certs, research, projects)
-- CareerOS ↔ GitHub (projects, skills, bio)
-- CareerOS ↔ Portfolio (every entity)
-- LinkedIn ↔ Portfolio (visible contradictions)
-- GitHub projects ↔ Portfolio project inventory
-
-Verify: employment titles/dates · education dates · certifications · research terminology · project names and links · no private metrics on public surfaces.
-
-Facts must match across platforms. Presentation can be platform-specific.
+Key fixes: GEN-002 end date closed, GEN-003 added, PhD label normalized, CML/derivatives volumes removed from public copy (preserved in CareerOS canonical evidence), CUSIP count removed from derivatives page, "ScholarlyArticle" classification noted for future correction (fixed Phase 4).
 
 ---
 
-### Phase 4 — Full portfolio audit
+### Phase 4 — Full portfolio audit ✓ Complete 2026-08-13
 
-After Phase 3 complete. Scope: every page and route.
+Commits: `bbcb133` (Batch 1) · `d6eb7d2` (Batch 2) · `0a42c03` (Batch 3)
 
-Dimensions: visual hierarchy · responsive/mobile · navigation/IA · accessibility (a11y) · SEO · JSON-LD/structured data · metadata/social previews · recruiter UX · hiring-manager UX · technical credibility · O1/EB1 evidence presentation (without legal-status claims) · project case-study quality · research presentation · certifications · employment differentiation · performance · dead links · duplicate/stale content · public/private metric clearance · cross-platform comparison.
+**Finding registry — all P0 and P1 resolved:**
 
-Use all available skills and tools. This is a broader pass than the Aug 2026 identity audit.
+| ID | Sev | Finding | Status |
+|---|---|---|---|
+| P0-001 | P0 | `alumniOf` included UoC (active enrollment) | ✓ Fixed — moved to `affiliation` |
+| P0-002 | P0 | `ScholarlyArticle` type on technical monographs | ✓ Fixed — `CreativeWork` + `genre: "Technical monograph"` |
+| P0-003 | P0 | Project Newest/Oldest sort used render index, not dates | ✓ Fixed — simplified to Featured/A–Z/Z–A |
+| P1-001 | P1 | Filter chips missing `aria-pressed` (projects + research) | ✓ Fixed — stable chips/buttons get aria-pressed; cycle button correctly omitted |
+| P1-002 | P1 | Project external links missing `rel="noopener noreferrer"` | ✓ Fixed |
+| P1-003 | P1 | "PhD Candidate" label on CV + credentials block | ✓ Fixed — "Ph.D. Student" |
+| P1-004 | P1 | Travel gallery auto-rotation: no keyboard pause (WCAG 2.2 SC 2.2.2) | ✓ Fixed — visible Pause/Play button; focusin/focusout pause; prefers-reduced-motion gates setInterval |
+| P2-001 | P2 | No JSON-LD on project detail pages | ✓ Added — SoftwareSourceCode / CreativeWork per project |
+| P2-002 | P2 | No JSON-LD on CV page | ✓ Added — ProfilePage + Person mainEntity |
+| P2-003 | P2 | Research meta desc: stale "AI Governance" framing, "PhD" (no dots) | ✓ Fixed — broader AI/Data Science framing, "Ph.D. student" |
+| P3-001 | P3 | No `prefers-reduced-motion` global CSS | ✓ Fixed — universal collapse rule added |
+| P3-002 | P3 | `rel="noreferrer"` without `noopener` across site | ✓ Fixed — normalized to `noopener noreferrer` site-wide |
+
+**Open schema question — pending before Phase 5:**
+
+Three Genworth enterprise case study pages (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`) currently use `SoftwareSourceCode` but have no public code repository. These are proprietary system case studies; `CreativeWork` may be more accurate. `college-convo-care` is a borderline case (academic software build, no public repo). Awaiting user decision before reclassifying. See schema audit output from 2026-08-13 for full classification table.
+
+**Phase 4 gate — all checks passed:**
+Build clean · JSON-LD parses on all 22 schema pages · No PhD Candidate variants · No restricted metrics · No Newest/Oldest project sort · UoC in affiliation not alumniOf · Monographs as CreativeWork · ARIA filter states correct · Gallery Pause/Play keyboard operable · Reduced-motion prevents gallery rotation · Global reduced-motion CSS present · All target="_blank" links have `noopener noreferrer`
 
 ---
 
 ### Phase 5 — Graphify refresh
 
-After portfolio audit. Re-run against corrected CareerOS state.
+After portfolio audit complete and schema reclassification question resolved. Re-run against corrected CareerOS state.
 
 Update: employment nodes + supersession relationships · education nodes · certifications + evidence tiers · AWS item as Training/Professional Development (not Certification) · research nodes (all 10 monographs) · GitHub repository/project nodes · project classifications (Portfolio Case Study / GitHub Engineering Project / Historical College Project) · platform sync state per entity.
 

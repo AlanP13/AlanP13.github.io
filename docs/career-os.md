@@ -485,3 +485,19 @@ This section tracks synchronization between CareerOS canonical and each external
 | IPRO497-Design-and-Entrepreneur | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
 | IPRO497-AP-Digital-Development | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
 | Repository topics / descriptions | ✓ Completed 2026-08-13 — topics added to 12 repos; descriptions fixed/added for Financial-Engineering-Portfolio, Web-Portfolio, ECE218, CS331, ECE407 |
+
+### Portfolio audit (Phase 4)
+
+| Domain | Status |
+|---|---|
+| Structured data (JSON-LD) | ✓ Complete 2026-08-13 — alumniOf corrected (UoC → affiliation), ScholarlyArticle → CreativeWork + genre, project schemas added (SoftwareSourceCode / CreativeWork), CV ProfilePage added |
+| Label accuracy | ✓ Complete — PhD Candidate → Ph.D. Student on CV and homepage credentials; research meta description updated to broader AI/Data Science framing |
+| WCAG 2.2 SC 2.2.2 (gallery auto-rotation) | ✓ Fixed — visible Pause/Play button; focusin/focusout keyboard pause; prefers-reduced-motion prevents setInterval |
+| ARIA filter state (projects + research pages) | ✓ Fixed — aria-pressed on stable filter chips and sort buttons; cycle button correctly omitted |
+| External link security | ✓ Fixed — rel="noopener noreferrer" consistent site-wide |
+| Reduced-motion CSS | ✓ Added — global prefers-reduced-motion collapse rule in global.css |
+| Project sort truthfulness | ✓ Fixed — Newest/Oldest removed; project sort simplified to Featured/A–Z/Z–A |
+
+**Open before Phase 5:** Schema reclassification question — three Genworth enterprise case study pages (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`) currently use SoftwareSourceCode but have no public code repository. These are proprietary system case studies; CreativeWork may be more accurate. Awaiting user decision.
+
+**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ · Graphify pending (Phase 5)
