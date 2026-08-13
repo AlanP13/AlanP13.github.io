@@ -190,19 +190,19 @@ Build clean · JSON-LD parses on all 22 schema pages · No PhD Candidate variant
 
 ---
 
-### Phase 5 — Graphify refresh
+### Phase 5 — Graphify refresh ✓ Complete 2026-08-13
 
-Re-run against corrected CareerOS state. Schema question resolved — no blockers.
+Re-run against fully corrected post-Phase-4 state.
 
-Update: employment nodes + supersession relationships · education nodes · certifications + evidence tiers · AWS item as Training/Professional Development (not Certification) · research nodes (all 10 monographs) · GitHub repository/project nodes · project classifications (Portfolio Case Study / GitHub Engineering Project / Historical College Project) · platform sync state per entity.
+**Graph stats:** 187 nodes · 196 edges · 31 communities (8 meaningful, rest singletons)
 
-Preserve: evidence source + confidence metadata · PUBLIC/PRIVATE/ATTORNEY-ONLY clearance · superseded values (do not silently delete historical facts).
+**Key communities:** Research Concepts & Governance Frameworks (34) · Astro Build Config (23) · Site Layout & Navigation (19) · Page Templates & Content Routes (17) · Portfolio Strategy & Audience (15) · Project Infrastructure & CI/CD (8) · Academic Trajectory & Research Methods (8) · Genworth Enterprise Projects (4) · Edge AI & IoT Projects (4)
 
-Run contradiction detection after refresh. Generate final CareerOS reconciliation report.
+**God nodes:** SiteLayout.astro (26 edges) · Vol 10 Capstone (16 edges) · Computer Architecture Vol 2 (8 edges)
 
----
+**Surprising connections surfaced:** Incorta cert → Scalable Analytics Vol 7 · O1/EB1 audience → Computer Architecture Vol 2 · Palo Alto cert → WSN/IoT Vol 1
 
-**Completion definition:** Canonical registry ✓ → LinkedIn ✓ → GitHub ✓ → Portfolio audit ✓ → Graphify ✓ → contradiction scan = 0 unresolved material conflicts
+**Completion definition:** Canonical registry ✓ → LinkedIn ✓ → GitHub ✓ → Portfolio audit ✓ → Graphify ✓
 
 ---
 

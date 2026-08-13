@@ -500,4 +500,4 @@ This section tracks synchronization between CareerOS canonical and each external
 
 **Schema reclassification — RESOLVED 2026-08-13:** Three Genworth enterprise case study pages reclassified SoftwareSourceCode → CreativeWork (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`). `college-convo-care` remains SoftwareSourceCode. All 10 project JSON-LD schemas verified. Phase 4 fully closed: 0 open P0/P1 findings, 0 open schema-classification questions.
 
-**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ (fully closed) · Graphify pending (Phase 5)
+**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ (fully closed) · Graphify ✓ (Phase 5 complete — 187 nodes, 196 edges, 31 communities)
