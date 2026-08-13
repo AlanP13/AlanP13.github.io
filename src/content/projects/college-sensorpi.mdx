@@ -1,0 +1,49 @@
+---
+title: "SensoryPi — Smart Security System (Raspberry Pi)"
+featured: false
+summary: "Built a Raspberry Pi-based smart security system that combines facial recognition with motion detection, triggering alerts on unrecognized faces and logging events with timestamped images."
+highlights:
+  - "Implemented real-time facial recognition using OpenCV face encodings to distinguish known from unknown visitors"
+  - "Integrated a PIR motion sensor via Arduino to trigger the camera pipeline on detected movement"
+  - "Built an event logging system that captures, timestamps, and stores alert frames for review"
+  - "Designed a hardware-software bridge between Arduino sensor input and Python/OpenCV processing on the Pi"
+impact:
+  - "End-to-end embedded security system running on commodity hardware — camera, sensor, compute, and alerting in one device"
+  - "Demonstrated how real-time computer vision can be deployed at the edge with constrained resources"
+  - "Practical foundation in hardware-software integration: sensor input → processing → output action, the pattern that underlies modern IoT pipelines"
+tech: ["Python", "OpenCV", "Raspberry Pi", "Arduino", "PIR Motion Sensor", "Facial Recognition", "Embedded Systems"]
+tags: ["iot", "security", "embedded", "raspberry-pi", "computer-vision", "edge-ai"]
+role: "Designer & Builder"
+order: 4
+---
+
+## Context
+
+Physical security systems rely on two primitives: **detecting that something moved** and **deciding if that something belongs there**. This project implements both on edge hardware.
+
+---
+
+## What I Built
+
+A **hardware-integrated smart security system** running on a Raspberry Pi that:
+
+1. **Detects motion** via a PIR sensor connected through Arduino — no wasted compute polling an idle camera feed
+2. **Activates the camera pipeline** on a positive motion signal
+3. **Runs facial recognition** using OpenCV — comparing detected faces against a set of known enrollments
+4. **Triggers an alert** and logs a timestamped image frame when an unrecognized face is detected
+
+The Arduino handles low-level sensor I/O; the Pi handles vision processing. The two communicate over serial, keeping the architectures clean.
+
+---
+
+## Outcomes
+
+- A functional security system running on a Raspberry Pi that correctly identifies known faces and alerts on unknowns
+- Hardware-software integration spanning two embedded platforms (Arduino + Pi) and a computer vision stack
+- A real-time system constrained by edge resources — frame rate, memory, and latency all matter
+
+---
+
+## Why This Matters
+
+Edge-deployed computer vision is an increasingly common pattern in industrial IoT, physical security, and smart infrastructure. Building one from hardware up — sensor, controller, compute, storage, alert — is fundamentally different from calling an API. This project built that foundation.

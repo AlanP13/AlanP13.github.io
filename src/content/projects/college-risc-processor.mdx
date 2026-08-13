@@ -1,0 +1,54 @@
+---
+title: "32-bit RISC Processor (5-Stage MIPS Pipeline)"
+featured: false
+summary: "Designed and implemented a fully pipelined 32-bit RISC processor in VHDL with a 5-stage MIPS pipeline, hazard detection unit, and forwarding paths to eliminate data hazards without pipeline stalls."
+highlights:
+  - "Implemented all five classic pipeline stages: IF, ID, EX, MEM, WB with pipeline registers between each stage"
+  - "Designed a hazard detection unit that identifies data hazards and inserts pipeline bubbles only when forwarding cannot resolve the conflict"
+  - "Built forwarding (bypass) paths from EX/MEM and MEM/WB stages back to the EX stage ALU inputs"
+  - "Validated processor correctness against a suite of MIPS programs covering arithmetic, memory access, branching, and hazard sequences"
+impact:
+  - "Demonstrated deep understanding of CPU microarchitecture, control flow, and performance-correctness trade-offs at the hardware level"
+  - "Built a fully working pipelined processor from scratch — every instruction correctly executes in a steady-state pipeline"
+  - "Strengthened systems reasoning that transfers directly to understanding data pipeline correctness, ordering guarantees, and dependency tracking"
+tech: ["VHDL", "MIPS", "Computer Architecture", "Pipeline Design", "Hazard Detection", "Forwarding Units"]
+tags: ["systems", "computer-architecture", "hardware", "digital-design", "mips", "processor"]
+role: "Sole Designer & Engineer"
+order: 5
+---
+
+## Context
+
+Pipeline parallelism makes CPUs faster — but it introduces **data hazards** when a later instruction depends on the result of an instruction that hasn't finished yet.
+
+This project implements a **5-stage MIPS pipeline** with hardware-level hazard resolution:
+- **Forwarding paths** route results early to eliminate most stalls
+- **A hazard detection unit** catches the remaining cases and inserts controlled pipeline bubbles
+
+---
+
+## What I Built
+
+A **fully pipelined 32-bit RISC processor** implemented in VHDL with:
+
+- **IF** — Instruction Fetch from instruction memory
+- **ID** — Instruction Decode + register file read
+- **EX** — ALU execution with forwarding multiplexers
+- **MEM** — Data memory read/write
+- **WB** — Write-back to register file
+
+The forwarding unit examines EX/MEM and MEM/WB pipeline register contents on every cycle and routes the most recent result to the ALU inputs when a dependency is detected — without waiting for WB to complete.
+
+---
+
+## Outcomes
+
+- A working 32-bit MIPS pipeline that correctly executes load/store, arithmetic, and branch instructions
+- Hazard detection and forwarding validated against intentionally hazardous instruction sequences
+- Solid grounding in the hardware-software boundary: how the ISA exposes structure that the compiler, OS, and hardware all rely on
+
+---
+
+## Why This Matters
+
+Understanding how a CPU actually moves data through stages — and why hazards exist — builds mental models that carry over into every layer of systems engineering. Data dependencies in a pipeline mirror dependency tracking in a distributed data pipeline. The same reasoning applies.
