@@ -11,7 +11,15 @@ Sources key:
 - `JD-PDF` — Job Description PDF  
 - `LINKEDIN-PDF` — LinkedIn export PDF  
 
-Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) · `MEDIUM` (single credible source) · `PENDING` (awaiting verification)
+Confidence key (controlled vocabulary — do not mix levels):
+- `VERIFIED` — physical document on file (certificate PDF, official letter, diploma)
+- `USER-CONFIRMED` — user explicitly confirmed in CareerOS session
+- `LINKEDIN-CORROBORATED` — sourced from LinkedIn export; user-supplied credential IDs
+- `HIGH` — multi-source corroborated (2+ independent sources agree, no physical doc)
+- `MEDIUM` — single credible source, not independently confirmed
+- `UNVERIFIED` — awaiting verification
+
+> **Note:** Legacy label `HIGHEST` has been retired; all prior `HIGHEST` entries reclassified as `VERIFIED`.
 
 ---
 
@@ -130,7 +138,7 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | **Source** | RESUME-0728 |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
-| **Portfolio** | `edu-phd.mdx` — dates updated ✓; GPA not shown (optional) |
+| **Portfolio** | `edu-phd.mdx` — UPDATED 2026-08-13: "August 2025 – Present" (deliberate, CareerOS-verified; prior commit used bare "2025 – Present" without month — corrected before push) |
 | **Resume** | ✓ Correct |
 | **CV** | Include with GPA and expected date |
 
@@ -192,12 +200,10 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | **Credential Number** | 189900608 |
 | **Expiry** | None stated |
 | **Source** | CERT-PDF (physical certificate) |
-| **Confidence** | HIGHEST |
+| **Confidence** | VERIFIED |
 | **Clearance** | PUBLIC |
-| **LinkedIn** | Verify; add credential number |
-| **Portfolio** | `foundations-in-investments.mdx` — STALE: wrong title ("Foundations of Investment"), status "in-progress", no credential data |
-
-> **Fix needed:** Correct title to "Investment Foundations® Certificate", set `status: "earned"`, `dateObtained: "2026-07"`, `credentialId: "189900608"`. Credential URL: verify at cfainstitute.org.
+| **LinkedIn** | Verify; add credential number 189900608 |
+| **Portfolio** | `foundations-in-investments.mdx` — UPDATED 2026-08-12: title, status→earned, credentialId, dateObtained all correct |
 
 ---
 
@@ -210,10 +216,10 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | **Expiry** | July 27, 2028 |
 | **Credential ID** | Not shown on certificate PDF; may appear in Qualys badge portal |
 | **Source** | CERT-PDF (physical certificate) |
-| **Confidence** | HIGHEST |
+| **Confidence** | VERIFIED |
 | **Clearance** | PUBLIC |
-| **LinkedIn** | Verify/add with expiry date |
-| **Portfolio** | MISSING — no MDX file |
+| **LinkedIn** | Verify/add with expiry date 2028-07 |
+| **Portfolio** | `qualys-vmdr.mdx` — CREATED 2026-08-12; featured, security category |
 
 ---
 
@@ -261,7 +267,7 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 | **Source** | CERT-PDF (physical Udemy completion certificate) |
 | **Confidence** | HIGHEST (physical cert) |
 | **Clearance** | PUBLIC — but must NOT be described as "AWS Certified"; must be described as exam-prep training |
-| **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→training, title/summary rewritten to remove certification framing |
+| **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→other (schema enum does not include "training"; "other" is the closest valid value), title/summary rewritten to remove certification framing. **Architecture debt:** file physically resides in certifications collection; a future Professional Development collection should absorb it. Tracked as roadmap task AWS-MIGRATE-001. |
 
 > **INTEGRITY RULE:** Do not describe Alan as "AWS Certified." He holds no official AWS certifications. This Udemy course prepared him for AWS exams but confers no AWS credential. Represents under Professional Development / Training, not Certifications. If a separate training collection is created in the future, move this item there.
 
@@ -298,7 +304,8 @@ Confidence key: `HIGHEST` (physical doc) · `HIGH` (multi-source corroborated) �
 
 | Surface | Approved wording |
 |---|---|
-| Portfolio hero / homepage | "10 Technical Monographs & Reports" |
+| Portfolio homepage count line | "10 open-access Technical Monographs & Reports published" |
+| Portfolio research index | "10 Technical Monographs & Reports published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE" |
 | Portfolio credentials section | "Engineering-to-Research Monograph Series (10 volumes, Zenodo)" |
 | Academic CV | Section heading: "Technical Monographs and Reports" (NOT "Peer-Reviewed Publications") |
 | Resume summary | "ten peer-distributed monographs" (current resume wording; acceptable) |
@@ -389,7 +396,7 @@ Grouped as they appear in the site skills grid. Skills marked `[NEW]` are not cu
 
 | Entity | Canonical form | Dates | Source | Portfolio |
 |---|---|---|---|---|
-| IEEE-HKN IIT Delta Chapter | Internal Secretary | April 2022 – May 2023 | RESUME-0728 | In edu-ms.mdx bullets (no date) |
+| IEEE-HKN IIT Delta Chapter | Internal Secretary | April 2022 – May 2023 | RESUME-0728 | UPDATED 2026-08-13: edu-ms.mdx bullet, resume.astro, cv.astro, about.astro all set to Apr 2022. Prior hardcoded "Jan 2022" was stale (source: June 2022 LinkedIn-derived pass, superseded by RESUME-0728). |
 | IEEE | Member | 2024 – Present | RESUME-0728 | Not on portfolio |
 | Dean's List | 5 semesters, 2020–2023 | 2020–2023 | RESUME-0728 | In edu bullets |
 
@@ -400,13 +407,61 @@ Grouped as they appear in the site skills grid. Skills marked `[NEW]` are not cu
 | ID | Issue | Current state | Required action |
 |---|---|---|---|
 | INCON-001 | ITHENA title: resume says "Software Engineer Intern", CareerOS canonical is "Full Stack Developer Intern" | Portfolio is correct; resume PDF is stale | Correct resume PDF separately; do not change portfolio |
-| INCON-002 | AWS item: MDX title says "AWS Certified — 5 Certifications!"; item is a Udemy exam-prep course, not an official AWS certification | Integrity issue — not just a count fix | RESOLVED 2026-08-12: reclassified to training; featured→false; title/summary rewritten |
-| INCON-003 | CFA cert: MDX title is "Foundations of Investment"; canonical is "Investment Foundations® Certificate" | MDX is wrong | RESOLVED 2026-08-12: fixed to earned with credential data |
-| INCON-004 | work-genworth-p1.mdx exposes "(P1)" internal level in public title | Cosmetic | Remove level tag from display title |
-| INCON-005 | work-genworth-p2.mdx end date reads "Present" instead of "July 2026" | STALE | Fix dates |
-| INCON-006 | Genworth role missing from portfolio: Data Engineer (GEN-003) | MISSING | Create work-genworth-de.mdx |
-| INCON-007 | ITHENA work mode: "In-Person" is unverified | Portfolio shows unverified data | Remove "(In-Person)" from location |
-| INCON-008 | IIT degree dates: only "August 2023" shown, no start dates | STALE | Add start dates |
-| INCON-009 | Publication terminology: any hardcoded "published papers" count | Multiple surfaces | Audit and replace with "Technical Monographs & Reports" |
-| INCON-010 | CERT-001 CFA: portfolio status "in-progress", credential data missing | STALE | Update to "earned" with cert data |
-| INCON-011 | `doi:` fields in research MDX files: may be empty | Unverified | Audit each vol*.mdx |
+| INCON-002 | AWS item: MDX title says "AWS Certified — 5 Certifications!"; item is a Udemy exam-prep course, not an official AWS certification | RESOLVED 2026-08-12: reclassified; featured→false; title/summary rewritten | Architecture debt remains: file still in certifications collection; migrate to training collection per AWS-MIGRATE-001 |
+| INCON-003 | CFA cert: MDX title is "Foundations of Investment"; canonical is "Investment Foundations® Certificate" | RESOLVED 2026-08-12: fixed to earned with credential data | — |
+| INCON-004 | work-genworth-p1.mdx exposes "(P1)" internal level in public title | RESOLVED 2026-08-12: level tag removed from MDX and resume.astro | — |
+| INCON-005 | work-genworth-p2.mdx end date reads "Present" instead of "July 2026" | RESOLVED 2026-08-12 | — |
+| INCON-006 | Genworth role missing from portfolio: Data Engineer (GEN-003) | RESOLVED 2026-08-12: work-genworth-de.mdx created | — |
+| INCON-007 | ITHENA work mode: "In-Person" is unverified | RESOLVED 2026-08-12: location simplified to "Richmond, VA" | — |
+| INCON-008 | IIT degree dates: only "August 2023" shown, no start dates | RESOLVED 2026-08-12: BS Aug 2019, MS May 2022 added | — |
+| INCON-009 | Publication terminology: hardcoded "published papers" on multiple surfaces | RESOLVED 2026-08-12: replaced with "Technical Monographs & Reports" and "open-access" qualifier on homepage | — |
+| INCON-010 | CERT-001 CFA: portfolio status "in-progress", credential data missing | RESOLVED 2026-08-12 | — |
+| INCON-011 | `doi:` fields in research MDX files: may be empty | RESOLVED 2026-08-12: all 10 files confirmed to have doi: field; JSON-LD identifier verified correct | — |
+| INCON-012 | HKN start date conflict: cv.astro/about.astro hardcoded "Jan 2022"; RESUME-0728 canonical is "April 2022" | RESOLVED 2026-08-13: all surfaces updated to Apr 2022 | — |
+| INCON-013 | edu-phd.mdx dates: "2025 – Present" missing month | RESOLVED 2026-08-13: corrected to "August 2025 – Present" | — |
+
+---
+
+## Platform Synchronization Status
+
+This section tracks synchronization between CareerOS canonical and each external platform. "Portfolio" = alanp13.github.io (code-controlled). "LinkedIn" and "GitHub" require manual user action.
+
+**Legend:** ✓ Synced · NEEDS-UPDATE · NOT-YET-ADDED · N/A
+
+### Employment
+
+| Entity | Portfolio | LinkedIn | GitHub |
+|---|---|---|---|
+| GEN-001 — Associate Application Development Analyst | ✓ | Verify dates | N/A |
+| GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | **NEEDS-UPDATE** — close at July 2026 | N/A |
+| GEN-003 — Data Engineer (current) | ✓ | **NEEDS-UPDATE** — add role or update current title | N/A |
+| ITHENA-001 — Full Stack Developer Intern | ✓ | Verify title reads "Full Stack Developer Intern" | N/A |
+| IIT-SA-001 — Student Assistant | ✓ | Verify presence | N/A |
+
+### Certifications
+
+| Entity | Portfolio | LinkedIn |
+|---|---|---|
+| CERT-001 — Investment Foundations® #189900608 | ✓ | **NEEDS-UPDATE** — add/verify with credential number |
+| CERT-002 — Qualys VMDR (exp. 2028-07) | ✓ | **NEEDS-UPDATE** — add with expiry date |
+| CERT-003 — Neo4j Certified Professional | ✓ | ✓ (source) |
+| CERT-004 — Neo4j Graph Data Science | ✓ | ✓ (source) |
+| CERT-005 — AWS Udemy (reclassified training) | Hidden (featured→false) | Verify it is NOT presented as an AWS certification |
+
+### Research Publications
+
+| Surface | Status |
+|---|---|
+| Portfolio research pages (10 volumes) | ✓ |
+| LinkedIn publications section | Verify 10 volumes listed; terminology should match "Technical Monographs & Reports" |
+| GitHub profile / READMEs | IPRO497 repos need READMEs; bio/description update pending |
+| Zenodo community | ✓ (10 records live) |
+| OpenAIRE | ✓ (indexed via Zenodo) |
+
+### GitHub-specific
+
+| Item | Status |
+|---|---|
+| Bio / description reflecting Data Engineer title | **NEEDS-UPDATE** |
+| IPRO497 repo READMEs | **NEEDS-UPDATE** — add project context |
+| Other repo descriptions | Audit pending |

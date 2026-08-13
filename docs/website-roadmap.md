@@ -52,12 +52,34 @@ Sourced from CareerOS canonical registry (`docs/career-os.md`). All facts verifi
 | ID-006 | [x] | P1 | XS | **IIT BS degree — add start date** — `edu-bs.mdx` and `resume.astro` updated to "August 2019 – August 2023". | Shipped 2026-08-12. |
 | ID-007 | [x] | P1 | XS | **IIT MS degree — add start date** — `edu-ms.mdx` and `resume.astro` updated to "May 2022 – August 2023". USER-CONFIRMED; supersedes older Aug 2022 CareerOS record. | Shipped 2026-08-12. |
 | ID-008 | [x] | P1 | XS | **Fix CFA cert MDX — wrong title and status** — `foundations-in-investments.mdx` updated: title → "Investment Foundations® Certificate", `status: "earned"`, `dateObtained: "2026-07"`, `credentialId: "189900608"`. | Shipped 2026-08-12. Physical cert verified. |
-| ID-009 | [x] | P1 | S | **Reclassify AWS Udemy training — remove from certification display** — CareerOS confirmed no official AWS certifications held. The item is a Udemy exam-prep course. `aws-certified-5-certifications.mdx`: `featured→false`, title rewritten to remove "Certified" framing, category→"training", summary clarified as training course. Do not describe Alan as AWS Certified. | Shipped 2026-08-12. Count discrepancy (5 vs 4) is secondary to integrity — the item should not appear as a certification at all. |
-| ID-010 | [ ] | P1 | XS | **Update research count terminology — "4 papers" → "10 Technical Monographs & Reports"** — Audit all hardcoded research count strings across `index.astro`, `about.astro`, `cv.astro`, `resume.astro`. Replace with "10 Technical Monographs & Reports" or "Engineering-to-Research Monograph Series (10 volumes)". Do NOT use "10 published papers" or "10 peer-reviewed papers". | See `docs/career-os.md` § Research for approved terminology. |
+| ID-009 | [x] | P1 | S | **Reclassify AWS Udemy training — remove from certification display** — CareerOS confirmed no official AWS certifications held. The item is a Udemy exam-prep course. `aws-certified-5-certifications.mdx`: `featured→false`, category→`other` (schema enum does not support "training"; "other" is the valid closest value), title/summary rewritten. Do not describe Alan as AWS Certified. | Shipped 2026-08-12. Architecture debt remains: file still physically in certifications collection. See AWS-MIGRATE-001 for future migration to a training/professional-development collection. |
+| ID-010 | [x] | P1 | XS | **Update research count terminology — "4 papers" → "10 Technical Monographs & Reports"** — Updated: `index.astro` count line now reads "{N} open-access Technical Monographs & Reports published"; research card CTA "Read paper →" → "Read report →"; `research/index.astro` uses "Technical Monographs & Reports published via Engineering-to-Research Monograph Series"; `cv.astro` meta description uses dynamic count from collection. | Shipped 2026-08-12/13. |
 | ID-011 | [x] | P1 | S | **Add three new certification MDX files** — Created: `qualys-vmdr.mdx` (VERIFIED/physical cert, Jul 2026), `neo4j-certified-professional.mdx` (USER-SUPPLIED/LINKEDIN-CORROBORATED, Aug 2026), `neo4j-graph-data-science.mdx` (USER-SUPPLIED/LINKEDIN-CORROBORATED, Aug 2026). | Shipped 2026-08-12. Add Neo4j PDFs to `manual/_extracted/Certifications/` when available to upgrade confidence to VERIFIED. |
-| ID-012 | [ ] | P1 | S | **Audit `doi:` field in all 10 research MDX files** — The `doi:` field populates the `identifier` property in ScholarlyArticle JSON-LD (formatted as `https://doi.org/{doi}`), not `datePublished` (which comes from `publication_date`). Verify each vol*.mdx has `doi: "10.5281/zenodo.XXXXXXX"` set. Check `src/pages/research/[slug].astro` JSON-LD builder to confirm exact field mapping before editing. DOI values in `docs/career-os.md`. | Affects structured data `identifier`; `datePublished` is separate. |
-| ID-013 | [ ] | P2 | XS | **Remove internal level tags from Genworth timeline titles** — `work-genworth-p1.mdx` title is "Associate Application Development Analyst (P1)" and `work-genworth-p2.mdx` is "Application Development Analyst (P2)". Remove the parenthetical level designations — P1/P2 are internal and should not appear in public-facing display. | Does not affect GEN-003 since "Data Engineer" has no level tag. |
-| ID-014 | [ ] | P2 | XS | **Add HKN dates to edu-ms.mdx bullets** — Current bullet: "Active in Eta Kappa Nu (IEEE-HKN); served as Internal Secretary (2022)." Canonical dates: April 2022 – May 2023. Add dates to bullet. | Canonical: RESUME-0728. |
+| ID-012 | [x] | P1 | S | **Audit `doi:` field in all 10 research MDX files** — Verified: all 10 published research MDX files have `doi:` field set. Built-output JSON-LD confirmed: `doi:` populates `identifier` (as `https://doi.org/{doi}`), not `datePublished`. No changes needed. | Verified 2026-08-12. |
+| ID-013 | [x] | P2 | XS | **Remove internal level tags from Genworth timeline titles** — Removed "(P1)" from `work-genworth-p1.mdx` and "(P2)" from `work-genworth-p2.mdx`; also removed from both hardcoded `resume.astro` spans. | Shipped 2026-08-12. |
+| ID-014 | [x] | P2 | XS | **Add HKN dates to edu-ms.mdx bullets** — Updated bullet to "Member, Eta Kappa Nu (IEEE-HKN), April 2022 – May 2023; served as Internal Secretary." Also corrected stale hardcoded "Jan 2022" in `cv.astro` and `about.astro` to "Apr 2022" (canonical: RESUME-0728). resume.astro HKN bullet also updated with dates. | Shipped 2026-08-12/13. |
+
+### Platform synchronization (LinkedIn & GitHub)
+
+These items require manual user action — they cannot be automated via code. Tracked here so CareerOS canonical status is visible alongside portfolio work.
+
+| ID | Status | Platform | Item |
+|---|---|---|---|
+| LI-001 | [ ] | LinkedIn | Close GEN-002 (Application Development Analyst) at July 2026 |
+| LI-002 | [ ] | LinkedIn | Add or update current role to "Data Engineer" starting July 2026 (GEN-003) |
+| LI-003 | [ ] | LinkedIn | Add Investment Foundations® Certificate (CFA, #189900608, July 2026) |
+| LI-004 | [ ] | LinkedIn | Add Qualys VMDR certification (July 2026, expires July 2028) |
+| LI-005 | [ ] | LinkedIn | Verify Neo4j Certified Professional and Neo4j GDS Cert are listed correctly |
+| LI-006 | [ ] | LinkedIn | Ensure AWS Udemy item is NOT presented as an AWS certification |
+| LI-007 | [ ] | LinkedIn | Verify ITHENA title reads "Full Stack Developer Intern" (not "Software Engineer Intern") |
+| GH-001 | [ ] | GitHub | Update bio/description to reflect "Data Engineer" title |
+| GH-002 | [ ] | GitHub | Add READMEs to IPRO497 repos (IPRO497-Design-and-Entrepreneur, IPRO497-AP-Digital-Development) |
+
+### Architecture debt
+
+| ID | Status | Priority | Effort | Item |
+|---|---|---|---|---|
+| AWS-MIGRATE-001 | [ ] | P3 | M | **Migrate AWS Udemy training out of certifications collection** — `aws-certified-5-certifications.mdx` currently resides in `src/content/certifications/` with `category: "other"` and `featured: false`. This is a hidden-but-present certification record. A future `training` or `professional-development` content collection should absorb it so a full certifications collection query cannot accidentally resurrect it. Trigger: when a second training item warrants a collection. |
 
 ### UI and design
 
@@ -104,13 +126,13 @@ Sourced from CareerOS canonical registry (`docs/career-os.md`). All facts verifi
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| CP-001 | [x] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Correct order: IEEE Member (May 2024–Present) → HKN Internal Secretary (Jan 2022–May 2023) → HKN Member (2021–2023). | `src/pages/cv.astro:117–132`, `src/pages/about.astro:161–177` |
+| CP-001 | [x] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Correct order: IEEE Member (May 2024–Present) → HKN Internal Secretary (Apr 2022–May 2023) → HKN Member (2021–2023). Note: start date corrected to Apr 2022 per RESUME-0728 (was "Jan 2022" from June 2022 LinkedIn-derived pass). | `src/pages/cv.astro`, `src/pages/about.astro` |
 | CP-002 | [x] | P1 | XS | **Research index subtitle — surface published papers** — Currently reads "Applied research work related to AI and Data Science in enterprise systems." Now that 4 papers are Zenodo-published and OpenAIRE-indexed, the subtitle should say so (e.g. "4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE."). | `src/pages/research/index.astro:54–56` |
 | CP-003 | [x] | P2 | XS | **CV page meta description — mention publications** — Currently: "PhD candidate in Information Technology…researcher in AI governance." After the CV split, the description should surface "4 Zenodo-published papers" as the lead credential. | `src/pages/cv.astro:25` |
 | CP-004 | [x] | P2 | XS | **Research detail page meta description** — `[slug].astro` uses `d.abstract ?? d.summary` as the description. For published papers, the abstract is rich and long. Consider truncating to 155 chars or using a dedicated `short_description` field for meta. | `src/pages/research/[slug].astro:74` |
 | CP-005 | [ ] | P2 | S | **Quantified work bullets (2B-002)** — Work experience bullets at Genworth still lack specific numbers (pipeline scale, records/day, error reduction %). Requires user to supply metrics. High recruiter impact. | `src/content/timeline/work-genworth-p1.mdx`, `work-genworth-p2.mdx` |
 | CP-006 | [ ] | P2 | S | **Business outcome reframing on work projects (2B-007)** — Project summaries in the projects collection describe what was built, not what changed. Shift to impact framing: cost savings, error reduction, migration scope. Requires user approval of public metrics. | `src/content/projects/work-*.mdx` |
-| CP-007 | [x] | P1 | XS | **PhD dates — add start year** — `edu-phd.mdx` showed "In progress" without a year; LinkedIn shows 2025–2029. Updated to "2025 – Present" in timeline MDX and hardcoded resume page. | `src/content/timeline/edu-phd.mdx`, `src/pages/resume.astro` |
+| CP-007 | [x] | P1 | XS | **PhD dates — add start year** — `edu-phd.mdx` showed "In progress" without a year. Updated to "August 2025 – Present" (CareerOS EDU-001 canonical; initial commit used bare "2025 – Present" without month — corrected 2026-08-13 before push). | `src/content/timeline/edu-phd.mdx` |
 | CP-008 | [x] | P2 | S | **Add missing LinkedIn projects — 32-bit RISC Processor & SensoryPi** — Two college projects visible on LinkedIn were absent from the projects collection. Added `college-risc-processor.mdx` (5-stage MIPS pipeline, Aug–Dec 2022) and `college-sensorpi.mdx` (Raspberry Pi facial recognition + motion detection, May–Jul 2022). | `src/content/projects/college-risc-processor.mdx`, `src/content/projects/college-sensorpi.mdx` |
 
 ### Structured data and SEO
