@@ -24,11 +24,42 @@ const allCerts = await getCollection("certifications");
 const certsFeatured = allCerts
   .filter((c) => c.data.featured)
   .sort((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0));
+
+const cvSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Alan Palayil",
+    jobTitle: "Data Engineer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Genworth Financial",
+    },
+    alumniOf: [
+      {
+        "@type": "EducationalOrganization",
+        name: "Illinois Institute of Technology",
+      },
+    ],
+    affiliation: {
+      "@type": "CollegeOrUniversity",
+      name: "University of the Cumberlands",
+    },
+    url: "https://alanp13.github.io",
+    sameAs: [
+      "https://www.linkedin.com/in/alan-palayil/",
+      "https://github.com/AlanP13",
+      "https://orcid.org/0009-0004-8302-5090",
+    ],
+  },
+});
 ---
 
 <SiteLayout
   title="Academic CV — Alan Palayil"
   description={`Academic CV — Alan Palayil. ${publishedPapers.length} Technical Monographs & Reports published on Zenodo (DOI), IEEE member, Ph.D. student in Information Technology at University of the Cumberlands.`}
+  schemaJson={cvSchema}
 >
   <div class="cv">
 

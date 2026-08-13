@@ -45,13 +45,13 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
 
   <div class="controls">
     <div class="chips" id="filter-chips" role="group" aria-label="Filter by topic">
-      <button class="fchip active" data-filter="all">All</button>
+      <button class="fchip active" data-filter="all" aria-pressed="true">All</button>
       {FILTERS.map(f => (
-        <button class="fchip" data-filter={f.key}>{f.label}</button>
+        <button class="fchip" data-filter={f.key} aria-pressed="false">{f.label}</button>
       ))}
     </div>
     <div class="sorts" role="group" aria-label="Sort projects">
-      <button class="sbtn active" id="sort-featured">Featured</button>
+      <button class="sbtn active" id="sort-featured" aria-pressed="true">Featured</button>
       <button class="sbtn" id="sort-cycle">A–Z</button>
     </div>
   </div>
@@ -161,8 +161,12 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
       chipsWrap?.addEventListener("click", e => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".fchip");
         if (!btn) return;
-        document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll<HTMLButtonElement>(".fchip").forEach(c => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
         btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
         activeFilter = btn.dataset.filter ?? "all";
         apply();
       });
@@ -170,6 +174,7 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
       // Featured sort — reset cycle to first state
       featuredBtn?.addEventListener("click", () => {
         featuredBtn.classList.add("active");
+        featuredBtn.setAttribute("aria-pressed", "true");
         cycleBtn?.classList.remove("active");
         cycleIdx = 0;
         if (cycleBtn) cycleBtn.textContent = CYCLE[0].label;
@@ -184,6 +189,7 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
         } else {
           cycleIdx = 0;
           featuredBtn?.classList.remove("active");
+          featuredBtn?.setAttribute("aria-pressed", "false");
           cycleBtn.classList.add("active");
         }
         cycleBtn.textContent = CYCLE[cycleIdx].label;

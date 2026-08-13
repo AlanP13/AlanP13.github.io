@@ -50,7 +50,7 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
 
 <SiteLayout
   title="Research — Alan Palayil"
-  description="Applied research in AI Governance, enterprise data systems, and financial systems modernization. Technical reports from a PhD in Information Technology at University of the Cumberlands."
+  description="Applied research in AI, Data Science, enterprise systems, cybersecurity, and financial technology. Open-access technical monographs by a Ph.D. student in Information Technology at the University of the Cumberlands."
 >
   <div class="hd">
     <h1>Research</h1>
@@ -61,13 +61,13 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
 
   <div class="controls">
     <div class="chips" id="filter-chips" role="group" aria-label="Filter by topic">
-      <button class="fchip active" data-filter="all">All</button>
+      <button class="fchip active" data-filter="all" aria-pressed="true">All</button>
       {TOP_FILTERS.map(area => (
-        <button class="fchip" data-filter={area}>{area}</button>
+        <button class="fchip" data-filter={area} aria-pressed="false">{area}</button>
       ))}
     </div>
     <div class="sorts" role="group" aria-label="Sort research">
-      <button class="sbtn active" id="sort-status">Status</button>
+      <button class="sbtn active" id="sort-status" aria-pressed="true">Status</button>
       <button class="sbtn" id="sort-cycle">A–Z</button>
     </div>
   </div>
@@ -164,8 +164,12 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
       chipsWrap?.addEventListener("click", e => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".fchip");
         if (!btn) return;
-        document.querySelectorAll(".fchip").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll<HTMLButtonElement>(".fchip").forEach(c => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
         btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
         activeFilter = btn.dataset.filter ?? "all";
         apply();
       });
@@ -173,6 +177,7 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
       // Status sort (default)
       statusBtn?.addEventListener("click", () => {
         statusBtn.classList.add("active");
+        statusBtn.setAttribute("aria-pressed", "true");
         cycleBtn?.classList.remove("active");
         cycleIdx = 0;
         if (cycleBtn) cycleBtn.textContent = CYCLE[0].label;
@@ -187,6 +192,7 @@ const TOP_FILTERS = ["Security", "Systems Research", "Machine Learning", "Data S
         } else {
           cycleIdx = 0;
           statusBtn?.classList.remove("active");
+          statusBtn?.setAttribute("aria-pressed", "false");
           cycleBtn.classList.add("active");
         }
         cycleBtn.textContent = CYCLE[cycleIdx].label;

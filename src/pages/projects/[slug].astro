@@ -13,6 +13,30 @@ export async function getStaticPaths() {
 const { project, all } = Astro.props;
 const { Content } = await project.render();
 
+// Projects that are primarily hardware or mixed-engineering use CreativeWork;
+// pure software/code artifacts use SoftwareSourceCode.
+const HARDWARE_SLUGS = new Set([
+  "college-risc-processor",
+  "college-sensorpi",
+  "personal-smart-home-hub",
+]);
+const schemaType = HARDWARE_SLUGS.has(project.slug) ? "CreativeWork" : "SoftwareSourceCode";
+const githubLink = project.data.links?.find((l: { url: string }) => l.url.includes("github.com"))?.url;
+const projectSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  name: project.data.title,
+  description: project.data.summary,
+  author: {
+    "@type": "Person",
+    name: "Alan Palayil",
+    url: "https://alanp13.github.io",
+  },
+  ...(schemaType === "SoftwareSourceCode" && githubLink ? { codeRepository: githubLink } : {}),
+  ...(project.data.tech?.length ? { keywords: project.data.tech.join(", ") } : {}),
+  url: `https://alanp13.github.io/projects/${project.slug}`,
+});
+
 const byOrderDescThenTitle = (a: any, b: any) => {
   const ao = a.data.order ?? 0;
   const bo = b.data.order ?? 0;
@@ -38,6 +62,7 @@ const prev =
 <SiteLayout
   title={`${project.data.title} — Alan Palayil`}
   description={project.data.summary}
+  schemaJson={projectSchema}
 >
   <article class="page">
     <p class="back"><a href="/projects">← Back to Projects</a></p>
