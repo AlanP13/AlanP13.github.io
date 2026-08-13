@@ -184,7 +184,10 @@ const carouselImages = await Promise.all(
   </section>
 
   <section class="gallery">
-    <h2 class="galleryTitle">Travel</h2>
+    <div class="galleryHeader">
+      <h2 class="galleryTitle">Travel</h2>
+      <button id="galleryPauseBtn" class="galleryPause">Pause</button>
+    </div>
 
     <div class="grid" id="placesGallery" data-rotating>
       {
@@ -208,9 +211,14 @@ const carouselImages = await Promise.all(
 
       let index = 0;
       let timer = null;
-      let paused = false;
+      let hoverPaused = false;
+      let focusPaused = false;
+      let userPaused = false;
+
+      const isPaused = () => hoverPaused || focusPaused || userPaused;
 
       const container = document.getElementById("placesGallery");
+      const pauseBtn = document.getElementById("galleryPauseBtn");
       const cards = Array.from(container.querySelectorAll(".imgCard"));
       const count = Math.min(VISIBLE, cards.length);
 
@@ -233,10 +241,8 @@ const carouselImages = await Promise.all(
 
         preload.src = img.src;
         if (preload.complete) {
-          // Already in cache — swap after the fade-out finishes
           setTimeout(doSwap, FADE_MS);
         } else {
-          // Wait for the image to load AND the fade-out to finish
           const deadline = Date.now() + FADE_MS;
           const onReady = () => setTimeout(doSwap, Math.max(0, deadline - Date.now()));
           preload.onload = onReady;
@@ -257,11 +263,30 @@ const carouselImages = await Promise.all(
         render();
       }
 
-      container.addEventListener("mouseenter", () => (paused = true));
-      container.addEventListener("mouseleave", () => (paused = false));
+      function syncBtn() {
+        if (!pauseBtn) return;
+        pauseBtn.textContent = userPaused ? "Play" : "Pause";
+        pauseBtn.setAttribute("aria-label", userPaused ? "Resume gallery rotation" : "Pause gallery rotation");
+      }
 
-      // HTML already shows the correct first frame — just start the rotation
-      timer = setInterval(() => { if (!paused) tick(); }, INTERVAL);
+      container.addEventListener("mouseenter", () => { hoverPaused = true; });
+      container.addEventListener("mouseleave", () => { hoverPaused = false; });
+      container.addEventListener("focusin",    () => { focusPaused = true; });
+      container.addEventListener("focusout",   () => { focusPaused = false; });
+
+      pauseBtn?.addEventListener("click", () => {
+        userPaused = !userPaused;
+        syncBtn();
+      });
+
+      // Do not start auto-rotation when the user prefers reduced motion
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (reducedMotion.matches) {
+        if (pauseBtn) pauseBtn.hidden = true;
+      } else {
+        // HTML already shows the correct first frame — just start the rotation
+        timer = setInterval(() => { if (!isPaused()) tick(); }, INTERVAL);
+      }
     </script>
   </section>
 
@@ -367,11 +392,31 @@ const carouselImages = await Promise.all(
       margin-left: auto;
       margin-right: auto;
     }
+    .galleryHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
     .galleryTitle {
-      margin: 0 0 12px;
+      margin: 0;
       font-size: 16px;
       letter-spacing: -0.01em;
       font-weight: 700;
+    }
+    .galleryPause {
+      padding: 3px 10px;
+      border-radius: var(--r);
+      border: 1px solid rgb(var(--border));
+      background: var(--card-bg);
+      color: rgb(var(--muted));
+      font-size: 12px;
+      cursor: pointer;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+    .galleryPause:hover {
+      color: rgb(var(--text));
+      border-color: rgb(var(--accent));
     }
     .grid {
       display: grid;

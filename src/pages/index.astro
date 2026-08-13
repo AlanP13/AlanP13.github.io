@@ -88,11 +88,11 @@ const personSchema = JSON.stringify({
       "@type": "EducationalOrganization",
       name: "Illinois Institute of Technology",
     },
-    {
-      "@type": "EducationalOrganization",
-      name: "University of the Cumberlands",
-    },
   ],
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "University of the Cumberlands",
+  },
   url: "https://alanp13.github.io",
   sameAs: [
     "https://www.linkedin.com/in/alan-palayil/",
@@ -100,7 +100,8 @@ const personSchema = JSON.stringify({
     "https://orcid.org/0009-0004-8302-5090",
   ],
   workExample: allPublishedPapers.map((p) => ({
-    "@type": "ScholarlyArticle",
+    "@type": "CreativeWork",
+    genre: "Technical monograph",
     name: p.data.title,
     url: `https://alanp13.github.io/research/${p.slug}`,
     ...(p.data.doi ? { identifier: `https://doi.org/${p.data.doi}` } : {}),
@@ -603,7 +604,7 @@ const personSchema = JSON.stringify({
         <div class="credDivider"></div>
         <div class="credEntry">
           <div>
-            <p class="credOrg">PhD Candidate</p>
+            <p class="credOrg">Ph.D. Student</p>
             <p class="credDesc">Information Technology · University of the Cumberlands</p>
           </div>
           <div class="credMeta">

@@ -114,10 +114,8 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
       const sections    = Array.from(document.querySelectorAll<HTMLElement>(".section"));
 
       const CYCLE = [
-        { key: "az",     label: "A–Z"    },
-        { key: "za",     label: "Z–A"    },
-        { key: "newest", label: "Newest" },
-        { key: "oldest", label: "Oldest" },
+        { key: "az", label: "A–Z" },
+        { key: "za", label: "Z–A" },
       ];
       let cycleIdx     = 0;
       let activeFilter = "all";
@@ -145,10 +143,6 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
             visible.sort((a, b) => (a.dataset.title ?? "").localeCompare(b.dataset.title ?? ""));
           } else if (activeSort === "za") {
             visible.sort((a, b) => (b.dataset.title ?? "").localeCompare(a.dataset.title ?? ""));
-          } else if (activeSort === "newest") {
-            visible.sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0));
-          } else if (activeSort === "oldest") {
-            visible.sort((a, b) => Number(b.dataset.order ?? 0) - Number(a.dataset.order ?? 0));
           } else {
             visible.sort((a, b) => Number(a.dataset.order ?? 0) - Number(b.dataset.order ?? 0));
           }
@@ -183,7 +177,7 @@ const rest     = projects.filter((p) => !p.data.featured).sort(byOrderDescThenTi
         apply();
       });
 
-      // Cycling sort — advance through A–Z → Z–A → Newest → Oldest → A–Z…
+      // Cycling sort — advance through A–Z → Z–A → A–Z…
       cycleBtn?.addEventListener("click", () => {
         if (cycleBtn.classList.contains("active")) {
           cycleIdx = (cycleIdx + 1) % CYCLE.length;
