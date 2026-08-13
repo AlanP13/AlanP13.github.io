@@ -476,9 +476,9 @@ This section tracks synchronization between CareerOS canonical and each external
 
 | Item | Status |
 |---|---|
-| Profile bio (github.com/AlanP13) | **MANUAL PENDING** — API requires `user` OAuth scope. Run `gh auth refresh -h github.com -s user` or update at github.com → Settings → Public profile. Text: "Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research." |
+| Profile bio (github.com/AlanP13) | ✓ Updated manually 2026-08-13: "Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research." |
 | Profile README (AlanP13/AlanP13) | ✓ Updated 2026-08-13 — "Data Engineer" identity, current themes, research link, portfolio link |
-| Pinned repos | **MANUAL PENDING** — GitHub does not expose pin management via API. Go to github.com/AlanP13 → "Customize your pins" → unpin Financial-Engineering-Portfolio; pin IoT-Data-Platform-Lab and Data-Mining-for-Financial-Systems-Vol8. Slot 6 open. |
+| Pinned repos | ✓ Set manually 2026-08-13: AlanP13.github.io, Enterprise-Event-Simulation-Platform, IoT-Data-Platform-Lab, Data-Mining-for-Financial-Systems-Vol8, Py8085-Simulator; slot 6 open |
 | IPRO497-Design-and-Entrepreneur | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
 | IPRO497-AP-Digital-Development | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
 | Repository topics / descriptions | ✓ Completed 2026-08-13 — topics added to 12 repos; descriptions fixed/added for Financial-Engineering-Portfolio, Web-Portfolio, ECE218, CS331, ECE407 |

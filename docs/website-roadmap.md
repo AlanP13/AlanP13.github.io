@@ -123,13 +123,13 @@ Mix of code-assistable (READMEs, topics) and manual (bio, pins, metadata).
 
 | ID | Status | Item |
 |---|---|---|
-| GH-001 | [~] | **Update bio to reflect Data Engineer** — Profile README updated (commit `2747be3f` on AlanP13/AlanP13 repo, 2026-08-13): "Data Engineer" identity, current technical themes, research link, portfolio link. **Manual remaining:** GitHub profile bio requires `user` OAuth scope — run `gh auth refresh -h github.com -s user` then re-apply, or update via github.com → Settings → Public profile. Bio text: `Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research.` |
+| GH-001 | [x] | **Update bio to reflect Data Engineer** — Profile README updated (commit `2747be3f`, AlanP13/AlanP13, 2026-08-13). GitHub profile bio updated manually 2026-08-13: "Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research." |
 
 #### B. Pinned repositories
 
 | ID | Status | Item |
 |---|---|---|
-| GH-003 | [~] | **Audit and update pinned repos** — Audit complete 2026-08-13. Decision: AlanP13.github.io, Enterprise-Event-Simulation-Platform, IoT-Data-Platform-Lab, Data-Mining-for-Financial-Systems-Vol8, Py8085-Simulator; slot 6 open. Financial-Engineering-Portfolio removed. **Manual required** — GitHub does not expose pin management via API. Go to github.com/AlanP13 → "Customize your pins" → unpin Financial-Engineering-Portfolio, pin IoT-Data-Platform-Lab and Data-Mining-for-Financial-Systems-Vol8. Sixth-pin candidates reviewed; none strong enough yet — revisit after Phase 4 audit. |
+| GH-003 | [x] | **Audit and update pinned repos** — Set manually 2026-08-13: AlanP13.github.io, Enterprise-Event-Simulation-Platform, IoT-Data-Platform-Lab, Data-Mining-for-Financial-Systems-Vol8, Py8085-Simulator; slot 6 open. Financial-Engineering-Portfolio removed. Sixth-pin candidates reviewed; none strong enough — revisit after Phase 4 audit. |
 
 #### C. IPRO497 repositories
 
