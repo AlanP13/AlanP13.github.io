@@ -318,3 +318,21 @@ footer.wrap.foot {
 :root[data-theme="light"] .starfield::after {
   mix-blend-mode: multiply;
 }
+
+/* =================================================
+   Reduced motion — collapse nonessential transitions
+   and animations to near-instant for users who prefer
+   reduced motion. Focus indicators and state-color
+   changes still fire; they just happen without timing.
+   The About gallery's JS independently skips its
+   setInterval under this preference.
+   ================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

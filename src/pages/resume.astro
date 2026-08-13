@@ -36,9 +36,9 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <a href="mailto:alan.palayil@gmail.com">alan.palayil@gmail.com</a>
       </div>
       <div class="contactLinks">
-        <a href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/alan-palayil/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <span class="cdot" aria-hidden="true">·</span>
-        <a href="https://github.com/AlanP13" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/AlanP13" target="_blank" rel="noopener noreferrer">GitHub</a>
         <span class="cdot" aria-hidden="true">·</span>
         <a href="https://alanp13.github.io">alanp13.github.io</a>
       </div>
@@ -51,7 +51,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">Data Engineer</span>
-            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
+            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noopener noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">July 2026 – Present</span>
@@ -72,7 +72,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">Application Development Analyst</span>
-            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
+            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noopener noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">December 2025 – July 2026</span>
@@ -93,7 +93,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">Associate Application Development Analyst</span>
-            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noreferrer">Genworth Financial</a></span>
+            <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noopener noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">July 2023 - December 2025</span>
@@ -114,7 +114,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">Software Engineer Intern</span>
-            <span class="rOrg"><a href="https://ithena.ai" target="_blank" rel="noreferrer">ITHENA</a></span>
+            <span class="rOrg"><a href="https://ithena.ai" target="_blank" rel="noopener noreferrer">ITHENA</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">June 2020 - August 2020</span>
@@ -139,7 +139,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">Executive PhD in Information Technology</span>
-            <span class="rOrg"><a href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology" target="_blank" rel="noreferrer">University of Cumberlands</a></span>
+            <span class="rOrg"><a href="https://www.ucumberlands.edu/academics/graduate/phd-information-technology" target="_blank" rel="noopener noreferrer">University of Cumberlands</a></span>
           </div>
           <div class="rRight">
             <span class="rDates rInProgress">August 2025 – Present</span>
@@ -157,7 +157,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">M.S. Cybersecurity Engineering</span>
-            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/cybersecurity-engineering-mas" target="_blank" rel="noreferrer">Illinois Institute of Technology</a></span>
+            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/cybersecurity-engineering-mas" target="_blank" rel="noopener noreferrer">Illinois Institute of Technology</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">May 2022 – August 2023</span>
@@ -174,7 +174,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
         <div class="rEntryHead">
           <div class="rLeft">
             <span class="rTitle">B.S. Computer &amp; Cybersecurity Engineering</span>
-            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/computer-and-cybersecurity-engineering-bs" target="_blank" rel="noreferrer">Illinois Institute of Technology</a></span>
+            <span class="rOrg"><a href="https://www.iit.edu/academics/programs/computer-and-cybersecurity-engineering-bs" target="_blank" rel="noopener noreferrer">Illinois Institute of Technology</a></span>
           </div>
           <div class="rRight">
             <span class="rDates">August 2019 – August 2023</span>
@@ -266,7 +266,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
                 <span class="rTitle">{cert.data.title}</span>
                 <span class="rOrg">
                   {cert.data.issuerUrl
-                    ? <a href={cert.data.issuerUrl} target="_blank" rel="noreferrer">{cert.data.issuer}</a>
+                    ? <a href={cert.data.issuerUrl} target="_blank" rel="noopener noreferrer">{cert.data.issuer}</a>
                     : cert.data.issuer}
                 </span>
               </div>
@@ -275,7 +275,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
                   ? <span class="rDates rInProgress">In Progress</span>
                   : <span class="rDates">{cert.data.dateObtained ?? "Completed"}</span>}
                 {cert.data.credentialUrl && (
-                  <a class="rCredLink" href={cert.data.credentialUrl} target="_blank" rel="noreferrer">Verify →</a>
+                  <a class="rCredLink" href={cert.data.credentialUrl} target="_blank" rel="noopener noreferrer">Verify →</a>
                 )}
               </div>
             </div>
