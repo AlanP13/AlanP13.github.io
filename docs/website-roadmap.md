@@ -183,18 +183,16 @@ Commits: `bbcb133` (Batch 1) · `d6eb7d2` (Batch 2) · `0a42c03` (Batch 3)
 | P3-001 | P3 | No `prefers-reduced-motion` global CSS | ✓ Fixed — universal collapse rule added |
 | P3-002 | P3 | `rel="noreferrer"` without `noopener` across site | ✓ Fixed — normalized to `noopener noreferrer` site-wide |
 
-**Open schema question — pending before Phase 5:**
+**Schema reclassification — RESOLVED 2026-08-13:** Three Genworth enterprise case study pages reclassified from `SoftwareSourceCode` → `CreativeWork` (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`). `college-convo-care` remains `SoftwareSourceCode` — actual software system/code artifact. Classification logic refactored into `CASE_STUDY_SLUGS` + `NON_CODE_PROJECT_SLUGS` named sets. All 10 project schemas verified against built HTML.
 
-Three Genworth enterprise case study pages (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`) currently use `SoftwareSourceCode` but have no public code repository. These are proprietary system case studies; `CreativeWork` may be more accurate. `college-convo-care` is a borderline case (academic software build, no public repo). Awaiting user decision before reclassifying. See schema audit output from 2026-08-13 for full classification table.
-
-**Phase 4 gate — all checks passed:**
-Build clean · JSON-LD parses on all 22 schema pages · No PhD Candidate variants · No restricted metrics · No Newest/Oldest project sort · UoC in affiliation not alumniOf · Monographs as CreativeWork · ARIA filter states correct · Gallery Pause/Play keyboard operable · Reduced-motion prevents gallery rotation · Global reduced-motion CSS present · All target="_blank" links have `noopener noreferrer`
+**Phase 4 gate — all checks passed (0 open P0/P1, 0 open schema-classification questions):**
+Build clean · JSON-LD parses on all 22 schema pages · No PhD Candidate variants · No restricted metrics · No Newest/Oldest project sort · UoC in affiliation not alumniOf · Monographs as CreativeWork · ARIA filter states correct · Gallery Pause/Play keyboard operable · Reduced-motion prevents gallery rotation · Global reduced-motion CSS present · All target="_blank" links have `noopener noreferrer` · Enterprise case studies as CreativeWork · SoftwareSourceCode only for genuine code artifacts
 
 ---
 
 ### Phase 5 — Graphify refresh
 
-After portfolio audit complete and schema reclassification question resolved. Re-run against corrected CareerOS state.
+Re-run against corrected CareerOS state. Schema question resolved — no blockers.
 
 Update: employment nodes + supersession relationships · education nodes · certifications + evidence tiers · AWS item as Training/Professional Development (not Certification) · research nodes (all 10 monographs) · GitHub repository/project nodes · project classifications (Portfolio Case Study / GitHub Engineering Project / Historical College Project) · platform sync state per entity.
 

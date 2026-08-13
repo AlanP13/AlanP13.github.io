@@ -498,6 +498,6 @@ This section tracks synchronization between CareerOS canonical and each external
 | Reduced-motion CSS | ✓ Added — global prefers-reduced-motion collapse rule in global.css |
 | Project sort truthfulness | ✓ Fixed — Newest/Oldest removed; project sort simplified to Featured/A–Z/Z–A |
 
-**Open before Phase 5:** Schema reclassification question — three Genworth enterprise case study pages (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`) currently use SoftwareSourceCode but have no public code repository. These are proprietary system case studies; CreativeWork may be more accurate. Awaiting user decision.
+**Schema reclassification — RESOLVED 2026-08-13:** Three Genworth enterprise case study pages reclassified SoftwareSourceCode → CreativeWork (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`). `college-convo-care` remains SoftwareSourceCode. All 10 project JSON-LD schemas verified. Phase 4 fully closed: 0 open P0/P1 findings, 0 open schema-classification questions.
 
-**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ · Graphify pending (Phase 5)
+**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ (fully closed) · Graphify pending (Phase 5)
