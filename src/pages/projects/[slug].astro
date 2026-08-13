@@ -13,14 +13,22 @@ export async function getStaticPaths() {
 const { project, all } = Astro.props;
 const { Content } = await project.render();
 
-// Projects that are primarily hardware or mixed-engineering use CreativeWork;
-// pure software/code artifacts use SoftwareSourceCode.
-const HARDWARE_SLUGS = new Set([
+// Proprietary enterprise case studies: architecture/impact described, source not published.
+const CASE_STUDY_SLUGS = new Set([
+  "work-cml-json-prj",
+  "work-custody-bank-files-prj",
+  "work-derivatives-legacy-prj",
+]);
+// Hardware and mixed-engineering projects where source code is not the primary artifact.
+const NON_CODE_PROJECT_SLUGS = new Set([
   "college-risc-processor",
   "college-sensorpi",
   "personal-smart-home-hub",
 ]);
-const schemaType = HARDWARE_SLUGS.has(project.slug) ? "CreativeWork" : "SoftwareSourceCode";
+const schemaType =
+  CASE_STUDY_SLUGS.has(project.slug) || NON_CODE_PROJECT_SLUGS.has(project.slug)
+    ? "CreativeWork"
+    : "SoftwareSourceCode";
 const githubLink = project.data.links?.find((l: { url: string }) => l.url.includes("github.com"))?.url;
 const projectSchema = JSON.stringify({
   "@context": "https://schema.org",
