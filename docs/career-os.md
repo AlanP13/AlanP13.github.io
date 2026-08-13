@@ -74,11 +74,11 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
 | **LinkedIn** | ✓ Closed at July 2026, 2026-08-13 |
-| **Portfolio** | `work-genworth-p2.mdx` — UPDATED 2026-08-12 — dates corrected to "December 2025 – July 2026"; team-count metric (5) removed from public bullet 2026-08-13 (clearance fix CLR-006) |
+| **Portfolio** | `work-genworth-p2.mdx` — UPDATED 2026-08-12 — dates corrected to "December 2025 – July 2026"; team-count metric (5) removed from public bullet 2026-08-13 (clearance fix CLR-006); UPDATED 2026-08-13 Phase 5 QA: internal team names (BA, PAM Ops, DGM, AppWorx Support, Alternative Assets) generalized to "cross-functional operations, accounting, platform-support, and technology teams" — team names are not PUBLIC-cleared |
 | **Resume** | ✓ Listed with correct closed dates |
 | **CV** | Include with corrected dates |
 
-> **Canonical evidence note (private/not PUBLIC-cleared):** RESUME-0728 source bullets for this role include specific operating metrics that are valid résumé facts but not cleared for public web publication: pipeline count (10+ production pipelines), job count (30+ automated jobs), time savings (2+ hours/week manual effort reduction), and cross-functional team count (5 teams: BA, PAM Ops, DGM, AppWorx Support, Alternative Assets). These are preserved in RESUME-0728; public surfaces use qualitative equivalents per CareerOS clearance policy.
+> **Canonical evidence note (private/not PUBLIC-cleared):** RESUME-0728 source bullets for this role include specific operating metrics that are valid résumé facts but not cleared for public web publication: pipeline count (10+ production pipelines), job count (30+ automated jobs), time savings (2+ hours/week manual effort reduction), cross-functional team count (5 teams), and internal team names (BA, PAM Ops, DGM, AppWorx Support, Alternative Assets). All preserved in RESUME-0728; public surfaces use qualitative equivalents per CareerOS clearance policy.
 
 ---
 
@@ -153,7 +153,8 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | RESUME-0728 |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
-| **Portfolio** | `edu-phd.mdx` — UPDATED 2026-08-13: "August 2025 – Present" (deliberate, CareerOS-verified; prior commit used bare "2025 – Present" without month — corrected before push) |
+| **Portfolio display form** | "Ph.D. in Information Technology" (natural display; not the marketing label "Executive PhD") |
+| **Portfolio** | `edu-phd.mdx` — UPDATED 2026-08-13: "August 2025 – Present" (dates correct); UPDATED 2026-08-13 (Phase 5 QA): title corrected from "Executive PhD in Information Technology" → "Ph.D. in Information Technology" to match canonical resume form |
 | **Resume** | ✓ Correct |
 | **CV** | Include with GPA and expected date |
 
@@ -169,7 +170,7 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | RESUME-0728 |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
-| **Portfolio** | `edu-bs.mdx` — STALE: shows only "August 2023"; missing start date and GPA |
+| **Portfolio** | `edu-bs.mdx` — dates show "August 2019 – August 2023" ✓ (prior CareerOS note "STALE" was itself stale — file was already corrected; note updated 2026-08-13 Phase 5 QA) |
 | **Resume** | ✓ Correct |
 | **CV** | Include with GPA |
 
@@ -500,4 +501,4 @@ This section tracks synchronization between CareerOS canonical and each external
 
 **Schema reclassification — RESOLVED 2026-08-13:** Three Genworth enterprise case study pages reclassified SoftwareSourceCode → CreativeWork (`work-cml-json-prj`, `work-custody-bank-files-prj`, `work-derivatives-legacy-prj`). `college-convo-care` remains SoftwareSourceCode. All 10 project JSON-LD schemas verified. Phase 4 fully closed: 0 open P0/P1 findings, 0 open schema-classification questions.
 
-**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ (fully closed) · Graphify ✓ (Phase 5 complete — 187 nodes, 196 edges, 31 communities)
+**Sync state as of 2026-08-13:** LinkedIn ✓ · GitHub ✓ · Portfolio Phase 4 ✓ · Graphify ✓ · Phase 5 QA gate ✓ — full CareerOS synchronization complete. 0 unresolved material contradictions. 0 unresolved clearance questions.

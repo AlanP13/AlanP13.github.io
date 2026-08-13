@@ -192,17 +192,28 @@ Build clean · JSON-LD parses on all 22 schema pages · No PhD Candidate variant
 
 ### Phase 5 — Graphify refresh ✓ Complete 2026-08-13
 
-Re-run against fully corrected post-Phase-4 state.
+Re-run against fully corrected post-Phase-4 state. Phase 5 QA gate passed.
 
 **Graph stats:** 187 nodes · 196 edges · 31 communities (8 meaningful, rest singletons)
 
-**Key communities:** Research Concepts & Governance Frameworks (34) · Astro Build Config (23) · Site Layout & Navigation (19) · Page Templates & Content Routes (17) · Portfolio Strategy & Audience (15) · Project Infrastructure & CI/CD (8) · Academic Trajectory & Research Methods (8) · Genworth Enterprise Projects (4) · Edge AI & IoT Projects (4)
+**Key communities:** Research Concepts & Governance Frameworks (34, cohesion 0.08 — known over-clustered; audience persona nodes mixed with research concepts) · Astro Build Config (23) · Site Layout & Navigation (19) · Page Templates & Content Routes (17) · Portfolio Strategy & Audience (15) · Project Infrastructure & CI/CD (8) · Academic Trajectory & Research Methods (8) · Genworth Enterprise Projects (4) · Edge AI & IoT Projects (4)
 
-**God nodes:** SiteLayout.astro (26 edges) · Vol 10 Capstone (16 edges) · Computer Architecture Vol 2 (8 edges)
+**God nodes:** SiteLayout.astro (26 edges, legitimate structural hub) · Vol 10 Capstone (16 edges, legitimate citation structure) · Computer Architecture Vol 2 (8 edges, ~2 inflated by artifact INFERRED edges)
 
-**Surprising connections surfaced:** Incorta cert → Scalable Analytics Vol 7 · O1/EB1 audience → Computer Architecture Vol 2 · Palo Alto cert → WSN/IoT Vol 1
+**Known graph artifacts (INFERRED edges — not canonical CareerOS relationships):**
+- O1/EB1 Immigration Reviewers → Computer Architecture Vol. 2: proximity artifact from PRODUCT.md chunk; audience persona does not specifically reference this paper
+- Research Collaborators → Computer Architecture Vol. 2: same artifact; connects to all research output, not Vol. 2 specifically
+- Embedded-to-Edge-AI Vol. 4 → ITHENA Intern: anachronistic; 2020 internship cannot have informed a 2026 paper
 
-**Completion definition:** Canonical registry ✓ → LinkedIn ✓ → GitHub ✓ → Portfolio audit ✓ → Graphify ✓
+**Useful inferred associations (correctly labeled INFERRED):** Incorta cert → Scalable Analytics Vol 7 · Palo Alto cert → WSN/IoT Vol 1 · RISC Processor → Computer Architecture Vol 2
+
+**Phase 5 QA fixes applied 2026-08-13:**
+- edu-phd.mdx: "Executive PhD in Information Technology" → "Ph.D. in Information Technology" (marketing label removed)
+- work-genworth-p2.mdx + resume.astro: internal team names (BA, PAM Ops, DGM, AppWorx Support, Alternative Assets) generalized to public-safe phrase
+- work-genworth-p1.mdx: date separator normalized to en dash
+- career-os.md: C-002 stale edu-bs note corrected; EDU-001 display form documented; GEN-002 clearance policy updated to explicitly exclude team names
+
+**Completion definition:** Canonical registry ✓ → LinkedIn ✓ → GitHub ✓ → Portfolio audit ✓ → Graphify rebuild ✓ → canonical contradiction scan = 0 unresolved material contradictions ✓ → supersession validated ✓ → PUBLIC/PRIVATE clearance validated ✓ → inferred edges documented and separated from canonical ✓ → no misleading high-impact inferred edges untreated ✓
 
 ---
 
