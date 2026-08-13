@@ -73,10 +73,12 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | RESUME-0728 + CAREER-OS + JD-PDF |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
-| **LinkedIn** | NEEDS UPDATE — close this role at July 1, 2026 |
-| **Portfolio** | `work-genworth-p2.mdx` — UPDATED 2026-08-12 — dates corrected to "December 2025 – July 2026" |
+| **LinkedIn** | ✓ Closed at July 2026, 2026-08-13 |
+| **Portfolio** | `work-genworth-p2.mdx` — UPDATED 2026-08-12 — dates corrected to "December 2025 – July 2026"; team-count metric (5) removed from public bullet 2026-08-13 (clearance fix CLR-006) |
 | **Resume** | ✓ Listed with correct closed dates |
 | **CV** | Include with corrected dates |
+
+> **Canonical evidence note (private/not PUBLIC-cleared):** RESUME-0728 source bullets for this role include specific operating metrics that are valid résumé facts but not cleared for public web publication: pipeline count (10+ production pipelines), job count (30+ automated jobs), time savings (2+ hours/week manual effort reduction), and cross-functional team count (5 teams: BA, PAM Ops, DGM, AppWorx Support, Alternative Assets). These are preserved in RESUME-0728; public surfaces use qualitative equivalents per CareerOS clearance policy.
 
 ---
 
@@ -94,8 +96,10 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | RESUME-0728 + JD-PDF + CAREER-OS (USER-CONFIRMED) |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC |
-| **LinkedIn** | NEEDS UPDATE — add new role "Data Engineer" starting July 2026; or update current role title |
-| **Portfolio** | `work-genworth-de.mdx` — CREATED 2026-08-12; hero/about/resume/JSON-LD updated same date |
+| **LinkedIn** | ✓ Added July 2026 – Present, 2026-08-13 |
+| **Portfolio** | `work-genworth-de.mdx` — CREATED 2026-08-12; hero/about/resume/JSON-LD updated same date; CML loan-volume metric removed from public bullet 2026-08-13 (clearance fix CLR-001) |
+
+> **Canonical evidence note (private/not PUBLIC-cleared):** RESUME-0728 source bullets for this role include the specific CML portfolio volume (1,500+ active commercial mortgage loans) which is a valid résumé fact but not cleared for public web publication. Preserved in RESUME-0728; public surface uses qualitative equivalent per CareerOS clearance policy.
 | **Resume** | ✓ Listed as current role |
 | **CV** | Include |
 
@@ -131,7 +135,7 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC (full master record + academic CV + background checks; optional on targeted technical resume) |
 | **LinkedIn** | Verify presence |
-| **Portfolio** | MISSING — no timeline file; include with low visual priority (do not compete with GEN/ITHENA) |
+| **Portfolio** | ✓ `work-iit-student-assistant.mdx` EXISTS (order: 20, low visual priority) |
 | **Resume** | ✓ Listed |
 | **CV** | Include |
 
@@ -276,7 +280,7 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Date Completed** | June 10, 2021 |
 | **Credential ID** | UC-6604265b-6b90-4bfc-9193-f2f5df5f13d3 |
 | **Source** | CERT-PDF (physical Udemy completion certificate) |
-| **Confidence** | HIGHEST (physical cert) |
+| **Confidence** | VERIFIED — physical certificate evidence (Udemy completion PDF in manual/_extracted/) |
 | **Clearance** | PUBLIC — but must NOT be described as "AWS Certified"; must be described as exam-prep training |
 | **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→other (schema enum does not include "training"; "other" is the closest valid value), title/summary rewritten to remove certification framing. **Architecture debt:** file physically resides in certifications collection; a future Professional Development collection should absorb it. Tracked as roadmap task AWS-MIGRATE-001. |
 
@@ -351,8 +355,8 @@ Confidence key (controlled vocabulary — do not mix levels):
 **Tier 1 — Portfolio case studies** (production/professional engineering, lead role, clear impact):
 | Portfolio file | Resume/canonical name | Status |
 |---|---|---|
-| `work-cml-json-prj.mdx` | PAM CML Migration & JSON Message Generation Platform | ✓ EXISTS, featured |
-| `work-derivatives-legacy-prj.mdx` | PAM Derivatives Legacy Message Platform (Azure Synapse) | ✓ EXISTS, featured |
+| `work-cml-json-prj.mdx` | PAM CML Migration & JSON Message Generation Platform | ✓ EXISTS, featured; CML loan volume (1,500+) removed from public copy 2026-08-13 (clearance fix) — qualitative replacement used; volume preserved in RESUME-0728 |
+| `work-derivatives-legacy-prj.mdx` | PAM Derivatives Legacy Message Platform (Azure Synapse) | ✓ EXISTS, featured; CUSIP count (~800) removed from public copy 2026-08-13 (clearance fix) — qualitative replacement used; count preserved in RESUME-0728 |
 | `work-custody-bank-files-prj.mdx` | Operational Automation & Reliability Hardening | ✓ EXISTS, featured |
 | `college-convo-care.mdx` | Convo Care — Privacy-First AI Risk Triage Platform | ✓ EXISTS, not featured |
 | `college-application-development.mdx` | Enterprise Event Simulation Platform | ✓ EXISTS, not featured |
@@ -443,7 +447,6 @@ This section tracks synchronization between CareerOS canonical and each external
 
 | Entity | Portfolio | LinkedIn | GitHub |
 |---|---|---|---|
-| GEN-001 — Associate Application Development Analyst | ✓ | Verify dates | N/A |
 | GEN-001 — Associate Application Development Analyst | ✓ | ✓ Verified 2026-08-13 | N/A |
 | GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | ✓ Closed at July 2026, 2026-08-13 | N/A |
 | GEN-003 — Data Engineer (current) | ✓ | ✓ Added July 2026 – Present, 2026-08-13 | N/A |
@@ -454,8 +457,8 @@ This section tracks synchronization between CareerOS canonical and each external
 
 | Entity | Portfolio | LinkedIn |
 |---|---|---|
-| CERT-001 — Investment Foundations® #189900608 | ✓ | **NEEDS-UPDATE** — add/verify with credential number |
-| CERT-002 — Qualys VMDR (exp. 2028-07) | ✓ | **NEEDS-UPDATE** — add with expiry date |
+| CERT-001 — Investment Foundations® #189900608 | ✓ | ✓ Added 2026-08-13 — credential number 189900608 |
+| CERT-002 — Qualys VMDR (exp. 2028-07) | ✓ | ✓ Added 2026-08-13 — expiry date 2028-07 |
 | CERT-003 — Neo4j Certified Professional | ✓ | ✓ (source) |
 | CERT-004 — Neo4j Graph Data Science | ✓ | ✓ (source) |
 | CERT-005 — AWS Udemy (reclassified training) | Hidden (featured→false) | ✓ Removed from Certifications 2026-08-13 |
