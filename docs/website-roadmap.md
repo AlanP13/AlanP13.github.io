@@ -74,42 +74,42 @@ Manual user actions. Priority: Employment → Education → Certifications → H
 
 | ID | Status | Item |
 |---|---|---|
-| LI-001 | [ ] | **Close Application Development Analyst** — Employer: Genworth Financial. Dates: December 2025 – July 2026. Do not show as current. Do not expose P2 level. |
-| LI-002 | [ ] | **Add/update Data Engineer (current role)** — Employer: Genworth Financial. Dates: July 2026 – Present. Title: Data Engineer. Location: Richmond, VA. Update headline and About so Application Development Analyst is no longer implied as current. |
-| LI-003e | [ ] | **Verify Associate Application Development Analyst** — Dates: July 2023 – December 2025. Do not expose P1 level. |
-| LI-007 | [ ] | **Verify ITHENA title reads "Software Engineer Intern"** — Canonical: RESUME-0728. Prior CareerOS record "Full Stack Developer Intern" was LinkedIn-derived and has been corrected. Dates: June 2020 – August 2020. Location: Richmond, VA. Do not add "In-Person." |
+| LI-001 | [x] | **Close Application Development Analyst** — Employer: Genworth Financial. Dates: December 2025 – July 2026. Do not show as current. Do not expose P2 level. | Completed 2026-08-13. |
+| LI-002 | [x] | **Add/update Data Engineer (current role)** — Employer: Genworth Financial. Dates: July 2026 – Present. Title: Data Engineer. Location: Richmond, VA. | Completed 2026-08-13. |
+| LI-003e | [x] | **Verify Associate Application Development Analyst** — Dates: July 2023 – December 2025. No P1 level. | Completed 2026-08-13. |
+| LI-007 | [x] | **Verify ITHENA title reads "Software Engineer Intern"** — Dates: June 2020 – August 2020. Location: Richmond, VA. No "In-Person." | Completed 2026-08-13. |
 | LI-008 | [ ] | **Verify IIT Student Assistant** — Title: Student Assistant, Office of Residence Life, Illinois Institute of Technology. Dates: August 2021 – May 2023. Lower visual prominence than engineering roles. |
 
 #### B. Education
 
 | ID | Status | Item |
 |---|---|---|
-| LI-009 | [ ] | **B.S. Computer & Cybersecurity Engineering** — IIT, August 2019 – August 2023 |
-| LI-010 | [ ] | **M.S. Cybersecurity Engineering** — IIT, May 2022 – August 2023 |
-| LI-011 | [ ] | **Ph.D. Information Technology** — University of the Cumberlands, August 2025 – Present. Expected completion may appear separately. |
-| LI-012 | [ ] | **HKN affiliation** — Eta Kappa Nu, Internal Secretary, April 2022 – May 2023. Remove any January 2022 start date. |
+| LI-009 | [x] | **B.S. Computer & Cybersecurity Engineering** — IIT, August 2019 – August 2023 | Completed 2026-08-13. |
+| LI-010 | [x] | **M.S. Cybersecurity Engineering** — IIT, May 2022 – August 2023 | Completed 2026-08-13. |
+| LI-011 | [x] | **Ph.D. Information Technology** — University of the Cumberlands, August 2025 – Present. | Completed 2026-08-13. |
+| LI-012 | [x] | **HKN affiliation** — Eta Kappa Nu, Internal Secretary, April 2022 – May 2023. | Completed 2026-08-13. |
 
 #### C. Certifications
 
 | ID | Status | Item |
 |---|---|---|
-| LI-003 | [ ] | **Add Investment Foundations® Certificate** — CFA Institute, July 2026, Credential #189900608. Status: earned. |
-| LI-004 | [ ] | **Add Qualys VMDR** — Vulnerability Management Detection and Response, July 2026, expires July 2028. |
-| LI-005 | [ ] | **Verify Neo4j certs** — Neo4j Certified Professional (ID: 599d588d-8706-44bf-9707-59c5bb61a5b9) and Neo4j Graph Data Science (ID: 0285db3f-4f77-4501-92c8-c48ebe19d30d), both August 2026. |
-| LI-006 | [ ] | **AWS Udemy** — Verify NOT presented as an AWS certification. If retained, place under Courses/Professional Development. Describe as exam-preparation training only. |
+| LI-003 | [x] | **Add Investment Foundations® Certificate** — CFA Institute, July 2026, Credential #189900608. | Completed 2026-08-13. |
+| LI-004 | [x] | **Add Qualys VMDR** — Vulnerability Management Detection and Response, July 2026, expires July 2028. | Completed 2026-08-13. |
+| LI-005 | [x] | **Verify Neo4j certs** — Neo4j Certified Professional and Neo4j Graph Data Science, both August 2026. | Completed 2026-08-13. |
+| LI-006 | [x] | **AWS Udemy** — Removed or reclassified out of Certifications. | Completed 2026-08-13. |
 
 #### D. Headline & About
 
 | ID | Status | Item |
 |---|---|---|
-| LI-013 | [ ] | **Update LinkedIn headline** — Lead with Data Engineer. Candidate: "Data Engineer \| Financial Systems & Cloud Platforms \| AI & Data Science Research \| Ph.D. Student". Avoid internal level designations. |
-| LI-014 | [ ] | **Update LinkedIn About** — Remove any Application Development Analyst wording. Themes: data engineering, financial systems, investment technology, Python/SQL, ETL, Azure, cloud modernization, AI/data-science research. Platform-specific voice — do not copy portfolio prose verbatim. |
+| LI-013 | [x] | **Update LinkedIn headline** — "Data Engineer \| Financial Systems & Cloud Platforms \| AI & Data Science Research \| Ph.D. Student" | Completed 2026-08-13. |
+| LI-014 | [x] | **Update LinkedIn About** — Data Engineer framing, Ph.D. student, no Fortune 500 label, no restricted metrics. | Completed 2026-08-13. |
 
 #### E. Publications
 
 | ID | Status | Item |
 |---|---|---|
-| LI-015 | [ ] | **Verify all 10 Zenodo volumes listed** — Use "Technical Monographs & Reports" and "Engineering-to-Research Monograph Series." Never "10 peer-reviewed papers." Individual peer-reviewed work must remain distinguishable from Zenodo monographs. |
+| LI-015 | [x] | **All 10 Zenodo volumes entered** — Publisher: Zenodo, series in description field, newest to oldest, DOI URLs. | Completed 2026-08-13. |
 
 **Public-metric safety:** Do not publish private/internal operating metrics (CML/derivatives volumes, internal system identifiers) unless explicitly PUBLIC-cleared in CareerOS.
 
@@ -123,26 +123,26 @@ Mix of code-assistable (READMEs, topics) and manual (bio, pins, metadata).
 
 | ID | Status | Item |
 |---|---|---|
-| GH-001 | [ ] | **Update bio to reflect Data Engineer** — Complementary to LinkedIn, not identical. Themes: data engineering, financial systems, cloud, AI/graph/data science, systems engineering. Verify profile URL points to alanp13.github.io. |
+| GH-001 | [~] | **Update bio to reflect Data Engineer** — Profile README updated (commit `2747be3f` on AlanP13/AlanP13 repo, 2026-08-13): "Data Engineer" identity, current technical themes, research link, portfolio link. **Manual remaining:** GitHub profile bio requires `user` OAuth scope — run `gh auth refresh -h github.com -s user` then re-apply, or update via github.com → Settings → Public profile. Bio text: `Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research.` |
 
 #### B. Pinned repositories
 
 | ID | Status | Item |
 |---|---|---|
-| GH-003 | [ ] | **Audit and update pinned repos** — Current candidates: AlanP13.github.io, Enterprise-Event-Simulation-Platform, Financial-Engineering-Portfolio, Py8085-Simulator. Evaluate whether a stronger AI/data/graph project should replace a weaker pin. Keep at least one systems/low-level project. Final selection requires user decision during GitHub audit. |
+| GH-003 | [~] | **Audit and update pinned repos** — Audit complete 2026-08-13. Decision: AlanP13.github.io, Enterprise-Event-Simulation-Platform, IoT-Data-Platform-Lab, Data-Mining-for-Financial-Systems-Vol8, Py8085-Simulator; slot 6 open. Financial-Engineering-Portfolio removed. **Manual required** — GitHub does not expose pin management via API. Go to github.com/AlanP13 → "Customize your pins" → unpin Financial-Engineering-Portfolio, pin IoT-Data-Platform-Lab and Data-Mining-for-Financial-Systems-Vol8. Sixth-pin candidates reviewed; none strong enough yet — revisit after Phase 4 audit. |
 
 #### C. IPRO497 repositories
 
 | ID | Status | Item |
 |---|---|---|
-| GH-002 | [ ] | **Add README to IPRO497-Design-and-Entrepreneur** — Sections: project purpose, your contribution, team/project context, technologies, architecture/implementation, outcome, academic context. Do not exaggerate individual ownership of team work. |
-| GH-004 | [ ] | **Add README to IPRO497-AP-Digital-Development** — Same structure as above. |
+| GH-002 | [x] | **IPRO497-Design-and-Entrepreneur** — Both repos already had minimal READMEs. Repo-level description and topics added 2026-08-13. Description: "IPRO capstone — virtual golf club fitting solution with sensor-equipped demo kits and web interface. Interdisciplinary project with Wilson Sports." Topics: capstone, entrepreneurship, interdisciplinary, iot, sensors, web-development. README prose unchanged (functional). |
+| GH-004 | [x] | **IPRO497-AP-Digital-Development** — Same as GH-002. Description: "HawkStudy — Java Spring Boot campus study room reservation system with PostgreSQL backend and ThingSpeak IoT integration." Topics: capstone, iot, java, postgresql, spring-boot, web-application. |
 
 #### D. Repository metadata
 
 | ID | Status | Item |
 |---|---|---|
-| GH-005 | [ ] | **Audit all important public repo descriptions, topics, demo URLs** — Remove stale descriptions. Ensure archived/unfinished projects do not appear current. Make README titles consistent with portfolio naming. Add relevant topics. Check licenses where appropriate. |
+| GH-005 | [x] | **Repo descriptions, topics, metadata** — Applied 2026-08-13. Topics added to: AlanP13.github.io, Enterprise-Event-Simulation-Platform, Py8085-Simulator, IoT-Data-Platform-Lab, Order-Management-System, DataFrame-and-CSV-Utility, Applied-Operating-Systems, Getting-the-Foundations-Right-Vol3, Data-Mining-for-Financial-Systems-Vol8, Whether--Why--and-For-Whom-Vol9, DriveSimX-Mobile-Vehicle-Simulation, Trajectory-Lab-Mobile-Physics-Simulator. Descriptions fixed: Financial-Engineering-Portfolio (removed "Python bootcamp" framing), Web-Portfolio (marked as legacy React portfolio), ECE218/CS331/ECE407 (coursework one-liners added). |
 
 #### E. Classification schema
 

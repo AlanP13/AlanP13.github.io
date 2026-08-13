@@ -444,9 +444,10 @@ This section tracks synchronization between CareerOS canonical and each external
 | Entity | Portfolio | LinkedIn | GitHub |
 |---|---|---|---|
 | GEN-001 — Associate Application Development Analyst | ✓ | Verify dates | N/A |
-| GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | **NEEDS-UPDATE** — close at July 2026 | N/A |
-| GEN-003 — Data Engineer (current) | ✓ | **NEEDS-UPDATE** — add role or update current title | N/A |
-| ITHENA-001 — Software Engineer Intern | ✓ | Verify title reads "Software Engineer Intern" | N/A |
+| GEN-001 — Associate Application Development Analyst | ✓ | ✓ Verified 2026-08-13 | N/A |
+| GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | ✓ Closed at July 2026, 2026-08-13 | N/A |
+| GEN-003 — Data Engineer (current) | ✓ | ✓ Added July 2026 – Present, 2026-08-13 | N/A |
+| ITHENA-001 — Software Engineer Intern | ✓ | ✓ Verified "Software Engineer Intern" 2026-08-13 | N/A |
 | IIT-SA-001 — Student Assistant | ✓ | Verify presence | N/A |
 
 ### Certifications
@@ -457,22 +458,27 @@ This section tracks synchronization between CareerOS canonical and each external
 | CERT-002 — Qualys VMDR (exp. 2028-07) | ✓ | **NEEDS-UPDATE** — add with expiry date |
 | CERT-003 — Neo4j Certified Professional | ✓ | ✓ (source) |
 | CERT-004 — Neo4j Graph Data Science | ✓ | ✓ (source) |
-| CERT-005 — AWS Udemy (reclassified training) | Hidden (featured→false) | Verify it is NOT presented as an AWS certification |
+| CERT-005 — AWS Udemy (reclassified training) | Hidden (featured→false) | ✓ Removed from Certifications 2026-08-13 |
 
 ### Research Publications
 
 | Surface | Status |
 |---|---|
 | Portfolio research pages (10 volumes) | ✓ |
-| LinkedIn publications section | Verify 10 volumes listed; terminology should match "Technical Monographs & Reports" |
-| GitHub profile / READMEs | IPRO497 repos need READMEs; bio/description update pending |
+| LinkedIn publications section | ✓ All 10 entered 2026-08-13 — newest to oldest, publisher: Zenodo, series in description field |
+| GitHub profile / READMEs | ✓ Profile README updated 2026-08-13 (Data Engineer identity, research link) |
 | Zenodo community | ✓ (10 records live) |
 | OpenAIRE | ✓ (indexed via Zenodo) |
+
+> **Evidence quality boundary (preserve for Graphify):** LinkedIn listing these publications does NOT upgrade the canonical evidence tier of the research nodes. Canonical evidence remains the Zenodo/DOI records. LinkedIn is a synchronized presentation surface only — not an evidence source. Do not reclassify research confidence from the DOI-backed level based on LinkedIn presence.
 
 ### GitHub-specific
 
 | Item | Status |
 |---|---|
-| Bio / description reflecting Data Engineer title | **NEEDS-UPDATE** |
-| IPRO497 repo READMEs | **NEEDS-UPDATE** — add project context |
-| Other repo descriptions | Audit pending |
+| Profile bio (github.com/AlanP13) | **MANUAL PENDING** — API requires `user` OAuth scope. Run `gh auth refresh -h github.com -s user` or update at github.com → Settings → Public profile. Text: "Data Engineer building reliable data systems across financial platforms, cloud infrastructure, AI, and applied research." |
+| Profile README (AlanP13/AlanP13) | ✓ Updated 2026-08-13 — "Data Engineer" identity, current themes, research link, portfolio link |
+| Pinned repos | **MANUAL PENDING** — GitHub does not expose pin management via API. Go to github.com/AlanP13 → "Customize your pins" → unpin Financial-Engineering-Portfolio; pin IoT-Data-Platform-Lab and Data-Mining-for-Financial-Systems-Vol8. Slot 6 open. |
+| IPRO497-Design-and-Entrepreneur | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
+| IPRO497-AP-Digital-Development | ✓ Description and topics added 2026-08-13. README existed (minimal, functional). |
+| Repository topics / descriptions | ✓ Completed 2026-08-13 — topics added to 12 repos; descriptions fixed/added for Financial-Engineering-Portfolio, Web-Portfolio, ECE218, CS331, ECE407 |
