@@ -1,8 +1,18 @@
 # CareerOS — Canonical Fact Registry
 
-**Last updated:** 2026-08-12  
+**Last updated:** 2026-08-13  
 **Authority:** This document supersedes any individual surface (resume PDF, portfolio MDX, LinkedIn) when they conflict.  
 **Schema per entity:** `canonical value | source | confidence | clearance | LinkedIn | Portfolio | Resume | CV`
+
+**Canonical precedence (highest → lowest):**
+1. User explicit correction in a CareerOS session
+2. Current résumé (RESUME-0728 or later dated file)
+3. Newer primary evidence (physical certificate, offer letter, official document)
+4. Prior CareerOS records
+5. LinkedIn-derived data
+6. Portfolio / CV / GitHub
+
+> This ordering prevents LinkedIn-derived or AI-inferred values from overriding what the résumé and user explicitly state. When sources conflict, escalate to the user rather than defaulting to a prior CareerOS pass.
 
 Sources key:  
 - `CERT-PDF` — physical certificate PDF in manual/_extracted/  
@@ -93,20 +103,21 @@ Confidence key (controlled vocabulary — do not mix levels):
 
 ---
 
-### ITHENA-001 — Full Stack Developer Intern
+### ITHENA-001 — Software Engineer Intern
 | Field | Value |
 |---|---|
-| **Canonical title** | Full Stack Developer Intern |
+| **Canonical title** | Software Engineer Intern |
 | **Employer** | ITHENA, Richmond, VA |
-| **Work mode** | UNVERIFIED — safe public form: "Richmond, VA" only (do not say "In-Person") |
+| **Work mode** | UNVERIFIED — safe public form: "Richmond, VA" only (résumé does not establish work mode; do not add "In-Person") |
 | **Dates** | June 2020 – August 2020 |
-| **Source** | CAREER-OS (canonical; supersedes RESUME-0728 which lists "Software Engineer Intern") |
-| **Confidence** | HIGH (CAREER-OS resolved) |
+| **Source** | RESUME-0728 (supersedes prior CareerOS record which incorrectly used "Full Stack Developer Intern" sourced from a LinkedIn-derived pass) |
+| **Confidence** | HIGH |
+| **last_verified** | 2026-08-13 (RESUME-0728 + USER-CONFIRMED) |
 | **Clearance** | PUBLIC |
-| **LinkedIn** | Verify — should read "Full Stack Developer Intern" |
-| **Portfolio** | `work-ithena-fs.mdx` — title CORRECT; work mode "In-Person" needs removal |
-| **Resume** | STALE — reads "Software Engineer Intern" (resume PDF needs separate correction) |
-| **CV** | Include as "Full Stack Developer Intern" |
+| **LinkedIn** | Verify — should read "Software Engineer Intern" |
+| **Portfolio** | `work-ithena-fs.mdx` — UPDATED 2026-08-13: title corrected to "Software Engineer Intern"; location "Richmond, VA" (no work mode) |
+| **Resume** | ✓ Correct — reads "Software Engineer Intern" |
+| **CV** | Include as "Software Engineer Intern" |
 
 ---
 
@@ -406,7 +417,7 @@ Grouped as they appear in the site skills grid. Skills marked `[NEW]` are not cu
 
 | ID | Issue | Current state | Required action |
 |---|---|---|---|
-| INCON-001 | ITHENA title: resume says "Software Engineer Intern", CareerOS canonical is "Full Stack Developer Intern" | Portfolio is correct; resume PDF is stale | Correct resume PDF separately; do not change portfolio |
+| INCON-001 | ITHENA title: prior CareerOS canonical was "Full Stack Developer Intern" (LinkedIn-derived); RESUME-0728 reads "Software Engineer Intern" | RESOLVED 2026-08-13: résumé is the correct source per canonical precedence rule. Portfolio MDX, resume.astro, CareerOS, and LinkedIn guidance all corrected to "Software Engineer Intern". | — |
 | INCON-002 | AWS item: MDX title says "AWS Certified — 5 Certifications!"; item is a Udemy exam-prep course, not an official AWS certification | RESOLVED 2026-08-12: reclassified; featured→false; title/summary rewritten | Architecture debt remains: file still in certifications collection; migrate to training collection per AWS-MIGRATE-001 |
 | INCON-003 | CFA cert: MDX title is "Foundations of Investment"; canonical is "Investment Foundations® Certificate" | RESOLVED 2026-08-12: fixed to earned with credential data | — |
 | INCON-004 | work-genworth-p1.mdx exposes "(P1)" internal level in public title | RESOLVED 2026-08-12: level tag removed from MDX and resume.astro | — |
@@ -435,7 +446,7 @@ This section tracks synchronization between CareerOS canonical and each external
 | GEN-001 — Associate Application Development Analyst | ✓ | Verify dates | N/A |
 | GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | **NEEDS-UPDATE** — close at July 2026 | N/A |
 | GEN-003 — Data Engineer (current) | ✓ | **NEEDS-UPDATE** — add role or update current title | N/A |
-| ITHENA-001 — Full Stack Developer Intern | ✓ | Verify title reads "Full Stack Developer Intern" | N/A |
+| ITHENA-001 — Software Engineer Intern | ✓ | Verify title reads "Software Engineer Intern" | N/A |
 | IIT-SA-001 — Student Assistant | ✓ | Verify presence | N/A |
 
 ### Certifications

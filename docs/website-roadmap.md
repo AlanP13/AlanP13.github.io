@@ -71,7 +71,7 @@ These items require manual user action — they cannot be automated via code. Tr
 | LI-004 | [ ] | LinkedIn | Add Qualys VMDR certification (July 2026, expires July 2028) |
 | LI-005 | [ ] | LinkedIn | Verify Neo4j Certified Professional and Neo4j GDS Cert are listed correctly |
 | LI-006 | [ ] | LinkedIn | Ensure AWS Udemy item is NOT presented as an AWS certification |
-| LI-007 | [ ] | LinkedIn | Verify ITHENA title reads "Full Stack Developer Intern" (not "Software Engineer Intern") |
+| LI-007 | [ ] | LinkedIn | Verify ITHENA title reads "Software Engineer Intern" (canonical: RESUME-0728; prior CareerOS record "Full Stack Developer Intern" was LinkedIn-derived and has been corrected) |
 | GH-001 | [ ] | GitHub | Update bio/description to reflect "Data Engineer" title |
 | GH-002 | [ ] | GitHub | Add READMEs to IPRO497 repos (IPRO497-Design-and-Entrepreneur, IPRO497-AP-Digital-Development) |
 
