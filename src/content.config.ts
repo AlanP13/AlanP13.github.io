@@ -171,7 +171,7 @@ const certifications = defineCollection({
     issuer: z.string(),
     issuerUrl: z.string().url().optional(),
     credentialId: z.string().optional(),
-    credentialUrl: z.string().url().optional(),
+    credentialUrl: z.string().optional(),
     dateObtained: z.string().optional(),
     dateExpiry: z.string().optional(),
     status: z.enum(["earned", "in-progress", "planned", "expired"]).default("earned"),

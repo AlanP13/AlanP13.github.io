@@ -23,7 +23,9 @@ const technicalReports = papersSorted.filter(
 const allCerts = await getCollection("certifications");
 const certsFeatured = allCerts
   .filter((c) => c.data.featured)
-  .sort((a, b) => (b.data.order ?? 0) - (a.data.order ?? 0));
+  .sort((a, b) =>
+    (b.data.dateObtained ?? "9999-99").localeCompare(a.data.dateObtained ?? "9999-99")
+  );
 
 const cvSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -107,7 +109,7 @@ const cvSchema = JSON.stringify({
     <!-- Publications -->
     <section class="cvSection">
       <h2 class="cvSectionTitle">Publications</h2>
-      <p class="cvNote">Engineering-to-Research Monograph Series · Zenodo community · OpenAIRE-indexed</p>
+      <p class="cvNote">Open-access research indexed on Zenodo and OpenAIRE · ORCID: <a href="https://orcid.org/0009-0004-8302-5090" target="_blank" rel="noopener noreferrer" class="cvLink">0009-0004-8302-5090</a></p>
       {publishedPapers.map((paper) => (
         <div class="cvPaper">
           <div class="cvPaperHeader">
@@ -201,6 +203,20 @@ const cvSchema = JSON.stringify({
       </div>
       <div class="cvEntry">
         <div class="cvEntryMain">
+          <span class="cvEntryRole">Alumni Member</span>
+          <span class="cvEntryOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
+        </div>
+        <span class="cvEntryDate">May 2023 – Present</span>
+      </div>
+      <div class="cvEntry">
+        <div class="cvEntryMain">
+          <span class="cvEntryRole">Member</span>
+          <span class="cvEntryOrg">SHPE · Illinois Institute of Technology</span>
+        </div>
+        <span class="cvEntryDate">Aug 2022 – May 2023</span>
+      </div>
+      <div class="cvEntry">
+        <div class="cvEntryMain">
           <span class="cvEntryRole">Internal Secretary</span>
           <span class="cvEntryOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
         </div>
@@ -208,10 +224,10 @@ const cvSchema = JSON.stringify({
       </div>
       <div class="cvEntry">
         <div class="cvEntryMain">
-          <span class="cvEntryRole">Member</span>
-          <span class="cvEntryOrg">Eta Kappa Nu (IEEE-HKN) · Illinois Institute of Technology</span>
+          <span class="cvEntryRole">General Member</span>
+          <span class="cvEntryOrg">IEEE · Illinois Institute of Technology</span>
         </div>
-        <span class="cvEntryDate">2021–2023</span>
+        <span class="cvEntryDate">Aug 2021 – May 2023</span>
       </div>
     </section>
 
@@ -234,7 +250,7 @@ const cvSchema = JSON.stringify({
     <section class="cvSection">
       <h2 class="cvSectionTitle">Certifications</h2>
       <p class="cvNote">Selected. <a href="/resume#certifications" class="cvLink">All certifications →</a></p>
-      {certsFeatured.slice(0, 5).map((cert) => (
+      {certsFeatured.map((cert) => (
         <div class="cvEntry">
           <div class="cvEntryMain">
             <span class="cvEntryRole">{cert.data.title}</span>

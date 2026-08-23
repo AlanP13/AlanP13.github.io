@@ -60,6 +60,30 @@ Sourced from CareerOS canonical registry (`docs/career-os.md`). All facts verifi
 | ID-013 | [x] | P2 | XS | **Remove internal level tags from Genworth timeline titles** — Removed "(P1)" from `work-genworth-p1.mdx` and "(P2)" from `work-genworth-p2.mdx`; also removed from both hardcoded `resume.astro` spans. | Shipped 2026-08-12. |
 | ID-014 | [x] | P2 | XS | **Add HKN dates to edu-ms.mdx bullets** — Updated bullet to "Member, Eta Kappa Nu (IEEE-HKN), April 2022 – May 2023; served as Internal Secretary." Also corrected stale hardcoded "Jan 2022" in `cv.astro` and `about.astro` to "Apr 2022" (canonical: RESUME-0728). resume.astro HKN bullet also updated with dates. | Shipped 2026-08-12/13. |
 
+### CV page update (Aug 2026)
+
+Sourced from a user-supplied LinkedIn export of Memberships & Leadership, cross-checked against `docs/career-os.md` canonical precedence (résumé > canonical registry > LinkedIn). Scope: `src/pages/cv.astro` only — `about.astro`'s equivalent section intentionally not touched this pass.
+
+| ID | Status | Priority | Effort | Item | Notes |
+|---|---|---|---|---|---|
+| CV-001 | [x] | P2 | S | **Expand CV Memberships & Leadership to 5 entries** — Added HKN Alumni Member (May 2023–Present), SHPE Member (Aug 2022–May 2023), IEEE General Member (Aug 2021–May 2023). Removed the old ambiguous "Member — Eta Kappa Nu (IEEE-HKN) — 2021–2023" line, which conflated a plain IEEE membership with HKN. HKN Internal Secretary date verified against a conflicting LinkedIn "Jan 2022" figure and kept at the canonical Apr 2022 (RESUME-0728, INCON-012 — Jan 2022 already established as stale). | Shipped 2026-08-23. New facts logged in `career-os.md` Leadership & Affiliations table. |
+| CV-002 | [x] | P2 | XS | **CV Certifications section sort fixed to true date order** — Was `featured`-only (20 of 28), capped at 5, sorted by editorial `order` field. Now shows all 20 featured certs (matches `resume.astro`'s curated set), true `dateObtained` descending sort instead of `order`, no cap. "Selected. All certifications →" note kept, still links to `/resume#certifications`. | Shipped 2026-08-23. `resume.astro`/`index.astro` certification logic unchanged (still `order`-sorted) — out of scope for this pass. |
+| CV-003 | [x] | P2 | XS | **CV Publications note reworded + ORCID link added** — "Engineering-to-Research Monograph Series · Zenodo community · OpenAIRE-indexed" → "Open-access research indexed on Zenodo and OpenAIRE · ORCID: [linked]", reusing the page's existing `.cvLink` pattern. | Shipped 2026-08-23. |
+
+### Resume page update (Aug 2026)
+
+Sourced from a local, previously-uncommitted `public/Alan_Palayil_Resume.pdf` found to be materially more current than the version committed to git (which predated the Data Engineer promotion, Ph.D. enrollment, and current certifications) — see RES-006.
+
+| ID | Status | Priority | Effort | Item | Notes |
+|---|---|---|---|---|---|
+| RES-001 | [x] | P2 | XS | **Accent-color "Present" dates** — Current-role date ("July 2026 – Present") now uses the existing `.rInProgress` accent class, matching the PhD education entry which already had it. | Shipped 2026-08-23. |
+| RES-002 | [x] | P2 | S | **Technical Skills rebuilt to match current resume PDF** — Replaced the 6-category/30-tag Genworth-specific list with the 8-category/46-tag list from the local resume PDF (Languages & Frameworks, Databases & ETL, Cloud & DevOps, Integration & Formats, Security & Governance, AI & Data Science, Automation & Hardware, Methodologies). AWS listed as "AWS (Solutions Architect, SysOps, Developer)" per explicit user instruction, despite no official AWS certification on file (Udemy exam-prep only, AWS-MIGRATE-001) — kept as-is at user's direction. | Shipped 2026-08-23. |
+| RES-003 | [x] | P2 | XS | **Certifications order rule matched to CV** — Replaced status-priority + `order`-field sort with featured-filter + true `dateObtained` descending sort (same logic as CV-002). | Shipped 2026-08-23. |
+| RES-004 | [x] | P2 | S | **PDF-backed certificate links added** — CFA Investment Foundations and Qualys VMDR certs had no working `credentialUrl` (both commented out, no external verify page). Copied their PDFs from `manual/_extracted/Certifications/` into `public/certs/`, relaxed the `credentialUrl` schema from `.url()` to plain `z.string()` to allow root-relative paths, and set `credentialUrl` on both MDX files. Link label now reads "View Certificate →" for local PDFs vs "Verify →" for external verification URLs, to avoid implying third-party verification for a self-hosted scan. | Shipped 2026-08-23. 15 of 28 certs still have no PDF or verify link on file — not addressed this pass. |
+| RES-005 | [x] | P2 | XS | **3-line professional summary added** — New `.rSummary` paragraph between the contact block and Experience, adapted from the local resume PDF's Professional Summary (trimmed to 3 sentences; dropped "peer-distributed" wording in favor of established site terminology). | Shipped 2026-08-23. |
+| RES-006 | [x] | P2 | XS | **Section header size increased** — `.rHead` font-size 13px → 18px (was smaller than `.rTitle`'s 15.5px entry-title text); `::before` accent bar height 14px → 18px to match. | Shipped 2026-08-23. |
+| RES-007 | [ ] | P0 | XS | **Downloadable resume PDF is stale on the live site** — `public/Alan_Palayil_Resume.pdf` has local, uncommitted changes (current version: Data Engineer title, Ph.D., current certs, updated skills/summary) that are NOT yet committed. The version currently live on GitHub Pages still shows "Associate Application Development Analyst... Present" with no Ph.D. or Data Engineer role — visitors clicking "Download PDF" get outdated information that contradicts the rest of the site. | Flagged 2026-08-23, not committed — awaiting explicit user go-ahead per repo git safety convention. |
+
 ### Phase 1 — LinkedIn synchronization
 
 Manual user actions. Priority: Employment → Education → Certifications → Headline/About → Publications.

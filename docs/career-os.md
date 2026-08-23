@@ -415,6 +415,9 @@ Grouped as they appear in the site skills grid. Skills marked `[NEW]` are not cu
 | IEEE-HKN IIT Delta Chapter | Internal Secretary | April 2022 – May 2023 | RESUME-0728 | UPDATED 2026-08-13: edu-ms.mdx bullet, resume.astro, cv.astro, about.astro all set to Apr 2022. Prior hardcoded "Jan 2022" was stale (source: June 2022 LinkedIn-derived pass, superseded by RESUME-0728). |
 | IEEE | Member | 2024 – Present | RESUME-0728 | Not on portfolio |
 | Dean's List | 5 semesters, 2020–2023 | 2020–2023 | RESUME-0728 | In edu bullets |
+| IEEE-HKN IIT Delta Chapter | Alumni Member | May 2023 – Present | LinkedIn, user-supplied 2026-08-23 | Added to cv.astro 2026-08-23 |
+| IEEE | General Member | August 2021 – May 2023 | LinkedIn, user-supplied 2026-08-23 | Added to cv.astro 2026-08-23; replaces prior ambiguous "HKN Member 2021–2023" line on cv.astro (that label conflated a plain IEEE membership with HKN) |
+| SHPE (Society of Hispanic Professional Engineers) @ Illinois Tech | Member | August 2022 – May 2023 | LinkedIn, user-supplied 2026-08-23 | Added to cv.astro 2026-08-23 |
 
 ---
 

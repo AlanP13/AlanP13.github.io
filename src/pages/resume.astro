@@ -4,13 +4,11 @@ import { getCollection } from "astro:content";
 import { DownloadSimple } from "@phosphor-icons/react";
 
 const certItems = await getCollection("certifications");
-const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) => {
-  const priority: Record<string, number> = { "in-progress": 0, "planned": 1, "earned": 2, "expired": 3 };
-  const sa = priority[a.data.status] ?? 99;
-  const sb = priority[b.data.status] ?? 99;
-  if (sa !== sb) return sa - sb;
-  return (b.data.order ?? 0) - (a.data.order ?? 0);
-});
+const certsSorted = [...certItems]
+  .filter((c) => c.data.featured)
+  .sort((a, b) =>
+    (b.data.dateObtained ?? "9999-99").localeCompare(a.data.dateObtained ?? "9999-99")
+  );
 ---
 
 <SiteLayout
@@ -44,6 +42,8 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       </div>
     </div>
 
+    <p class="rSummary">Data Engineer specializing in automation, modernization, and cloud migration of high-volume financial data systems, with deep expertise in Python, SQL, and Azure/AWS cloud architectures. Designed and delivered a production JSON message-generation platform now processing 1,500+ active commercial mortgage loans daily. Cybersecurity-trained, Zero Trust–certified, and an actively publishing researcher (ten technical monographs, 2026) pursuing a Ph.D. in Information Technology focused on secure, explainable AI systems.</p>
+
     <section class="rSection">
       <h2 class="rHead">Experience</h2>
 
@@ -54,7 +54,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
             <span class="rOrg"><a href="https://www.genworth.com" target="_blank" rel="noopener noreferrer">Genworth Financial</a></span>
           </div>
           <div class="rRight">
-            <span class="rDates">July 2026 – Present</span>
+            <span class="rDates rInProgress">July 2026 – Present</span>
             <span class="rLoc">Richmond, VA · Hybrid</span>
           </div>
         </div>
@@ -192,65 +192,89 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       <h2 class="rHead">Technical Skills</h2>
       <div class="skillsGrid">
         <div class="skillRow">
-          <span class="skillLabel">Enterprise Platforms</span>
+          <span class="skillLabel">Languages &amp; Frameworks</span>
           <div class="skillTags">
-            <span>PAM Investment Accounting</span>
-            <span>Financial Systems Modernization</span>
-            <span>Platform Migration</span>
-            <span>Production Support</span>
+            <span>Python</span>
+            <span>SQL</span>
+            <span>Java</span>
+            <span>C#</span>
+            <span>C++</span>
+            <span>JavaScript</span>
+            <span>React</span>
           </div>
         </div>
         <div class="skillRow">
-          <span class="skillLabel">Data Engineering</span>
+          <span class="skillLabel">Databases &amp; ETL</span>
           <div class="skillTags">
-            <span>Azure Synapse</span>
-            <span>ETL Pipelines</span>
-            <span>AppWorx</span>
+            <span>PostgreSQL</span>
+            <span>MySQL</span>
+            <span>Oracle</span>
+            <span>Azure Synapse Analytics</span>
+            <span>Azure Data Lake Storage (ADLS)</span>
             <span>Markit EDM</span>
-            <span>Data Warehousing</span>
-            <span>Data Reconciliation</span>
+            <span>Informatica</span>
+            <span>AppWorx</span>
+            <span>ETL/ELT Pipelines</span>
+            <span>Batch Processing</span>
           </div>
         </div>
         <div class="skillRow">
-          <span class="skillLabel">Cloud</span>
+          <span class="skillLabel">Cloud &amp; DevOps</span>
           <div class="skillTags">
+            <span>AWS (Solutions Architect, SysOps, Developer)</span>
             <span>Microsoft Azure</span>
-            <span>ADLS</span>
-            <span>Serverless SQL</span>
-            <span>Azure Monitoring</span>
-            <span>Logic Apps</span>
-            <span>Key Vault</span>
+            <span>Azure DevOps</span>
+            <span>Git/GitHub</span>
+            <span>JIRA</span>
+            <span>Linux</span>
+            <span>CI/CD</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Integration &amp; Formats</span>
+          <div class="skillTags">
+            <span>JSON</span>
+            <span>XML</span>
+            <span>REST APIs</span>
+            <span>Secure File Transfer</span>
+            <span>Enterprise Scheduling</span>
+          </div>
+        </div>
+        <div class="skillRow">
+          <span class="skillLabel">Security &amp; Governance</span>
+          <div class="skillTags">
+            <span>Zero Trust Architecture (CCZT)</span>
+            <span>Network Security</span>
+            <span>NIST CSF</span>
+            <span>Model Risk Management</span>
+            <span>Data Validation</span>
           </div>
         </div>
         <div class="skillRow">
           <span class="skillLabel">AI &amp; Data Science</span>
           <div class="skillTags">
             <span>Machine Learning</span>
-            <span>Time Series Forecasting</span>
-            <span>AI Governance</span>
+            <span>Anomaly Detection</span>
+            <span>Time-Series Forecasting</span>
             <span>Data Mining</span>
             <span>Predictive Analytics</span>
           </div>
         </div>
         <div class="skillRow">
-          <span class="skillLabel">Risk &amp; Governance</span>
+          <span class="skillLabel">Automation &amp; Hardware</span>
           <div class="skillTags">
-            <span>Enterprise Risk Management</span>
-            <span>Model Risk Management</span>
-            <span>NIST</span>
-            <span>COSO ERM</span>
-            <span>Regulatory Compliance</span>
+            <span>PowerShell</span>
+            <span>Bash</span>
+            <span>Arduino/ESP32</span>
           </div>
         </div>
         <div class="skillRow">
-          <span class="skillLabel">Languages</span>
+          <span class="skillLabel">Methodologies</span>
           <div class="skillTags">
-            <span>Python</span>
-            <span>SQL</span>
-            <span>C#</span>
-            <span>Java</span>
-            <span>C++</span>
-            <span>JavaScript</span>
+            <span>Agile/Scrum</span>
+            <span>SDLC</span>
+            <span>Functional &amp; Technical Test-Plan Development</span>
+            <span>Root-Cause Analysis</span>
           </div>
         </div>
       </div>
@@ -275,7 +299,9 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
                   ? <span class="rDates rInProgress">In Progress</span>
                   : <span class="rDates">{cert.data.dateObtained ?? "Completed"}</span>}
                 {cert.data.credentialUrl && (
-                  <a class="rCredLink" href={cert.data.credentialUrl} target="_blank" rel="noopener noreferrer">Verify →</a>
+                  <a class="rCredLink" href={cert.data.credentialUrl} target="_blank" rel="noopener noreferrer">
+                    {cert.data.credentialUrl.startsWith("/") ? "View Certificate →" : "Verify →"}
+                  </a>
                 )}
               </div>
             </div>
@@ -369,9 +395,16 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
     .contactLinks a:hover { color: rgb(var(--accent)); }
     .cdot { margin: 0 8px; opacity: 0.4; }
 
+    .rSummary {
+      font-size: 14px;
+      line-height: 1.6;
+      color: color-mix(in srgb, rgb(var(--text)) 85%, transparent);
+      margin: 0 0 32px;
+    }
+
     .rSection { margin-bottom: 36px; }
     .rHead {
-      font-size: 13px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.01em;
       color: rgb(var(--accent));
@@ -386,7 +419,7 @@ const certsSorted = [...certItems].filter((c) => c.data.featured).sort((a, b) =>
       content: "";
       display: inline-block;
       width: 3px;
-      height: 14px;
+      height: 18px;
       border-radius: 999px;
       background: rgb(var(--accent));
       opacity: 0.8;
