@@ -248,10 +248,10 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Credential ID** | 599d588d-8706-44bf-9707-59c5bb61a5b9 |
 | **Expiry** | Unknown |
 | **Source** | LINKEDIN-PDF + USER-CONFIRMED |
-| **Confidence** | USER-SUPPLIED/LINKEDIN-CORROBORATED — credential IDs supplied by user via LinkedIn export; no physical cert PDF in manual. Upgrade to VERIFIED once GraphAcademy certificate URL is confirmed. |
+| **Confidence** | VERIFIED — GraphAcademy certificate URL confirmed 2026-08-24 (`https://graphacademy.neo4j.com/c/599d588d-8706-44bf-9707-59c5bb61a5b9`), credential ID matches. |
 | **Clearance** | PUBLIC |
 | **LinkedIn** | ✓ Listed (source) |
-| **Portfolio** | `neo4j-certified-professional.mdx` — CREATED 2026-08-12 |
+| **Portfolio** | `neo4j-certified-professional.mdx` — CREATED 2026-08-12; `credentialUrl` added 2026-08-24 |
 | **Skills covered** | Cypher, Neo4j fundamentals, schema/indexes, drivers, data modeling, importing data |
 
 ---
@@ -265,10 +265,10 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Credential ID** | 0285db3f-4f77-4501-92c8-c48ebe19d30d |
 | **Expiry** | Unknown |
 | **Source** | LINKEDIN-PDF + USER-CONFIRMED |
-| **Confidence** | USER-SUPPLIED/LINKEDIN-CORROBORATED — same as CERT-003; upgrade to VERIFIED once GraphAcademy certificate URL confirmed |
+| **Confidence** | VERIFIED — GraphAcademy certificate URL confirmed 2026-08-24 (`https://graphacademy.neo4j.com/c/0285db3f-4f77-4501-92c8-c48ebe19d30d`), credential ID matches. |
 | **Clearance** | PUBLIC |
 | **LinkedIn** | ✓ Listed (source) |
-| **Portfolio** | `neo4j-graph-data-science.mdx` — CREATED 2026-08-12 |
+| **Portfolio** | `neo4j-graph-data-science.mdx` — CREATED 2026-08-12; `credentialUrl` added 2026-08-24 |
 | **Skills covered** | GDS library, graph data science workflows, graph algorithms |
 
 ---
