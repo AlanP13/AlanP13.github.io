@@ -83,6 +83,7 @@ const citationAuthor = "Palayil, Alan B.";
   title={`${d.title} — Alan Palayil`}
   description={metaDescription}
   schemaJson={schemaJson}
+  ogImage={new URL(`/research/${item.slug}.png`, Astro.site).href}
 >
   <Fragment slot="head">
     <meta name="citation_title" content={d.title} />
