@@ -134,7 +134,7 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | RESUME-0728 + CAREER-OS |
 | **Confidence** | HIGH |
 | **Clearance** | PUBLIC (full master record + academic CV + background checks; optional on targeted technical resume) |
-| **LinkedIn** | Verify presence |
+| **LinkedIn** | ✓ Verified 2026-08-24 — title reads "Student Assistant", Illinois Institute of Technology (LI-008) |
 | **Portfolio** | ✓ `work-iit-student-assistant.mdx` EXISTS (order: 20, low visual priority) |
 | **Resume** | ✓ Listed |
 | **CV** | Include |
@@ -283,7 +283,7 @@ Confidence key (controlled vocabulary — do not mix levels):
 | **Source** | CERT-PDF (physical Udemy completion certificate) |
 | **Confidence** | VERIFIED — physical certificate evidence (Udemy completion PDF in manual/_extracted/) |
 | **Clearance** | PUBLIC — but must NOT be described as "AWS Certified"; must be described as exam-prep training |
-| **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→other (schema enum does not include "training"; "other" is the closest valid value), title/summary rewritten to remove certification framing. **Architecture debt:** file physically resides in certifications collection; a future Professional Development collection should absorb it. Tracked as roadmap task AWS-MIGRATE-001. |
+| **Portfolio** | `aws-certified-5-certifications.mdx` — RECLASSIFIED 2026-08-12: featured→false, category→other, title/summary rewritten to remove certification framing. **MIGRATED 2026-08-24 (AWS-MIGRATE-001):** moved from `src/content/certifications/` to a new `src/content/training/` collection (same schema, `git mv`) so a full certifications collection query can never accidentally resurrect it. No page queries the `training` collection yet — data only, no new UI. |
 
 > **INTEGRITY RULE:** Do not describe Alan as "AWS Certified." He holds no official AWS certifications. This Udemy course prepared him for AWS exams but confers no AWS credential. Represents under Professional Development / Training, not Certifications. If a separate training collection is created in the future, move this item there.
 
@@ -455,7 +455,7 @@ This section tracks synchronization between CareerOS canonical and each external
 | GEN-002 — Application Development Analyst (closed Jul 2026) | ✓ | ✓ Closed at July 2026, 2026-08-13 | N/A |
 | GEN-003 — Data Engineer (current) | ✓ | ✓ Added July 2026 – Present, 2026-08-13 | N/A |
 | ITHENA-001 — Software Engineer Intern | ✓ | ✓ Verified "Software Engineer Intern" 2026-08-13 | N/A |
-| IIT-SA-001 — Student Assistant | ✓ | Verify presence | N/A |
+| IIT-SA-001 — Student Assistant | ✓ | ✓ Verified 2026-08-24 | N/A |
 
 ### Certifications
 

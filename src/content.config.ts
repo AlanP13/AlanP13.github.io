@@ -183,4 +183,23 @@ const certifications = defineCollection({
   }),
 });
 
-export const collections = { projects, research, timeline, archive, certifications };
+const training = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    issuer: z.string(),
+    issuerUrl: z.string().url().optional(),
+    credentialId: z.string().optional(),
+    credentialUrl: z.string().optional(),
+    dateObtained: z.string().optional(),
+    dateExpiry: z.string().optional(),
+    status: z.enum(["earned", "in-progress", "planned", "expired"]).default("earned"),
+    category: z.enum(["finance", "cloud", "security", "data", "ai", "development", "other"]).default("other"),
+    skills: z.array(z.string()).default([]),
+    order: z.number().default(0),
+    featured: z.boolean().default(false),
+    summary: z.string().optional(),
+  }),
+});
+
+export const collections = { projects, research, timeline, archive, certifications, training };
