@@ -72,6 +72,11 @@ if (d.university)
 if (d.doi) schemaObj.identifier = `https://doi.org/${d.doi}`;
 
 const schemaJson = JSON.stringify(schemaObj);
+
+// Highwire Press-style citation meta tags — Google Scholar's indexer parses
+// these directly; it does not reliably index Schema.org JSON-LD for
+// scholarly-content discovery.
+const citationAuthor = "Palayil, Alan B.";
 ---
 
 <SiteLayout
@@ -79,6 +84,15 @@ const schemaJson = JSON.stringify(schemaObj);
   description={metaDescription}
   schemaJson={schemaJson}
 >
+  <Fragment slot="head">
+    <meta name="citation_title" content={d.title} />
+    <meta name="citation_author" content={citationAuthor} />
+    {d.publication_date && <meta name="citation_publication_date" content={d.publication_date} />}
+    {d.doi && <meta name="citation_doi" content={d.doi} />}
+    {d.zenodo_url && <meta name="citation_pdf_url" content={d.zenodo_url} />}
+    <meta name="citation_abstract_html_url" content={Astro.url.href} />
+    <meta name="citation_language" content="en" />
+  </Fragment>
   <article class="page">
     <p class="back"><a href="/research">← Research</a></p>
 
@@ -287,7 +301,7 @@ const schemaJson = JSON.stringify(schemaObj);
     .page {
       max-width: var(--content, 1100px);
       margin: 0 auto;
-      padding: 12px 0 48px;
+      padding: 26px 16px 48px;
     }
     .back {
       margin: 0 0 18px;
@@ -301,6 +315,7 @@ const schemaJson = JSON.stringify(schemaObj);
       color: rgb(var(--accent));
     }
     .rhead {
+      margin-top: 10px;
       margin-bottom: 32px;
     }
     .badges {
@@ -363,12 +378,18 @@ const schemaJson = JSON.stringify(schemaObj);
     .body {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 32px;
+      gap: 18px;
     }
-    @media (min-width: 860px) {
+    @media (min-width: 980px) {
       .body {
-        grid-template-columns: 1fr 260px;
+        grid-template-columns: 1fr 280px;
+        gap: 24px;
         align-items: start;
+      }
+      .side {
+        position: sticky;
+        top: 18px;
+        align-self: start;
       }
     }
     .main {

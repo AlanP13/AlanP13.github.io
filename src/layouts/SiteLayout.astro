@@ -75,6 +75,8 @@ const isCurrentPath = (href: string) =>
 
     {schemaJson && <script type="application/ld+json" set:html={schemaJson} />}
 
+    <slot name="head" />
+
     <script defer is:inline src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bdab500100c44468868b97e46362fe66"}'></script>
   </head>
 
