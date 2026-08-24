@@ -1,8 +1,8 @@
 # Website Roadmap — Alan Palayil Portfolio
 
 Master backlog for https://alanp13.github.io  
-Last full audit: **2026-08-13** (Phase 4 — structured data, ARIA, accessibility, SEO, reduced-motion, rel consistency)  
-Prior audit: 2026-06-25 (content + UI; filter/sort; anti-pattern sweep; a11y + perf fixes)  
+Last full audit: **2026-08-24** (Phase 6 — full regression sweep of all `[x]` items post CV/Resume update; zero regressions found, one gap reopened)  
+Prior audit: 2026-08-13 (Phase 4 — structured data, ARIA, accessibility, SEO, reduced-motion, rel consistency)  
 Repository baseline: June 2026.
 
 This is a public repository. Keep this document limited to public-safe website
@@ -60,7 +60,7 @@ Sourced from CareerOS canonical registry (`docs/career-os.md`). All facts verifi
 | ID-013 | [x] | P2 | XS | **Remove internal level tags from Genworth timeline titles** — Removed "(P1)" from `work-genworth-p1.mdx` and "(P2)" from `work-genworth-p2.mdx`; also removed from both hardcoded `resume.astro` spans. | Shipped 2026-08-12. |
 | ID-014 | [x] | P2 | XS | **Add HKN dates to edu-ms.mdx bullets** — Updated bullet to "Member, Eta Kappa Nu (IEEE-HKN), April 2022 – May 2023; served as Internal Secretary." Also corrected stale hardcoded "Jan 2022" in `cv.astro` and `about.astro` to "Apr 2022" (canonical: RESUME-0728). resume.astro HKN bullet also updated with dates. | Shipped 2026-08-12/13. |
 
-### CV page update (Aug 2026)
+### CV page update (Aug 2026) ✓ Complete 2026-08-23
 
 Sourced from a user-supplied LinkedIn export of Memberships & Leadership, cross-checked against `docs/career-os.md` canonical precedence (résumé > canonical registry > LinkedIn). Scope: `src/pages/cv.astro` only — `about.astro`'s equivalent section intentionally not touched this pass.
 
@@ -70,7 +70,7 @@ Sourced from a user-supplied LinkedIn export of Memberships & Leadership, cross-
 | CV-002 | [x] | P2 | XS | **CV Certifications section sort fixed to true date order** — Was `featured`-only (20 of 28), capped at 5, sorted by editorial `order` field. Now shows all 20 featured certs (matches `resume.astro`'s curated set), true `dateObtained` descending sort instead of `order`, no cap. "Selected. All certifications →" note kept, still links to `/resume#certifications`. | Shipped 2026-08-23. `resume.astro`/`index.astro` certification logic unchanged (still `order`-sorted) — out of scope for this pass. |
 | CV-003 | [x] | P2 | XS | **CV Publications note reworded + ORCID link added** — "Engineering-to-Research Monograph Series · Zenodo community · OpenAIRE-indexed" → "Open-access research indexed on Zenodo and OpenAIRE · ORCID: [linked]", reusing the page's existing `.cvLink` pattern. | Shipped 2026-08-23. |
 
-### Resume page update (Aug 2026)
+### Resume page update (Aug 2026) ✓ Complete 2026-08-24
 
 Sourced from a local, previously-uncommitted `public/Alan_Palayil_Resume.pdf` found to be materially more current than the version committed to git (which predated the Data Engineer promotion, Ph.D. enrollment, and current certifications) — see RES-006.
 
@@ -82,7 +82,7 @@ Sourced from a local, previously-uncommitted `public/Alan_Palayil_Resume.pdf` fo
 | RES-004 | [x] | P2 | S | **PDF-backed certificate links added** — CFA Investment Foundations and Qualys VMDR certs had no working `credentialUrl` (both commented out, no external verify page). Copied their PDFs from `manual/_extracted/Certifications/` into `public/certs/`, relaxed the `credentialUrl` schema from `.url()` to plain `z.string()` to allow root-relative paths, and set `credentialUrl` on both MDX files. Link label now reads "View Certificate →" for local PDFs vs "Verify →" for external verification URLs, to avoid implying third-party verification for a self-hosted scan. | Shipped 2026-08-23. 15 of 28 certs still have no PDF or verify link on file — not addressed this pass. |
 | RES-005 | [x] | P2 | XS | **3-line professional summary added** — New `.rSummary` paragraph between the contact block and Experience, adapted from the local resume PDF's Professional Summary (trimmed to 3 sentences; dropped "peer-distributed" wording in favor of established site terminology). | Shipped 2026-08-23. |
 | RES-006 | [x] | P2 | XS | **Section header size increased** — `.rHead` font-size 13px → 18px (was smaller than `.rTitle`'s 15.5px entry-title text); `::before` accent bar height 14px → 18px to match. | Shipped 2026-08-23. |
-| RES-007 | [ ] | P0 | XS | **Downloadable resume PDF is stale on the live site** — `public/Alan_Palayil_Resume.pdf` has local, uncommitted changes (current version: Data Engineer title, Ph.D., current certs, updated skills/summary) that are NOT yet committed. The version currently live on GitHub Pages still shows "Associate Application Development Analyst... Present" with no Ph.D. or Data Engineer role — visitors clicking "Download PDF" get outdated information that contradicts the rest of the site. | Flagged 2026-08-23, not committed — awaiting explicit user go-ahead per repo git safety convention. |
+| RES-007 | [x] | P0 | XS | **Downloadable resume PDF is stale on the live site** — `public/Alan_Palayil_Resume.pdf` had local, uncommitted changes (current version: Data Engineer title, Ph.D., current certs, updated skills/summary) that were not yet committed. The version live on GitHub Pages showed "Associate Application Development Analyst... Present" with no Ph.D. or Data Engineer role. | Resolved 2026-08-23. User confirmed; committed and pushed (`dfe68a3`) alongside the CV/Resume page work. Live PDF now matches site content. |
 
 ### Phase 1 — LinkedIn synchronization
 
@@ -241,6 +241,22 @@ Re-run against fully corrected post-Phase-4 state. Phase 5 QA gate passed.
 
 ---
 
+### Phase 6 — CV/Resume update & full regression audit ✓ Complete 2026-08-24
+
+CV page update (CV-001–003) and Resume page update (RES-001–007) shipped 2026-08-23/24 (commits `dfe68a3`, `d7f81d4`). This phase's audit re-verified every `[x]` item in the roadmap against live source — not just the newly-shipped ones — using three independent verification passes covering: Identity & data accuracy (ID-001–014), UI/anti-patterns (UI-001–014, AUD2-001–007), code quality (CQ-001–005), SEO (SD-001–003), IA (IA-001–002), and the About/CV membership cross-check.
+
+**Result: zero regressions.** Every previously-shipped `[x]` item checked out exactly as documented — CSS values, JSON-LD fields, timeline dates, cert facts, all confirmed against current source, not assumed from prior notes.
+
+**One reopened gap found:** CV-001 (2026-08-23) restructured CV's membership list to 5 entries but intentionally left `about.astro` untouched, per that session's stated scope. This silently reopened CP-001 (originally closed 2026-06-22, which had synced both pages) — About and CV now disagree on membership content. Logged as **CP-009**.
+
+**Two minor findings, not regressions, added as new low-priority backlog items:**
+- **CQ-006** — `index.astro` locally redeclares `--card-bg` with a no-op self-reference instead of relying on `theme.css`.
+- **EXT-004** — confirmed still not implemented (roadmap already correctly listed this open; audit just verified the "unblocked now" framing is accurate — it needs a small code change, not further external action).
+
+**Gate:** 0 regressions in 40+ audited `[x]` items · 1 reopened item logged (CP-009) · 2 new minor findings logged (CQ-006) · RES-007 resolved and closed · roadmap audit-score table refreshed below.
+
+---
+
 ### Architecture debt
 
 | ID | Status | Priority | Effort | Item |
@@ -287,12 +303,13 @@ Re-run against fully corrected post-Phase-4 state. Phase 5 QA gate passed.
 | CQ-003 | [x] | P2 | XS | **Remove unused `.sub` CSS rule in index.astro** — The `.sub` selector is defined in the style block but no element in the JSX uses the `sub` class. Dead CSS. | `src/pages/index.astro` |
 | CQ-004 | [x] | P2 | XS | **Fix `byOrderDescThenTitle` forward type reference** — The sort function types its arguments as `(typeof projects)[0]` but `projects` is assigned two lines later. Works at runtime; cleaner to type as `CollectionEntry<"projects">` with an import. | `src/pages/index.astro:24` |
 | CQ-005 | [x] | P2 | XS | **Remove undefined `.prose` class from About** — `<div class="left prose">` in about.astro references `.prose` but no such rule exists in the scoped style block. Harmless but should be removed. | `src/pages/about.astro` |
+| CQ-006 | [ ] | P3 | XS | **`--card-bg` redeclared locally in index.astro** — `index.astro` has a `:root { --card-bg: var(--card-bg); }` self-reference (no-op) and duplicates the light-mode value already defined in `theme.css`. Not a functional bug — the token still resolves correctly — but it duplicates a value that's supposed to live centrally. Found during 2026-08-24 audit while re-verifying UI-010/UI-012. | `src/pages/index.astro:990-1002` |
 
 ### Content and copy
 
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
-| CP-001 | [x] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Correct order: IEEE Member (May 2024–Present) → HKN Internal Secretary (Apr 2022–May 2023) → HKN Member (2021–2023). Note: start date corrected to Apr 2022 per RESUME-0728 (was "Jan 2022" from June 2022 LinkedIn-derived pass). | `src/pages/cv.astro`, `src/pages/about.astro` |
+| CP-001 | [x] | P1 | XS | **Fix memberships order — most-recent-first on CV and About** — IEEE Member (May 2024–Present) was appended after the older HKN entries on both pages. It should appear first. Original fix (2026-06-22): IEEE Member (May 2024–Present) → HKN Internal Secretary (Apr 2022–May 2023) → HKN Member (2021–2023) on both pages. **Superseded 2026-08-23 by CV-001** — CV now has 5 entries (HKN Alumni Member, SHPE, IEEE General Member added); About was intentionally left untouched that pass and still has only the original 3. See CP-009 (reopened gap). | `src/pages/cv.astro`, `src/pages/about.astro` |
 | CP-002 | [x] | P1 | XS | **Research index subtitle — surface published papers** — Currently reads "Applied research work related to AI and Data Science in enterprise systems." Now that 4 papers are Zenodo-published and OpenAIRE-indexed, the subtitle should say so (e.g. "4 papers published via Engineering-to-Research Monograph Series, indexed on Zenodo and OpenAIRE."). | `src/pages/research/index.astro:54–56` |
 | CP-003 | [x] | P2 | XS | **CV page meta description — mention publications** — Currently: "PhD candidate in Information Technology…researcher in AI governance." After the CV split, the description should surface "4 Zenodo-published papers" as the lead credential. | `src/pages/cv.astro:25` |
 | CP-004 | [x] | P2 | XS | **Research detail page meta description** — `[slug].astro` uses `d.abstract ?? d.summary` as the description. For published papers, the abstract is rich and long. Consider truncating to 155 chars or using a dedicated `short_description` field for meta. | `src/pages/research/[slug].astro:74` |
@@ -300,6 +317,7 @@ Re-run against fully corrected post-Phase-4 state. Phase 5 QA gate passed.
 | CP-006 | [ ] | P2 | S | **Business outcome reframing on work projects (2B-007)** — Project summaries in the projects collection describe what was built, not what changed. Shift to impact framing: cost savings, error reduction, migration scope. Requires user approval of public metrics. | `src/content/projects/work-*.mdx` |
 | CP-007 | [x] | P1 | XS | **PhD dates — add start year** — `edu-phd.mdx` showed "In progress" without a year. Updated to "August 2025 – Present" (CareerOS EDU-001 canonical; initial commit used bare "2025 – Present" without month — corrected 2026-08-13 before push). | `src/content/timeline/edu-phd.mdx` |
 | CP-008 | [x] | P2 | S | **Add missing LinkedIn projects — 32-bit RISC Processor & SensoryPi** — Two college projects visible on LinkedIn were absent from the projects collection. Added `college-risc-processor.mdx` (5-stage MIPS pipeline, Aug–Dec 2022) and `college-sensorpi.mdx` (Raspberry Pi facial recognition + motion detection, May–Jul 2022). | `src/content/projects/college-risc-processor.mdx`, `src/content/projects/college-sensorpi.mdx` |
+| CP-009 | [ ] | P2 | S | **About page memberships out of sync with CV (reopened by CV-001)** — About's "Leadership & Service" still has only 3 entries (IEEE Member, HKN Internal Secretary, Dean's List); CV's "Professional Memberships & Leadership" now has 5 (adds HKN Alumni Member May 2023–Present, SHPE Member Aug 2022–May 2023, IEEE General Member Aug 2021–May 2023). About also mixes Dean's List into the membership list where CV keeps it in a separate Academic Honors section. Found during 2026-08-24 audit. | `src/pages/about.astro:159-184` vs `src/pages/cv.astro:194-238` |
 
 ### Structured data and SEO
 
@@ -314,7 +332,7 @@ Re-run against fully corrected post-Phase-4 state. Phase 5 QA gate passed.
 | ID | Status | Priority | Effort | Item | Notes |
 |---|---|---|---|---|---|
 | IA-001 | [x] | P2 | XS | **Footer ORCID link** — Footer currently: LinkedIn · GitHub · Resume · Email. ORCID should be added; it is the primary academic identity signal and is already in the homepage credCard and research detail pages. | `src/layouts/SiteLayout.astro:339–345` |
-| IA-002 | [x] | P2 | XS | **OpenAIRE/indexed language on CV research section** — The CV "Publications" section shows DOIs but doesn't indicate that the papers are OpenAIRE-indexed. A one-line note "Engineering-to-Research Monograph Series — Zenodo community, OpenAIRE-indexed" would strengthen the O1/EB1 signal for anyone reading the CV page directly. | `src/pages/cv.astro` |
+| IA-002 | [x] | P2 | XS | **OpenAIRE/indexed language on CV research section** — Original fix (2026-06-23): "Engineering-to-Research Monograph Series · Zenodo community, OpenAIRE-indexed" note added. **Reworded 2026-08-23 by CV-003** — current live text: "Open-access research indexed on Zenodo and OpenAIRE · ORCID: [linked]" — broader phrasing, ORCID now hyperlinked inline. | `src/pages/cv.astro:112` |
 | IA-003 | [ ] | P3 | M | **Research distribution links — ResearchGate** — Sidebar on detail pages has a "Find this work on" section that renders conditionally. ResearchGate profile + paper pages still need to be created, then `researchgate_url` populated in each MDX. External action first. | `src/content/research/*.mdx`, `src/pages/research/[slug].astro` |
 | IA-004 | [ ] | P3 | L | **Blog / writing section** | Trigger: 2–3 technical posts ready to publish. |
 | IA-005 | [ ] | P3 | L | **Case study depth on work projects** — Architecture diagrams, before/after metrics. | Trigger: architecture details approved for public disclosure. |
@@ -362,6 +380,9 @@ Chronological. Most recent first.
 
 | Date | ID | Item |
 |---|---|---|
+| 2026-08-24 | Phase 6 | **Full regression audit** — Re-verified all 40+ previously-shipped `[x]` roadmap items against live source (not prior notes). Zero regressions. Closed RES-007 (resume PDF committed/pushed). Reopened CP-001 as **CP-009** (About/CV membership sync broken by CV-001). Logged CQ-006 (minor `--card-bg` duplication). Refreshed Audit Score History with a new Aug 24 column. |
+| 2026-08-24 | ID-011 | Neo4j Certified Professional and Graph Data Science certs upgraded USER-SUPPLIED → VERIFIED; user supplied GraphAcademy certificate URLs matching credential IDs on file. |
+| 2026-08-23/24 | CV-001–003, RES-001–007 | **CV and Resume page updates** — CV: memberships expanded 3→5 entries, certifications sort fixed to true date order, Publications note reworded with ORCID link. Resume: "Present" dates accent-colored, Skills rebuilt from current resume PDF, certifications matched to CV's sort logic, CFA/Qualys VMDR certs gained PDF-backed links, 3-line professional summary added, section headers enlarged. Previously-uncommitted, more current `Alan_Palayil_Resume.pdf` committed and pushed (was serving a stale pre-promotion résumé). |
 | 2026-08-12 | CP-007/008 | **LinkedIn sync** — PhD dates updated to "2025 – Present" (timeline MDX + hardcoded resume). Added two missing college projects: 32-bit RISC Processor (5-stage MIPS pipeline) and SensoryPi Smart Security System (Raspberry Pi facial recognition + motion detection). |
 | 2026-06-25 | (perf) | **Scroll performance + light mode galaxy fix** — Removed `backdrop-filter: blur(12px/10px)` from `main.wrap.main` (was re-compositing all animated layers on every scroll frame; root cause of scroll jank). Replaced with `rgb(var(--bg) / 0.88)` dark / `rgb(var(--card) / 0.94)` light. Added `will-change: transform` + `contain: paint` to `.bgfx` container to promote entire background as a single GPU texture. Removed `filter: blur(0.2px)` from `.nebula`. Light mode nebula now visible via `mix-blend-mode: multiply` at `opacity: 0.32`; stars switched from `screen` to `multiply` blend at `opacity: 0.38` so accent-tinted star dots show on light bg. Header/nav/popover keep their `backdrop-filter` (fixed elements, no scroll cost). |
 | 2026-06-25 | AUD2-001–007 | **Anti-pattern + quality sweep** — Uppercase + wide tracking removed from all remaining pages: `resume.astro` (`.rHead` 0.12em → -0.01em, `.skillLabel` 0.08em → none), `cv.astro` (`.cvSectionTitle` 0.1em, `.cvBadge` uppercase), `about.astro` (`.galleryTitle`, `.serviceTitle`), `index.astro` (`.credLabel`, `.certCat`). All 6 remaining hardcoded `rgba(255,255,255,0.02)` replaced with `var(--card-bg)`. Resume mid-breakpoint added at 760px. Comet `filter: blur(7px)` replaced with blur-free radial-gradient glow. |
@@ -416,19 +437,21 @@ Chronological. Most recent first.
 
 ## Audit Score History
 
-| Dimension | Baseline (Jun 8) | Post-Sprint 2 (Jun 15) | Post-Audit (Jun 22) | Galaxy Sprint (Jun 24) |
-|---|---|---|---|---|
-| O1/EB1 Evidence Visibility | 2 / 10 | 5 / 10 | 8 / 10 | **8 / 10** |
-| First Impression | 7.5 / 10 | 8 / 10 | 8.5 / 10 | **9 / 10** |
-| Recruiter Clarity | 5.5 / 10 | 8 / 10 | 8 / 10 | **8 / 10** |
-| Technical Credibility | 7 / 10 | 8 / 10 | 8.5 / 10 | **8.5 / 10** |
-| Visual Design | 7 / 10 | 8 / 10 | 8.5 / 10 | **9 / 10** |
-| SEO / Structured Data | 3.5 / 10 | 7.5 / 10 | 7.5 / 10 | **7.5 / 10** |
-| Accessibility | 6 / 10 | 8 / 10 | 8 / 10 | **8 / 10** |
-| Performance | 7 / 10 | 9 / 10 | 9 / 10 | **9 / 10** |
-| Content Depth | 6 / 10 | 8 / 10 | 8.5 / 10 | **8.5 / 10** |
-| Mobile Experience | 5.5 / 10 | 8.5 / 10 | 8.5 / 10 | **8.5 / 10** |
+| Dimension | Baseline (Jun 8) | Post-Sprint 2 (Jun 15) | Post-Audit (Jun 22) | Galaxy Sprint (Jun 24) | Post-Phase 6 (Aug 24) |
+|---|---|---|---|---|---|
+| O1/EB1 Evidence Visibility | 2 / 10 | 5 / 10 | 8 / 10 | 8 / 10 | **9 / 10** |
+| First Impression | 7.5 / 10 | 8 / 10 | 8.5 / 10 | 9 / 10 | **9 / 10** |
+| Recruiter Clarity | 5.5 / 10 | 8 / 10 | 8 / 10 | 8 / 10 | **8.5 / 10** |
+| Technical Credibility | 7 / 10 | 8 / 10 | 8.5 / 10 | 8.5 / 10 | **9 / 10** |
+| Visual Design | 7 / 10 | 8 / 10 | 8.5 / 10 | 9 / 10 | **9 / 10** |
+| SEO / Structured Data | 3.5 / 10 | 7.5 / 10 | 7.5 / 10 | 7.5 / 10 | **8 / 10** |
+| Accessibility | 6 / 10 | 8 / 10 | 8 / 10 | 8 / 10 | **8.5 / 10** |
+| Performance | 7 / 10 | 9 / 10 | 9 / 10 | 9 / 10 | **9 / 10** |
+| Content Depth | 6 / 10 | 8 / 10 | 8.5 / 10 | 8.5 / 10 | **9 / 10** |
+| Mobile Experience | 5.5 / 10 | 8.5 / 10 | 8.5 / 10 | 8.5 / 10 | **8.5 / 10** |
 
 **Jun 24 movers:** First Impression 8.5 → 9 (galaxy visible by default, seamless, comets live); Visual Design 8.5 → 9 (detail page consistency, token system, no more uppercase scaffold tells).
 
-**Remaining ceiling blockers:** EXT-001 (ResearchGate profile + paper uploads), IA-003 (ResearchGate distribution links — depends on EXT-001), CP-005/006 (quantified work metrics + outcome reframing — pending user-supplied numbers), UI-013 (DESIGN.md documentation).
+**Aug 24 movers (Phase 3–6, i.e. everything since Jun 24 — schema/audit work plus this session's CV/Resume pass):** O1/EB1 Evidence Visibility 8 → 9 (Phase 4 JSON-LD: `CreativeWork`/`ScholarlyArticle` reclassification, `datePublished`, Person `workExample` linking all published research; Neo4j certs upgraded to VERIFIED with live GraphAcademy links; CFA/Qualys certs gained PDF-backed evidence where none existed before). Technical Credibility 8.5 → 9 (same evidence chain, plus Resume's skills section rebuilt to match the current, accurate resume PDF). Content Depth 8.5 → 9 (CV memberships expanded 3→5 entries, Resume gained a professional summary and full accurate skills taxonomy). Recruiter Clarity 8 → 8.5 (Resume summary + bigger section headers improve scannability). SEO/Structured Data 7.5 → 8, Accessibility 8 → 8.5 (Phase 4 ARIA states, reduced-motion, `datePublished`/`workExample` additions). First Impression and Visual Design held at ceiling — no homepage-hero-level changes this period.
+
+**Remaining ceiling blockers:** EXT-001 (ResearchGate profile + paper uploads), IA-003 (ResearchGate distribution links — depends on EXT-001), CP-005/006 (quantified work metrics + outcome reframing — pending user-supplied numbers), UI-013 (DESIGN.md documentation), **CP-009** (About page memberships out of sync with CV — new, found 2026-08-24), SD-003/EXT-004 (dynamic OG images, Zenodo `sameAs` in JSON-LD — both still open, small code work).
