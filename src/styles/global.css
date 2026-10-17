@@ -226,11 +226,11 @@ footer.wrap.foot {
 
 @keyframes nebulaDrift {
   from {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translate3d(-50px, 30px, 0) scale(1.02);
+    transform: translate3d(-50px, 30px, 0);
   }
 }
 
