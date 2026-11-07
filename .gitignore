@@ -24,7 +24,6 @@ pnpm-debug.log*
 .idea/
 
 # graphify knowledge graph output
-graphify-out/
 
 # --- graphify: commit the map, not the machinery ---
 graphify-out/*
